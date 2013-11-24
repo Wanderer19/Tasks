@@ -1,0 +1,345 @@
+1..100
+select_sort:	
+time  0.00373601913452148
+comparisons  5050
+swaps  0
+
+bubble_sort:	
+time  0.00844979286193848
+comparisons  9801
+swaps  0
+
+insert_sort:	
+time  0.00017094612121582
+comparisons  99
+swaps  99
+
+pyramid_sort:	
+time  0.00173306465148926
+comparisons  1081
+swaps  641
+
+quick_sort:	
+time  0.00058293342590332
+comparisons  606
+swaps  63
+
+shell_sort:	
+time  0.000493049621582031
+comparisons  1006
+swaps  0
+
+merge_sort:	
+time  0.00102591514587402
+comparisons  356
+swaps  600
+
+function_sort:	
+time  0.000164985656738281
+comparisons  99
+swaps  99
+
+
+100..1
+select_sort:	
+time  0.00443100929260254
+comparisons  5050
+swaps  50
+
+bubble_sort:	
+time  0.0111050605773926
+comparisons  9801
+swaps  4950
+
+insert_sort:	
+time  0.00502395629882813
+comparisons  4950
+swaps  5049
+
+pyramid_sort:	
+time  0.00148391723632813
+comparisons  944
+swaps  517
+
+quick_sort:	
+time  0.000601053237915039
+comparisons  610
+swaps  112
+
+shell_sort:	
+time  0.000863075256347656
+comparisons  1290
+swaps  292
+
+merge_sort:	
+time  0.000983953475952148
+comparisons  316
+swaps  636
+
+function_sort:	
+time  0.000216007232666016
+comparisons  297
+swaps  0
+
+
+01010101
+select_sort:	
+time  0.000244855880737305
+comparisons  300
+swaps  11
+
+bubble_sort:	
+time  0.000511884689331055
+comparisons  529
+swaps  66
+
+insert_sort:	
+time  0.000110864639282227
+comparisons  89
+swaps  89
+
+pyramid_sort:	
+time  0.000219106674194336
+comparisons  117
+swaps  61
+
+quick_sort:	
+time  0.000174045562744141
+comparisons  123
+swaps  53
+
+shell_sort:	
+time  0.000145912170410156
+comparisons  194
+swaps  46
+
+merge_sort:	
+time  0.000185012817382813
+comparisons  76
+swaps  100
+
+function_sort:	
+time  0.000131845474243164
+comparisons  149
+swaps  23
+
+
+(1)x100
+select_sort:	
+time  0.00371503829956055
+comparisons  5050
+swaps  0
+
+bubble_sort:	
+time  0.00863218307495117
+comparisons  9801
+swaps  0
+
+insert_sort:	
+time  0.000177145004272461
+comparisons  99
+swaps  99
+
+pyramid_sort:	
+time  0.000599145889282227
+comparisons  294
+swaps  100
+
+quick_sort:	
+time  0.000978946685791016
+comparisons  744
+swaps  372
+
+shell_sort:	
+time  0.000504970550537109
+comparisons  1006
+swaps  0
+
+merge_sort:	
+time  0.000970840454101563
+comparisons  356
+swaps  600
+
+function_sort:	
+time  0.000152111053466797
+comparisons  198
+swaps  0
+
+
+10
+select_sort:	
+time  5.29289245605469e-005
+comparisons  55
+swaps  8
+
+bubble_sort:	
+time  9.41753387451172e-005
+comparisons  81
+swaps  24
+
+insert_sort:	
+time  4.10079956054688e-005
+comparisons  30
+swaps  33
+
+pyramid_sort:	
+time  8.10623168945313e-005
+comparisons  35
+swaps  27
+
+quick_sort:	
+time  6.38961791992188e-005
+comparisons  48
+swaps  12
+
+shell_sort:	
+time  4.79221343994141e-005
+comparisons  59
+swaps  16
+
+merge_sort:	
+time  6.60419464111328e-005
+comparisons  24
+swaps  28
+
+function_sort:	
+time  4.50611114501953e-005
+comparisons  45
+swaps  12
+
+
+100
+select_sort:	
+time  0.00393795967102051
+comparisons  5050
+swaps  91
+
+bubble_sort:	
+time  0.00970292091369629
+comparisons  9801
+swaps  2264
+
+insert_sort:	
+time  0.00247001647949219
+comparisons  2361
+swaps  2363
+
+pyramid_sort:	
+time  0.00171899795532227
+comparisons  1033
+swaps  586
+
+quick_sort:	
+time  0.000911951065063477
+comparisons  851
+swaps  191
+
+shell_sort:	
+time  0.0012199878692627
+comparisons  1573
+swaps  572
+
+merge_sort:	
+time  0.00114798545837402
+comparisons  542
+swaps  618
+
+function_sort:	
+time  0.000965118408203125
+comparisons  1066
+swaps  281
+
+
+1000
+select_sort:	
+time  0.362730026245117
+comparisons  500500
+swaps  993
+
+bubble_sort:	
+time  0.992591142654419
+comparisons  998001
+swaps  249252
+
+insert_sort:	
+time  0.253968000411987
+comparisons  250241
+swaps  250251
+
+pyramid_sort:	
+time  0.025378942489624
+comparisons  16853
+swaps  9063
+
+quick_sort:	
+time  0.0130689144134521
+comparisons  13316
+swaps  2855
+
+shell_sort:	
+time  0.065208911895752
+comparisons  62236
+swaps  46231
+
+merge_sort:	
+time  0.0160081386566162
+comparisons  8734
+swaps  9250
+
+function_sort:	
+time  0.0158290863037109
+comparisons  17322
+swaps  4268
+
+
+10000
+select_sort:	
+time  -
+comparisons  -
+swaps  -
+
+bubble_sort:	
+time  -
+comparisons  -
+swaps  -
+
+insert_sort:	
+time  -
+comparisons  -
+swaps  -
+
+pyramid_sort:	
+time  0.343694925308228
+comparisons  235308
+swaps  124122
+
+quick_sort:	
+time  0.178693056106567
+comparisons  187374
+swaps  42494
+
+shell_sort:	
+time  4.595379114151
+comparisons  3878656
+swaps  3638650
+
+merge_sort:	
+time  0.217555999755859
+comparisons  120398
+swaps  127525
+
+function_sort:	
+time  0.391251802444458
+comparisons  245240
+swaps  49462
+
+
+STABILITY:
+select_sort	yes
+bubble_sort	yes
+insert_sort	yes
+pyramid_sort	no
+quick_sort	no
+shell_sort	yes
+merge_sort	yes
+function_sort	yes

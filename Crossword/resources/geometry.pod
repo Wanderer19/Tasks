@@ -1,0 +1,10 @@
+
+=head1 SET GEOMETRY
+
+In order to set a word, you can enter the start and end coordinates. 
+The word may be either horizontal or vertical. 
+Once the coordinates of the words entered, you should click on the "Remember the word."
+After you enter all the words you have to click "Save geometry" button. 
+There are also additional functions: to cancel the word, clear the field (refer to the "crossword").
+
+=cut

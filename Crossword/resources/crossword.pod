@@ -1,0 +1,29 @@
+     
+=head1 NAME
+
+Crossword Generator   
+
+=head1 DESCRIPTION
+     
+This program is based on a specified list of words and geometry fills crossword.
+
+=head1 WORDLIST
+
+To specify a list of words, it is necessary, or you can specify 
+the file name with these words, or manually enter them in the special field. 
+You then need to click "Save The Words"
+
+=head1 GEOMETRY
+
+To define the geometry, you need to click on "Set geometry crossword", 
+then select the size of the field, and then follow the instructions.
+
+=head1 COMPLETE
+
+After the defined words and geometry, 
+it is necessary to click on "Fill the crossword".
+
+=head1 AUTHOR
+
+Maria Telyatnikova <mashatelatnikova@gmail.com>
+=cut
