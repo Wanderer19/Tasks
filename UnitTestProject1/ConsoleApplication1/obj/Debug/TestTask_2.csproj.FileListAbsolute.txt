@@ -1,0 +1,6 @@
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestProject1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestProject1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestProject1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestProject1\ConsoleApplication1\obj\Debug\TestTask_2.csprojResolveAssemblyReference.cache
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestProject1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestProject1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

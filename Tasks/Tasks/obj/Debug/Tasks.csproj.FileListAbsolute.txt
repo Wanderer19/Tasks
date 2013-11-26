@@ -1,0 +1,6 @@
+c:\users\asus\documents\visual studio 2013\Projects\Tasks\Tasks\bin\Debug\Tasks.exe.config
+c:\users\asus\documents\visual studio 2013\Projects\Tasks\Tasks\bin\Debug\Tasks.exe
+c:\users\asus\documents\visual studio 2013\Projects\Tasks\Tasks\bin\Debug\Tasks.pdb
+c:\users\asus\documents\visual studio 2013\Projects\Tasks\Tasks\obj\Debug\Tasks.csprojResolveAssemblyReference.cache
+c:\users\asus\documents\visual studio 2013\Projects\Tasks\Tasks\obj\Debug\Tasks.exe
+c:\users\asus\documents\visual studio 2013\Projects\Tasks\Tasks\obj\Debug\Tasks.pdb
