@@ -1,0 +1,6 @@
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestLife\Life\bin\Debug\Life.exe.config
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestLife\Life\bin\Debug\Life.exe
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestLife\Life\bin\Debug\Life.pdb
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestLife\Life\obj\Debug\Life.csprojResolveAssemblyReference.cache
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestLife\Life\obj\Debug\Life.exe
+c:\users\asus\documents\visual studio 2013\Projects\UnitTestLife\Life\obj\Debug\Life.pdb
