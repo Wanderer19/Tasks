@@ -8,7 +8,7 @@ package Application;
 		my $self = {};
 		
 		$self->{countries} = [];
-	
+		
 		return bless $self, $class;
 	}
 	
@@ -76,9 +76,18 @@ package Application;
 		$self->{textField} = $self->{mainWindow}->Scrolled(
 																"Text", 
 																-scrollbars => Settings::ScrollbarText,
+																-width => Settings::WidthTextField, 
+																-height => Settings::HeightTextField
+															)->pack();
+		$self->{text} = $self->{mainWindow}->Scrolled(
+																"Text", 
+																-scrollbars => Settings::ScrollbarText,
 																-width => Settings::WidthText, 
 																-height => Settings::HeightText
 															)->pack();
+		
+				
+		
 	}
 	
 	sub Colorize{
@@ -99,9 +108,9 @@ package Application;
 		my $string = $self->{textField}->get("1.0", "end");
 		chomp ($string);
 		
-		my @countries = split ("------------", $string);
+		$self->{textField}->delete("1.0", "end");
 		my @coordinates;
-		for (split (/[\s]+/, $countries[-1])){
+		for (split (/[\s]+/, $string)){
 			push @coordinates, [split (",", $_)] if ($_);
 		}
 		
@@ -113,7 +122,7 @@ package Application;
 			$_->Print();
 		}
 		
-		$self->{textField}->insert("end", "------------\n"); 
+		$self->{text}->insert("end", $string. "------------\n"); 
 		$self->DrawCountry(-1, Settings::ColorEmptyCountry);
 	}
 	
@@ -121,11 +130,11 @@ package Application;
 		my $self = shift;
 		my ($index, $color) = @_;
 		print $self->{canvas}->createPolygon(
-											$self->{countries}->[$index]->GetCoordinates(),
-											-fill => $color, 
-											-outline => Settings::OutlineCountry, 
-											-width => Settings::WidthCountry
-										);
+												$self->{countries}->[$index]->GetCoordinates(),
+												-fill => $color, 
+												-outline => Settings::OutlineCountry, 
+												-width => Settings::WidthCountry
+											);
 	}
 	
 	sub ShowXY{

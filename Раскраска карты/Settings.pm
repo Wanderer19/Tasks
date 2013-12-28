@@ -16,6 +16,8 @@ package Settings;
 		ScrollbarText => "se",
 		WidthText => 20,
 		HeightText => 20,
+		WidthTextField => 20,
+		HeightTextField => 5,
 		OutlineCountry => "black",
 		WidthCountry => 2,
 		ColorEmptyCountry => "lavender",
