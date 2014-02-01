@@ -7,16 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Visualizer
 {
     public partial class BubbleSortForm : Form
     {
-        public BubbleSortForm()
+        private Application mainApplication;
+        private XDocument settings;
+
+        public BubbleSortForm(Application mainApplication)
         {
+            settings = XDocument.Load("BubbleSortFormSettings.xml");
+            this.mainApplication = mainApplication;
             InitializeComponent();
         }
-
+      
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -53,9 +59,16 @@ namespace Visualizer
 
         private void RunVisualizer(object sender, EventArgs e)
         {
-            var visualizer = new BubbleSortVisualizer();
+            var visualizer = new BubbleSortVisualizer(this);
+            this.Visible = false;
+
             var data = new Data(visualizer);
             data.Show();
+        }
+
+        private void CloseBubbleSortForm(object sender, EventArgs e)
+        {
+            mainApplication.Visible = true;
         }
     }
 }

@@ -9,6 +9,15 @@ package Country;
 		return bless $self, $class;
 	}
 
+	
+	sub Print{
+		my $self = shift;
+		
+		for (@{$self->{coordinates}}){
+			print "$$_[0] - $$_[1]\n";
+		}
+	}
+
 	sub GetCoordinates{
 		my $self = shift;
 		
@@ -20,6 +29,24 @@ package Country;
 		return @coordinates;
 	}
 	
+
+	sub GetIntersections{
+		my $self = shift;
+		my @countries = @_;
+		
+		my @lines;
+		for ($self->GetLines()){
+			my $flag = 0;
+			
+			for(my $i = 0; $i < scalar @countries; ++$i){
+				if ($self->Overlap($_, $countries[$i])){
+					$self->{intersects}->{$i} = 1;
+				}
+			}
+		}
+	}
+	
+
 	sub Overlap{
 		my $self = shift;
 		my ($line, $country) = @_;
@@ -53,4 +80,32 @@ package Country;
 		return @lines;
 	}
 	
+
+	sub GetMatrix{
+		my $self = shift;
+		my @countries = @_;
+		
+		my @matrix;
+		my $index = 0;
+		for (@countries){
+			for my $i (0 .. $#countries){
+				$matrix[$index][$i] = 0;
+				if ($_->{intersects}->{$i} == 1){
+					$matrix[$index][$i] = 1;
+					$matrix[$i][$index] = 1;
+				}
+			}
+			$index ++;
+		}
+	
+		for my $i (0 .. $#countries){
+			for my $j (0 .. $#countries){
+				print $matrix[$i][$j], " ";
+			}
+			print "\n";
+		}
+		
+		return \@matrix;
+	}
+
 1;

@@ -4,6 +4,7 @@ package Application;
 	use Settings;
 	use Map;
 	use Menu;
+	use Errors;
 	
 	sub New{
 		my $class = shift;
@@ -50,7 +51,7 @@ package Application;
 	sub DeleteCountry{
 		my $self = shift;
 		
-		unless ($self->{isColoring}){
+		unless ($self->{isColored}){
 			$self->{canvas}->delete($self->{map}->DeleteCountry());
 		}
 	}
@@ -61,7 +62,13 @@ package Application;
 		my $mainMenu = $self->{mainWindow}->Menu(-background => Settings::Bacground);
 		$self->{mainWindow}->configure(-menu => $mainMenu);
 		
-		my $fileMenu = Menu::->cascade($self->{mainWindow}, $mainMenu, "Map", sub{ exit }, "Exit", "<Control-w>", sub {$self->SaveCountry()}, "Save Country", "<Control-s>", sub {$self->DeleteCountry();}, "Cancel", "<Control-z>", sub {$self->Clear();}, "Clear", "<Control-x>");
+		my $fileMenu = Menu::->cascade(
+										$self->{mainWindow}, $mainMenu, "Map", 
+										sub{ exit }, "Exit", "<Control-w>", 
+										sub {$self->SaveCountry()}, "Save Country", "<Control-s>",
+										sub {$self->DeleteCountry();}, "Cancel", "<Control-z>",
+										sub {$self->Clear();}, "Clear", "<Control-x>"
+									);
 		
 	}
 	
@@ -74,7 +81,7 @@ package Application;
 		
 		$self->{map}->Clear();
 		$self->{text}->delete("1.0", "end");
-		$self->{isColoring} = 0;
+		$self->{isColored} = 0;
 	}
 	
 	sub CreateButtons{
@@ -96,17 +103,17 @@ package Application;
 		my $self = shift;
 		
 		$self->{textField} = $self->{mainWindow}->Scrolled(
-																"Text", 
-																-scrollbars => Settings::ScrollbarText,
-																-width => Settings::WidthTextField, 
-																-height => Settings::HeightTextField
-															)->pack();
+															"Text", 
+															-scrollbars => Settings::ScrollbarText,
+															-width => Settings::WidthTextField, 
+															-height => Settings::HeightTextField
+														)->pack();
 		$self->{text} = $self->{mainWindow}->Scrolled(
-																"Text", 
-																-scrollbars => Settings::ScrollbarText,
-																-width => Settings::WidthText, 
-																-height => Settings::HeightText
-															)->pack();
+														"Text", 
+														-scrollbars => Settings::ScrollbarText,
+														-width => Settings::WidthText, 
+														-height => Settings::HeightText
+													)->pack();
 		
 				
 		
@@ -114,11 +121,12 @@ package Application;
 	
 	sub Colorize{
 		my $self = shift;
-		$self->{isColoring} = 1;
+		
+		$self->{isColored} = 1;
 		my $colors = Settings::Colors;
+		
 		my $coloring = Coloring->New($self->{map}->GetMatrixMap());
 		$coloring->Colorize();
-		#$self->{canvas}->delete(1);
 
 		while (my ($index, $color) = each %{$coloring->{coloring}}){
 			$self->DrawCountry($index, $$colors[$color]);
@@ -128,7 +136,7 @@ package Application;
 	sub SaveCountry{
 		my $self = shift;
 		
-		unless ($self->{isColoring}){
+		unless ($self->{isColored}){
 			my $string = $self->{textField}->get("1.0", "end");
 			chomp ($string);
 		
@@ -163,7 +171,7 @@ package Application;
 		shift;
 		my ($x, $y, $self) = @_;
 		
-		unless ($self->{isColoring}){
+		unless ($self->{isColored}){
 			my ($i, $j) = ($self->{canvas}->canvasx($x), $self->{canvas}->canvasy($y));
 			$self->{textField}->insert("end", "$i". Settings::Separator."$j\n"); 
 		}

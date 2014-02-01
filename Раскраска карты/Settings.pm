@@ -1,13 +1,17 @@
 package Settings;
 	use constant{
 		Bacground => "lavender",
+
 		Separator => ",",
+
 		CanvasHeight => 600,
 		CanvasWidth => 1100,
 		CanvasBackground => "lavender",
 		SideOfCanvas => "left",
 		TextButtonSaveCountry => "Save Country",
+
 		TextButtonCancel => "Cancel",
+
 		TextButtonColorize => "Colorize",
 		BackgroundButton => "#7f83ff",
 		ActiveBackgroundButton => "#b8bdff",
@@ -18,7 +22,9 @@ package Settings;
 		ScrollbarText => "se",
 		WidthText => 20,
 		HeightText => 20,
+
 		Line => "------------",
+
 		WidthTextField => 20,
 		HeightTextField => 5,
 		OutlineCountry => "black",

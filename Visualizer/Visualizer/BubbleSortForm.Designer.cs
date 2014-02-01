@@ -1,16 +1,27 @@
-﻿namespace Visualizer
+﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
+
+namespace Visualizer
 {
     partial class BubbleSortForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        private System.Windows.Forms.Label bubbleSortTitle;
+        private System.Windows.Forms.ListBox aboutSorting;
+        private System.Windows.Forms.MenuStrip mainMenu;
+        private System.Windows.Forms.ToolStripMenuItem programMenu;
+        private System.Windows.Forms.ToolStripMenuItem helpMenu;
+        private System.Windows.Forms.ToolStripMenuItem visualizer;
+        private System.Windows.Forms.ToolStripMenuItem sourceCode;
+        private System.Windows.Forms.ToolStripMenuItem sourceCodeCSharp;
+        private System.Windows.Forms.ToolStripMenuItem sourceCodeCPlusPlus;
+        private System.Windows.Forms.ToolStripMenuItem sourceCodeJava;
+        private System.Windows.Forms.ToolStripMenuItem sourceCodePython;
+        private System.Windows.Forms.ToolStripMenuItem help;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,15 +33,14 @@
 
         #region Windows Form Designer generated codeprogramMenu
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
+            XDocument settings = XDocument.Load("BubbleSortFormSettings.xml");
+            
+            
             this.bubbleSortTitle = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.aboutSorting = new System.Windows.Forms.ListBox();
+            this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.programMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizer = new System.Windows.Forms.ToolStripMenuItem();
             this.sourceCode = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +50,7 @@
             this.sourceCodePython = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.help = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // bubbleSortTitle
@@ -54,64 +64,33 @@
             this.bubbleSortTitle.TabIndex = 0;
             this.bubbleSortTitle.Text = "Пузырьковая Сортировка";
             // 
-            // listBox1
+            // aboutSorting
             // 
-            this.listBox1.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 29;
-            this.listBox1.Items.AddRange(new object[] {
-            "Сортировка простыми обменами, сортиро́вка пузырько́м",
-            "(англ. bubble sort) — простой алгоритм сортировки.",
-            "Для понимания и реализации этот алгоритм — простейший, ",
-            "но эффективен он лишь для небольших массивов. Сложность",
-            "алгоритма: O(n²). Алгоритм считается учебным и практически ",
-            "не применяется вне учебной литературы, вместо него на практике ",
-            "применяются более эффективные алгоритмы сортировки. ",
-            "В то же время метод сортировки обменами лежит в основе ",
-            "некоторых более совершенных алгоритмов, таких как шейкерная",
-            "сортировка, пирамидальная сортировка и быстрая сортировка.",
-            "",
-            "Алгоритм",
-            "Алгоритм состоит из повторяющихся проходов по сортируемому ",
-            "массиву. За каждый проход элементы последовательно сравниваются",
-            "попарно и, если порядок в паре неверный, выполняется обмен ",
-            "элементов. Проходы по массиву повторяются N-1 раз или до тех пор, ",
-            "пока на очередном проходе не окажется, что обмены больше не нужны, ",
-            "что означает — массив отсортирован. При каждом проходе алгоритма ",
-            "по внутреннему циклу, очередной наибольший элемент массива ставится ",
-            "на своё место в конце массива рядом с предыдущим «наибольшим ",
-            "элементом», а наименьший элемент перемещается на одну позицию",
-            "к началу массива («всплывает» до нужной позиции как пузырёк ",
-            "в воде, отсюда и название алгоритма).",
-            "",
-            "Особенность данного алгоритма заключается в следующем: после ",
-            "первого завершения внутреннего цикла максимальный элемент ",
-            "массива всегда находится на N-ой позиции. При втором проходе, ",
-            "следующий по значению максимальный элемент находится ",
-            "на N-1 месте. И так далее. Таким образом, на каждом следующем",
-            " проходе число обрабатываемых элементов уменьшается на 1 и ",
-            "нет необходимости «обходить» весь массив от начала до конца",
-            "каждый раз."});
-            this.listBox1.Location = new System.Drawing.Point(12, 140);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(861, 609);
-            this.listBox1.TabIndex = 1;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.aboutSorting.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.aboutSorting.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.aboutSorting.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.aboutSorting.FormattingEnabled = true;
+            this.aboutSorting.ItemHeight = 29;
+         
+            this.aboutSorting.Items.AddRange(settings.Element("main").Element("aboutSorting").Value.Split(new string[] { "\n" }, StringSplitOptions.None));
+            this.aboutSorting.Location = new System.Drawing.Point(12, 140);
+            this.aboutSorting.Name = "aboutSorting";
+            this.aboutSorting.ScrollAlwaysVisible = true;
+            this.aboutSorting.Size = new System.Drawing.Size(861, 609);
+            this.aboutSorting.TabIndex = 1;
+            this.aboutSorting.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // menuStrip1
+            // mainMenu
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainMenu.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.programMenu,
             this.helpMenu});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(850, 36);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
+            this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.Size = new System.Drawing.Size(850, 36);
+            this.mainMenu.TabIndex = 2;
+            this.mainMenu.Text = "mainMenu";
             // 
             // programMenu
             // 
@@ -183,7 +162,7 @@
             // help
             // 
             this.help.Name = "help";
-            this.help.Size = new System.Drawing.Size(175, 32);
+            this.help.Size = new System.Drawing.Size(172, 32);
             this.help.Text = "Помощь";
             this.help.Click += new System.EventHandler(this.ShowHelp);
             // 
@@ -193,32 +172,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientSize = new System.Drawing.Size(850, 753);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.aboutSorting);
             this.Controls.Add(this.bubbleSortTitle);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.mainMenu);
+            this.MainMenuStrip = this.mainMenu;
             this.Name = "BubbleSortForm";
             this.Text = "BubbleSortForm";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Closed += new System.EventHandler(this.CloseBubbleSortForm);
+
+
+            this.mainMenu.ResumeLayout(false);
+            this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label bubbleSortTitle;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem programMenu;
-        private System.Windows.Forms.ToolStripMenuItem helpMenu;
-        private System.Windows.Forms.ToolStripMenuItem visualizer;
-        private System.Windows.Forms.ToolStripMenuItem sourceCode;
-        private System.Windows.Forms.ToolStripMenuItem sourceCodeCSharp;
-        private System.Windows.Forms.ToolStripMenuItem sourceCodeCPlusPlus;
-        private System.Windows.Forms.ToolStripMenuItem sourceCodeJava;
-        private System.Windows.Forms.ToolStripMenuItem sourceCodePython;
-        private System.Windows.Forms.ToolStripMenuItem help;
     }
 }

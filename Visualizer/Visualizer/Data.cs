@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Visualizer
 {
@@ -37,18 +39,46 @@ namespace Visualizer
             if (choice)
             {
                 var array = new int[] {0, -9, 7, 1, 5};
+                this.Visible = false;
                 visualizer.Array = array;
                 visualizer.Show();
 
             }
             else
             {
-                var arrayStrings = this.inputField.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                
-                var array = arrayStrings.Select(int.Parse).ToArray();
+                try
+                {
+                    var str = this.inputField.Text;
+                    var isValid = true;
 
-                visualizer.Array = array;
-                visualizer.Show();
+                    if (str.Any(i => !Char.IsWhiteSpace(i) && !Char.IsNumber(i) && i != '-'))
+                    {
+                        this.inputField.Text = "";
+                        isValid = false;
+                    }
+
+                    if (isValid)
+                    {
+                        str = Regex.Replace(str, @"\s+", ",");
+
+                        var array =
+                            str.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                                .Select(int.Parse)
+                                .ToArray();
+                        this.Visible = false;
+                        visualizer.Array = array;
+                        visualizer.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка! Неправильный формат строки.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.inputField.Text = "";
+                    MessageBox.Show("Ошибка! Неправильный формат строки.");
+                }
             }
         }
     }

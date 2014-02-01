@@ -19,17 +19,6 @@ package Map;
 		my $self = shift;
 		
 		pop @{$self->{countries}};
-		return scalar @{$self->{countries}} + 1;
-	}
-	
-	sub Clear{
-		my $self = shift;
-		
-		@{$self->{countries}} = ();
-	}
-	
-	sub GetIntersections{
-		my $self = shift;
 
 		for (my $i = 0; $i < scalar @{$self->{countries}} - 1; ++$i){
 			my $country = $self->{countries}->[$i];
@@ -38,7 +27,9 @@ package Map;
 			
 				for(my $j = $i + 1; $j < scalar @{$self->{countries}}; ++$j){
 					if ($country->Overlap($_, $self->{countries}->[$j])){
-						$country->{intersects}->{$j} = 1;
+
+						$country->{intersects}->{$i} = 1;
+
 					}
 				}
 			}
@@ -54,7 +45,11 @@ package Map;
 		my $index = 0;
 		for (@countries){
 			for my $i (0 .. $#countries){
+
 				$matrix[$index][$i] = 0 unless ($matrix[$index][$i]);
+
+				
+
 				if ($_->{intersects}->{$i} == 1){
 					$matrix[$index][$i] = 1;
 					$matrix[$i][$index] = 1;
@@ -65,6 +60,7 @@ package Map;
 	
 		return \@matrix;
 	}
+
 	
 	sub GetCoordinates{
 		my $self = shift;
@@ -72,5 +68,6 @@ package Map;
 		
 		return $self->{countries}->[$index]->GetCoordinates();
 	}
+
 
 1;
