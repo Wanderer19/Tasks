@@ -4,12 +4,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Visualizer
 {
     class Array
     {
-        private int[] array;
+        public int[] array;
 
         public List<System.Drawing.Point> RectangleCoordinates { get; set; }
         public List<System.Drawing.Point> ValuesCoordinates { get; set; }
@@ -24,10 +25,10 @@ namespace Visualizer
             Colors = new List<Color>();
             
             var x = 3;
-            var y = 100;
+            var y = 200;
 
             var x1 = 28;
-            var y1 = 125;
+            var y1 = 225;
            
           
             foreach (var value in array)
@@ -45,6 +46,36 @@ namespace Visualizer
                 x1 += 100;
             }
 
+        }
+
+        public int GetValue(int i)
+        {
+            return array[i];
+
+        }
+        public void Swap(int i1, int j)
+        {
+            var x = 3;
+            var y = 200;
+
+            var x1 = 28;
+            var y1 = 225;
+
+
+            for (var i = 0; i < array.Length; ++i)
+            {
+                Colors.Add(Color.LightCyan);
+
+                RectangleCoordinates.Add(new System.Drawing.Point(x, y));
+
+                if (Math.Abs(array[i]) >= 100 || (array[i] <= -10))
+                    ValuesCoordinates[i] = new System.Drawing.Point(x1 - 10, y1);
+                else
+                    ValuesCoordinates[i] = new System.Drawing.Point(x1, y1);
+
+                x += 100;
+                x1 += 100;
+            }
         }
     }
 }

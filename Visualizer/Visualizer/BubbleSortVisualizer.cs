@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,20 +47,12 @@ namespace Visualizer
             graphics = this.CreateGraphics();
             arrays = new Array(this.Array);
             automate = new BubbleSortAutomate(this.Array);
-          
+            state = 0;
+            reverseState = 0;
       
-          
+            this.DrawArray(-1, -1);
 
-            for (var i = 0; i < Array.Length; ++i)
-            {
-                var rect = new System.Drawing.Rectangle(arrays.RectangleCoordinates[i],
-                    new System.Drawing.Size(100, 100));
-                graphics.DrawRectangle(drawPen, rect);
-                graphics.FillRectangle(new SolidBrush(arrays.Colors[i]), rect);
-                graphics.DrawString(Array[i].ToString(), drawFont, drawBrush, arrays.ValuesCoordinates[i], drawFormat);
-               
-             
-            }
+
             
         }
 
@@ -80,7 +73,9 @@ namespace Visualizer
 
         private void buttonChangeData_Click(object sender, EventArgs e)
         {
-           
+            Data d = new Data(this);
+            this.Visible = false;
+            d.Show();
         }
 
         private void pauseButton_Click(object sender, EventArgs e)
@@ -96,24 +91,80 @@ namespace Visualizer
         private void forwardButton_Click(object sender, EventArgs e)
         {
             var res = automate.DirectAutomate(state);
-            state = res.Item1;
+            state = res.state;
             reverseState = state;
 
-            graphics.DrawString(currentComment, drawFont, drawBrush1, new PointF(400, 400), drawFormat);
-            graphics.DrawString(res.Item2, drawFont, drawBrush, new PointF(400, 400), drawFormat);
-            currentComment = res.Item2;
+            this.DrawState(res);
+            //graphics.FillRectangle(drawBrush1, 300, 400, 1500, 500);
+           // graphics.DrawString(currentComment, drawFont, drawBrush1, new PointF(400, 400), drawFormat);
+            //graphics.DrawString(res.fullMessage, drawFont, drawBrush, new PointF(400, 400), drawFormat);
+            //currentComment = res.fullMessage;
 
         }
 
         private void backwardButton_Click(object sender, EventArgs e)
         {
             var res = automate.ReverseAutomate(state);
-            state = res.Item1;
+            state = res.state;
             reverseState = state;
 
-            graphics.DrawString(currentComment, drawFont, drawBrush1, new PointF(400, 400), drawFormat);
-            graphics.DrawString(res.Item2, drawFont, drawBrush, new PointF(400, 400), drawFormat);
-            currentComment = res.Item2;
+            graphics.FillRectangle(drawBrush1, 300, 400, 1500, 500);
+            //graphics.DrawString(currentComment, drawFont, drawBrush1, new PointF(400, 400), drawFormat);
+            graphics.DrawString(res.fullMessage, drawFont, drawBrush, new PointF(400, 400), drawFormat);
+            currentComment = res.fullMessage;
+        }
+
+        private void DrawState(BubbleSortAutomate.State state)
+        {
+            graphics.FillRectangle(drawBrush1, 0, 0, 1500, 200);
+            if (state.currentState.Equals("compare"))
+                this.DrawCompare(state.firstIndex, state.secondIndex);
+            else
+                this.DrawSwap(state.firstIndex, state.secondIndex);
+
+            this.DrawComment(state.fullMessage);
+        }
+
+        private void DrawComment(string message)
+        {
+            graphics.FillRectangle(drawBrush1, 300, 400, 1500, 500);
+            graphics.DrawString(message, drawFont, drawBrush, new PointF(400, 400), drawFormat);
+        }
+
+        private void DrawCompare(int i, int j)
+        {
+            this.DrawArray(-1, -1);
+            drawPen.StartCap = LineCap.ArrowAnchor;
+            drawPen.EndCap = LineCap.ArrowAnchor;
+           
+            Point[] points = new Point[] { new Point(53 + i * 100, 180), new Point(47 + 53 + i * 100, 155), new Point(100 + 53 + i * 100, 180) };
+            graphics.DrawCurve(drawPen, points);
+            graphics.DrawString("VS", drawFont, drawBrush, 80*(i+1), 100, drawFormat);
+        }
+
+        private void DrawSwap(int i, int j)
+        {
+            arrays.Swap(i, j);
+
+            this.DrawArray(i, j);
+
+        }
+
+        private void DrawArray(int x, int y)
+        {
+           
+            for (var i = 0; i < Array.Length; ++i)
+            {
+                var color = i == x || i == y ? Color.Fuchsia : Color.LightCyan;
+                var rect = new System.Drawing.Rectangle(arrays.RectangleCoordinates[i],
+                    new System.Drawing.Size(100, 100));
+                graphics.FillRectangle(new SolidBrush(color), rect);
+                graphics.DrawRectangle(drawPen, rect);
+               
+                graphics.DrawString(arrays.GetValue(i).ToString(), drawFont, drawBrush, arrays.ValuesCoordinates[i], drawFormat);
+
+
+            }
         }
     }
 }

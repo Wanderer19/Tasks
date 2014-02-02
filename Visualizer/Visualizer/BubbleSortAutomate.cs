@@ -25,6 +25,25 @@ namespace Visualizer
             }
         }
 
+        internal struct State
+        {
+            public string currentState;
+            public int secondIndex;
+            public int firstIndex;
+
+            public string fullMessage;
+            public int state;
+
+            public State(string currState, string message, int i, int j, int state)
+            {
+                this.currentState = currState;
+                this.fullMessage = message;
+                this.firstIndex = i;
+                this.secondIndex = j;
+                this.state = state;
+            }
+        }
+
         private Data data;
         private Stack<object> stack;
 
@@ -34,68 +53,84 @@ namespace Visualizer
             stack = new Stack<object>();
         }
 
-        public Tuple<int, string> ReverseAutomate(int state)
+        public State ReverseAutomate(int state)
         {
-            string comment = "";
-            switch (state)
+            var comment = "";
+            var currentState = "";
+            var firstIndex = 0;
+            var secondIndex = 0;
+
+            var isInterestingState = false;
+
+            while (!isInterestingState)
+
             {
-                case 0:
+                switch (state)
                 {
-                    comment = "Начало сортировки";
+                    case 0:
+                    {
+                        comment = "Начало сортировки";
                   
 
                         state = -1;
 
                         break;
                     }
-                case 1:
-                {
-                    comment = "Начало цикла, i = 1";
+                    case 1:
+                    {
+                        comment = "Начало цикла, i = 1";
                      
 
                         state = 0;
 
                         break;
                     }
-                case 2:
-                {
-                    comment = String.Format("Сравнение индекса i =  {0} и длина массива {1}", data.i, data.size);
+                    case 2:
+                    {
+                        comment = String.Format("Сравнение индекса i =  {0} и длина массива {1}", data.i, data.size);
                   
                         state = data.i <= 1 ? 1 : 9;
 
                         break;
                     }
-                case 3:
-                {
-                    comment = "Начало второго цикла, j = 0";
+                    case 3:
+                    {
+                        comment = "Начало второго цикла, j = 0";
 
 
                         state = 2;
 
                         break;
                     }
-                case 4:
-                {
-                    comment = String.Format("Сравнение индекса j =  {0} и длина массива  - 1 = {1}", data.i,
-                        data.size - 1);
+                    case 4:
+                    {
+                        comment = String.Format("Сравнение индекса j =  {0} и длина массива  - 1 = {1}", data.i,
+                            data.size - 1);
                    
                         state = data.j <= 0 ? 3 : 8;
 
                         break;
 
                     }
-                case 5:
-                {
-                    comment = String.Format("Сравнение элемента с индексом {0} и с индексом {1}", data.j, data.j + 1);
-          
+                    case 5:
+                    {
+                        comment = String.Format("Сравнение элемента с индексом {0} и с индексом {1}", data.j, data.j + 1);
+                        isInterestingState = true;
+                        firstIndex = data.j;
+                        secondIndex = data.j + 1;
+                        currentState = "compare";
                         state = 4;
 
                         break;
                     }
-                case 6:
-                {
-                    comment = String.Format("Обмен эелементов и синдексами {0} и {1}", data.j, data.j + 1);
-                       
+                    case 6:
+                    {
+                        comment = String.Format("Обмен эелементов и синдексами {0} и {1}", data.j, data.j + 1);
+                        isInterestingState = true;
+                        firstIndex = data.j;
+                        secondIndex = data.j + 1;
+                        currentState = "swap";
+
                         data.array[data.j + 1] = (int)stack.Pop();
                         data.array[data.j] = (int)stack.Pop();
 
@@ -103,16 +138,16 @@ namespace Visualizer
 
                         break;
                     }
-                case 7:
+                    case 7:
                     {
                         var isTrue = (bool)stack.Pop();
                         state = isTrue ? 6 : 5;
 
                         break;
                     }
-                case 8:
-                {
-                    comment = "Инкремент j";
+                    case 8:
+                    {
+                        comment = "Инкремент j";
                        
                         data.j--;
 
@@ -120,9 +155,9 @@ namespace Visualizer
 
                         break;
                     }
-                case 9:
-                {
-                    comment = "Инкремент i";
+                    case 9:
+                    {
+                        comment = "Инкремент i";
                        
                         data.i--;
                         data.j = data.size - 1;
@@ -131,37 +166,45 @@ namespace Visualizer
 
                         break;
                     }
-                case 10:
-                {
-                    comment = "Конец сортировки";
-                        
+                    case 10:
+                    {
+                        comment = "Конец сортировки";
+                        isInterestingState = true;
+                        currentState = "end";
 
                         state = 2;
 
                         break;
                     }
-                default:
+                    default:
                     {
                         state = -1;
                         break;
                     }
+                }
             }
-            return Tuple.Create(state, comment);
+            return new State(currentState, comment, firstIndex, secondIndex, state);
         }
 
-        public Tuple<int, string> DirectAutomate(int state)
+        public State DirectAutomate(int state)
         {
-            string comment = "";
+            var comment = "";
+            var isInterestingState = false;
+            var currentState = "";
+            var firstIndex = 0;
+            var secondIndex = 0;
 
-            switch (state)
+            while (!isInterestingState)
             {
-                case 0:
+                switch (state)
+                {
+                    case 0:
                     {
                         state = 1;
                         comment = "Начало сортировки";
                         break;
                     }
-                case 1:
+                    case 1:
                     {
                         data.i = 1;
                         state = 2;
@@ -170,37 +213,42 @@ namespace Visualizer
 
                         break;
                     }
-                case 2:
-                {
-                    comment = String.Format("Сравнение индекса i =  {0} и длина массива {1}", data.i, data.size);
+                    case 2:
+                    {
+                        comment = String.Format("Сравнение индекса i =  {0} и длина массива {1}", data.i, data.size);
                        
 
                         state = data.i < data.size ? 3 : -1;
 
                         break;
                     }
-                case 3:
-                {
-                    comment = "Начало второго цикла, j = 0";
+                    case 3:
+                    {
+                        comment = "Начало второго цикла, j = 0";
                        
                         data.j = 0;
                         state = 4;
 
                         break;
                     }
-                case 4:
-                {
-                    comment = String.Format("Сравнение индекса j =  {0} и длина массива  - 1 = {1}", data.i,
-                        data.size - 1);
+                    case 4:
+                    {
+                        comment = String.Format("Сравнение индекса j =  {0} и длина массива  - 1 = {1}", data.i,
+                            data.size - 1);
               
                         state = data.j < data.size - 1 ? 5 : 9;
 
                         break;
                     }
-                case 5:
-                {
-                    comment = String.Format("Сравнение элемента с индексом {0} и с индексом {1}", data.j, data.j + 1);
-                       
+                    case 5:
+                    {
+                        isInterestingState = true;
+                        currentState = "compare";
+                        firstIndex = data.j;
+                        secondIndex = data.j + 1;
+
+                        comment = String.Format("Сравнение элемента с индексом {0} и с индексом {1}", data.j, data.j + 1);
+                        
                         if (data.array[data.j] > data.array[data.j + 1])
                         {
                             stack.Push(data.array[data.j]);
@@ -216,9 +264,14 @@ namespace Visualizer
 
                         break;
                     }
-                case 6:
-                {
-                    comment = String.Format("Обмен эелементов и синдексами {0} и {1}", data.j, data.j + 1);
+                    case 6:
+                    {
+                        isInterestingState = true;
+                        firstIndex = data.j;
+                        secondIndex = data.j + 1;
+                        currentState = "swap";
+
+                        comment = String.Format("Обмен эелементов и синдексами {0} и {1}", data.j, data.j + 1);
                       
                         var tmp = data.array[data.j];
                         data.array[data.j] = data.array[data.j + 1];
@@ -230,15 +283,15 @@ namespace Visualizer
 
                         break;
                     }
-                case 7:
+                    case 7:
                     {
                         state = 8;
 
                         break;
                     }
-                case 8:
-                {
-                    comment = "Инкремент j";
+                    case 8:
+                    {
+                        comment = "Инкремент j";
                         
                         data.j++;
 
@@ -246,9 +299,9 @@ namespace Visualizer
 
                         break;
                     }
-                case 9:
-                {
-                    comment = "Инкремент i";
+                    case 9:
+                    {
+                        comment = "Инкремент i";
                     
                         data.i++;
 
@@ -256,15 +309,19 @@ namespace Visualizer
 
                         break;
                     }
-                default:
-                {
-                    comment = "Конец";
-                      
+                    default:
+                    {
+                        isInterestingState = true;
+                        firstIndex = -1;
+                        secondIndex = -1;
+                        comment = "Конец";
+                        currentState = "end";
                         break;
                     }
+                }
             }
 
-            return Tuple.Create(state, comment);
+            return new State(currentState, comment, firstIndex, secondIndex, state);
         }
 
         public void Print()
