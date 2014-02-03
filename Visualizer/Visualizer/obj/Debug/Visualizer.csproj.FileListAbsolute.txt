@@ -1,9 +1,7 @@
 c:\users\asus\documents\visual studio 2013\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.exe
 c:\users\asus\documents\visual studio 2013\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.pdb
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.exe.config
-C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.BubbleSortForm.resources
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.BubbleSortVisualizer.resources
-C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Data.resources
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Application.resources
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Properties.Resources.resources
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Sourcecode.resources
@@ -12,3 +10,5 @@ C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\De
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.exe
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.pdb
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.csprojResolveAssemblyReference.cache
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SortingForm.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverForm.resources

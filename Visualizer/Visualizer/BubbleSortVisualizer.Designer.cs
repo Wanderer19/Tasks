@@ -86,7 +86,7 @@
             this.buttonChangeData.TabIndex = 1;
             this.buttonChangeData.Text = "Поменять данные";
             this.buttonChangeData.UseVisualStyleBackColor = false;
-            this.buttonChangeData.Click += new System.EventHandler(this.buttonChangeData_Click);
+            this.buttonChangeData.Click += new System.EventHandler(this.ChangeData);
             // 
             // startButton
             // 
@@ -185,7 +185,7 @@
             this.pauseButton.TabIndex = 7;
             this.pauseButton.Text = "Пауза";
             this.pauseButton.UseVisualStyleBackColor = false;
-            this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
+       
             // 
             // continueButton
             // 
@@ -222,7 +222,6 @@
             this.Name = "BubbleSortVisualizer";
             this.Text = "BubbleSortVisualizer";
             this.Closed += new System.EventHandler(this.CloseBubbleSortVisualizer);
-            this.Load += new System.EventHandler(this.BubbleSortVisualizer_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

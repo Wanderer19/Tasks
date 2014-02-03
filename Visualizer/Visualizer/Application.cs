@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,19 +22,20 @@ namespace Visualizer
         private void BubbleSortRun(object sender, EventArgs e)
         {
             this.Visible = false;
-           
-            var bubbleSortForm = new BubbleSortForm(this);
+            
+            var bubbleSortForm = new SortingForm(this,new BubbleSortFormSettings());
+            
             bubbleSortForm.Show();
         }
 
         private void ShowAboutProgram(object sender, EventArgs e)
         {
-            MessageBox.Show("Привет");
+            MessageBox.Show(String.Join("\n", File.ReadAllLines(GeneralSettings.AboutProgramFile)));
         }
 
         private void ShowHelp(object sender, EventArgs e)
         {
-            MessageBox.Show("Пока");
+            MessageBox.Show(String.Join("\n", File.ReadAllLines(GeneralSettings.HelpFile)));
         }
     }
 }

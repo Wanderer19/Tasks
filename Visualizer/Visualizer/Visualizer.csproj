@@ -48,24 +48,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Array.cs" />
+    <Compile Include="ArrayOld.cs" />
     <Compile Include="BubbleSortAutomate.cs" />
-    <Compile Include="BubbleSortForm.cs">
+    <Compile Include="BubbleSortVisualizerSettings.cs" />
+    <Compile Include="DataReceiverFormSettings.cs" />
+    <Compile Include="SortingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BubbleSortForm.Designer.cs">
-      <DependentUpon>BubbleSortForm.cs</DependentUpon>
+    <Compile Include="SortingForm.Designer.cs">
+      <DependentUpon>SortingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BubbleSortFormSettings.cs" />
     <Compile Include="BubbleSortVisualizer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BubbleSortVisualizer.Designer.cs">
       <DependentUpon>BubbleSortVisualizer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data.cs">
+    <Compile Include="DataReceiverForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Data.Designer.cs">
-      <DependentUpon>Data.cs</DependentUpon>
+    <Compile Include="DataReceiverForm.Designer.cs">
+      <DependentUpon>DataReceiverForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Application.cs">
       <SubType>Form</SubType>
@@ -73,8 +77,10 @@
     <Compile Include="Application.Designer.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
+    <Compile Include="GeneralSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortingFormSettings.cs" />
     <Compile Include="Sourcecode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,14 +93,14 @@
     <Compile Include="Visualizer.Designer.cs">
       <DependentUpon>Visualizer.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BubbleSortForm.resx">
-      <DependentUpon>BubbleSortForm.cs</DependentUpon>
+    <EmbeddedResource Include="SortingForm.resx">
+      <DependentUpon>SortingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BubbleSortVisualizer.resx">
       <DependentUpon>BubbleSortVisualizer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Data.resx">
-      <DependentUpon>Data.cs</DependentUpon>
+    <EmbeddedResource Include="DataReceiverForm.resx">
+      <DependentUpon>DataReceiverForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Application.resx">
       <DependentUpon>Application.cs</DependentUpon>
