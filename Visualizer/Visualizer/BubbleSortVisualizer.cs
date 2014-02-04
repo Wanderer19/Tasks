@@ -14,41 +14,34 @@ namespace Visualizer
 {
     public partial class BubbleSortVisualizer : Visualizer
     {
-        public int r = 10;
-        private ArrayOld _arraysOld;
-        private System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 20);
-        private System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
-        private System.Drawing.SolidBrush drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
-        private System.Drawing.SolidBrush drawBrush1 = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
-        private Pen drawPen = new Pen(Color.Blue, 7);
-        private SortingForm bubbleSortForm;
-        private BubbleSortAutomate automate;
-        private int state ;
-        private int reverseState;
-        private int prevState;
+        public const string StateCompare = "compare";
+        public const string StateSwap = "swap";
+        private readonly SortingForm bubbleSortForm;
         private Graphics graphics;
-        private string currentComment = "";
-        private Array array;
+        private readonly BubbleSortArray bubbleSortArray;
+        private readonly AutomatonBubbleSort automatonBubbleSort;
+        private readonly DrawingTools drawingTools;
+        private bool automaticMode = false;
 
         public BubbleSortVisualizer(SortingForm bubbleSortForm, int[] array)
         {
-            state = 0;
-            prevState = 0;
-            reverseState = 0;
             this.bubbleSortForm = bubbleSortForm;
+            
+            this.bubbleSortArray = new BubbleSortArray(array);
+            this.automatonBubbleSort = new AutomatonBubbleSort(array);
+            drawingTools = new DrawingTools(BubbleSortVisualizerSettings.FontDigits, BubbleSortVisualizerSettings.FormatDrawing,
+                                             BubbleSortVisualizerSettings.BrushDigit, BubbleSortVisualizerSettings.BrushElement, 
+                                             BubbleSortVisualizerSettings.PenElement);
+           
             this.Paint += new PaintEventHandler(DrawInitialState);
-            this.Array = array;
             InitializeComponent();
          }
 
         public void DrawInitialState(object sender, PaintEventArgs e)
         {
             graphics = this.CreateGraphics();
-            _arraysOld = new ArrayOld(this.Array);
-            automate = new BubbleSortAutomate(this.Array);
-           
-      
-            this.DrawArrayOld(-1, -1);
+   
+            this.DrawArray();
         }
 
         private void ShowHelpMessage(object sender, EventArgs e)
@@ -58,31 +51,24 @@ namespace Visualizer
 
         private void DrawArray()
         {
-            for (var i = 0; i < array.Length; ++i)
+            for (var i = 0; i < bubbleSortArray.Length; ++i)
             {
-                var rectangle = new System.Drawing.Rectangle(array.GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
+                var rectangle = new System.Drawing.Rectangle(bubbleSortArray.GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
 
-                graphics.FillRectangle(new SolidBrush(IdentefyColorElement(i)), rectangle);
-                graphics.DrawRectangle(drawPen, rectangle);
-                graphics.DrawString(array.GetValue(i), drawFont, drawBrush, array.GetCoordinates(i), drawFormat);
+                graphics.FillRectangle(new SolidBrush(bubbleSortArray.GetColorElement(i)), rectangle);
+                graphics.DrawRectangle(drawingTools.PenElement, rectangle);
+                graphics.DrawString(bubbleSortArray.GetValue(i), drawingTools.FontDigits, drawingTools.BrushDigit, bubbleSortArray.GetCoordinates(i), drawingTools.FormatDrawing);
             }
         }
 
-        private Color IdentefyColorElement(int index)
-        {
-            return array.IsSelected(index)
-                    ? BubbleSortVisualizerSettings.SelectedElementColor
-                    : BubbleSortVisualizerSettings.SelectedElementColor;
-
-        
-        }
-   
+       
 
         private void ChangeData(object sender, EventArgs e)
         {
             var dataReceiver = new DataReceiverForm(bubbleSortForm, 1);
             
             this.Visible = false;
+            this.Dispose();
             dataReceiver.Show();
         }
 
@@ -92,82 +78,82 @@ namespace Visualizer
             bubbleSortForm.Visible = true;
         }
 
-        private void forwardButton_Click(object sender, EventArgs e)
+        private void DoStepForward(object sender, EventArgs e)
         {
-            var res = automate.DirectAutomate(state);
-            prevState = state;
-            state = res.state;
-            reverseState = state;
-
-            this.DrawCurrentState(res);
-
+            this.DrawState(automatonBubbleSort.DoStepForward());
         }
 
-        private void backwardButton_Click(object sender, EventArgs e)
+        private void DoStepBackward(object sender, EventArgs e)
         {
-            var res = automate.ReverseAutomate(state);
-            state = res.state;
-            reverseState = state;
-
-           this.DrawCurrentState(res);
+            this.DrawState(automatonBubbleSort.DoStepBackward());
         }
 
-        private void DrawCurrentState(BubbleSortAutomate.State state)
+        private void DrawState(StateAutomaton stateAutomaton)
         {
-            this.ClearField();
-            if (state.currentState.Equals("compare"))
-                this.DrawCompare(state.firstIndex, state.secondIndex);
-            else
-                this.DrawSwap(state.firstIndex, state.secondIndex);
+            this.ClearComments();
 
-            this.DrawComment(state.fullMessage);
+            switch (stateAutomaton.StateId)
+            {
+                case StateCompare:
+                {
+                    this.DrawCompare(stateAutomaton.IndexesSelectedItems);
+                    break;
+                }
+                case StateSwap:
+                {
+                    this.DrawSwap(stateAutomaton.IndexesSelectedItems);
+                    break;
+                }
+            }
+            
+           this.DrawComment(stateAutomaton.DescriptionState);
         }
 
-        private void ClearField()
+        private void ClearComments()
         {
-            graphics.FillRectangle(drawBrush1, BubbleSortVisualizerSettings.UpperCommentField);
-            graphics.FillRectangle(drawBrush1, BubbleSortVisualizerSettings.BottomCommentField);
+            graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.UpperCommentField);
+            graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.BottomCommentField);
         }
 
         private void DrawComment(string message)
         {
+            graphics.DrawString(message, drawingTools.FontDigits, drawingTools.BrushDigit, BubbleSortVisualizerSettings.LocationBottomCommentField, drawingTools.FormatDrawing);
+        }
+
+        private void DrawCompare(Tuple <int, int> indexes)
+        {
+            this.DrawArray();
+            this.DrawCursor(indexes.Item1);
+            this.DrawSymbolComparison(indexes.Item1);
+        }
+
+        private void DrawCursor(int index)
+        {
+            //TO-DO придумать куда вынести
+            var points = new Point[] { new Point(53 + index * 100, 180), new Point(47 + 53 + index * 100, 155), new Point(100 + 53 + index * 100, 180) };
+            graphics.DrawCurve(drawingTools.PenElement, points);
+        }
+
+        private void DrawSymbolComparison(int index)
+        {
+            graphics.DrawString(BubbleSortVisualizerSettings.SymbolComparison, drawingTools.FontDigits, drawingTools.BrushDigit, 80 + 100 * index, 100, drawingTools.FormatDrawing);
+        }
+
+        private void DrawSwap(Tuple<int, int> indexes)
+        {
+            bubbleSortArray.SelectElements(indexes);
             
-            graphics.DrawString(message, drawFont, drawBrush, BubbleSortVisualizerSettings.locationBottomCommentField, drawFormat);
-        }
-
-        private void DrawCompare(int i, int j)
-        {
-            this.DrawArrayOld(-1, -1);
-            drawPen.StartCap = LineCap.ArrowAnchor;
-            drawPen.EndCap = LineCap.ArrowAnchor;
-           
-            Point[] points = new Point[] { new Point(53 + i * 100, 180), new Point(47 + 53 + i * 100, 155), new Point(100 + 53 + i * 100, 180) };
-            graphics.DrawCurve(drawPen, points);
-            graphics.DrawString("VS", drawFont, drawBrush, 80 + 100*i, 100, drawFormat);
-        }
-
-        private void DrawSwap(int i, int j)
-        {
-            _arraysOld.Swap(i, j);
-
-            this.DrawArrayOld(i, j);
+            this.DrawArray();
+            
+            bubbleSortArray.DeselectElements(indexes);
 
         }
 
-        private void DrawArrayOld(int x, int y)
+        private void EnableAutomaticMode(object sender, EventArgs e)
         {
-           
-            for (var i = 0; i < Array.Length; ++i)
+            if (this.automaticMode)
             {
-                var color = i == x || i == y ? Color.Fuchsia : Color.LightCyan;
-                var rect = new System.Drawing.Rectangle(_arraysOld.RectangleCoordinates[i],
-                    new System.Drawing.Size(100, 100));
-                graphics.FillRectangle(new SolidBrush(color), rect);
-                graphics.DrawRectangle(drawPen, rect);
-               
-                graphics.DrawString(_arraysOld.GetValue(i).ToString(), drawFont, drawBrush, _arraysOld.ValuesCoordinates[i], drawFormat);
-
-
+                
             }
         }
     }

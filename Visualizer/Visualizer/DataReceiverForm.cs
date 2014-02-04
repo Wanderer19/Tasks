@@ -72,6 +72,7 @@ namespace Visualizer
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
                      this.ProcessError();
             }
         }

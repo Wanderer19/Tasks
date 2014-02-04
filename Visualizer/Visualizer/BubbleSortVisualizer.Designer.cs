@@ -135,6 +135,7 @@
             this.automaticModeButton.TabIndex = 4;
             this.automaticModeButton.Text = "Автоматический режим";
             this.automaticModeButton.UseVisualStyleBackColor = false;
+            this.automaticModeButton.Click += new System.EventHandler(this.EnableAutomaticMode);
             // 
             // forwardButton
             // 
@@ -151,7 +152,7 @@
             this.forwardButton.TabIndex = 5;
             this.forwardButton.Text = ">>>Вперед";
             this.forwardButton.UseVisualStyleBackColor = false;
-            this.forwardButton.Click += new System.EventHandler(this.forwardButton_Click);
+            this.forwardButton.Click += new System.EventHandler(this.DoStepForward);
             // 
             // backwardButton
             // 
@@ -168,7 +169,7 @@
             this.backwardButton.TabIndex = 6;
             this.backwardButton.Text = "<<<Назад";
             this.backwardButton.UseVisualStyleBackColor = false;
-            this.backwardButton.Click += new System.EventHandler(this.backwardButton_Click);
+            this.backwardButton.Click += new System.EventHandler(this.DoStepBackward);
             // 
             // pauseButton
             // 
@@ -185,7 +186,6 @@
             this.pauseButton.TabIndex = 7;
             this.pauseButton.Text = "Пауза";
             this.pauseButton.UseVisualStyleBackColor = false;
-       
             // 
             // continueButton
             // 

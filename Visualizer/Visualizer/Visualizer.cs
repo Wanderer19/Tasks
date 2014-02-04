@@ -12,8 +12,6 @@ namespace Visualizer
 {
     public partial class Visualizer : Form
     {
-        public int[] Array { get; set; }
-    
         public Visualizer()
         {
             InitializeComponent();
