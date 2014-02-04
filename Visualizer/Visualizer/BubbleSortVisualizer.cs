@@ -22,7 +22,8 @@ namespace Visualizer
         private readonly AutomatonBubbleSort automatonBubbleSort;
         private readonly DrawingTools drawingTools;
         private bool automaticMode = false;
-
+        private readonly System.Timers.Timer selfTimer;
+ 
         public BubbleSortVisualizer(SortingForm bubbleSortForm, int[] array)
         {
             this.bubbleSortForm = bubbleSortForm;
@@ -32,10 +33,18 @@ namespace Visualizer
             drawingTools = new DrawingTools(BubbleSortVisualizerSettings.FontDigits, BubbleSortVisualizerSettings.FormatDrawing,
                                              BubbleSortVisualizerSettings.BrushDigit, BubbleSortVisualizerSettings.BrushElement, 
                                              BubbleSortVisualizerSettings.PenElement);
+
+           selfTimer = new System.Timers.Timer();
+           selfTimer.Elapsed += new System.Timers.ElapsedEventHandler(DoAutomaticStepForward);
+           
            
             this.Paint += new PaintEventHandler(DrawInitialState);
-            InitializeComponent();
          }
+
+        public void DoAutomaticStepForward(object source, System.Timers.ElapsedEventArgs e)
+        {
+            this.DoStepForward(null, new EventArgs());
+        }
 
         public void DrawInitialState(object sender, PaintEventArgs e)
         {
@@ -44,7 +53,7 @@ namespace Visualizer
             this.DrawArray();
         }
 
-        private void ShowHelpMessage(object sender, EventArgs e)
+        public override void ShowHelpMessage(object sender, EventArgs e)
         {
             MessageBox.Show(System.IO.File.ReadAllText(BubbleSortVisualizerSettings.HelpFile));
         }
@@ -61,9 +70,9 @@ namespace Visualizer
             }
         }
 
-       
 
-        private void ChangeData(object sender, EventArgs e)
+
+        public override void ChangeData(object sender, EventArgs e)
         {
             var dataReceiver = new DataReceiverForm(bubbleSortForm, 1);
             
@@ -73,19 +82,21 @@ namespace Visualizer
         }
 
 
-        private void CloseBubbleSortVisualizer(object sender, EventArgs e)
+        public override void CloseBubbleSortVisualizer(object sender, EventArgs e)
         {
             bubbleSortForm.Visible = true;
         }
 
-        private void DoStepForward(object sender, EventArgs e)
+        public override void DoStepForward(object sender, EventArgs e)
         {
-            this.DrawState(automatonBubbleSort.DoStepForward());
+            if (!(this.automaticMode && sender is System.Windows.Forms.Button))
+                this.DrawState(automatonBubbleSort.DoStepForward());
         }
 
-        private void DoStepBackward(object sender, EventArgs e)
+        public override void DoStepBackward(object sender, EventArgs e)
         {
-            this.DrawState(automatonBubbleSort.DoStepBackward());
+            if (!(this.automaticMode && sender is System.Windows.Forms.Button))
+                this.DrawState(automatonBubbleSort.DoStepBackward());
         }
 
         private void DrawState(StateAutomaton stateAutomaton)
@@ -129,8 +140,13 @@ namespace Visualizer
 
         private void DrawCursor(int index)
         {
-            //TO-DO придумать куда вынести
-            var points = new Point[] { new Point(53 + index * 100, 180), new Point(47 + 53 + index * 100, 155), new Point(100 + 53 + index * 100, 180) };
+            var points = new Point[]
+            {
+                new Point(BubbleSortVisualizerSettings.FirstPointerCoordinates[0].X + index * BubbleSortVisualizerSettings.WidthElemet, BubbleSortVisualizerSettings.FirstPointerCoordinates[0].Y), 
+                new Point(BubbleSortVisualizerSettings.FirstPointerCoordinates[1].X + index * BubbleSortVisualizerSettings.WidthElemet, BubbleSortVisualizerSettings.FirstPointerCoordinates[1].Y),
+                new Point(BubbleSortVisualizerSettings.FirstPointerCoordinates[2].X + index * BubbleSortVisualizerSettings.WidthElemet, BubbleSortVisualizerSettings.FirstPointerCoordinates[2].Y)
+            };
+
             graphics.DrawCurve(drawingTools.PenElement, points);
         }
 
@@ -149,12 +165,37 @@ namespace Visualizer
 
         }
 
-        private void EnableAutomaticMode(object sender, EventArgs e)
+        public override void EnableAutomaticMode(object sender, EventArgs e)
         {
-            if (this.automaticMode)
+            if (!this.automaticMode)
             {
-                
+                this.automaticMode = true;
+                selfTimer.Interval = 650;
+                selfTimer.Start();
             }
+        }
+
+        public override void DoPause(object sender, EventArgs e)
+        {
+            selfTimer.Stop();
+            this.automaticMode = false;
+        }
+
+        public override void Proceed(object sender, EventArgs e)
+        {
+            selfTimer.Start();
+            this.automaticMode = true;
+        }
+
+        public override void ToStart(object sender, EventArgs e)
+        {
+           this.ClearComments();
+           this.bubbleSortArray.DeselectAllElements();
+           
+           automatonBubbleSort.ToStart();
+
+           this.DrawArray();
+            
         }
     }
 }

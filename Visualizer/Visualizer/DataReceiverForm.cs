@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,8 +18,8 @@ namespace Visualizer
     {
         private bool choice = true;
         private Visualizer visualizer;
-        private SortingForm mainForm;
-        private int sortId;
+        private readonly SortingForm mainForm;
+        private readonly int sortId;
         private const int BubbleSortId = 1;
 
         public DataReceiverForm(SortingForm form, int sortId)
@@ -48,10 +49,10 @@ namespace Visualizer
 
         private void SelectEnteredDataButton(object sender, EventArgs e)
         {
-            choice = false;
+            choice = false;//TryToRunVisualizer
         }
 
-        private void HandleReceiverData(object sender, EventArgs e)
+        private void TryToRunVisualizer(object sender, EventArgs e)
         {
             try
             {
@@ -59,31 +60,42 @@ namespace Visualizer
                     this.RunVisualizer(new int[] { 0, -9, 7, 1, 5 });
                 else
                 {
-                
-                    var intputData = this.inputField.Text;
-
-                    if (IsValidData(intputData))
-                        this.RunVisualizer(ReadData(intputData));
+                    if (IsValidInputData())
+                        this.RunVisualizer(ReadData());
                     else
                         this.ProcessError();
                     
                 }
-                
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-                     this.ProcessError();
+                this.ProcessError();
             }
         }
         
-        private static bool IsValidData(string inputData)
+        private bool IsValidInputData()
         {
-            return inputData.Any(i => Char.IsWhiteSpace(i) || Char.IsNumber(i) || i == '-');
+            
+            var inputData = this.inputField.Text;
+           
+            if (inputData.Any(i => Char.IsWhiteSpace(i) || Char.IsNumber(i) || i == '-'))
+            {
+                var array = ReadData();
+
+                if (array.Length > DataReceiverFormSettings.SizeLimitArray)
+                    return false;
+
+                return !array.Any(i => Math.Abs(i) > DataReceiverFormSettings.LimitArrayElementValue);
+            }
+            
+
+            return false;
         }
 
-        private static int [] ReadData(string inputData)
+        private int [] ReadData()
         {
+            
+            var inputData = this.inputField.Text;
             inputData = Regex.Replace(inputData, @"\s+", ",");
 
             var array = inputData.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
@@ -98,14 +110,13 @@ namespace Visualizer
             this.Visible = false;
 
             this.IdentifyVisualizer(array);
-            //visualizer.ArrayOld = array;//TO-DO сделать setArray , проверка на размер и тд
             visualizer.Show();
         }
 
         private void ProcessError()
         {
             this.inputField.Text = "";
-            MessageBox.Show("Ошибка! Неправильный формат строки.");
+            MessageBox.Show(DataReceiverFormSettings.ErrorMessage);
         }
     }
 }

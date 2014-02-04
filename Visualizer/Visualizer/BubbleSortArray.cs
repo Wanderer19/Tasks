@@ -63,6 +63,11 @@ namespace Visualizer
             selectedIndexes[indexes.Item1] = false;
             selectedIndexes[indexes.Item2] = false;
         }
-   
+
+        public void DeselectAllElements()
+        {
+            for (var i = 0; i < array.Length; ++i)
+                selectedIndexes[i] = false;
+        }
     }
 }

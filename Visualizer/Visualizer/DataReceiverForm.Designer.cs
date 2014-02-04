@@ -100,7 +100,7 @@
             this.OkButton.TabIndex = DataReceiverFormSettings.OkButtonTabIndex;
             this.OkButton.Text = DataReceiverFormSettings.OkButtonText;
             this.OkButton.UseVisualStyleBackColor = DataReceiverFormSettings.OkButtonUseVisualStyleBackColor;
-            this.OkButton.Click += new System.EventHandler(this.HandleReceiverData);
+            this.OkButton.Click += new System.EventHandler(this.TryToRunVisualizer);
 
             // 
             // DataReceiverForm

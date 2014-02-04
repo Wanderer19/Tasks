@@ -24,7 +24,7 @@ namespace Visualizer
             this.Visible = false;
             
             var bubbleSortForm = new SortingForm(this,new BubbleSortFormSettings());
-            
+   
             bubbleSortForm.Show();
         }
 
@@ -36,6 +36,11 @@ namespace Visualizer
         private void ShowHelp(object sender, EventArgs e)
         {
             MessageBox.Show(String.Join("\n", File.ReadAllLines(GeneralSettings.HelpFile)));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

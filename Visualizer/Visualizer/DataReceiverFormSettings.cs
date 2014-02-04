@@ -70,6 +70,10 @@ namespace Visualizer
         public static readonly Size ClientSize = new System.Drawing.Size(814, 539);
         public static readonly string Name = "DataReceiverForm";
         public static readonly string Text = "DataReceiverForm";
-           
+
+        public static readonly int LimitArrayElementValue = 99999;
+        public static readonly int SizeLimitArray = 20;
+        public static readonly string ErrorMessage = "Неправильные данны";
+
     }
 }

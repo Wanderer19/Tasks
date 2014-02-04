@@ -96,6 +96,7 @@
     <Compile Include="Visualizer.Designer.cs">
       <DependentUpon>Visualizer.cs</DependentUpon>
     </Compile>
+    <Compile Include="VisualizerSettings.cs" />
     <EmbeddedResource Include="SortingForm.resx">
       <DependentUpon>SortingForm.cs</DependentUpon>
     </EmbeddedResource>

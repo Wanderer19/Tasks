@@ -10,11 +10,12 @@ namespace Visualizer
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Label mainTitle;
         public System.Windows.Forms.Button bubbleSortButton;
+        public System.Windows.Forms.Button selectionSortButton;
         private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem helpProgramMenu;
         private System.Windows.Forms.ToolStripMenuItem aboutProgramMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpMenuItem;
-       
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -72,6 +73,15 @@ namespace Visualizer
             this.bubbleSortButton.Text = GeneralSettings.BubbleSortButtonText;
             this.bubbleSortButton.UseVisualStyleBackColor = GeneralSettings.BubbleSortButtonUseVisualStyleBackColor;
             this.bubbleSortButton.Click += new System.EventHandler(this.BubbleSortRun);
+
+            this.selectionSortButton.Location = new System.Drawing.Point(233, 404);
+            this.selectionSortButton.Name = "selectionSortButton";
+            this.selectionSortButton.Size = new System.Drawing.Size(400, 89);
+            this.selectionSortButton.TabIndex = 3;
+            this.selectionSortButton.Text = "selectionSortButton";
+            this.selectionSortButton.UseVisualStyleBackColor = true;
+            this.selectionSortButton.Click += new System.EventHandler(this.button1_Click);
+            
 
             // 
             // mainMenu

@@ -16,5 +16,50 @@ namespace Visualizer
         {
             InitializeComponent();
         }
+
+        public virtual void ToStart(object sender, EventArgs e)
+        {
+            
+        }
+
+        public virtual void EnableAutomaticMode(object sender, EventArgs e)
+        {
+            
+        }
+
+        public virtual void DoStepForward(object sender, EventArgs e)
+        {
+            
+        }
+
+        public virtual void DoStepBackward(object sender, EventArgs e)
+        {
+            
+        }
+
+        public virtual void DoPause(object sender, EventArgs e)
+        {
+            
+        }
+
+        public virtual void Proceed(object sender, EventArgs e)
+        {
+            
+        }
+
+        public virtual void CloseBubbleSortVisualizer(object sender, EventArgs e)
+        {
+            
+        }
+
+        public virtual void ShowHelpMessage(object sender, EventArgs e)
+        {
+            
+        }
+
+        public virtual void ChangeData(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

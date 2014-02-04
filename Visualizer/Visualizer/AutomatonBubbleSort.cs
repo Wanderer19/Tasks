@@ -313,5 +313,15 @@ namespace Visualizer
             }
             return new StateAutomaton(descriptionState, stateId, dataModel.State, firstIndex, secondIndex);
         }
+
+        public void ToStart()
+        {
+            var stateAutomaton = this.DoStepBackward();
+
+            while (stateAutomaton.StateNumber != 0)
+            {
+                stateAutomaton = this.DoStepBackward();
+            }
+        }
     }
 }
