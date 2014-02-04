@@ -5,34 +5,51 @@ using System.Text;
 
 namespace Visualizer
 {
-    class AutomatonSelectionSort : IAutomaton
+    public class AutomatonSelectionSort : Automaton
     {
-        private class DataModel
+        public AutomatonSelectionSort(int[] array)
         {
-            public DataModel()
+            dataModel = new DataModel(array);
+            stack = new Stack<object>();
+        }
+
+        private DataModel dataModel;
+        private Stack<object> stack;
+
+        public override StateAutomaton DoStepForward()
+        {
+            var descriptionState = "";
+            var isInterestingState = false;
+            var stateId = "";
+            var currentIndex = -1;
+            var minIndex = -1;
+
+            while (!isInterestingState)
             {
-                
+                switch (dataModel.State)
+                {
+                }
             }
+
+            return new StateAutomaton(descriptionState, stateId, dataModel.State, currentIndex, minIndex);
         }
 
-        public AutomatonSelectionSort(int [] array)
+        public override StateAutomaton DoStepBackward()
         {
-            
-        }
+            var descriptionState = "";
+            var isInterestingState = false;
+            var stateId = "";
+            var currentIndex = -1;
+            var minIndex = -1;
 
-        public StateAutomaton DoStepForward()
-        {
-            throw new NotImplementedException();
-        }
+             while (!isInterestingState)
+            {
+                switch (dataModel.State)
+                {
+                }
+            }
 
-        public StateAutomaton DoStepBackward()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ToStart()
-        {
-            throw new NotImplementedException();
+            return new StateAutomaton(descriptionState, stateId, dataModel.State, currentIndex, minIndex);
         }
     }
 }

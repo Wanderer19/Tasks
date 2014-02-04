@@ -54,7 +54,7 @@ namespace Visualizer
 
         private void SelectEnteredDataButton(object sender, EventArgs e)
         {
-            choice = false;//TryToRunVisualizer
+            choice = false;
         }
 
         private void TryToRunVisualizer(object sender, EventArgs e)
@@ -65,7 +65,7 @@ namespace Visualizer
                     this.RunVisualizer(new int[] { 0, -9, 7, 1, 5 });
                 else
                 {
-                    if (IsValidInputData())
+                    if (IsValidInputData(inputField.Text))
                         this.RunVisualizer(ReadData());
                     else
                         this.ProcessError();
@@ -78,11 +78,8 @@ namespace Visualizer
             }
         }
         
-        private bool IsValidInputData()
+        private bool IsValidInputData(string inputData)
         {
-            
-            var inputData = this.inputField.Text;
-           
             if (inputData.Any(i => Char.IsWhiteSpace(i) || Char.IsNumber(i) || i == '-'))
             {
                 var array = ReadData();

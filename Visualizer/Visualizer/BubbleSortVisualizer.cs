@@ -16,47 +16,22 @@ namespace Visualizer
     {
         public const string StateCompare = "compare";
         public const string StateSwap = "swap";
-        private readonly AutomatonBubbleSort automatonBubbleSort;
-        private bool automaticMode = false;
-        private readonly System.Timers.Timer selfTimer;
+        
  
         public BubbleSortVisualizer(SortingForm bubbleSortForm, int[] array)
         {
             this.mainForm = bubbleSortForm;
             
             this.sortArray = new SortArray(array);
-            this.automatonBubbleSort = new AutomatonBubbleSort(array);
+            this.automatonSort = new AutomatonBubbleSort(array);
             drawingTools = new DrawingTools(BubbleSortVisualizerSettings.FontDigits, BubbleSortVisualizerSettings.FormatDrawing,
                                              BubbleSortVisualizerSettings.BrushDigit, BubbleSortVisualizerSettings.BrushElement, 
-                                             BubbleSortVisualizerSettings.PenElement);
-
-           selfTimer = new System.Timers.Timer();
-           selfTimer.Elapsed += new System.Timers.ElapsedEventHandler(DoAutomaticStepForward);
-           
+                                             BubbleSortVisualizerSettings.PenElement);           
            
             this.Paint += new PaintEventHandler(DrawInitialState);
          }
 
-        public void DoAutomaticStepForward(object source, System.Timers.ElapsedEventArgs e)
-        {
-            this.DoStepForward(null, new EventArgs());
-        }
-
-        
-
-        public override void DoStepForward(object sender, EventArgs e)
-        {
-            if (!(this.automaticMode && sender is System.Windows.Forms.Button))
-                this.DrawState(automatonBubbleSort.DoStepForward());
-        }
-
-        public override void DoStepBackward(object sender, EventArgs e)
-        {
-            if (!(this.automaticMode && sender is System.Windows.Forms.Button))
-                this.DrawState(automatonBubbleSort.DoStepBackward());
-        }
-
-        private void DrawState(StateAutomaton stateAutomaton)
+        public override void DrawState(StateAutomaton stateAutomaton)
         {
             this.ClearComments();
 
@@ -122,34 +97,12 @@ namespace Visualizer
 
         }
 
-        public override void EnableAutomaticMode(object sender, EventArgs e)
-        {
-            if (!this.automaticMode)
-            {
-                this.automaticMode = true;
-                selfTimer.Interval = 650;
-                selfTimer.Start();
-            }
-        }
-
-        public override void DoPause(object sender, EventArgs e)
-        {
-            selfTimer.Stop();
-            this.automaticMode = false;
-        }
-
-        public override void Proceed(object sender, EventArgs e)
-        {
-            selfTimer.Start();
-            this.automaticMode = true;
-        }
-
         public override void ToStart(object sender, EventArgs e)
         {
            this.ClearComments();
            this.sortArray.DeselectAllElements();
            
-           automatonBubbleSort.ToStart();
+           automatonSort.ToStart();
 
            this.DrawArray();
             
