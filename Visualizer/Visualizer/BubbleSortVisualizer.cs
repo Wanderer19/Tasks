@@ -16,19 +16,15 @@ namespace Visualizer
     {
         public const string StateCompare = "compare";
         public const string StateSwap = "swap";
-        private readonly SortingForm bubbleSortForm;
-        private Graphics graphics;
-        private readonly BubbleSortArray bubbleSortArray;
         private readonly AutomatonBubbleSort automatonBubbleSort;
-        private readonly DrawingTools drawingTools;
         private bool automaticMode = false;
         private readonly System.Timers.Timer selfTimer;
  
         public BubbleSortVisualizer(SortingForm bubbleSortForm, int[] array)
         {
-            this.bubbleSortForm = bubbleSortForm;
+            this.mainForm = bubbleSortForm;
             
-            this.bubbleSortArray = new BubbleSortArray(array);
+            this.sortArray = new SortArray(array);
             this.automatonBubbleSort = new AutomatonBubbleSort(array);
             drawingTools = new DrawingTools(BubbleSortVisualizerSettings.FontDigits, BubbleSortVisualizerSettings.FormatDrawing,
                                              BubbleSortVisualizerSettings.BrushDigit, BubbleSortVisualizerSettings.BrushElement, 
@@ -46,46 +42,7 @@ namespace Visualizer
             this.DoStepForward(null, new EventArgs());
         }
 
-        public void DrawInitialState(object sender, PaintEventArgs e)
-        {
-            graphics = this.CreateGraphics();
-   
-            this.DrawArray();
-        }
-
-        public override void ShowHelpMessage(object sender, EventArgs e)
-        {
-            MessageBox.Show(System.IO.File.ReadAllText(BubbleSortVisualizerSettings.HelpFile));
-        }
-
-        private void DrawArray()
-        {
-            for (var i = 0; i < bubbleSortArray.Length; ++i)
-            {
-                var rectangle = new System.Drawing.Rectangle(bubbleSortArray.GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
-
-                graphics.FillRectangle(new SolidBrush(bubbleSortArray.GetColorElement(i)), rectangle);
-                graphics.DrawRectangle(drawingTools.PenElement, rectangle);
-                graphics.DrawString(bubbleSortArray.GetValue(i), drawingTools.FontDigits, drawingTools.BrushDigit, bubbleSortArray.GetCoordinates(i), drawingTools.FormatDrawing);
-            }
-        }
-
-
-
-        public override void ChangeData(object sender, EventArgs e)
-        {
-            var dataReceiver = new DataReceiverForm(bubbleSortForm, 1);
-            
-            this.Visible = false;
-            this.Dispose();
-            dataReceiver.Show();
-        }
-
-
-        public override void CloseBubbleSortVisualizer(object sender, EventArgs e)
-        {
-            bubbleSortForm.Visible = true;
-        }
+        
 
         public override void DoStepForward(object sender, EventArgs e)
         {
@@ -157,11 +114,11 @@ namespace Visualizer
 
         private void DrawSwap(Tuple<int, int> indexes)
         {
-            bubbleSortArray.SelectElements(indexes);
+            sortArray.SelectElements(indexes);
             
             this.DrawArray();
             
-            bubbleSortArray.DeselectElements(indexes);
+            sortArray.DeselectElements(indexes);
 
         }
 
@@ -190,7 +147,7 @@ namespace Visualizer
         public override void ToStart(object sender, EventArgs e)
         {
            this.ClearComments();
-           this.bubbleSortArray.DeselectAllElements();
+           this.sortArray.DeselectAllElements();
            
            automatonBubbleSort.ToStart();
 

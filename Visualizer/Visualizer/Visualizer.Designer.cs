@@ -235,7 +235,7 @@
             this.Controls.Add(this.changeDataButton);
             this.Controls.Add(this.mainMenu);
             this.MainMenuStrip = this.mainMenu;
-            this.Closed += new System.EventHandler(this.CloseBubbleSortVisualizer);
+            this.Closed += new System.EventHandler(this.CloseVisualizer);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.ResumeLayout(false);

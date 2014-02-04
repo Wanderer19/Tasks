@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Visualizer
 {
-    class DrawingTools
+    public class DrawingTools
     {
         public System.Drawing.Font FontDigits { get; private set; }
         public System.Drawing.StringFormat FormatDrawing { get; private set;}

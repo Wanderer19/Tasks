@@ -48,7 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BubbleSortArray.cs" />
+    <Compile Include="AutomatonSelectionSort.cs" />
+    <Compile Include="SortArray.cs" />
     <Compile Include="DrawingTools.cs" />
     <Compile Include="IAutomaton.cs" />
     <Compile Include="AutomatonBubbleSort.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Sourcecode.Designer.cs">
       <DependentUpon>Sourcecode.cs</DependentUpon>
     </Compile>
+    <Compile Include="SourceCodeSettings.cs" />
     <Compile Include="StateAutomaton.cs" />
     <Compile Include="Visualizer.cs">
       <SubType>Form</SubType>

@@ -23,7 +23,7 @@ namespace Visualizer
         {
             this.Visible = false;
             
-            var bubbleSortForm = new SortingForm(this,new BubbleSortFormSettings());
+            var bubbleSortForm = new SortingForm(this, new BubbleSortFormSettings());
    
             bubbleSortForm.Show();
         }

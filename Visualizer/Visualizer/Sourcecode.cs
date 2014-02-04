@@ -18,12 +18,6 @@ namespace Visualizer
             this.file = file;
             InitializeComponent();
         }
-
-        private void bubbleSortCode_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
        
     }
 }
