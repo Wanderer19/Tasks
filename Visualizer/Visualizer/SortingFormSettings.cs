@@ -11,10 +11,6 @@ namespace Visualizer
 {
     public class SortingFormSettings
     {
-        public SortingFormSettings()
-        {
-            
-        }
         public static readonly bool MainTitleAutoSize = true;
         public static readonly Font MainTitleFont = new System.Drawing.Font("Segoe Script", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         public static readonly Color MainTitleForeColor = System.Drawing.Color.MidnightBlue;

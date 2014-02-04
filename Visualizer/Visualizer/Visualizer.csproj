@@ -54,6 +54,13 @@
     <Compile Include="AutomatonBubbleSort.cs" />
     <Compile Include="BubbleSortVisualizerSettings.cs" />
     <Compile Include="DataReceiverFormSettings.cs" />
+    <Compile Include="SelectionSortFormSettings.cs" />
+    <Compile Include="SelectionSortVisualizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectionSortVisualizer.Designer.cs">
+      <DependentUpon>SelectionSortVisualizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="SortingForm.cs">
       <SubType>Form</SubType>
     </Compile>

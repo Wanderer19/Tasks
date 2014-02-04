@@ -23,22 +23,28 @@ namespace Visualizer
         public static readonly string MainTitleText = "Алгоритмы Сортировок";
         public static readonly System.Drawing.ContentAlignment MainTitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
-        public static readonly Color BubbleSortButtonBackColor = System.Drawing.Color.LightSkyBlue;
-        public static readonly Cursor BubbleSortButtonCursor = System.Windows.Forms.Cursors.Hand;
-        public static readonly Color BubbleSortButtonBorderColor = System.Drawing.Color.Navy;
-        public static readonly int BubbleSortButtonBorderSize = 0;
-        public static readonly Color BubbleSortButtonMouseDownBackColor = System.Drawing.SystemColors.Highlight;
-        public static readonly Color BubbleSortButtonMouseOverBackColor = System.Drawing.SystemColors.Highlight;
-        public static readonly FlatStyle BubbleSortButtonFlatStyle = System.Windows.Forms.FlatStyle.Flat;
-        public static readonly Font BubbleSortButtonFont = new System.Drawing.Font("Mistral", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-        public static readonly Color BubbleSortButtonForeColor = System.Drawing.Color.DarkBlue;
+        public static readonly Color ButtonBackColor = System.Drawing.Color.LightSkyBlue;
+        public static readonly Cursor ButtonCursor = System.Windows.Forms.Cursors.Hand;
+        public static readonly Color ButtonBorderColor = System.Drawing.Color.Navy;
+        public static readonly int ButtonBorderSize = 0;
+        public static readonly Color ButtonMouseDownBackColor = System.Drawing.SystemColors.Highlight;
+        public static readonly Color ButtonMouseOverBackColor = System.Drawing.SystemColors.Highlight;
+        public static readonly FlatStyle ButtonFlatStyle = System.Windows.Forms.FlatStyle.Flat;
+        public static readonly Font ButtonFont = new System.Drawing.Font("Mistral", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+        public static readonly Color ButtonForeColor = System.Drawing.Color.DarkBlue;
+        
         public static readonly Point BubbleSortButtonLocation = new System.Drawing.Point(105, 228);
         public static readonly string BubbleSortButtonName = "bubbleSortButton";
-        public static readonly Size BubbleSortButtonSize = new System.Drawing.Size(654, 125);
+        public static readonly Size ButtonSize = new System.Drawing.Size(654, 125);
         public static readonly int BubbleSortButtonTabIndex = 1;
         public static readonly string BubbleSortButtonText = "Пузырьковая сортировка";
-        public static readonly bool BubbleSortButtonUseVisualStyleBackColor = false;
+        public static readonly bool ButtonUseVisualStyleBackColor = false;
 
+        public static readonly Point SelectionSortButtonLocation = new System.Drawing.Point(114, 391);
+        public static readonly string SelectionSortButtonName = "selectionSortButton";
+        public static readonly int SelectionSortButtonTabIndex = 3;
+        public static readonly string SelectionSortButtonText = "Сортировка выбором";
+        
         public static readonly Color MainMenuBackColor = System.Drawing.Color.LightSkyBlue;
         public static readonly Font MainMenuFont = new System.Drawing.Font("Stencil", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         public static readonly Point MainMenuLocation = new System.Drawing.Point(0, 0);
@@ -73,5 +79,6 @@ namespace Visualizer
         public static readonly string Text = "Визуализатор алгоритмов сортировок";
 
         public const int BubbleSortId = 1;
+        public const int SelectionSortId = 2;
     }
 }

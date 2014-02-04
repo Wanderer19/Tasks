@@ -30,6 +30,7 @@ namespace Visualizer
         {
             this.mainTitle = new System.Windows.Forms.Label();
             this.bubbleSortButton = new System.Windows.Forms.Button();
+            this.selectionSortButton = new System.Windows.Forms.Button();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.helpProgramMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutProgramMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,30 +58,40 @@ namespace Visualizer
             // bubbleSortButton
             // 
 
-            this.bubbleSortButton.BackColor = GeneralSettings.BubbleSortButtonBackColor;
-            this.bubbleSortButton.Cursor = GeneralSettings.BubbleSortButtonCursor;
-            this.bubbleSortButton.FlatAppearance.BorderColor = GeneralSettings.BubbleSortButtonBorderColor;
-            this.bubbleSortButton.FlatAppearance.BorderSize = GeneralSettings.BubbleSortButtonBorderSize;
-            this.bubbleSortButton.FlatAppearance.MouseDownBackColor = GeneralSettings.BubbleSortButtonMouseDownBackColor;
-            this.bubbleSortButton.FlatAppearance.MouseOverBackColor = GeneralSettings.BubbleSortButtonMouseOverBackColor;
-            this.bubbleSortButton.FlatStyle = GeneralSettings.BubbleSortButtonFlatStyle;
-            this.bubbleSortButton.Font = GeneralSettings.BubbleSortButtonFont;
-            this.bubbleSortButton.ForeColor = GeneralSettings.BubbleSortButtonForeColor;
+            this.bubbleSortButton.BackColor = GeneralSettings.ButtonBackColor;
+            this.bubbleSortButton.Cursor = GeneralSettings.ButtonCursor;
+            this.bubbleSortButton.FlatAppearance.BorderColor = GeneralSettings.ButtonBorderColor;
+            this.bubbleSortButton.FlatAppearance.BorderSize = GeneralSettings.ButtonBorderSize;
+            this.bubbleSortButton.FlatAppearance.MouseDownBackColor = GeneralSettings.ButtonMouseDownBackColor;
+            this.bubbleSortButton.FlatAppearance.MouseOverBackColor = GeneralSettings.ButtonMouseOverBackColor;
+            this.bubbleSortButton.FlatStyle = GeneralSettings.ButtonFlatStyle;
+            this.bubbleSortButton.Font = GeneralSettings.ButtonFont;
+            this.bubbleSortButton.ForeColor = GeneralSettings.ButtonForeColor;
             this.bubbleSortButton.Location = GeneralSettings.BubbleSortButtonLocation;
             this.bubbleSortButton.Name = GeneralSettings.BubbleSortButtonName;
-            this.bubbleSortButton.Size = GeneralSettings.BubbleSortButtonSize;
+            this.bubbleSortButton.Size = GeneralSettings.ButtonSize;
             this.bubbleSortButton.TabIndex = GeneralSettings.BubbleSortButtonTabIndex;
             this.bubbleSortButton.Text = GeneralSettings.BubbleSortButtonText;
-            this.bubbleSortButton.UseVisualStyleBackColor = GeneralSettings.BubbleSortButtonUseVisualStyleBackColor;
+            this.bubbleSortButton.UseVisualStyleBackColor = GeneralSettings.ButtonUseVisualStyleBackColor;
             this.bubbleSortButton.Click += new System.EventHandler(this.BubbleSortRun);
 
-            this.selectionSortButton.Location = new System.Drawing.Point(233, 404);
-            this.selectionSortButton.Name = "selectionSortButton";
-            this.selectionSortButton.Size = new System.Drawing.Size(400, 89);
-            this.selectionSortButton.TabIndex = 3;
-            this.selectionSortButton.Text = "selectionSortButton";
-            this.selectionSortButton.UseVisualStyleBackColor = true;
-            this.selectionSortButton.Click += new System.EventHandler(this.button1_Click);
+            this.selectionSortButton.BackColor = GeneralSettings.ButtonBackColor;
+            this.selectionSortButton.Cursor = GeneralSettings.ButtonCursor;
+            this.selectionSortButton.FlatAppearance.BorderColor = GeneralSettings.ButtonBorderColor;
+            this.selectionSortButton.FlatAppearance.BorderSize = GeneralSettings.ButtonBorderSize;
+            this.selectionSortButton.FlatAppearance.MouseDownBackColor = GeneralSettings.ButtonMouseDownBackColor;
+            this.selectionSortButton.FlatAppearance.MouseOverBackColor = GeneralSettings.ButtonMouseOverBackColor;
+            this.selectionSortButton.FlatStyle = GeneralSettings.ButtonFlatStyle;
+            this.selectionSortButton.Font = GeneralSettings.ButtonFont;
+            this.selectionSortButton.ForeColor = GeneralSettings.ButtonForeColor;
+            this.selectionSortButton.Location = GeneralSettings.SelectionSortButtonLocation;
+            this.selectionSortButton.Name = GeneralSettings.SelectionSortButtonName;
+            this.selectionSortButton.Size = GeneralSettings.ButtonSize;
+            this.selectionSortButton.TabIndex = GeneralSettings.SelectionSortButtonTabIndex;
+            this.selectionSortButton.Text = GeneralSettings.SelectionSortButtonText;
+            this.selectionSortButton.UseVisualStyleBackColor = GeneralSettings.ButtonUseVisualStyleBackColor;
+
+            this.selectionSortButton.Click += new System.EventHandler(this.SelectionSortRun);
             
 
             // 
@@ -140,6 +151,7 @@ namespace Visualizer
             this.Text = GeneralSettings.Text;
 
             this.Controls.Add(this.bubbleSortButton);
+            this.Controls.Add(this.selectionSortButton);
             this.Controls.Add(this.mainTitle);
             this.Controls.Add(this.mainMenu);
             this.MainMenuStrip = this.mainMenu;

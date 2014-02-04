@@ -42,13 +42,13 @@ namespace Visualizer
 
         private void ShowSourceCodeJava(object sender, EventArgs e)
         {
-            var sourceCode = new Sourcecode(currentSettings.SourceCodeCPlusPlus);
+            var sourceCode = new Sourcecode(currentSettings.SourceCodeJava);
             sourceCode.Show();
         }
 
         private void ShowSourceCodeCPlusPlus(object sender, EventArgs e)
         {
-            var sourceCode = new Sourcecode(currentSettings.SourceCodeJava);
+            var sourceCode = new Sourcecode(currentSettings.SourceCodeCPlusPlus);
             sourceCode.Show();
         }
 

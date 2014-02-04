@@ -39,6 +39,11 @@ namespace Visualizer
                     visualizer = new BubbleSortVisualizer(mainForm, array);
                     break;
                 }
+                case GeneralSettings.SelectionSortId:
+                {
+                    visualizer = new SelectionSortVisualizer(mainForm, array);
+                    break;
+                }
             }    
         }
 

@@ -38,9 +38,13 @@ namespace Visualizer
             MessageBox.Show(String.Join("\n", File.ReadAllLines(GeneralSettings.HelpFile)));
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SelectionSortRun(object sender, EventArgs e)
         {
+            this.Visible = false;
 
+            var selectionSortForm = new SortingForm(this, new SelectionSortFormSettings());
+
+            selectionSortForm.Show();
         }
     }
 }
