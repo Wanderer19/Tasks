@@ -52,16 +52,27 @@ namespace Visualizer
 
         }
 
+        public void SelectElement(int index)
+        {
+            selectedIndexes[index] = true;
+
+        }
+
+        public void DeselectElement(int index)
+        {
+            selectedIndexes[index] = false;
+        }
+       
         public void SelectElements(Tuple<int, int> indexes)
         {
-            selectedIndexes[indexes.Item1] = true;
-            selectedIndexes[indexes.Item2] = true;
+           this.SelectElement(indexes.Item1);
+           this.SelectElement(indexes.Item2);
         }
 
         public void DeselectElements(Tuple<int, int> indexes)
         {
-            selectedIndexes[indexes.Item1] = false;
-            selectedIndexes[indexes.Item2] = false;
+           DeselectElement(indexes.Item1);
+            DeselectElement(indexes.Item2);
         }
 
         public void DeselectAllElements()

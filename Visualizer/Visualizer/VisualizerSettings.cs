@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Visualizer
 {
-    class VisualizerSettings
+    public class VisualizerSettings
     {
         public static readonly Point MainMenuLocation = new System.Drawing.Point(0, 0);
         public static readonly string MainMenuName = "mainMenu";
@@ -81,7 +81,39 @@ namespace Visualizer
         public static readonly System.Windows.Forms.AutoScaleMode AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         public static readonly Color BackColor = System.Drawing.Color.LightCyan;
         public static readonly Size ClientSize = new System.Drawing.Size(1182, 753);
-        public static readonly string Name = "BubbleSortVisualizer";
-        public static readonly string Text = "BubbleSortVisualizer";
+        //public static readonly string Name = "BubbleSortVisualizer";
+        //public static readonly string Text = "BubbleSortVisualizer";
+
+        public Point PositionFirstElement
+        {
+            get { return new Point(3, 200); }
+        }
+
+        public  int WidthElemet { get { return 100; }}
+        public  Color SelectedElementColor { get { return Color.Fuchsia; }}
+        public  Color ElementColor { get { return Color.LightCyan; }}
+        public  Size ElementSize { get { return new Size(100, 100); }}
+        public  string HelpFile { get { return "help.txt"; }}
+        public  Rectangle UpperCommentField { get { return new Rectangle(0, 0, 1500, 200); }}
+        public  Rectangle BottomCommentField { get { return new Rectangle(300, 400, 1500, 500); }}
+        public  PointF LocationBottomCommentField { get { return new PointF(400, 400); }}
+        public  System.Drawing.Font FontDigits { get { return new System.Drawing.Font("Arial", 20); }}
+        public  System.Drawing.StringFormat FormatDrawing { get { return new System.Drawing.StringFormat(); }}
+        public  System.Drawing.SolidBrush BrushDigit { get
+        {
+            return new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+        }}
+        public  System.Drawing.SolidBrush BrushElement { get
+        {
+            return new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
+        }}
+        public  Pen PenElement { get { return new Pen(Color.Blue, 7); }}
+        public  string SymbolComparison { get { return "VS"; }}
+        public  Point[] FirstPointerCoordinates { get
+        {
+            return new Point[] {new Point(53, 180), new Point(100, 155), new Point(153, 180)};
+        }}
+
+        public virtual int SortId { get { return 0; } }
     }
 }

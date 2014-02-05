@@ -223,8 +223,6 @@
             this.AutoScaleMode = VisualizerSettings.AutoScaleMode;
             this.BackColor = VisualizerSettings.BackColor;
             this.ClientSize = VisualizerSettings.ClientSize;
-            this.Name = VisualizerSettings.Name;
-            this.Text = VisualizerSettings.Text;
 
             this.Controls.Add(this.continueButton);
             this.Controls.Add(this.pauseButton);

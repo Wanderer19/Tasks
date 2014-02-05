@@ -19,6 +19,7 @@ namespace Visualizer
         protected Automaton automatonSort;
         protected bool automaticMode = false;
         protected System.Timers.Timer selfTimer;
+        protected int sortId;
 
         public Visualizer()
         {
@@ -30,10 +31,21 @@ namespace Visualizer
 
         public void DoAutomaticStepForward(object source, System.Timers.ElapsedEventArgs e)
         {
-            this.DoStepForward(null, new EventArgs());
+            this.DrawState(automatonSort.DoStepForward());
         }
 
+
         public virtual void ToStart(object sender, EventArgs e)
+        {
+            this.ClearComments();
+            this.sortArray.DeselectAllElements();
+
+            automatonSort.ToStart();
+
+            this.DrawArray();
+        }
+
+        public virtual void ClearComments()
         {
             
         }
@@ -42,6 +54,10 @@ namespace Visualizer
         {
             if (!this.automaticMode)
             {
+                this.backwardButton.Enabled = false;
+                this.forwardButton.Enabled = false;
+                this.continueButton.Enabled = false;
+
                 this.automaticMode = true;
                 selfTimer.Interval = 650;
                 selfTimer.Start();
@@ -50,14 +66,12 @@ namespace Visualizer
 
         public virtual void DoStepForward(object sender, EventArgs e)
         {
-            if (!(this.automaticMode && sender is System.Windows.Forms.Button))
-                this.DrawState(automatonSort.DoStepForward());
+            this.DrawState(automatonSort.DoStepForward());
         }
 
         public virtual void DoStepBackward(object sender, EventArgs e)
         {
-            if (!(this.automaticMode && sender is System.Windows.Forms.Button))
-                this.DrawState(automatonSort.DoStepBackward());
+            this.DrawState(automatonSort.DoStepBackward());
         }
 
         public virtual void DrawState(StateAutomaton stateAutomaton)
@@ -67,6 +81,9 @@ namespace Visualizer
 
         public virtual void DoPause(object sender, EventArgs e)
         {
+            this.backwardButton.Enabled = true;
+            this.forwardButton.Enabled = true;
+            this.continueButton.Enabled = true;
             selfTimer.Stop();
             this.automaticMode = false;
         }
@@ -74,6 +91,9 @@ namespace Visualizer
         public virtual void Proceed(object sender, EventArgs e)
         {
             selfTimer.Start();
+            this.backwardButton.Enabled = false;
+            this.forwardButton.Enabled = false;
+            this.continueButton.Enabled = false;
             this.automaticMode = true;
         }  
 
@@ -89,7 +109,7 @@ namespace Visualizer
 
         public virtual void ChangeData(object sender, EventArgs e)
         {
-            var dataReceiver = new DataReceiverForm(mainForm, 1);
+            var dataReceiver = new DataReceiverForm(mainForm, sortId);
 
             this.Visible = false;
             this.Dispose();

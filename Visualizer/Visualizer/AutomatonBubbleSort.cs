@@ -11,7 +11,7 @@ namespace Visualizer
         private int firstIndex;
         private int secondIndex;
         public int State { get; set; }
-
+        public int Min { get; set; }
         public int FirstIndex
         {
             get { return firstIndex; }
@@ -54,13 +54,14 @@ namespace Visualizer
             firstIndex = 0;
             secondIndex = 0;
             State = 0;
+            Min = 0;
         }
 
-        public void Swap()
+        public void Swap(int i, int j)
         {
-            var copyItem = Array[secondIndex];
-            Array[secondIndex] = Array[secondIndex + 1];
-            Array[secondIndex + 1] = copyItem;
+            var copyItem = Array[i];
+            Array[i] = Array[j];
+            Array[j] = copyItem;
         }
     }
 
@@ -155,7 +156,7 @@ namespace Visualizer
                         firstIndex = dataModel.SecondIndex;
                         secondIndex = dataModel.SecondIndex + 1;
 
-                        dataModel.Swap();
+                        dataModel.Swap(dataModel.SecondIndex, dataModel.SecondIndex + 1);
 
                         stack.Push(true);
 

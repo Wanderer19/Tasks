@@ -39,18 +39,20 @@ namespace Visualizer
             {
                 case StateCompare:
                 {
-                    this.DrawCompare(stateAutomaton.IndexesSelectedItems);
+                    this.DrawCompare(stateAutomaton.IndexesSelectedItemsCompare);
                     break;
                 }
                 case StateSwap:
                 {
-                    this.DrawSwap(stateAutomaton.IndexesSelectedItems);
+                    this.DrawSwap(stateAutomaton.IndexesSelectedItemsSwap);
                     break;
                 }
             }
             
            this.DrawComment(stateAutomaton.DescriptionState);
         }
+
+  
 
         private void ClearComments()
         {

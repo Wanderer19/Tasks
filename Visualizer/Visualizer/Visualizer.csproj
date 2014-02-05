@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Automaton.cs" />
     <Compile Include="AutomatonSelectionSort.cs" />
+    <Compile Include="SelectionSortVisualizerSettings.cs" />
     <Compile Include="SortArray.cs" />
     <Compile Include="DrawingTools.cs" />
     <Compile Include="IAutomaton.cs" />
