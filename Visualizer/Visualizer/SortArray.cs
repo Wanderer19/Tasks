@@ -10,18 +10,17 @@ namespace Visualizer
 {
     public class SortArray
     {
-        private int[] array;
+        //private int[] array;
         private bool[] selectedIndexes = new bool[]{};
         private List<Point> coordinatesElements;
 
-        public int Length { get { return array.Length; } }
-        public SortArray(int[] array)
+        public int Length { get; private set; }
+        public SortArray(int arrayLength)
         {
-            this.array = array;
-           
-            selectedIndexes = Enumerable.Range(0, array.Length).Select(i => false).ToArray();
+            this.Length = arrayLength;
+            selectedIndexes = Enumerable.Range(0, arrayLength).Select(i => false).ToArray();
             coordinatesElements = new List<Point>();
-            for (var i = 0; i < array.Length; ++i)
+            for (var i = 0; i < arrayLength; ++i)
             {
                 coordinatesElements.Add(new Point(BubbleSortVisualizerSettings.PositionFirstElement.X + i * BubbleSortVisualizerSettings.WidthElemet,
                     BubbleSortVisualizerSettings.PositionFirstElement.Y));
@@ -38,11 +37,6 @@ namespace Visualizer
             return coordinatesElements[index];
         }
 
-        public string GetValue(int index)
-        {
-            return array[index].ToString();
-        }
-
         public Color GetColorElement(int index)
         {
             return this.IsSelected(index)
@@ -52,32 +46,36 @@ namespace Visualizer
 
         }
 
-        public void SelectElement(int index)
+        private void SelectElement(int index)
         {
             selectedIndexes[index] = true;
 
         }
 
-        public void DeselectElement(int index)
+        private void DeselectElement(int index)
         {
             selectedIndexes[index] = false;
         }
        
-        public void SelectElements(Tuple<int, int> indexes)
+        public void SelectElements(params int [] indexes)
         {
-           this.SelectElement(indexes.Item1);
-           this.SelectElement(indexes.Item2);
+            foreach (var index in indexes)
+            {
+                this.SelectElement(index);
+            }
         }
 
-        public void DeselectElements(Tuple<int, int> indexes)
+        public void DeselectElements(params int [] indexes)
         {
-           DeselectElement(indexes.Item1);
-            DeselectElement(indexes.Item2);
+            foreach (var index in indexes)
+            {
+                this.DeselectElement(index);
+            }
         }
 
         public void DeselectAllElements()
         {
-            for (var i = 0; i < array.Length; ++i)
+            for (var i = 0; i < Length; ++i)
                 selectedIndexes[i] = false;
         }
     }

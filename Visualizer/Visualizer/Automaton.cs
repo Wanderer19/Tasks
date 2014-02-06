@@ -17,7 +17,7 @@ namespace Visualizer
             throw new NotImplementedException();
         }
 
-        public virtual void ToStart()
+        public virtual StateAutomaton ToStart()
         {
             var stateAutomaton = this.DoStepBackward();
 
@@ -25,6 +25,8 @@ namespace Visualizer
             {
                 stateAutomaton = this.DoStepBackward();
             }
+
+            return stateAutomaton;
         }
     }
 }

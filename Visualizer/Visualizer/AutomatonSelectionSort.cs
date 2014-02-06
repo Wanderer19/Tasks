@@ -8,29 +8,112 @@ namespace Visualizer
 {
     public class AutomatonSelectionSort : Automaton
     {
+        private class DataModel
+        {
+            private int firstIndex;
+            private int secondIndex;
+            private int minIndex;
+            public int State { get; set; }
+            public int BorderSortedPart { get; set; }
+
+            public int FirstIndex
+            {
+                get { return firstIndex; }
+                set
+                {
+                    if (value <= ArraySize && value >= 0)
+                    {
+                        firstIndex = value;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+            }
+
+            public int SecondIndex
+            {
+                get { return secondIndex; }
+                set
+                {
+                    if (value <= ArraySize && value >= 0)
+                    {
+                        secondIndex = value;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+            }
+
+            public int Min
+            {
+                get { return minIndex; }
+                set
+                {
+                    if (value <= ArraySize && value >= 0)
+                    {
+                        minIndex = value;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+            }
+
+            public int ArraySize { get; private set; }
+            public int[] Array { get; private set; }
+
+            public DataModel(int[] array)
+            {
+                ArraySize = array.Length;
+                Array = array;
+                firstIndex = 0;
+                secondIndex = 0;
+                minIndex = 0;
+                State = 0;
+                BorderSortedPart = -1;
+            }
+
+            public void Swap()
+            {
+                var copyItem = Array[FirstIndex];
+                Array[FirstIndex] = Array[Min];
+                Array[Min] = copyItem;
+
+                BorderSortedPart = FirstIndex;
+            }
+        }
+
         public AutomatonSelectionSort(int[] array)
         {
-            dataModel = new DataModel(array);
-            stack = new Stack<object>();
+            dataModel = new DataModel((int[])array.Clone());
+            this.array = (int[]) array.Clone();
+            stepsCount = 0;
         }
 
         private DataModel dataModel;
-        private Stack<object> stack;
+        private readonly int[] array;
+        private int stepsCount;
 
         public override StateAutomaton DoStepForward()
         {
-            var descriptionState = "";
             var isInterestingState = false;
-            var stateId = "";
-            
-            var min = 0;
-            
+            stepsCount++;
+
+            var state = new StateSelectionSortAutomaton();
+
             while (!isInterestingState)
             {
+
                 switch (dataModel.State)
                 {
                     case 0:
                     {
+                        dataModel.BorderSortedPart = -1;
                        dataModel.State = 1;
                        
                         break;
@@ -39,8 +122,6 @@ namespace Visualizer
                         {
                             dataModel.FirstIndex = 0;
                             dataModel.State = 2;
-                            
-                            stack.Push(false);
                             
                             break;
                         }
@@ -52,25 +133,18 @@ namespace Visualizer
                     }
                     case 3:
                     {
-                       
-                            stack.Push(dataModel.Min);
-                            dataModel.Min = dataModel.FirstIndex;
-
-                            isInterestingState = true;
-                            stateId = "min";
-                           // descriptionState = String.Format("Текущий минимум = {0}", dataModel.Array[dataModel.Min]);
-                            min = dataModel.Min;
-
-                            dataModel.State = 4;
-                            break;
-                        }
+                        dataModel.Min = dataModel.FirstIndex;
+                        isInterestingState = true;
+                        state = GetStateSelectionSortAutomaton(3);
+                        dataModel.State = 4;
+                            
+                        break;
+                    }
                     case 4:
                         {
-                            stack.Push(dataModel.SecondIndex);
                             dataModel.SecondIndex = dataModel.FirstIndex + 1;
                             dataModel.State = 5;
                            
-                            stack.Push(false);
                             break;
 
                         }
@@ -83,34 +157,19 @@ namespace Visualizer
                     case 6:
                     {
                         isInterestingState = true;
-                        stateId = "compare";
-                        descriptionState = String.Format("Сравнение элемента с индексом {0} с текущим минимумом",
-                            dataModel.SecondIndex);
-                      
-                            if (dataModel.Array[dataModel.SecondIndex] < dataModel.Array[dataModel.Min])
-                            {
-                                dataModel.State = 7;
-                            }
-                            else
-                            {
-                                stack.Push(false);
-                                dataModel.State = 8;
-                            }
+                        state = GetStateSelectionSortAutomaton(6);
+                        dataModel.State = dataModel.Array[dataModel.SecondIndex] < dataModel.Array[dataModel.Min] ? 7 : 8;
 
-                            break;
+                     
+                        break;
 
                         }
                     case 7:
                     {
-                        stack.Push(dataModel.Min);
 
                         dataModel.Min = dataModel.SecondIndex;
-
                         isInterestingState = true;
-                        stateId = "min";
-                        min = dataModel.Min;
-                        stack.Push(true);
-                         
+                        state = GetStateSelectionSortAutomaton(7);
                         dataModel.State = 8;
                          
                         break;
@@ -124,23 +183,19 @@ namespace Visualizer
                         }
                     case 9:
                         {
-                            stack.Push(dataModel.SecondIndex);
+                            
                             dataModel.SecondIndex++;
                             dataModel.State = 5;
-                            stack.Push(true);
+                            
                             break;
                         }
                     case 10:
                         {
-                            
-                            stack.Push(dataModel.Array[dataModel.FirstIndex]);
-                            stack.Push(dataModel.Array[dataModel.Min]);
 
-                            dataModel.Swap(dataModel.FirstIndex, dataModel.Min);
-
+                            dataModel.Swap();
+                            state = GetStateSelectionSortAutomaton(10);
                             isInterestingState = true;
-                            stateId = "swap";
-                            descriptionState = String.Format("Обмен элемента с индексом {0} с текущим минимумом", dataModel.FirstIndex);
+                           
                             dataModel.State = 11;
                             
                             break;
@@ -148,18 +203,19 @@ namespace Visualizer
                         }
                     case 11:
                         {
-                            stack.Push(dataModel.FirstIndex);
                             dataModel.FirstIndex++;
                             dataModel.State = 2;
-                            stack.Push(true);
+                            
                             break;
                         }
                     case 12:
                     {
+                     
                         isInterestingState = true;
-                        stateId = "end";
-                        descriptionState = "Конец Сортировки";
-                            dataModel.State = -1;
+                        dataModel.BorderSortedPart = dataModel.ArraySize - 1;
+
+                        state = GetStateSelectionSortAutomaton(12);
+                        dataModel.State = -1;
                             break;
                         }
                     default:
@@ -170,159 +226,81 @@ namespace Visualizer
                 }
             }
 
-
-           // MessageBox.Show(String.Join(",", stack) + "-"+dataModel.State.ToString());
-            return new StateAutomaton(descriptionState, stateId, dataModel.State, dataModel.FirstIndex, dataModel.SecondIndex, dataModel.Min);
+            return state;
         }
 
-
-        public override StateAutomaton DoStepBackward()
+        private StateSelectionSortAutomaton GetStateSelectionSortAutomaton(int state)
         {
-           // MessageBox.Show(String.Join(",", stack) + "-" + dataModel.State.ToString());
-            var descriptionState = "";
-            var isInterestingState = false;
             var stateId = "";
-            var firstIndex = -1;
-            var secondIndex = -1;
-            var min = 0;
-
-             while (!isInterestingState)
+            var descriptionState = "";
+            var selectedIndexes = new List<int>();
+           
+            switch (state)
             {
-                switch (dataModel.State)
+                case 3:
                 {
+                    stateId = "min";
+                    break;
+                }
+                case 6:
+                {
+                    stateId = "compare";
+                    descriptionState = String.Format("Сравнение элемента с индексом {0} с текущим минимумом", dataModel.SecondIndex);
+                    
+                    selectedIndexes.Add(dataModel.SecondIndex);
 
-                    case 0:
-                        {
+                    break;
+                }
+                case 7:
+                {
+                    stateId = "min";
+                    break;
+                }
+                case 10:
+                {
+                    stateId = "swap";
+                    descriptionState = String.Format("Обмен элемента с индексом {0} с текущим минимумом", dataModel.FirstIndex);
 
-                            dataModel.State = -1;
-                            break;
-                        }
-                    case 1:
-                    {
-                        isInterestingState = true;
-                            dataModel.State = 0;
-                            break;
-                        }
-                    case 2:
-                        {
-                            var flag = (bool)stack.Pop();
-
-                            dataModel.State = flag ? 11 : 1;
-                            break;
-                        }
-                    case 3:
-                        {
-
-                            dataModel.Min = (int)stack.Pop();
-                            dataModel.State = 2;
-
-                            isInterestingState = true;
-                            stateId = "min";
-                            min = dataModel.Min;
-                            descriptionState = String.Format("Текущий минимум = {0}", dataModel.Min);
-
-                            break;
-                        }
-                    case 4:
-                        {
-                            dataModel.SecondIndex = (int)stack.Pop();
-                            dataModel.State = 3;
-                            break;
-                        }
-                    case 5:
-                        {
-                            var flag = (bool)stack.Pop();
-                            dataModel.State = flag ? 9 : 4;
-                            break;
-                        }
-                    case 6:
-                        {
-                            isInterestingState = true;
-                            stateId = "compare";
-                            firstIndex = dataModel.SecondIndex;
-                            secondIndex = dataModel.Min;
-                            descriptionState = String.Format("Сравнение элементов с индексами {0} и {1}",
-                                dataModel.SecondIndex, dataModel.Min);
-                            dataModel.State = 5;
-                            break;
-                        }
-                    case 7:
-                        {
-                         
-                            dataModel.Min = (int)stack.Pop();
-
-                            isInterestingState = true;
-                            stateId = "min";
-                            min = dataModel.Min;
-                            descriptionState = String.Format("Текущий минимум = {0}", dataModel.Min);
-                         
-
-                            dataModel.State = 6;
-                            break;
-
-                        }
-                    case 8:
-                        {
-                            var flag = (bool)stack.Pop();
-
-                            dataModel.State = flag ? 7 : 6;
-                            break;
-                        }
-                    case 9:
-                        {
-                            dataModel.SecondIndex = (int)stack.Pop();
-                            dataModel.State = 8;
-                            break;
-                        }
-                    case 10:
-                        {
-                            dataModel.Array[dataModel.Min] = (int)stack.Pop();
-                            dataModel.Array[dataModel.FirstIndex] = (int)stack.Pop();
-
-                            isInterestingState = true;
-                            stateId = "swap";
-                            firstIndex = dataModel.FirstIndex;
-                            secondIndex = dataModel.Min;
-
-                            descriptionState = String.Format("Обмен элементов с индексами {0} и {1}",
-                                dataModel.FirstIndex, dataModel.Min);
-                            dataModel.State = 5;
-                            break;
-                        }
-                    case 11:
-                        {
-                            dataModel.FirstIndex = (int)stack.Pop();
-                            dataModel.State = 10;
-                            break;
-                        }
-                    case 12:
-                        {
-                            isInterestingState = true;
-                            stateId = "end";
-                            dataModel.State = 2;
-                            break;
-                        }
-                    default:
-                    {
-                        isInterestingState = true;
-                        dataModel.State = -1;
-                        break;
-                    }
+                    selectedIndexes.Add(dataModel.FirstIndex);
+                    selectedIndexes.Add(dataModel.Min);
+                    
+                   break;
+                }
+                case 12:
+                {
+                    stateId = "end";
+                    descriptionState = "Конец Сортировки";
+                    break;
                 }
             }
 
-            
-            return new StateAutomaton(descriptionState, stateId, dataModel.State, firstIndex, secondIndex, min);
+            return new StateSelectionSortAutomaton(selectedIndexes, dataModel.BorderSortedPart, dataModel.Array[dataModel.Min], stateId, descriptionState, dataModel.Array);
         }
 
-        public override void ToStart()
+        public override StateAutomaton DoStepBackward()
         {
-            var state = this.DoStepBackward();
 
-            while (state.StateNumber != 0)
+            dataModel = new DataModel((int[]) array.Clone());
+            var newStepsCount = stepsCount-1;
+            stepsCount = 0;
+            StateAutomaton state = new StateSelectionSortAutomaton();
+
+            if (newStepsCount + 1 == 0) return state;
+            
+            while (stepsCount != newStepsCount)
             {
-                state = this.DoStepBackward();
+                state = DoStepForward();
             }
+
+            return state;
+        }
+
+        public override StateAutomaton ToStart()
+        {
+            stepsCount = 0;
+            dataModel = new DataModel((int[])array.Clone());
+
+            return new StateSelectionSortAutomaton();
         }
     }
 }

@@ -15,17 +15,18 @@ namespace Visualizer
         protected Graphics graphics;
         protected SortArray sortArray;
         protected DrawingTools drawingTools;
-        protected SortingForm mainForm;
+        protected SortingForm parentWindow;
         protected Automaton automatonSort;
         protected bool automaticMode = false;
         protected System.Timers.Timer selfTimer;
         protected int sortId;
+        protected int[] inputArray;
 
         public Visualizer()
         {
             selfTimer = new System.Timers.Timer();
             selfTimer.Elapsed += new System.Timers.ElapsedEventHandler(DoAutomaticStepForward);
-
+            
             InitializeComponent();
         }
 
@@ -34,18 +35,17 @@ namespace Visualizer
             this.DrawState(automatonSort.DoStepForward());
         }
 
-
         public virtual void ToStart(object sender, EventArgs e)
         {
-            this.ClearComments();
+            this.ClearOldComments();
             this.sortArray.DeselectAllElements();
 
-            automatonSort.ToStart();
+            var state = automatonSort.ToStart();
 
-            this.DrawArray();
+            this.DrawArray(state.Array);
         }
 
-        public virtual void ClearComments()
+        public virtual void ClearOldComments()
         {
             
         }
@@ -59,7 +59,7 @@ namespace Visualizer
                 this.continueButton.Enabled = false;
 
                 this.automaticMode = true;
-                selfTimer.Interval = 650;
+               
                 selfTimer.Start();
             }
         }
@@ -81,25 +81,30 @@ namespace Visualizer
 
         public virtual void DoPause(object sender, EventArgs e)
         {
-            this.backwardButton.Enabled = true;
-            this.forwardButton.Enabled = true;
-            this.continueButton.Enabled = true;
+            ToEnableButtons();
             selfTimer.Stop();
             this.automaticMode = false;
         }
 
+        public virtual void DrawSwap(StateAutomaton state)
+        {
+            sortArray.SelectElements(state.SelectedElements.ToArray());
+
+            this.DrawArray(state.Array);
+
+            sortArray.DeselectElements(state.SelectedElements.ToArray());
+
+        }
         public virtual void Proceed(object sender, EventArgs e)
         {
             selfTimer.Start();
-            this.backwardButton.Enabled = false;
-            this.forwardButton.Enabled = false;
-            this.continueButton.Enabled = false;
+            ToDisableButtons();
             this.automaticMode = true;
         }  
 
         public virtual void CloseVisualizer(object sender, EventArgs e)
         {
-            mainForm.Visible = true;
+            parentWindow.Visible = true;
         }
 
         public virtual void ShowHelpMessage(object sender, EventArgs e)
@@ -109,21 +114,40 @@ namespace Visualizer
 
         public virtual void ChangeData(object sender, EventArgs e)
         {
-            var dataReceiver = new DataReceiverForm(mainForm, sortId);
+            var dataReceiver = new DataReceiverForm(parentWindow, sortId);
 
+            HideMainWindow();
+            dataReceiver.Show();
+        }
+
+        public void ToDisableButtons()
+        {
+            this.backwardButton.Enabled = false;
+            this.forwardButton.Enabled = false;
+            this.continueButton.Enabled = false;
+        }
+
+        public void ToEnableButtons()
+        {
+            this.backwardButton.Enabled = true;
+            this.forwardButton.Enabled = true;
+            this.continueButton.Enabled = true;
+        }
+
+        public void HideMainWindow()
+        {
             this.Visible = false;
             this.Dispose();
-            dataReceiver.Show();
         }
 
         public virtual void DrawInitialState(object sender, PaintEventArgs e)
         {
             graphics = this.CreateGraphics();
 
-            this.DrawArray();
+            this.DrawArray(this.inputArray);
         }
 
-        public virtual void DrawArray()
+        public virtual void DrawArray(int [] array)
         {
             for (var i = 0; i < sortArray.Length; ++i)
             {
@@ -131,7 +155,7 @@ namespace Visualizer
 
                 graphics.FillRectangle(new SolidBrush(sortArray.GetColorElement(i)), rectangle);
                 graphics.DrawRectangle(drawingTools.PenElement, rectangle);
-                graphics.DrawString(sortArray.GetValue(i), drawingTools.FontDigits, drawingTools.BrushDigit, sortArray.GetCoordinates(i), drawingTools.FormatDrawing);
+                graphics.DrawString(array[i].ToString(), drawingTools.FontDigits, drawingTools.BrushDigit, sortArray.GetCoordinates(i), drawingTools.FormatDrawing);
             }
         }
 

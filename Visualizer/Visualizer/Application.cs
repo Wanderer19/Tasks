@@ -21,11 +21,24 @@ namespace Visualizer
       
         private void BubbleSortRun(object sender, EventArgs e)
         {
-            this.Visible = false;
+            HideMainWindow();
             
             var bubbleSortForm = new SortingForm(this, new BubbleSortFormSettings());
-   
             bubbleSortForm.Show();
+        }
+
+        private void SelectionSortRun(object sender, EventArgs e)
+        {
+            HideMainWindow();
+
+            var selectionSortForm = new SortingForm(this, new SelectionSortFormSettings());
+
+            selectionSortForm.Show();
+        }
+
+        private void HideMainWindow()
+        {
+            this.Visible = false; 
         }
 
         private void ShowAboutProgram(object sender, EventArgs e)
@@ -38,13 +51,6 @@ namespace Visualizer
             MessageBox.Show(String.Join("\n", File.ReadAllLines(GeneralSettings.HelpFile)));
         }
 
-        private void SelectionSortRun(object sender, EventArgs e)
-        {
-            this.Visible = false;
-
-            var selectionSortForm = new SortingForm(this, new SelectionSortFormSettings());
-
-            selectionSortForm.Show();
-        }
+        
     }
 }

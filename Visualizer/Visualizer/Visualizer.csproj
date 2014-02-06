@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayReader.cs" />
     <Compile Include="Automaton.cs" />
     <Compile Include="AutomatonSelectionSort.cs" />
     <Compile Include="SelectionSortVisualizerSettings.cs" />
@@ -101,6 +102,8 @@
     </Compile>
     <Compile Include="SourceCodeSettings.cs" />
     <Compile Include="StateAutomaton.cs" />
+    <Compile Include="StateBubbleSortAutomaton.cs" />
+    <Compile Include="StateSelectionSortAutomaton.cs" />
     <Compile Include="Visualizer.cs">
       <SubType>Form</SubType>
     </Compile>

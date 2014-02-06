@@ -14,47 +14,40 @@ namespace Visualizer
 {
     public partial class SortingForm : Form
     {
-        private Application mainApplication;
+        private readonly Application parentWindow;
       
-        private SortingFormSettings currentSettings;
+        private readonly SortingFormSettings interfaceSettings;
 
-        public SortingForm(Application mainApplication, SortingFormSettings currentSettings)
+        public SortingForm(Application parentWindow, SortingFormSettings interfaceSettings)
         {
-            this.currentSettings = currentSettings;
-            this.mainApplication = mainApplication;
+            this.interfaceSettings = interfaceSettings;
+            this.parentWindow = parentWindow;
 
             InitializeComponent();
-            this.aboutSorting.Items.AddRange(File.ReadAllLines(currentSettings.AboutSortingFile));
-         
-        }
-
-        private void ShowSourceCode( string file)
-        {
-            var sourceCode = new Sourcecode(file);
-            sourceCode.Show();
+            this.aboutSorting.Items.AddRange(File.ReadAllLines(interfaceSettings.AboutSortingFile));
         }
 
         private void ShowSourceCodeCSharp(object sender, EventArgs e)
         {
-            var sourceCode = new Sourcecode(currentSettings.SourceCodeCSharp);
+            var sourceCode = new Sourcecode(interfaceSettings.SourceCodeCSharp);
             sourceCode.Show();
         }
 
         private void ShowSourceCodeJava(object sender, EventArgs e)
         {
-            var sourceCode = new Sourcecode(currentSettings.SourceCodeJava);
+            var sourceCode = new Sourcecode(interfaceSettings.SourceCodeJava);
             sourceCode.Show();
         }
 
         private void ShowSourceCodeCPlusPlus(object sender, EventArgs e)
         {
-            var sourceCode = new Sourcecode(currentSettings.SourceCodeCPlusPlus);
+            var sourceCode = new Sourcecode(interfaceSettings.SourceCodeCPlusPlus);
             sourceCode.Show();
         }
 
         private void ShowSourceCodePython(object sender, EventArgs e)
         {
-            var sourceCode = new Sourcecode(currentSettings.SourceCodePython);
+            var sourceCode = new Sourcecode(interfaceSettings.SourceCodePython);
             sourceCode.Show();
         }
 
@@ -65,16 +58,26 @@ namespace Visualizer
 
         private void RunVisualizer(object sender, EventArgs e)
         {
-            //var visualizer = new BubbleSortVisualizer(this);
-            this.Visible = false;
+            HideMainWindow();
 
-            var data = new DataReceiverForm(this, currentSettings.SortID);
-            data.Show();
+            var dataReceiverForm = new DataReceiverForm(this, interfaceSettings.SortID);
+            dataReceiverForm.Show();
+        }
+
+        private void HideMainWindow()
+        {
+            this.Visible = false;
         }
 
         private void CloseBubbleSortForm(object sender, EventArgs e)
         {
-            mainApplication.Visible = true;
+            ShowParentWindow();
         }
+
+        private void ShowParentWindow()
+        {
+            parentWindow.Visible = true;
+        }
+
     }
 }

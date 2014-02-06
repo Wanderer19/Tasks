@@ -14,19 +14,20 @@ namespace Visualizer
         public const string StateCompare = "compare";
         public const string StateSwap = "swap";
         public const string StateMin = "min";
-        private List<int> sortedPartArray = new List<int>();
-
-        public SelectionSortVisualizer(SortingForm mainForm, int [] array)
+    
+        public SelectionSortVisualizer(SortingForm parentWindow, int [] array)
         {
-            this.mainForm = mainForm;
-
-            this.sortArray = new SortArray(array);
+            this.parentWindow = parentWindow;
+            this.inputArray = (int []) array.Clone();
+            this.sortArray = new SortArray(array.Length);
+            selfTimer.Interval = 1000;
             this.automatonSort = new AutomatonSelectionSort(array);
+            this.sortId = 2;
+
             drawingTools = new DrawingTools(BubbleSortVisualizerSettings.FontDigits, BubbleSortVisualizerSettings.FormatDrawing,
                                              BubbleSortVisualizerSettings.BrushDigit, BubbleSortVisualizerSettings.BrushElement,
                                              BubbleSortVisualizerSettings.PenElement);
             InitializeComponent();
-            sortId = 2;
             this.Paint += new PaintEventHandler(DrawInitialState);
         }
 
@@ -39,38 +40,33 @@ namespace Visualizer
 
                 case StateCompare:
                     {
-                        this.DrawMin(stateAutomaton.Min);
-                        this.DrawCompare(stateAutomaton.IndexesSelectedItemsCompare);
                         
+                        this.DrawCompare(stateAutomaton);
                         break;
                     }
                 case StateSwap:
                     {
-                        sortedPartArray.Add(stateAutomaton.FirstIndex);
-                        this.DrawSwap(stateAutomaton.IndexesSelectedItemsSwap);
+                        this.DrawSwap(stateAutomaton);
+
                         break;
                     }
                 case StateMin:
                 {
-                    this.DrawArray();
-                    this.DrawMin(stateAutomaton.Min);
-                    break;
-                }
-                default:
-                {
-                    sortedPartArray.Add(sortArray.Length - 1);
+                    this.DrawMin(stateAutomaton);
                     break;
                 }
             }
 
-            this.DrawSortedPartArray();
 
             this.DrawComment(stateAutomaton.DescriptionState);
+            this.DrawSortedPartArray(stateAutomaton);
+
         }
 
-        private void DrawMin(int index)
+        private void DrawMin(StateAutomaton state)
         {
-            graphics.DrawString(String.Format("Текущий минимум  = {0}", this.sortArray.GetValue(index)), drawingTools.FontDigits, drawingTools.BrushDigit, 80 + 100 * 4, 100, drawingTools.FormatDrawing);
+            this.DrawArray(state.Array);
+            graphics.DrawString(String.Format("Текущий минимум  = {0}", state.Min), drawingTools.FontDigits, drawingTools.BrushDigit, 80 + 100 * 4, 100, drawingTools.FormatDrawing);
         }
 
         private void DrawComment(string message)
@@ -78,13 +74,16 @@ namespace Visualizer
             graphics.DrawString(message, drawingTools.FontDigits, drawingTools.BrushDigit, BubbleSortVisualizerSettings.LocationBottomCommentField, drawingTools.FormatDrawing);
         }
 
-        private void DrawCompare(Tuple<int, int> indexes)
+        private void DrawCompare(StateAutomaton state)
         {
-            sortArray.SelectElement(indexes.Item1);
-            this.DrawArray();
-            sortArray.DeselectElement(indexes.Item1);
-            //this.DrawCursor(indexes.Item1);
-            //this.DrawSymbolComparison(indexes.Item1);
+            this.DrawMin(state);
+            
+            sortArray.SelectElements(state.SelectedElements.ToArray());
+            
+            this.DrawArray(state.Array);
+            
+            sortArray.DeselectElements(state.SelectedElements.ToArray());
+      
         }
 
         private void ClearComments()
@@ -93,31 +92,23 @@ namespace Visualizer
             graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.BottomCommentField);
         }
 
-        private void DrawSwap(Tuple<int, int> indexes)
+        private void DrawSortedPartArray(StateAutomaton state)
         {
-            sortArray.SelectElements(indexes);
-
-            this.DrawArray();
-
-           sortArray.DeselectElements(indexes);
-
-        }
-
-        private void DrawSortedPartArray()
-        {
-            foreach (var i in sortedPartArray)
+            for(var i = 0; i <= state.FirstIndex; ++i)
             {
                 var rectangle = new System.Drawing.Rectangle(sortArray.GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
 
                 graphics.FillRectangle(new SolidBrush(Color.DeepSkyBlue), rectangle);
                 graphics.DrawRectangle(drawingTools.PenElement, rectangle);
-                graphics.DrawString(sortArray.GetValue(i), drawingTools.FontDigits, drawingTools.BrushDigit, sortArray.GetCoordinates(i), drawingTools.FormatDrawing);
+                graphics.DrawString(state.Array[i].ToString(), drawingTools.FontDigits, drawingTools.BrushDigit, sortArray.GetCoordinates(i), drawingTools.FormatDrawing);
             }
         }
-
+        
         public override void ToStart(object sender, EventArgs e)
         {
-
+            sortArray = new SortArray(inputArray.Length);
+            automatonSort.ToStart();
+            DrawArray(inputArray);
         }
 
     }

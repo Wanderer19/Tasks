@@ -7,32 +7,12 @@ namespace Visualizer
 {
     public class StateAutomaton
     {
-        public string DescriptionState { get; private set; }
-        public Tuple<int, int> IndexesSelectedItemsCompare { get; private set; }
-        public Tuple<int, int> IndexesSelectedItemsSwap { get; private set; }
-        public string StateId { get; private set; }
-        public int StateNumber { get; private set; }
-        public int Min { get; private set; }
-        public int FirstIndex { get; private set; }
-
-        public StateAutomaton(string descriptionState, string stateId, int stateNumber, int firstndex, int secondindex)
-        {
-            DescriptionState = descriptionState;
-            StateId = stateId;
-            StateNumber = stateNumber;
-            IndexesSelectedItemsCompare = Tuple.Create(firstndex, secondindex);
-            IndexesSelectedItemsSwap = Tuple.Create(firstndex, secondindex);
-        }
-
-        public StateAutomaton(string descriptionState, string stateId, int stateNumber, int firstndex, int secondindex, int min)
-        {
-            DescriptionState = descriptionState;
-            StateId = stateId;
-            StateNumber = stateNumber;
-            IndexesSelectedItemsCompare = Tuple.Create(secondindex, min);
-            IndexesSelectedItemsSwap = Tuple.Create(firstndex, min);
-            FirstIndex = firstndex;
-            Min = min;
-        }
+        public string DescriptionState { get; protected set; }
+        public List<int> SelectedElements { get; protected set; } 
+        public string StateId { get; protected set; }
+        public int StateNumber { get; protected set; }
+        public int[] Array { get; protected set; }
+        public int Min { get; protected set; }
+        public int FirstIndex { get; protected set; }
     }
 }

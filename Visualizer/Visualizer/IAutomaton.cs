@@ -10,6 +10,7 @@ namespace Visualizer
     {
         StateAutomaton DoStepForward();
         StateAutomaton DoStepBackward();
-        void ToStart();
+        
+        StateAutomaton ToStart();
     }
 }

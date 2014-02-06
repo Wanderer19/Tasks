@@ -1,4 +1,6 @@
-﻿namespace Visualizer
+﻿using System;
+
+namespace Visualizer
 {
     partial class DataReceiverForm
     {
@@ -100,7 +102,7 @@
             this.OkButton.TabIndex = DataReceiverFormSettings.OkButtonTabIndex;
             this.OkButton.Text = DataReceiverFormSettings.OkButtonText;
             this.OkButton.UseVisualStyleBackColor = DataReceiverFormSettings.OkButtonUseVisualStyleBackColor;
-            this.OkButton.Click += new System.EventHandler(this.TryToRunVisualizer);
+            this.OkButton.Click += new System.EventHandler(this.RunVisualizer);
 
             // 
             // DataReceiverForm
@@ -116,6 +118,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.enteredDataButton);
             this.Controls.Add(this.defaultDataRadioButton);
+            this.Closed += new EventHandler(CloseDataReceiverForm);
             this.Name = "DataReceiverForm";
             this.Text = "DataReceiverForm";
             this.ResumeLayout(false);
@@ -131,5 +134,26 @@
         private System.Windows.Forms.Label signatureInputField;
         private System.Windows.Forms.RichTextBox inputField;
         private System.Windows.Forms.Button OkButton;
+
+        private bool VisualizerCanBeRun()
+        {
+            var isValidData = true;
+            var array = new int[] {0, -9, 7, 1, 5};
+                
+            if (!choice)
+            {
+                if (ArrayReader.IsValidInputString(inputField.Text))
+                {
+                    array = ArrayReader.ReadData(inputField.Text);
+                    isValidData = true;
+                }
+                else
+                    isValidData = false;
+            }
+
+            inputArray = array;
+            
+            return isValidData && ArrayReader.IsValidValuesElementsInArray(array);
+        }
     }
 }

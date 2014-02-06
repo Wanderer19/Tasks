@@ -2,71 +2,72 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using Visualizer;
 
 namespace Visualizer
 {
-    public class DataModel
-    {
-        private int firstIndex;
-        private int secondIndex;
-        public int State { get; set; }
-        public int Min { get; set; }
-        public int FirstIndex
-        {
-            get { return firstIndex; }
-            set
-            {
-                if (value <= ArraySize && value >= 0)
-                {
-                    firstIndex = value;
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-        }
-
-        public int SecondIndex
-        {
-            get { return secondIndex; }
-            set
-            {
-                if (value <= ArraySize && value >= 0)
-                {
-                    secondIndex = value;
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-        }
-
-        public int ArraySize { get; private set; }
-        public int[] Array { get; private set; }
-
-        public DataModel(int[] array)
-        {
-            ArraySize = array.Length;
-            Array = array;
-            firstIndex = 0;
-            secondIndex = 0;
-            State = 0;
-            Min = 0;
-        }
-
-        public void Swap(int i, int j)
-        {
-            var copyItem = Array[i];
-            Array[i] = Array[j];
-            Array[j] = copyItem;
-        }
-    }
 
     public class AutomatonBubbleSort : Automaton
     {
+        private class DataModel
+        {
+            private int firstIndex;
+            private int secondIndex;
+            public int State { get; set; }
+           
+            public int FirstIndex
+            {
+                get { return firstIndex; }
+                set
+                {
+                    if (value <= ArraySize && value >= 0)
+                    {
+                        firstIndex = value;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+            }
+
+            public int SecondIndex
+            {
+                get { return secondIndex; }
+                set
+                {
+                    if (value <= ArraySize && value >= 0)
+                    {
+                        secondIndex = value;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+            }
+
+            public int ArraySize { get; private set; }
+            public int[] Array { get; private set; }
+
+            public DataModel(int[] array)
+            {
+                ArraySize = array.Length;
+                Array = array;
+                firstIndex = 0;
+                secondIndex = 0;
+                State = 0;
+            }
+
+            public void Swap()
+            {
+                var copyItem = Array[secondIndex];
+                Array[secondIndex] = Array[secondIndex + 1];
+                Array[secondIndex + 1] = copyItem;
+            }
+        }
+
         public AutomatonBubbleSort(int[] array)
         {
             dataModel = new DataModel(array);
@@ -156,7 +157,7 @@ namespace Visualizer
                         firstIndex = dataModel.SecondIndex;
                         secondIndex = dataModel.SecondIndex + 1;
 
-                        dataModel.Swap(dataModel.SecondIndex, dataModel.SecondIndex + 1);
+                        dataModel.Swap();
 
                         stack.Push(true);
 
@@ -197,7 +198,7 @@ namespace Visualizer
                 }
             }
 
-            return new StateAutomaton(descriptionState, stateId, dataModel.State, firstIndex, secondIndex);
+            return new StateBubbleSortAutomaton(firstIndex, secondIndex,stateId,  descriptionState, dataModel.Array, dataModel.State);
         }
 
         public override StateAutomaton DoStepBackward()
@@ -312,13 +313,16 @@ namespace Visualizer
                     }
                     default:
                     {
-                        dataModel.State = -1;
+                        isInterestingState = true;
+
+                        dataModel.State = 10;
 
                         break;
                     }
                 }
             }
-            return new StateAutomaton(descriptionState, stateId, dataModel.State, firstIndex, secondIndex);
+            
+            return new StateBubbleSortAutomaton(firstIndex, secondIndex, stateId, descriptionState, dataModel.Array, dataModel.State);
         }
     }
 }

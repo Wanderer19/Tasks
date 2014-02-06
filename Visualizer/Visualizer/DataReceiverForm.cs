@@ -17,34 +17,16 @@ namespace Visualizer
     public partial class DataReceiverForm : Form
     {
         private bool choice = true;
-        private Visualizer visualizer;
-        private readonly SortingForm mainForm;
+        private readonly SortingForm parentWindow;
         private readonly int sortId;
-        private const int BubbleSortId = 1;
+        private int[] inputArray;
 
-        public DataReceiverForm(SortingForm form, int sortId)
+        public DataReceiverForm(SortingForm parentWindow, int sortId)
         {
-            this.mainForm = form;
+            this.parentWindow = parentWindow;
             this.sortId = sortId;
             
             InitializeComponent();
-        }
-
-        private void IdentifyVisualizer(int [] array)
-        {
-            switch (sortId)
-            {
-                case GeneralSettings.BubbleSortId:
-                {
-                    visualizer = new BubbleSortVisualizer(mainForm, array);
-                    break;
-                }
-                case GeneralSettings.SelectionSortId:
-                {
-                    visualizer = new SelectionSortVisualizer(mainForm, array);
-                    break;
-                }
-            }    
         }
 
         private void SelectDefaultData(object sender, EventArgs e)
@@ -57,69 +39,59 @@ namespace Visualizer
             choice = false;
         }
 
-        private void TryToRunVisualizer(object sender, EventArgs e)
+        private void RunVisualizer(object sender, EventArgs e)
         {
-            try
+            if (VisualizerCanBeRun())
             {
-                if (choice)
-                    this.RunVisualizer(new int[] { 0, -9, 7, 1, 5 });
-                else
-                {
-                    if (IsValidInputData(inputField.Text))
-                        this.RunVisualizer(ReadData());
-                    else
-                        this.ProcessError();
-                    
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                this.ProcessError();
-            }
-        }
-        
-        private bool IsValidInputData(string inputData)
-        {
-            if (inputData.Any(i => Char.IsWhiteSpace(i) || Char.IsNumber(i) || i == '-'))
-            {
-                var array = ReadData();
 
-                if (array.Length > DataReceiverFormSettings.SizeLimitArray)
-                    return false;
+                HideMainWindow();
 
-                return !array.Any(i => Math.Abs(i) > DataReceiverFormSettings.LimitArrayElementValue);
+                var visualizer = GetVisualizer(this.inputArray);
+                visualizer.Show();
             }
-            
-
-            return false;
+            else
+                ProcessErrorReadingData();
         }
 
-        private int [] ReadData()
-        {
-            
-            var inputData = this.inputField.Text;
-            inputData = Regex.Replace(inputData, @"\s+", ",");
-
-            var array = inputData.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                    .Select(int.Parse)
-                                    .ToArray();
-
-            return array;
-        }
-
-        private void RunVisualizer(int[] array)
+        private void HideMainWindow()
         {
             this.Visible = false;
-
-            this.IdentifyVisualizer(array);
-            visualizer.Show();
         }
 
-        private void ProcessError()
+        private Visualizer GetVisualizer(int[] array)
+        {
+            switch (sortId)
+            {
+                case GeneralSettings.BubbleSortId:
+                {
+                       return new BubbleSortVisualizer(parentWindow, array);
+                }
+                case GeneralSettings.SelectionSortId:
+                {
+                      return new SelectionSortVisualizer(parentWindow, array);
+                }
+                default:
+                {
+                    return new Visualizer();
+                }
+            }
+        }
+
+        private void ProcessErrorReadingData()
         {
             this.inputField.Text = "";
+
             MessageBox.Show(DataReceiverFormSettings.ErrorMessage);
+        }
+
+        private void CloseDataReceiverForm(object sender, EventArgs e)
+        {
+            ShowParentWindow();
+        }
+
+        private void ShowParentWindow()
+        {
+            parentWindow.Visible = true;
         }
     }
 }

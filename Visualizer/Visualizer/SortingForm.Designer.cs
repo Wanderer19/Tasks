@@ -62,7 +62,7 @@ namespace Visualizer
             this.mainTitle.Name = SortingFormSettings.MainTitleName;
             this.mainTitle.Size = SortingFormSettings.MainTitleSize;
             this.mainTitle.TabIndex = SortingFormSettings.MainTitleTabIndex;
-            this.mainTitle.Text = currentSettings.MainTitleText;
+            this.mainTitle.Text = interfaceSettings.MainTitleText;
 
             // 
             // aboutSorting

@@ -18,12 +18,15 @@ namespace Visualizer
         public const string StateSwap = "swap";
         
  
-        public BubbleSortVisualizer(SortingForm bubbleSortForm, int[] array)
+        public BubbleSortVisualizer(SortingForm parentWindow, int[] array)
         {
-            this.mainForm = bubbleSortForm;
-            
-            this.sortArray = new SortArray(array);
+            this.parentWindow = parentWindow;
+            this.inputArray = array;
+            this.sortId = 1;
+            selfTimer.Interval = 650;
+            this.sortArray = new SortArray(array.Length);
             this.automatonSort = new AutomatonBubbleSort(array);
+
             drawingTools = new DrawingTools(BubbleSortVisualizerSettings.FontDigits, BubbleSortVisualizerSettings.FormatDrawing,
                                              BubbleSortVisualizerSettings.BrushDigit, BubbleSortVisualizerSettings.BrushElement, 
                                              BubbleSortVisualizerSettings.PenElement);           
@@ -33,18 +36,18 @@ namespace Visualizer
 
         public override void DrawState(StateAutomaton stateAutomaton)
         {
-            this.ClearComments();
+            this.ClearOldComments();
 
             switch (stateAutomaton.StateId)
             {
                 case StateCompare:
                 {
-                    this.DrawCompare(stateAutomaton.IndexesSelectedItemsCompare);
+                    this.DrawCompare(stateAutomaton);
                     break;
                 }
                 case StateSwap:
                 {
-                    this.DrawSwap(stateAutomaton.IndexesSelectedItemsSwap);
+                    this.DrawSwap(stateAutomaton);
                     break;
                 }
             }
@@ -52,9 +55,7 @@ namespace Visualizer
            this.DrawComment(stateAutomaton.DescriptionState);
         }
 
-  
-
-        private void ClearComments()
+        public override void ClearOldComments()
         {
             graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.UpperCommentField);
             graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.BottomCommentField);
@@ -65,11 +66,12 @@ namespace Visualizer
             graphics.DrawString(message, drawingTools.FontDigits, drawingTools.BrushDigit, BubbleSortVisualizerSettings.LocationBottomCommentField, drawingTools.FormatDrawing);
         }
 
-        private void DrawCompare(Tuple <int, int> indexes)
+        private void DrawCompare(StateAutomaton state)
         {
-            this.DrawArray();
-            this.DrawCursor(indexes.Item1);
-            this.DrawSymbolComparison(indexes.Item1);
+            this.DrawArray(state.Array);
+            
+            this.DrawCursor(state.SelectedElements[0]);
+            this.DrawSymbolComparison(state.SelectedElements[0]);
         }
 
         private void DrawCursor(int index)
@@ -87,27 +89,6 @@ namespace Visualizer
         private void DrawSymbolComparison(int index)
         {
             graphics.DrawString(BubbleSortVisualizerSettings.SymbolComparison, drawingTools.FontDigits, drawingTools.BrushDigit, 80 + 100 * index, 100, drawingTools.FormatDrawing);
-        }
-
-        private void DrawSwap(Tuple<int, int> indexes)
-        {
-            sortArray.SelectElements(indexes);
-            
-            this.DrawArray();
-            
-            sortArray.DeselectElements(indexes);
-
-        }
-
-        public override void ToStart(object sender, EventArgs e)
-        {
-           this.ClearComments();
-           this.sortArray.DeselectAllElements();
-           
-           automatonSort.ToStart();
-
-           this.DrawArray();
-            
         }
     }
 }
