@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Visualizer
 {
@@ -32,76 +34,76 @@ namespace Visualizer
             // defaultDataRadioButton
             // 
 
-            this.defaultDataRadioButton.AutoSize = DataReceiverFormSettings.DefaultDataRadioButtonAutoSize;
-            this.defaultDataRadioButton.Font = DataReceiverFormSettings.DefaultDataRadioButtonFont;
-            this.defaultDataRadioButton.ForeColor = DataReceiverFormSettings.DefaultDataRadioButtonForeColor;
-            this.defaultDataRadioButton.Location = DataReceiverFormSettings.DefaultDataRadioButtonLocation;
-            this.defaultDataRadioButton.Name = DataReceiverFormSettings.DefaultDataRadioButtonName;
-            this.defaultDataRadioButton.Size = DataReceiverFormSettings.DefaultDataRadioButtonSize;
-            this.defaultDataRadioButton.TabIndex = DataReceiverFormSettings.DefaultDataRadioButtonTabIndex;
-            this.defaultDataRadioButton.TabStop = DataReceiverFormSettings.DefaultDataRadioButtonTabStop;
-            this.defaultDataRadioButton.Text = DataReceiverFormSettings.DefaultDataRadioButtonText;
-            this.defaultDataRadioButton.UseVisualStyleBackColor = DataReceiverFormSettings.DefaultDataRadioButtonUseVisualStyleBackColor;
+            this.defaultDataRadioButton.AutoSize = (bool) settings.GetObject("DefaultDataRadioButtonAutoSize");
+            this.defaultDataRadioButton.Font = (Font) settings.GetObject("DefaultDataRadioButtonFont");
+            this.defaultDataRadioButton.ForeColor = (Color) settings.GetObject("DefaultDataRadioButtonForeColor");
+            this.defaultDataRadioButton.Location = (Point) settings.GetObject("DefaultDataRadioButtonLocation");
+            this.defaultDataRadioButton.Name = settings.GetString("DefaultDataRadioButtonName");
+            this.defaultDataRadioButton.Size = (Size) settings.GetObject("DefaultDataRadioButtonSize");
+            this.defaultDataRadioButton.TabIndex = (int) settings.GetObject("DefaultDataRadioButtonTabIndex");
+            this.defaultDataRadioButton.TabStop = (bool) settings.GetObject("DefaultDataRadioButtonTabStop");
+            this.defaultDataRadioButton.Text = settings.GetString("DefaultDataRadioButtonText");
+            this.defaultDataRadioButton.UseVisualStyleBackColor = (bool)settings.GetObject("DefaultDataRadioButtonUseVisualStyleBackColor");
             this.defaultDataRadioButton.CheckedChanged += new System.EventHandler(this.SelectDefaultData);
 
             // 
             // enteredDataButton
             // 
 
-            this.enteredDataButton.AutoSize = DataReceiverFormSettings.EnteredDataButtonAutoSize;
-            this.enteredDataButton.Font = DataReceiverFormSettings.EnteredDataButtonFont;
-            this.enteredDataButton.ForeColor = DataReceiverFormSettings.EnteredDataButtonForeColor;
-            this.enteredDataButton.Location = DataReceiverFormSettings.EnteredDataButtonLocation;
-            this.enteredDataButton.Name = DataReceiverFormSettings.EnteredDataButtonName;
-            this.enteredDataButton.Size = DataReceiverFormSettings.EnteredDataButtonSize;
-            this.enteredDataButton.TabIndex = DataReceiverFormSettings.EnteredDataButtonTabIndex;
-            this.enteredDataButton.TabStop = DataReceiverFormSettings.EnteredDataButtonTabStop;
-            this.enteredDataButton.Text = DataReceiverFormSettings.EnteredDataButtonText;
-            this.enteredDataButton.UseVisualStyleBackColor = DataReceiverFormSettings.EnteredDataButtonUseVisualStyleBackColor;
+            this.enteredDataButton.AutoSize = (bool) settings.GetObject("EnteredDataButtonAutoSize");
+            this.enteredDataButton.Font =(Font) settings.GetObject("EnteredDataButtonFont");
+            this.enteredDataButton.ForeColor = (Color) settings.GetObject("EnteredDataButtonForeColor");
+            this.enteredDataButton.Location = (Point) settings.GetObject("EnteredDataButtonLocation");
+            this.enteredDataButton.Name = settings.GetString("EnteredDataButtonName");
+            this.enteredDataButton.Size = (Size) settings.GetObject("EnteredDataButtonSize");
+            this.enteredDataButton.TabIndex = (int) settings.GetObject("EnteredDataButtonTabIndex");
+            this.enteredDataButton.TabStop = (bool) settings.GetObject("EnteredDataButtonTabStop");
+            this.enteredDataButton.Text = settings.GetString("EnteredDataButtonText");
+            this.enteredDataButton.UseVisualStyleBackColor = (bool) settings.GetObject("EnteredDataButtonUseVisualStyleBackColor");
             this.enteredDataButton.CheckedChanged += new System.EventHandler(this.SelectEnteredDataButton);
 
             //
             // signatureInputField
             // 
 
-            this.signatureInputField.AutoSize = DataReceiverFormSettings.SignatureInputFieldAutoSize;
-            this.signatureInputField.Font = DataReceiverFormSettings.SignatureInputFieldFont;
-            this.signatureInputField.ForeColor = DataReceiverFormSettings.SignatureInputFieldForeColor;
-            this.signatureInputField.Location = DataReceiverFormSettings.SignatureInputFieldLocation;
-            this.signatureInputField.Name = DataReceiverFormSettings.SignatureInputFieldName;
-            this.signatureInputField.Size = DataReceiverFormSettings.SignatureInputFieldSize;
-            this.signatureInputField.TabIndex = DataReceiverFormSettings.SignatureInputFieldTabIndex;
-            this.signatureInputField.Text = DataReceiverFormSettings.SignatureInputFieldText;
+            this.signatureInputField.AutoSize = (bool) settings.GetObject("SignatureInputFieldAutoSize");
+            this.signatureInputField.Font = (Font) settings.GetObject("SignatureInputFieldFont");
+            this.signatureInputField.ForeColor = (Color) settings.GetObject("SignatureInputFieldForeColor");
+            this.signatureInputField.Location = (Point) settings.GetObject("SignatureInputFieldLocation");
+            this.signatureInputField.Name = settings.GetString("SignatureInputFieldName");
+            this.signatureInputField.Size = (Size) settings.GetObject("SignatureInputFieldSize");
+            this.signatureInputField.TabIndex = (int)settings.GetObject("SignatureInputFieldTabIndex");
+            this.signatureInputField.Text = settings.GetString("SignatureInputFieldText");
 
             // 
             // inputField
             // 
 
-            this.inputField.BackColor = DataReceiverFormSettings.InputFieldBackColor;
-            this.inputField.Location = DataReceiverFormSettings.InputFieldLocation;
-            this.inputField.Name = DataReceiverFormSettings.InputFieldName;
-            this.inputField.Size = DataReceiverFormSettings.InputFieldSize;
-            this.inputField.TabIndex = DataReceiverFormSettings.InputFieldTabIndex;
-            this.inputField.Text = DataReceiverFormSettings.InputFieldText;
+            this.inputField.BackColor = (Color) settings.GetObject("InputFieldBackColor");
+            this.inputField.Location = (Point) settings.GetObject("InputFieldLocation");
+            this.inputField.Name = settings.GetString("InputFieldName");
+            this.inputField.Size = (Size) settings.GetObject("InputFieldSize");
+            this.inputField.TabIndex = (int) settings.GetObject("InputFieldTabIndex");
+            this.inputField.Text = settings.GetString("InputFieldText");
 
             // 
             // OkButton
             // 
 
-            this.OkButton.BackColor = DataReceiverFormSettings.OkButtonBackColor;
-            this.OkButton.Cursor = DataReceiverFormSettings.OkButtonCursor;
-            this.OkButton.FlatAppearance.BorderSize = DataReceiverFormSettings.OkButtonBorderSize;
-            this.OkButton.FlatAppearance.MouseDownBackColor = DataReceiverFormSettings.OkButtonMouseDownBackColor;
-            this.OkButton.FlatAppearance.MouseOverBackColor = DataReceiverFormSettings.OkButtonMouseOverBackColor;
-            this.OkButton.FlatStyle = DataReceiverFormSettings.OkButtonFlatStyle;
-            this.OkButton.Font = DataReceiverFormSettings.OkButtonFont;
-            this.OkButton.ForeColor = DataReceiverFormSettings.OkButtonForeColor;
-            this.OkButton.Location = DataReceiverFormSettings.OkButtonLocation;
-            this.OkButton.Name = DataReceiverFormSettings.OkButtonName;
-            this.OkButton.Size = DataReceiverFormSettings.OkButtonSize;
-            this.OkButton.TabIndex = DataReceiverFormSettings.OkButtonTabIndex;
-            this.OkButton.Text = DataReceiverFormSettings.OkButtonText;
-            this.OkButton.UseVisualStyleBackColor = DataReceiverFormSettings.OkButtonUseVisualStyleBackColor;
+            this.OkButton.BackColor = (Color) settings.GetObject("OkButtonBackColor");
+            this.OkButton.Cursor = (Cursor) settings.GetObject("OkButtonCursor");
+            this.OkButton.FlatAppearance.BorderSize = (int) settings.GetObject("OkButtonBorderSize");
+            this.OkButton.FlatAppearance.MouseDownBackColor = (Color) settings.GetObject("OkButtonMouseDownBackColor");
+            this.OkButton.FlatAppearance.MouseOverBackColor = (Color) settings.GetObject("OkButtonMouseOverBackColor");
+            this.OkButton.FlatStyle = (FlatStyle) settings.GetObject("OkButtonFlatStyle");
+            this.OkButton.Font = (Font) settings.GetObject("OkButtonFont");
+            this.OkButton.ForeColor = (Color) settings.GetObject("OkButtonForeColor");
+            this.OkButton.Location = (Point) settings.GetObject("OkButtonLocation");
+            this.OkButton.Name = settings.GetString("OkButtonName");
+            this.OkButton.Size = (Size) settings.GetObject("OkButtonSize");
+            this.OkButton.TabIndex = (int) settings.GetObject("OkButtonTabIndex");
+            this.OkButton.Text = settings.GetString("OkButtonText");
+            this.OkButton.UseVisualStyleBackColor = (bool) settings.GetObject("OkButtonUseVisualStyleBackColor");
             this.OkButton.Click += new System.EventHandler(this.RunVisualizer);
 
             // 
@@ -152,8 +154,8 @@ namespace Visualizer
             }
 
             inputArray = array;
-            
-            return isValidData && ArrayReader.IsValidValuesElementsInArray(array);
+
+            return isValidData && ArrayReader.IsValidValuesElementsInArray(array, (int)settings.GetObject("SizeLimitArray"), (int)settings.GetObject("LimitArrayElementValue"));
         }
     }
 }

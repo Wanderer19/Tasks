@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace Visualizer
@@ -55,90 +57,93 @@ namespace Visualizer
             // mainTitle
             // 
 
-            this.mainTitle.AutoSize = SortingFormSettings.MainTitleAutoSize;
-            this.mainTitle.Font = SortingFormSettings.MainTitleFont;
-            this.mainTitle.ForeColor = SortingFormSettings.MainTitleForeColor;
-            this.mainTitle.Location = SortingFormSettings.MainTitleLocation;
-            this.mainTitle.Name = SortingFormSettings.MainTitleName;
-            this.mainTitle.Size = SortingFormSettings.MainTitleSize;
-            this.mainTitle.TabIndex = SortingFormSettings.MainTitleTabIndex;
-            this.mainTitle.Text = interfaceSettings.MainTitleText;
+            this.mainTitle.AutoSize = (bool) sortingFormSettings.GetObject("MainTitleAutoSize");
+            this.mainTitle.Font = (Font) sortingFormSettings.GetObject("MainTitleFont");
+            this.mainTitle.ForeColor = (Color) sortingFormSettings.GetObject("MainTitleForeColor");
+            this.mainTitle.Location = (Point) sortingFormSettings.GetObject("MainTitleLocation");
+            this.mainTitle.Name = sortingFormSettings.GetString("MainTitleName");
+            this.mainTitle.Size = (Size) sortingFormSettings.GetObject("MainTitleSize");
+            this.mainTitle.TabIndex = (int) sortingFormSettings.GetObject("MainTitleTabIndex");
+            this.mainTitle.Text = sortingFormSettings.GetString("MainTitleText");
 
             // 
             // aboutSorting
             // 
 
-            this.aboutSorting.BackColor = SortingFormSettings.AboutSortingBackColor;
-            this.aboutSorting.BorderStyle = SortingFormSettings.AboutSortingBorderStyle;
-            this.aboutSorting.Font = SortingFormSettings.AboutSortingFont;
-            this.aboutSorting.FormattingEnabled = SortingFormSettings.AboutSortingFormattingEnabled;
-            this.aboutSorting.ItemHeight = SortingFormSettings.AboutSortingItemHeight;
-            this.aboutSorting.Location = SortingFormSettings.AboutSortingLocation;
-            this.aboutSorting.Name = SortingFormSettings.AboutSortingName;
-            this.aboutSorting.ScrollAlwaysVisible = SortingFormSettings.AboutSortingScrollAlwaysVisible;
-            this.aboutSorting.Size = SortingFormSettings.AboutSortingSize;
-            this.aboutSorting.TabIndex = SortingFormSettings.AboutSortingTabIndex;
+            this.aboutSorting.BackColor = (Color) sortingFormSettings.GetObject("AboutSortingBackColor");
+            this.aboutSorting.BorderStyle = (BorderStyle) sortingFormSettings.GetObject("AboutSortingBorderStyle");
+            this.aboutSorting.Font = (Font) sortingFormSettings.GetObject("AboutSortingFont");
+            this.aboutSorting.FormattingEnabled = (bool) sortingFormSettings.GetObject("AboutSortingFormattingEnabled");
+            this.aboutSorting.ItemHeight = (int) sortingFormSettings.GetObject("AboutSortingItemHeight");
+            this.aboutSorting.Location = (Point) sortingFormSettings.GetObject("AboutSortingLocation");
+            this.aboutSorting.Name = sortingFormSettings.GetString("AboutSortingName");
+            this.aboutSorting.ScrollAlwaysVisible = (bool) sortingFormSettings.GetObject("AboutSortingScrollAlwaysVisible");
+            this.aboutSorting.Size = (Size) sortingFormSettings.GetObject("AboutSortingSize");
+            this.aboutSorting.TabIndex = (int) sortingFormSettings.GetObject("AboutSortingTabIndex");
+            this.aboutSorting.Items.AddRange((string [])sortingFormSettings.GetObject("AboutSortingFile"));
             
             // 
             // mainMenu
             // 
-            
-            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.programMenu, this.helpMenu });
 
-            this.mainMenu.BackColor = SortingFormSettings.MainMenuBackColor;
-            this.mainMenu.Location = SortingFormSettings.MainMenuLocation;
-            this.mainMenu.Name = SortingFormSettings.MainMenuName;
-            this.mainMenu.Size = SortingFormSettings.MainMenuSize;
-            this.mainMenu.TabIndex = SortingFormSettings.MainMenuTabIndex;
-            this.mainMenu.Text = SortingFormSettings.MainMenuText;
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.programMenu, this.helpMenu});
+
+            this.mainMenu.BackColor = (Color) sortingFormSettings.GetObject("MainMenuBackColor");
+            this.mainMenu.Location = (Point) sortingFormSettings.GetObject("MainMenuLocation");
+            this.mainMenu.Name = sortingFormSettings.GetString("MainMenuName");
+            this.mainMenu.Size = (Size) sortingFormSettings.GetObject("MainMenuSize");
+            this.mainMenu.TabIndex = (int) sortingFormSettings.GetObject("MainMenuTabIndex");
+            this.mainMenu.Text = sortingFormSettings.GetString("MainMenuText");
 
             // 
             // programMenu
             // 
 
-            this.programMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.visualizerMenuItem, this.sourceCodeMenuItem });
+            this.programMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
+            {this.visualizerMenuItem, this.sourceCodeMenuItem});
 
-            this.programMenu.Font = SortingFormSettings.ProgramMenuFont;
-            this.programMenu.ForeColor = SortingFormSettings.ProgramMenuForeColor;
-            this.programMenu.Name = SortingFormSettings.ProgramMenuName;
-            this.programMenu.Size = SortingFormSettings.ProgramMenuSize;
-            this.programMenu.Text = SortingFormSettings.ProgramMenuText;
+            this.programMenu.Font = (Font) sortingFormSettings.GetObject("ProgramMenuFont");
+            this.programMenu.ForeColor = (Color) sortingFormSettings.GetObject("ProgramMenuForeColor");
+            this.programMenu.Name = sortingFormSettings.GetString("ProgramMenuName");
+            this.programMenu.Size = (Size) sortingFormSettings.GetObject("ProgramMenuSize");
+            this.programMenu.Text = sortingFormSettings.GetString("ProgramMenuText");
 
             // 
             // visualizerMenuItem
             // 
 
-            this.visualizerMenuItem.Name = SortingFormSettings.VisualizerMenuItemName;
-            this.visualizerMenuItem.Size = SortingFormSettings.VisualizerMenuItemSize;
-            this.visualizerMenuItem.Text = SortingFormSettings.VisualizerMenuItemText;
+            this.visualizerMenuItem.Name = sortingFormSettings.GetString("VisualizerMenuItemName");
+            this.visualizerMenuItem.Size = (Size) sortingFormSettings.GetObject("VisualizerMenuItemSize");
+            this.visualizerMenuItem.Text = sortingFormSettings.GetString("VisualizerMenuItemText");
             this.visualizerMenuItem.Click += new System.EventHandler(this.RunVisualizer);
 
             // 
             // sourceCodeMenuItem
             //
- 
-            this.sourceCodeMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.sourceCodeCSharp, this.sourceCodeCPlusPlus, this.sourceCodeJava, this.sourceCodePython});
 
-            this.sourceCodeMenuItem.Name = SortingFormSettings.SourceCodeMenuItemName;
-            this.sourceCodeMenuItem.Size = SortingFormSettings.SourceCodeMenuItemSize;
-            this.sourceCodeMenuItem.Text = SortingFormSettings.SourceCodeMenuItemText;
+            this.sourceCodeMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
+            {this.sourceCodeCSharp, this.sourceCodeCPlusPlus, this.sourceCodeJava, this.sourceCodePython});
+
+            this.sourceCodeMenuItem.Name = sortingFormSettings.GetString("SourceCodeMenuItemName");
+            this.sourceCodeMenuItem.Size = (Size) sortingFormSettings.GetObject("SourceCodeMenuItemSize");
+            this.sourceCodeMenuItem.Text = sortingFormSettings.GetString("SourceCodeMenuItemText");
 
             // 
             // sourceCodeCSharp
             // 
 
-            this.sourceCodeCSharp.Name = SortingFormSettings.SourceCodeCSharpName;
-            this.sourceCodeCSharp.Size = SortingFormSettings.SourceCodeCSharpSize;
-            this.sourceCodeCSharp.Text = SortingFormSettings.SourceCodeCSharpText;
+            this.sourceCodeCSharp.Name = sortingFormSettings.GetString("SourceCodeCSharpName");
+            this.sourceCodeCSharp.Size = (Size) sortingFormSettings.GetObject("SourceCodeCSharpSize");
+            this.sourceCodeCSharp.Text = sortingFormSettings.GetString("SourceCodeCSharpText");
             this.sourceCodeCSharp.Click += new System.EventHandler(this.ShowSourceCodeCSharp);
            
             // 
             // sourceCodeCPlusPlus
             //
 
-            this.sourceCodeCPlusPlus.Name = SortingFormSettings.SourceCodeCPlusPlusName;
-            this.sourceCodeCPlusPlus.Size = SortingFormSettings.SourceCodeCPlusPlusSize;
-            this.sourceCodeCPlusPlus.Text = SortingFormSettings.SourceCodeCPlusPlusText;
+            this.sourceCodeCPlusPlus.Name = sortingFormSettings.GetString("SourceCodeCPlusPlusName");
+            this.sourceCodeCPlusPlus.Size = (Size) sortingFormSettings.GetObject("SourceCodeCPlusPlusSize");
+            this.sourceCodeCPlusPlus.Text = sortingFormSettings.GetString("SourceCodeCPlusPlusText");
 
             this.sourceCodeCPlusPlus.Click += new System.EventHandler(this.ShowSourceCodeCPlusPlus);
 
@@ -146,9 +151,9 @@ namespace Visualizer
             // sourceCodeJava
             // 
 
-            this.sourceCodeJava.Name = SortingFormSettings.SourceCodeJavaName;
-            this.sourceCodeJava.Size = SortingFormSettings.SourceCodeJavaSize;
-            this.sourceCodeJava.Text = SortingFormSettings.SourceCodeJavaText;
+            this.sourceCodeJava.Name = sortingFormSettings.GetString("SourceCodeJavaName");
+            this.sourceCodeJava.Size = (Size) sortingFormSettings.GetObject("SourceCodeJavaSize");
+            this.sourceCodeJava.Text = sortingFormSettings.GetString("SourceCodeJavaText");
 
             this.sourceCodeJava.Click += new System.EventHandler(this.ShowSourceCodeJava);
 
@@ -156,9 +161,9 @@ namespace Visualizer
             // sourceCodePython
             // 
 
-            this.sourceCodePython.Name = SortingFormSettings.SourceCodePythonName;
-            this.sourceCodePython.Size = SortingFormSettings.SourceCodePythonSize;
-            this.sourceCodePython.Text = SortingFormSettings.SourceCodePythonText;
+            this.sourceCodePython.Name = sortingFormSettings.GetString("SourceCodePythonName");
+            this.sourceCodePython.Size = (Size) sortingFormSettings.GetObject("SourceCodePythonSize");
+            this.sourceCodePython.Text = sortingFormSettings.GetString("SourceCodePythonText");
 
             this.sourceCodePython.Click += new System.EventHandler(this.ShowSourceCodePython);
 
@@ -166,21 +171,21 @@ namespace Visualizer
             // helpMenu
             // 
 
-            this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.helpMenuItem });
+            this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.helpMenuItem});
 
-            this.helpMenu.Font = SortingFormSettings.HelpMenuFont;
-            this.helpMenu.ForeColor = SortingFormSettings.HelpMenuForeColor;
-            this.helpMenu.Name = SortingFormSettings.HelpMenuName;
-            this.helpMenu.Size = SortingFormSettings.HelpMenuSize;
-            this.helpMenu.Text = SortingFormSettings.HelpMenuText;
+            this.helpMenu.Font = (Font) sortingFormSettings.GetObject("HelpMenuFont");
+            this.helpMenu.ForeColor = (Color) sortingFormSettings.GetObject("HelpMenuForeColor");
+            this.helpMenu.Name = sortingFormSettings.GetString("HelpMenuName");
+            this.helpMenu.Size = (Size) sortingFormSettings.GetObject("HelpMenuSize");
+            this.helpMenu.Text = sortingFormSettings.GetString("HelpMenuText");
 
             // 
             // helpMenuItem
             // 
 
-            this.helpMenuItem.Name = SortingFormSettings.HelpMenuItemName;
-            this.helpMenuItem.Size = SortingFormSettings.HelpMenuItemSize;
-            this.helpMenuItem.Text = SortingFormSettings.HelpMenuItemText;
+            this.helpMenuItem.Name = sortingFormSettings.GetString("HelpMenuItemName");
+            this.helpMenuItem.Size = (Size) sortingFormSettings.GetObject("HelpMenuItemSize");
+            this.helpMenuItem.Text = sortingFormSettings.GetString("HelpMenuItemText");
 
             this.helpMenuItem.Click += new System.EventHandler(this.ShowHelp);
 
@@ -198,12 +203,12 @@ namespace Visualizer
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            this.AutoScaleDimensions = SortingFormSettings.AutoScaleDimensions;
-            this.AutoScaleMode = SortingFormSettings.AutoScaleMode;
-            this.BackColor = SortingFormSettings.BackColor;
-            this.ClientSize = SortingFormSettings.ClientSize;
-            this.Name = SortingFormSettings.Name;
-            this.Text = "BubbleSortForm";
+            this.AutoScaleDimensions = (SizeF) sortingFormSettings.GetObject("AutoScaleDimensions");
+            this.AutoScaleMode = (System.Windows.Forms.AutoScaleMode) sortingFormSettings.GetObject("AutoScaleMode");
+            this.BackColor = (Color) sortingFormSettings.GetObject("BackColor");
+            this.ClientSize = (Size) sortingFormSettings.GetObject("ClientSize");
+            this.Name = sortingFormSettings.GetString("Name");
+            this.Text = sortingFormSettings.GetString("BubbleSortForm");
        }
 
         #endregion

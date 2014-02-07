@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,15 +16,22 @@ using System.Windows.Forms.VisualStyles;
 
 namespace Visualizer
 {
+
     public partial class DataReceiverForm : Form
     {
+        private readonly System.Resources.ResourceManager settings;
         private bool choice = true;
         private readonly SortingForm parentWindow;
         private readonly int sortId;
         private int[] inputArray;
+        private const int BubbleSortId = 1;
+        private const int SelectionSortId = 2;
 
         public DataReceiverForm(SortingForm parentWindow, int sortId)
         {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            settings = new ResourceManager("Visualizer.DataReceiverFormSettings", assembly);
             this.parentWindow = parentWindow;
             this.sortId = sortId;
             
@@ -62,11 +71,11 @@ namespace Visualizer
         {
             switch (sortId)
             {
-                case GeneralSettings.BubbleSortId:
+                case BubbleSortId:
                 {
                        return new BubbleSortVisualizer(parentWindow, array);
                 }
-                case GeneralSettings.SelectionSortId:
+                case SelectionSortId:
                 {
                       return new SelectionSortVisualizer(parentWindow, array);
                 }
@@ -81,7 +90,7 @@ namespace Visualizer
         {
             this.inputField.Text = "";
 
-            MessageBox.Show(DataReceiverFormSettings.ErrorMessage);
+            MessageBox.Show(settings.GetString("ErrorMessage"));
         }
 
         private void CloseDataReceiverForm(object sender, EventArgs e)

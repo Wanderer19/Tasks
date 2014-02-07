@@ -17,7 +17,6 @@ namespace Visualizer
         public const string StateCompare = "compare";
         public const string StateSwap = "swap";
         
- 
         public BubbleSortVisualizer(SortingForm parentWindow, int[] array)
         {
             this.parentWindow = parentWindow;
@@ -43,11 +42,13 @@ namespace Visualizer
                 case StateCompare:
                 {
                     this.DrawCompare(stateAutomaton);
+                    
                     break;
                 }
                 case StateSwap:
                 {
                     this.DrawSwap(stateAutomaton);
+                    
                     break;
                 }
             }

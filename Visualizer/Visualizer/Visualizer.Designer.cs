@@ -1,11 +1,12 @@
-﻿namespace Visualizer
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace Visualizer
 {
     partial class Visualizer
     {
         private System.ComponentModel.IContainer components = null;
 
-        private System.Windows.Forms.MenuStrip mainMenu;
-        private System.Windows.Forms.ToolStripMenuItem helpMenu;
         private System.Windows.Forms.Button changeDataButton;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Button automaticModeButton;
@@ -13,7 +14,6 @@
         private System.Windows.Forms.Button backwardButton;
         private System.Windows.Forms.Button pauseButton;
         private System.Windows.Forms.Button continueButton;
-        private System.Windows.Forms.ToolStripMenuItem helpMenuItem;
 
         protected override void Dispose(bool disposing)
         {
@@ -28,9 +28,6 @@
 
         public void InitializeComponent()
         {
-            this.mainMenu = new System.Windows.Forms.MenuStrip();
-            this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeDataButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.automaticModeButton = new System.Windows.Forms.Button();
@@ -38,61 +35,27 @@
             this.backwardButton = new System.Windows.Forms.Button();
             this.pauseButton = new System.Windows.Forms.Button();
             this.continueButton = new System.Windows.Forms.Button();
-            this.mainMenu.SuspendLayout();
             this.SuspendLayout();
-            
-            // 
-            // mainMenu
-            //
-
-            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.helpMenu });
-            
-            this.mainMenu.BackColor = VisualizerSettings.BackColor;
-            this.mainMenu.Location = VisualizerSettings.MainMenuLocation;
-            this.mainMenu.Name = VisualizerSettings.MainMenuName;
-            this.mainMenu.Size = VisualizerSettings.MainMenuSize;
-            this.mainMenu.TabIndex = VisualizerSettings.MainMenuTabIndex;
-            this.mainMenu.Text = VisualizerSettings.MainMenuText;
-            
-            // 
-            // helpMenu
-            // 
-
-            this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.helpMenuItem });
-            this.helpMenu.Font = VisualizerSettings.HelpMenuFont;
-            this.helpMenu.Name = VisualizerSettings.HelpMenuName;
-            this.helpMenu.Size = VisualizerSettings.HelpMenuSize;
-            this.helpMenu.Text = VisualizerSettings.HelpMenuText;
-
-            // 
-            // helpMenuItem
-            // 
-
-            this.helpMenuItem.Name = VisualizerSettings.HelpMenuItemName;
-            this.helpMenuItem.Size = VisualizerSettings.HelpMenuItemSize;
-            this.helpMenuItem.Text = VisualizerSettings.HelpMenuItemText;
-
-            this.helpMenuItem.Click += new System.EventHandler(this.ShowHelpMessage);
 
             // 
             // changeDataButton
             // 
 
-            this.changeDataButton.AutoSizeMode = VisualizerSettings.ChangeDataButtonAutoSizeMode;
-            this.changeDataButton.BackColor = VisualizerSettings.ButtonBackColor;
-            this.changeDataButton.Cursor = VisualizerSettings.ButtonCursor;
-            this.changeDataButton.FlatAppearance.BorderSize = VisualizerSettings.ButtonBorderSize;
-            this.changeDataButton.FlatAppearance.MouseDownBackColor = VisualizerSettings.ButtonMouseDownBackColor;
-            this.changeDataButton.FlatAppearance.MouseOverBackColor = VisualizerSettings.ButtonMouseOverBackColor;
-            this.changeDataButton.FlatStyle = VisualizerSettings.ButtonFlatStyle;
-            this.changeDataButton.Font = VisualizerSettings.ButtonFont;
-            this.changeDataButton.ForeColor = VisualizerSettings.ButtonForeColor;
-            this.changeDataButton.Location = VisualizerSettings.ChangeDataButtonLocation;
-            this.changeDataButton.Name = VisualizerSettings.ChangeDataButtonName;
-            this.changeDataButton.Size = VisualizerSettings.ChangeDataButtonSize;
-            this.changeDataButton.TabIndex = VisualizerSettings.ChangeDataButtonTabIndex;
-            this.changeDataButton.Text = VisualizerSettings.ChangeDataButtonText;
-            this.changeDataButton.UseVisualStyleBackColor = VisualizerSettings.ButtonUseVisualStyleBackColor;
+            this.changeDataButton.AutoSizeMode = (System.Windows.Forms.AutoSizeMode) settings.GetObject("ChangeDataButtonAutoSizeMode");
+            this.changeDataButton.BackColor = (Color) settings.GetObject("ButtonBackColor");
+            this.changeDataButton.Cursor = (Cursor) settings.GetObject("ButtonCursor");
+            this.changeDataButton.FlatAppearance.BorderSize = (int) settings.GetObject("ButtonBorderSize");
+            this.changeDataButton.FlatAppearance.MouseDownBackColor = (Color) settings.GetObject("ButtonMouseDownBackColor");
+            this.changeDataButton.FlatAppearance.MouseOverBackColor = (Color) settings.GetObject("ButtonMouseOverBackColor");
+            this.changeDataButton.FlatStyle = (FlatStyle) settings.GetObject("ButtonFlatStyle");
+            this.changeDataButton.Font = (Font) settings.GetObject("ButtonFont");
+            this.changeDataButton.ForeColor = (Color) settings.GetObject("ButtonForeColor");
+            this.changeDataButton.Location = (Point) settings.GetObject("ChangeDataButtonLocation");
+            this.changeDataButton.Name = settings.GetString("ChangeDataButtonName");
+            this.changeDataButton.Size = (Size) settings.GetObject("ChangeDataButtonSize");
+            this.changeDataButton.TabIndex = (int ) settings.GetObject("ChangeDataButtonTabIndex");
+            this.changeDataButton.Text = settings.GetString("ChangeDataButtonText");
+            this.changeDataButton.UseVisualStyleBackColor = (bool)settings.GetObject("ButtonUseVisualStyleBackColor");
 
             this.changeDataButton.Click += new System.EventHandler(this.ChangeData);
 
@@ -100,19 +63,19 @@
             // startButton
             // 
 
-            this.startButton.BackColor = VisualizerSettings.ButtonBackColor;
-            this.startButton.Cursor = VisualizerSettings.ButtonCursor;
-            this.startButton.FlatAppearance.BorderSize = VisualizerSettings.ButtonBorderSize;
-            this.startButton.FlatAppearance.MouseDownBackColor = VisualizerSettings.ButtonMouseDownBackColor;
-            this.startButton.FlatAppearance.MouseOverBackColor = VisualizerSettings.ButtonMouseOverBackColor;
-            this.startButton.FlatStyle = VisualizerSettings.ButtonFlatStyle;
-            this.startButton.Font = VisualizerSettings.ButtonFont;
-            this.startButton.Location = VisualizerSettings.StartButtonLocation;
-            this.startButton.Name = VisualizerSettings.StartButtonName;
-            this.startButton.Size = VisualizerSettings.StartButtonSize;
-            this.startButton.TabIndex = VisualizerSettings.StartButtonTabIndex;
-            this.startButton.Text = VisualizerSettings.StartButtonText;
-            this.startButton.UseVisualStyleBackColor = VisualizerSettings.ButtonUseVisualStyleBackColor;
+            this.startButton.BackColor = (Color) settings.GetObject("ButtonBackColor");
+            this.startButton.Cursor = (Cursor) settings.GetObject("ButtonCursor");
+            this.startButton.FlatAppearance.BorderSize = (int) settings.GetObject("ButtonBorderSize");
+            this.startButton.FlatAppearance.MouseDownBackColor = (Color) settings.GetObject("ButtonMouseDownBackColor");
+            this.startButton.FlatAppearance.MouseOverBackColor = (Color) settings.GetObject("ButtonMouseOverBackColor");
+            this.startButton.FlatStyle = (FlatStyle) settings.GetObject("ButtonFlatStyle");
+           this.startButton.Font = (Font) settings.GetObject("ButtonFont");
+            this.startButton.Location = (Point) settings.GetObject("StartButtonLocation");
+            this.startButton.Name = settings.GetString("StartButtonName");
+            this.startButton.Size = (Size) settings.GetObject("StartButtonSize");
+            this.startButton.TabIndex = (int) settings.GetObject("StartButtonTabIndex");
+            this.startButton.Text = settings.GetString("StartButtonText");
+            this.startButton.UseVisualStyleBackColor = (bool) settings.GetObject("ButtonUseVisualStyleBackColor");
 
             this.startButton.Click += new System.EventHandler(this.ToStart);
 
@@ -120,18 +83,18 @@
             // automaticModeButton
             // 
 
-            this.automaticModeButton.BackColor = VisualizerSettings.ButtonBackColor;
-            this.automaticModeButton.Cursor = VisualizerSettings.ButtonCursor;
-            this.automaticModeButton.FlatAppearance.BorderSize = VisualizerSettings.ButtonBorderSize;
-            this.automaticModeButton.FlatAppearance.MouseDownBackColor = VisualizerSettings.ButtonMouseDownBackColor;
-            this.automaticModeButton.FlatAppearance.MouseOverBackColor = VisualizerSettings.ButtonMouseOverBackColor;
-            this.automaticModeButton.Font = VisualizerSettings.ButtonFont;
-            this.automaticModeButton.Location = VisualizerSettings.AutomaticModeButtonLocation;
-            this.automaticModeButton.Name = VisualizerSettings.AutomaticModeButtonName;
-            this.automaticModeButton.Size = VisualizerSettings.AutomaticModeButtonSize;
-            this.automaticModeButton.TabIndex = VisualizerSettings.AutomaticModeButtonTabIndex;
-            this.automaticModeButton.Text = VisualizerSettings.AutomaticModeButtonText;
-            this.automaticModeButton.UseVisualStyleBackColor = VisualizerSettings.ButtonUseVisualStyleBackColor;
+            this.automaticModeButton.BackColor = (Color) settings.GetObject("ButtonBackColor");
+            this.automaticModeButton.Cursor = (Cursor) settings.GetObject("ButtonCursor");
+            this.automaticModeButton.FlatAppearance.BorderSize = (int) settings.GetObject("ButtonBorderSize");
+            this.automaticModeButton.FlatAppearance.MouseDownBackColor = (Color) settings.GetObject("ButtonMouseDownBackColor");
+            this.automaticModeButton.FlatAppearance.MouseOverBackColor = (Color) settings.GetObject("ButtonMouseOverBackColor");
+            this.automaticModeButton.Font = (Font) settings.GetObject("ButtonFont");
+            this.automaticModeButton.Location = (Point) settings.GetObject("AutomaticModeButtonLocation");
+            this.automaticModeButton.Name = settings.GetString("AutomaticModeButtonName");
+            this.automaticModeButton.Size = (Size) settings.GetObject("AutomaticModeButtonSize");
+            this.automaticModeButton.TabIndex = (int) settings.GetObject("AutomaticModeButtonTabIndex");
+            this.automaticModeButton.Text = settings.GetString("AutomaticModeButtonText");
+            this.automaticModeButton.UseVisualStyleBackColor = (bool) settings.GetObject("ButtonUseVisualStyleBackColor");
 
             this.automaticModeButton.Click += new System.EventHandler(this.EnableAutomaticMode);
 
@@ -139,19 +102,19 @@
             // forwardButton
             // 
 
-            this.forwardButton.BackColor = VisualizerSettings.ButtonBackColor;
-            this.forwardButton.Cursor = VisualizerSettings.ButtonCursor;
-            this.forwardButton.FlatAppearance.BorderSize = VisualizerSettings.ButtonBorderSize;
-            this.forwardButton.FlatAppearance.MouseDownBackColor = VisualizerSettings.ButtonMouseDownBackColor;
-            this.forwardButton.FlatAppearance.MouseOverBackColor = VisualizerSettings.ButtonMouseOverBackColor;
-            this.forwardButton.FlatStyle = VisualizerSettings.ButtonFlatStyle;
-            this.forwardButton.Font = VisualizerSettings.ButtonFont;
-            this.forwardButton.Location = VisualizerSettings.ForwardButtonLocation;
-            this.forwardButton.Name = VisualizerSettings.ForwardButtonName;
-            this.forwardButton.Size = VisualizerSettings.ForwardButtonSize;
-            this.forwardButton.TabIndex = VisualizerSettings.ForwardButtonTabIndex;
-            this.forwardButton.Text = VisualizerSettings.ForwardButtonText;
-            this.forwardButton.UseVisualStyleBackColor = VisualizerSettings.ButtonUseVisualStyleBackColor;
+            this.forwardButton.BackColor = (Color) settings.GetObject("ButtonBackColor");
+            this.forwardButton.Cursor = (Cursor) settings.GetObject("ButtonCursor");
+            this.forwardButton.FlatAppearance.BorderSize = (int) settings.GetObject("ButtonBorderSize");
+            this.forwardButton.FlatAppearance.MouseDownBackColor = (Color) settings.GetObject("ButtonMouseDownBackColor");
+            this.forwardButton.FlatAppearance.MouseOverBackColor = (Color) settings.GetObject("ButtonMouseOverBackColor");
+            this.forwardButton.FlatStyle = (FlatStyle) settings.GetObject("ButtonFlatStyle");
+            this.forwardButton.Location = (Point) settings.GetObject("ForwardButtonLocation");
+            this.forwardButton.Font = (Font) settings.GetObject("ButtonFont");
+            this.forwardButton.Name = settings.GetString("ForwardButtonName");
+            this.forwardButton.Size = (Size) settings.GetObject("ForwardButtonSize");
+            this.forwardButton.TabIndex = (int) settings.GetObject("ForwardButtonTabIndex");
+            this.forwardButton.Text = settings.GetString("ForwardButtonText");
+            this.forwardButton.UseVisualStyleBackColor = (bool) settings.GetObject("ButtonUseVisualStyleBackColor");
 
             this.forwardButton.Click += new System.EventHandler(this.DoStepForward);
 
@@ -159,19 +122,19 @@
             // backwardButton
             // 
 
-            this.backwardButton.BackColor = VisualizerSettings.ButtonBackColor;
-            this.backwardButton.Cursor = VisualizerSettings.ButtonCursor;
-            this.backwardButton.FlatAppearance.BorderSize = VisualizerSettings.ButtonBorderSize;
-            this.backwardButton.FlatAppearance.MouseDownBackColor = VisualizerSettings.ButtonMouseDownBackColor;
-            this.backwardButton.FlatAppearance.MouseOverBackColor = VisualizerSettings.ButtonMouseOverBackColor;
-            this.backwardButton.FlatStyle = VisualizerSettings.ButtonFlatStyle;
-            this.backwardButton.Font = VisualizerSettings.ButtonFont;
-            this.backwardButton.Location = VisualizerSettings.BackwardButtonLocation;
-            this.backwardButton.Name = VisualizerSettings.BackwardButtonName;
-            this.backwardButton.Size = VisualizerSettings.BackwardButtonSize;
-            this.backwardButton.TabIndex = VisualizerSettings.BackwardButtonTabIndex;
-            this.backwardButton.Text = VisualizerSettings.BackwardButtonText;
-            this.backwardButton.UseVisualStyleBackColor = VisualizerSettings.ButtonUseVisualStyleBackColor;
+            this.backwardButton.BackColor = (Color)settings.GetObject("ButtonBackColor");
+            this.backwardButton.Cursor = (Cursor) settings.GetObject("ButtonCursor");
+            this.backwardButton.FlatAppearance.BorderSize = (int) settings.GetObject("ButtonBorderSize");
+            this.backwardButton.FlatAppearance.MouseDownBackColor = (Color) settings.GetObject("ButtonMouseDownBackColor");
+            this.backwardButton.FlatAppearance.MouseOverBackColor = (Color) settings.GetObject("ButtonMouseOverBackColor");
+            this.backwardButton.FlatStyle = (FlatStyle) settings.GetObject("ButtonFlatStyle");
+            this.backwardButton.Font = (Font) settings.GetObject("ButtonFont");
+            this.backwardButton.Location = (Point) settings.GetObject("BackwardButtonLocation");
+            this.backwardButton.Name = settings.GetString("BackwardButtonName");
+            this.backwardButton.Size = (Size) settings.GetObject("BackwardButtonSize");
+            this.backwardButton.TabIndex = (int) settings.GetObject("BackwardButtonTabIndex");
+            this.backwardButton.Text = settings.GetString("BackwardButtonText");
+            this.backwardButton.UseVisualStyleBackColor = (bool) settings.GetObject("ButtonUseVisualStyleBackColor");
 
             this.backwardButton.Click += new System.EventHandler(this.DoStepBackward);
 
@@ -179,19 +142,19 @@
             // pauseButton
             // 
 
-            this.pauseButton.BackColor = VisualizerSettings.ButtonBackColor;
-            this.pauseButton.Cursor = VisualizerSettings.ButtonCursor;
-            this.pauseButton.FlatAppearance.BorderSize = VisualizerSettings.ButtonBorderSize;
-            this.pauseButton.FlatAppearance.MouseDownBackColor = VisualizerSettings.ButtonMouseDownBackColor;
-            this.pauseButton.FlatAppearance.MouseOverBackColor = VisualizerSettings.ButtonMouseOverBackColor;
-            this.pauseButton.FlatStyle = VisualizerSettings.ButtonFlatStyle;
-            this.pauseButton.Font = VisualizerSettings.ButtonFont;
-            this.pauseButton.Location = VisualizerSettings.PauseButtonLocation;
-            this.pauseButton.Name = VisualizerSettings.PauseButtonName;
-            this.pauseButton.Size = VisualizerSettings.PauseButtonSize;
-            this.pauseButton.TabIndex = VisualizerSettings.PauseButtonTabIndex;
-            this.pauseButton.Text = VisualizerSettings.PauseButtonText;
-            this.pauseButton.UseVisualStyleBackColor = VisualizerSettings.ButtonUseVisualStyleBackColor;
+            this.pauseButton.BackColor = (Color) settings.GetObject("ButtonBackColor");
+            this.pauseButton.Cursor = (Cursor) settings.GetObject("ButtonCursor");
+            this.pauseButton.FlatAppearance.BorderSize = (int) settings.GetObject("ButtonBorderSize");
+            this.pauseButton.FlatAppearance.MouseDownBackColor = (Color) settings.GetObject("ButtonMouseDownBackColor");
+            this.pauseButton.FlatAppearance.MouseOverBackColor = (Color) settings.GetObject("ButtonMouseOverBackColor");
+            this.pauseButton.FlatStyle = (FlatStyle) settings.GetObject("ButtonFlatStyle");
+            this.pauseButton.Font = (Font) settings.GetObject("ButtonFont");
+            this.pauseButton.Location = (Point) settings.GetObject("PauseButtonLocation");
+            this.pauseButton.Name = settings.GetString("PauseButtonName");
+            this.pauseButton.Size = (Size) settings.GetObject("PauseButtonSize");
+            this.pauseButton.TabIndex = (int) settings.GetObject("PauseButtonTabIndex");
+            this.pauseButton.Text = settings.GetString("PauseButtonText");
+            this.pauseButton.UseVisualStyleBackColor = (bool) settings.GetObject("ButtonUseVisualStyleBackColor");
 
             this.pauseButton.Click += new System.EventHandler(this.DoPause);
 
@@ -199,19 +162,19 @@
             // continueButton
             // 
 
-            this.continueButton.BackColor = VisualizerSettings.ButtonBackColor;
-            this.continueButton.Cursor = VisualizerSettings.ButtonCursor;
-            this.continueButton.FlatAppearance.BorderSize = VisualizerSettings.ButtonBorderSize;
-            this.continueButton.FlatAppearance.MouseDownBackColor = VisualizerSettings.ButtonMouseDownBackColor;
-            this.continueButton.FlatAppearance.MouseOverBackColor = VisualizerSettings.ButtonMouseOverBackColor;
-            this.continueButton.FlatStyle = VisualizerSettings.ButtonFlatStyle;
-            this.continueButton.Font = VisualizerSettings.ButtonFont;
-            this.continueButton.Location = VisualizerSettings.ContinueButtonLocation;
-            this.continueButton.Name = VisualizerSettings.ContinueButtonName;
-            this.continueButton.Size = VisualizerSettings.ContinueButtonSize;
-            this.continueButton.TabIndex = VisualizerSettings.ContinueButtonTabIndex;
-            this.continueButton.Text = VisualizerSettings.ContinueButtonText;
-            this.continueButton.UseVisualStyleBackColor = VisualizerSettings.ButtonUseVisualStyleBackColor;
+            this.continueButton.BackColor = (Color) settings.GetObject("ButtonBackColor");
+            this.continueButton.Cursor = (Cursor) settings.GetObject("ButtonCursor");
+            this.continueButton.FlatAppearance.BorderSize = (int) settings.GetObject("ButtonBorderSize");
+            this.continueButton.FlatAppearance.MouseDownBackColor = (Color) settings.GetObject("ButtonMouseDownBackColor");
+            this.continueButton.FlatAppearance.MouseOverBackColor = (Color) settings.GetObject("ButtonMouseOverBackColor");
+            this.continueButton.FlatStyle = (FlatStyle) settings.GetObject("ButtonFlatStyle");
+            this.continueButton.Font = (Font) settings.GetObject("ButtonFont");
+            this.continueButton.Location = (Point) settings.GetObject("ContinueButtonLocation");
+            this.continueButton.Name = settings.GetString("ContinueButtonName");
+            this.continueButton.Size = (Size) settings.GetObject("ContinueButtonSize");
+            this.continueButton.TabIndex = (int) settings.GetObject("ContinueButtonTabIndex");
+            this.continueButton.Text = settings.GetString("ContinueButtonText");
+            this.continueButton.UseVisualStyleBackColor = (bool) settings.GetObject("ButtonUseVisualStyleBackColor");
 
             this.continueButton.Click += new System.EventHandler(this.Proceed);
 
@@ -219,10 +182,10 @@
             // BubbleSortVisualizer
             // 
 
-            this.AutoScaleDimensions = VisualizerSettings.AutoScaleDimensions;
-            this.AutoScaleMode = VisualizerSettings.AutoScaleMode;
-            this.BackColor = VisualizerSettings.BackColor;
-            this.ClientSize = VisualizerSettings.ClientSize;
+            this.AutoScaleDimensions = (SizeF) settings.GetObject("AutoScaleDimensions");
+            this.AutoScaleMode = (System.Windows.Forms.AutoScaleMode) settings.GetObject("AutoScaleMode");
+            this.BackColor = (Color) settings.GetObject("BackColor");
+            this.ClientSize = (Size) settings.GetObject("ClientSize");
 
             this.Controls.Add(this.continueButton);
             this.Controls.Add(this.pauseButton);
@@ -231,17 +194,11 @@
             this.Controls.Add(this.automaticModeButton);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.changeDataButton);
-            this.Controls.Add(this.mainMenu);
-            this.MainMenuStrip = this.mainMenu;
             this.Closed += new System.EventHandler(this.CloseVisualizer);
-            this.mainMenu.ResumeLayout(false);
-            this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
         #endregion
-
-
-        }
+    }
 }

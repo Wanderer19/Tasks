@@ -37,22 +37,22 @@ namespace Visualizer
            
             switch (stateAutomaton.StateId)
             {
-
                 case StateCompare:
-                    {
-                        
-                        this.DrawCompare(stateAutomaton);
-                        break;
-                    }
+                {
+                    this.DrawCompare(stateAutomaton);
+                    
+                    break;
+                }
                 case StateSwap:
-                    {
-                        this.DrawSwap(stateAutomaton);
+                {
+                    this.DrawSwap(stateAutomaton);
 
-                        break;
-                    }
+                    break;
+                }
                 case StateMin:
                 {
                     this.DrawMin(stateAutomaton);
+                    
                     break;
                 }
             }
@@ -110,6 +110,5 @@ namespace Visualizer
             automatonSort.ToStart();
             DrawArray(inputArray);
         }
-
     }
 }

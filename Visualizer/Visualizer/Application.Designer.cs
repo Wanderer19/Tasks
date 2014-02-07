@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Security.AccessControl;
 using System.Windows.Forms;
 
@@ -34,7 +35,6 @@ namespace Visualizer
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.helpProgramMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutProgramMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
 
@@ -42,54 +42,58 @@ namespace Visualizer
             // mainTitle
             // 
 
-            this.mainTitle.AutoSize = GeneralSettings.MainTitleAutoSize;
-            this.mainTitle.BackColor = GeneralSettings.MainTitleBackColor;
-            this.mainTitle.Font = GeneralSettings.MainTitleFont;
-            this.mainTitle.ForeColor = GeneralSettings.MainTitleForeColor;
-            this.mainTitle.Location = GeneralSettings.MainTitleLocation;
-            this.mainTitle.Margin = GeneralSettings.MainTitleMargin;
-            this.mainTitle.Name = GeneralSettings.MainTitleName;
-            this.mainTitle.Size = GeneralSettings.MainTitleSize;
-            this.mainTitle.TabIndex = GeneralSettings.MainTitleTabIndex;
-            this.mainTitle.Text = GeneralSettings.MainTitleText;
-            this.mainTitle.TextAlign = GeneralSettings.MainTitleTextAlign;
+            this.mainTitle.AutoSize = (bool) generalSettings.GetObject("MainTitleAutoSize");
+            this.mainTitle.BackColor = (Color)generalSettings.GetObject("MainTitleBackColor");
+            this.mainTitle.Font = (Font)generalSettings.GetObject("MainTitleFont");
+            this.mainTitle.ForeColor = (Color)generalSettings.GetObject("MainTitleForeColor");
+            this.mainTitle.Location = (Point)generalSettings.GetObject("MainTitleLocation");
+            this.mainTitle.Margin = (Padding)generalSettings.GetObject("MainTitleMargin");
+            this.mainTitle.Name = generalSettings.GetString("MainTitleName");
+            this.mainTitle.Size = (Size)generalSettings.GetObject("MainTitleSize");
+            this.mainTitle.TabIndex = (int)generalSettings.GetObject("MainTitleTabIndex");
+            this.mainTitle.Text = generalSettings.GetString("MainTitleText");
+            this.mainTitle.TextAlign = (System.Drawing.ContentAlignment)generalSettings.GetObject("MainTitleTextAlign");
             
             // 
             // bubbleSortButton
             // 
 
-            this.bubbleSortButton.BackColor = GeneralSettings.ButtonBackColor;
-            this.bubbleSortButton.Cursor = GeneralSettings.ButtonCursor;
-            this.bubbleSortButton.FlatAppearance.BorderColor = GeneralSettings.ButtonBorderColor;
-            this.bubbleSortButton.FlatAppearance.BorderSize = GeneralSettings.ButtonBorderSize;
-            this.bubbleSortButton.FlatAppearance.MouseDownBackColor = GeneralSettings.ButtonMouseDownBackColor;
-            this.bubbleSortButton.FlatAppearance.MouseOverBackColor = GeneralSettings.ButtonMouseOverBackColor;
-            this.bubbleSortButton.FlatStyle = GeneralSettings.ButtonFlatStyle;
-            this.bubbleSortButton.Font = GeneralSettings.ButtonFont;
-            this.bubbleSortButton.ForeColor = GeneralSettings.ButtonForeColor;
-            this.bubbleSortButton.Location = GeneralSettings.BubbleSortButtonLocation;
-            this.bubbleSortButton.Name = GeneralSettings.BubbleSortButtonName;
-            this.bubbleSortButton.Size = GeneralSettings.ButtonSize;
-            this.bubbleSortButton.TabIndex = GeneralSettings.BubbleSortButtonTabIndex;
-            this.bubbleSortButton.Text = GeneralSettings.BubbleSortButtonText;
-            this.bubbleSortButton.UseVisualStyleBackColor = GeneralSettings.ButtonUseVisualStyleBackColor;
+            this.bubbleSortButton.BackColor = (Color)generalSettings.GetObject("ButtonBackColor");
+            this.bubbleSortButton.Cursor = (Cursor) generalSettings.GetObject("ButtonCursor");
+            this.bubbleSortButton.FlatAppearance.BorderColor = (Color)generalSettings.GetObject("ButtonBorderColor");
+            this.bubbleSortButton.FlatAppearance.BorderSize = (int) generalSettings.GetObject("ButtonBorderSize");
+            this.bubbleSortButton.FlatAppearance.MouseDownBackColor = (Color) generalSettings.GetObject("ButtonMouseDownBackColor");
+            this.bubbleSortButton.FlatAppearance.MouseOverBackColor = (Color) generalSettings.GetObject("ButtonMouseOverBackColor");
+            this.bubbleSortButton.FlatStyle = (FlatStyle) generalSettings.GetObject("ButtonFlatStyle");
+            this.bubbleSortButton.Font = (Font)generalSettings.GetObject("ButtonFont");
+            this.bubbleSortButton.ForeColor = (Color)generalSettings.GetObject("ButtonForeColor");
+            this.bubbleSortButton.Location = (Point)generalSettings.GetObject("BubbleSortButtonLocation");
+            this.bubbleSortButton.Name = generalSettings.GetString("BubbleSortButtonName");
+            this.bubbleSortButton.Size = (Size) generalSettings.GetObject("ButtonSize");
+            this.bubbleSortButton.TabIndex = (int) generalSettings.GetObject("BubbleSortButtonTabIndex");
+            this.bubbleSortButton.Text = generalSettings.GetString("BubbleSortButtonText");
+            this.bubbleSortButton.UseVisualStyleBackColor = (bool)generalSettings.GetObject("ButtonUseVisualStyleBackColor");
             this.bubbleSortButton.Click += new System.EventHandler(this.BubbleSortRun);
 
-            this.selectionSortButton.BackColor = GeneralSettings.ButtonBackColor;
-            this.selectionSortButton.Cursor = GeneralSettings.ButtonCursor;
-            this.selectionSortButton.FlatAppearance.BorderColor = GeneralSettings.ButtonBorderColor;
-            this.selectionSortButton.FlatAppearance.BorderSize = GeneralSettings.ButtonBorderSize;
-            this.selectionSortButton.FlatAppearance.MouseDownBackColor = GeneralSettings.ButtonMouseDownBackColor;
-            this.selectionSortButton.FlatAppearance.MouseOverBackColor = GeneralSettings.ButtonMouseOverBackColor;
-            this.selectionSortButton.FlatStyle = GeneralSettings.ButtonFlatStyle;
-            this.selectionSortButton.Font = GeneralSettings.ButtonFont;
-            this.selectionSortButton.ForeColor = GeneralSettings.ButtonForeColor;
-            this.selectionSortButton.Location = GeneralSettings.SelectionSortButtonLocation;
-            this.selectionSortButton.Name = GeneralSettings.SelectionSortButtonName;
-            this.selectionSortButton.Size = GeneralSettings.ButtonSize;
-            this.selectionSortButton.TabIndex = GeneralSettings.SelectionSortButtonTabIndex;
-            this.selectionSortButton.Text = GeneralSettings.SelectionSortButtonText;
-            this.selectionSortButton.UseVisualStyleBackColor = GeneralSettings.ButtonUseVisualStyleBackColor;
+            //
+            // selectionSortButton
+            //
+            
+            this.selectionSortButton.BackColor = (Color) generalSettings.GetObject("ButtonBackColor");
+            this.selectionSortButton.Cursor = (Cursor) generalSettings.GetObject("ButtonCursor");
+            this.selectionSortButton.FlatAppearance.BorderColor = (Color) generalSettings.GetObject("ButtonBorderColor");
+            this.selectionSortButton.FlatAppearance.BorderSize =(int) generalSettings.GetObject("ButtonBorderSize");
+            this.selectionSortButton.FlatAppearance.MouseDownBackColor = (Color) generalSettings.GetObject("ButtonMouseDownBackColor");
+            this.selectionSortButton.FlatAppearance.MouseOverBackColor = (Color)generalSettings.GetObject("ButtonMouseOverBackColor");
+            this.selectionSortButton.FlatStyle = (FlatStyle) generalSettings.GetObject("ButtonFlatStyle");
+            this.selectionSortButton.Font = (Font) generalSettings.GetObject("ButtonFont");
+            this.selectionSortButton.ForeColor = (Color) generalSettings.GetObject("ButtonForeColor");
+            this.selectionSortButton.Location = (Point) generalSettings.GetObject("SelectionSortButtonLocation");
+            this.selectionSortButton.Name = generalSettings.GetString("SelectionSortButtonName");
+            this.selectionSortButton.Size = (Size)generalSettings.GetObject("ButtonSize");
+            this.selectionSortButton.TabIndex = (int) generalSettings.GetObject("SelectionSortButtonTabIndex");
+            this.selectionSortButton.Text = generalSettings.GetString("SelectionSortButtonText");
+            this.selectionSortButton.UseVisualStyleBackColor = (bool) generalSettings.GetObject("ButtonUseVisualStyleBackColor");
 
             this.selectionSortButton.Click += new System.EventHandler(this.SelectionSortRun);
             
@@ -98,57 +102,49 @@ namespace Visualizer
             // mainMenu
             // 
 
-            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.helpProgramMenu });
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.helpProgramMenu});
 
-            this.mainMenu.BackColor = GeneralSettings.MainMenuBackColor;
-            this.mainMenu.Font = GeneralSettings.MainMenuFont;
-            this.mainMenu.Location = GeneralSettings.MainMenuLocation;
-            this.mainMenu.Name = GeneralSettings.MainMenuName;
-            this.mainMenu.Size = GeneralSettings.MainMenuSize;
-            this.mainMenu.TabIndex = GeneralSettings.MainMenuTabIndex;
+            this.mainMenu.BackColor = (Color)generalSettings.GetObject("MainMenuBackColor");
+            this.mainMenu.Font = (Font) generalSettings.GetObject("MainMenuFont");
+            this.mainMenu.Location = (Point) generalSettings.GetObject("MainMenuLocation");
+            this.mainMenu.Name = generalSettings.GetString("MainMenuName");
+            this.mainMenu.Size = (Size) generalSettings.GetObject("MainMenuSize");
+            this.mainMenu.TabIndex = (int) generalSettings.GetObject("MainMenuTabIndex");
           
             // 
             // helpProgramMenu
             // 
 
-            this.helpProgramMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.aboutProgramMenuItem, this.helpMenuItem });
+            this.helpProgramMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
+            {this.aboutProgramMenuItem});
 
-            this.helpProgramMenu.Font = GeneralSettings.HelpProgramMenuFont;
-            this.helpProgramMenu.ForeColor = GeneralSettings.HelpProgramMenuForeColor;
-            this.helpProgramMenu.Name = GeneralSettings.HelpProgramMenuName;
-            this.helpProgramMenu.Size = GeneralSettings.HelpProgramMenuSize;
-            this.helpProgramMenu.Text = GeneralSettings.HelpProgramMenuText;
+            this.helpProgramMenu.Font = (Font) generalSettings.GetObject("HelpProgramMenuFont");
+            this.helpProgramMenu.ForeColor = (Color) generalSettings.GetObject("HelpProgramMenuForeColor");
+            this.helpProgramMenu.Name = generalSettings.GetString("HelpProgramMenuName");
+            this.helpProgramMenu.Size = (Size) generalSettings.GetObject("HelpProgramMenuSize");
+            this.helpProgramMenu.Text = generalSettings.GetString("HelpProgramMenuText");
 
             // 
             // aboutProgramMenuItem
             // 
 
-            this.aboutProgramMenuItem.Name = GeneralSettings.AboutProgramMenuItemName;
-            this.aboutProgramMenuItem.Size = GeneralSettings.AboutProgramMenuItemSize;
-            this.aboutProgramMenuItem.Text = GeneralSettings.AboutProgramMenuItemText;
+            this.aboutProgramMenuItem.Name = generalSettings.GetString("AboutProgramMenuItemName");
+            this.aboutProgramMenuItem.Size = (Size) generalSettings.GetObject("AboutProgramMenuItemSize");
+            this.aboutProgramMenuItem.Text = generalSettings.GetString("AboutProgramMenuItemText");
             this.aboutProgramMenuItem.Click += new System.EventHandler(this.ShowAboutProgram);
-
-            // 
-            // ShowHelp
-            // 
-
-            this.helpMenuItem.Name = GeneralSettings.HelpMenuItemName;
-            this.helpMenuItem.Size = GeneralSettings.HelpMenuItemSize;
-            this.helpMenuItem.Text = GeneralSettings.HelpMenuItemText;
-            this.helpMenuItem.Click += new System.EventHandler(this.ShowHelp);
 
             // 
             // Application
             // 
 
-            this.AutoScaleDimensions = GeneralSettings.AutoScaleDimensions;
-            this.AutoScaleMode = GeneralSettings.AutoScaleMode;
-            this.BackColor = GeneralSettings.BackColor;
-            this.ClientSize = GeneralSettings.ClientSize;
-            this.Font = GeneralSettings.Font;
-            this.Margin = GeneralSettings.Margin;
-            this.StartPosition = GeneralSettings.StartPosition;
-            this.Text = GeneralSettings.Text;
+            this.AutoScaleDimensions = (SizeF) generalSettings.GetObject("AutoScaleDimensions");
+            this.AutoScaleMode = (System.Windows.Forms.AutoScaleMode) generalSettings.GetObject("AutoScaleMode");
+            this.BackColor = (Color) generalSettings.GetObject("BackColor");
+            this.ClientSize = (Size) generalSettings.GetObject("ClientSize");
+            this.Font = (Font) generalSettings.GetObject("Font");
+            this.Margin = (Padding) generalSettings.GetObject("Margin");
+            this.StartPosition = (System.Windows.Forms.FormStartPosition) generalSettings.GetObject("StartPosition");
+            this.Text = generalSettings.GetString("Text");
 
             this.Controls.Add(this.bubbleSortButton);
             this.Controls.Add(this.selectionSortButton);

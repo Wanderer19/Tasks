@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,16 +16,21 @@ namespace Visualizer
 {
     public partial class Application : Form
     {
+        private System.Resources.ResourceManager generalSettings;
+
         public Application()
         {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            generalSettings = new ResourceManager("Visualizer.GeneralSettings", assembly);
             InitializeComponent();
         }
-      
+
         private void BubbleSortRun(object sender, EventArgs e)
         {
             HideMainWindow();
             
-            var bubbleSortForm = new SortingForm(this, new BubbleSortFormSettings());
+            var bubbleSortForm = new SortingForm(this, "Visualizer.BubbleSortFormSettings");
             bubbleSortForm.Show();
         }
 
@@ -31,7 +38,7 @@ namespace Visualizer
         {
             HideMainWindow();
 
-            var selectionSortForm = new SortingForm(this, new SelectionSortFormSettings());
+            var selectionSortForm = new SortingForm(this, "Visualizer.SelectionSortFormSettings");
 
             selectionSortForm.Show();
         }
@@ -43,14 +50,7 @@ namespace Visualizer
 
         private void ShowAboutProgram(object sender, EventArgs e)
         {
-            MessageBox.Show(String.Join("\n", File.ReadAllLines(GeneralSettings.AboutProgramFile)));
+            MessageBox.Show(generalSettings.GetString("AboutProgram"));
         }
-
-        private void ShowHelp(object sender, EventArgs e)
-        {
-            MessageBox.Show(String.Join("\n", File.ReadAllLines(GeneralSettings.HelpFile)));
-        }
-
-        
     }
 }

@@ -13,12 +13,12 @@ namespace Visualizer
             return inputData.Any(i => Char.IsWhiteSpace(i) || Char.IsNumber(i) || i == '-');
         }
 
-        public static bool IsValidValuesElementsInArray(ICollection<int> array)
+        public static bool IsValidValuesElementsInArray(ICollection<int> array, int sizeLimitArray, int limitArrayElementValue)
         {
-            if (array.Count == 0 || array.Count > DataReceiverFormSettings.SizeLimitArray)
+            if (array.Count == 0 || array.Count > sizeLimitArray)
                 return false;
 
-            return !array.Any(i => Math.Abs(i) > DataReceiverFormSettings.LimitArrayElementValue);
+            return !array.Any(i => Math.Abs(i) > limitArrayElementValue);
         }
 
         public static int[] ReadData(string inputData)
