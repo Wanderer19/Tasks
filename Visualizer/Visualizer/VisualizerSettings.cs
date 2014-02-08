@@ -81,8 +81,7 @@ namespace Visualizer
         public static readonly System.Windows.Forms.AutoScaleMode AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         public static readonly Color BackColor = System.Drawing.Color.LightCyan;
         public static readonly Size ClientSize = new System.Drawing.Size(1182, 753);
-        //public static readonly string Name = "BubbleSortVisualizer";
-        //public static readonly string Text = "BubbleSortVisualizer";
+        
 
         public Point PositionFirstElement
         {
