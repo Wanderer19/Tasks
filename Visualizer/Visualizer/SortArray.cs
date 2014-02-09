@@ -10,16 +10,18 @@ namespace Visualizer
 {
     public class SortArray
     {
-        //private int[] array;
         private bool[] selectedIndexes = new bool[]{};
         private List<Point> coordinatesElements;
-
         public int Length { get; private set; }
+        
         public SortArray(int arrayLength)
         {
             this.Length = arrayLength;
+            
             selectedIndexes = Enumerable.Range(0, arrayLength).Select(i => false).ToArray();
+            
             coordinatesElements = new List<Point>();
+            
             for (var i = 0; i < arrayLength; ++i)
             {
                 coordinatesElements.Add(new Point(BubbleSortVisualizerSettings.PositionFirstElement.X + i * BubbleSortVisualizerSettings.WidthElemet,
@@ -42,14 +44,11 @@ namespace Visualizer
             return this.IsSelected(index)
                     ? BubbleSortVisualizerSettings.SelectedElementColor
                     : BubbleSortVisualizerSettings.ElementColor;
-
-
         }
 
         private void SelectElement(int index)
         {
             selectedIndexes[index] = true;
-
         }
 
         private void DeselectElement(int index)

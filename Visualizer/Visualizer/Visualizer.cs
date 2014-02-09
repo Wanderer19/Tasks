@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +14,7 @@ namespace Visualizer
 {
     public partial class Visualizer : Form
     {
+        private readonly System.Resources.ResourceManager settings;
         protected Graphics graphics;
         protected SortArray sortArray;
         protected DrawingTools drawingTools;
@@ -25,6 +28,9 @@ namespace Visualizer
         public Visualizer()
         {
             selfTimer = new System.Timers.Timer();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            settings = new ResourceManager("Visualizer.VisualizerSettings", assembly);
             selfTimer.Elapsed += new System.Timers.ElapsedEventHandler(DoAutomaticStepForward);
             
             InitializeComponent();

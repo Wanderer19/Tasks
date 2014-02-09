@@ -17,7 +17,6 @@ namespace Visualizer
         public const string StateCompare = "compare";
         public const string StateSwap = "swap";
         
- 
         public BubbleSortVisualizer(SortingForm parentWindow, int[] array)
         {
             this.parentWindow = parentWindow;
@@ -43,11 +42,13 @@ namespace Visualizer
                 case StateCompare:
                 {
                     this.DrawCompare(stateAutomaton);
+                    
                     break;
                 }
                 case StateSwap:
                 {
                     this.DrawSwap(stateAutomaton);
+                    
                     break;
                 }
             }
@@ -58,12 +59,14 @@ namespace Visualizer
         public override void ClearOldComments()
         {
             graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.UpperCommentField);
-            graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.BottomCommentField);
+            this.commentsBox.Text = "";
+            //graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.BottomCommentField);
         }
 
         private void DrawComment(string message)
         {
-            graphics.DrawString(message, drawingTools.FontDigits, drawingTools.BrushDigit, BubbleSortVisualizerSettings.LocationBottomCommentField, drawingTools.FormatDrawing);
+            this.commentsBox.Text = message;
+            //graphics.DrawString(message, drawingTools.FontDigits, drawingTools.BrushDigit, BubbleSortVisualizerSettings.LocationBottomCommentField, drawingTools.FormatDrawing);
         }
 
         private void DrawCompare(StateAutomaton state)

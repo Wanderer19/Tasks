@@ -13,14 +13,15 @@ namespace Visualizer
         private int[] array;
         private bool[] selectedIndexes = new bool[]{};
         private List<Point> coordinatesElements;
-
         public int Length { get { return array.Length; } }
+
         public BubbleSortArray(int[] array)
         {
             this.array = array;
            
             selectedIndexes = Enumerable.Range(0, array.Length).Select(i => false).ToArray();
             coordinatesElements = new List<Point>();
+            
             for (var i = 0; i < array.Length; ++i)
             {
                 coordinatesElements.Add(new Point(BubbleSortVisualizerSettings.PositionFirstElement.X + i * BubbleSortVisualizerSettings.WidthElemet,
@@ -48,8 +49,6 @@ namespace Visualizer
             return this.IsSelected(index)
                     ? BubbleSortVisualizerSettings.SelectedElementColor
                     : BubbleSortVisualizerSettings.ElementColor;
-
-
         }
 
         public void SelectElements(Tuple<int, int> indexes)

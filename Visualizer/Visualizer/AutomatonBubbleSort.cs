@@ -7,7 +7,6 @@ using Visualizer;
 
 namespace Visualizer
 {
-
     public class AutomatonBubbleSort : Automaton
     {
         private class DataModel

@@ -160,69 +160,63 @@ namespace Visualizer
                         state = GetStateSelectionSortAutomaton(6);
                         dataModel.State = dataModel.Array[dataModel.SecondIndex] < dataModel.Array[dataModel.Min] ? 7 : 8;
 
-                     
                         break;
-
-                        }
+                    }
                     case 7:
                     {
-
                         dataModel.Min = dataModel.SecondIndex;
                         isInterestingState = true;
                         state = GetStateSelectionSortAutomaton(7);
                         dataModel.State = 8;
                          
                         break;
-
                     }
                     case 8:
-                        {
-                            dataModel.State = 9;
-                            break;
-
-                        }
+                    {
+                        dataModel.State = 9;
+                            
+                        break;
+                    }
                     case 9:
-                        {
-                            
-                            dataModel.SecondIndex++;
-                            dataModel.State = 5;
-                            
-                            break;
-                        }
+                    {
+                        dataModel.SecondIndex++;
+                        dataModel.State = 5;
+                        
+                        break;
+                    }
                     case 10:
-                        {
-
-                            dataModel.Swap();
-                            state = GetStateSelectionSortAutomaton(10);
-                            isInterestingState = true;
+                    {
+                        dataModel.Swap();
+                        state = GetStateSelectionSortAutomaton(10);
+                        isInterestingState = true;
                            
-                            dataModel.State = 11;
+                        dataModel.State = 11;
                             
-                            break;
-
-                        }
+                        break;
+                    }
                     case 11:
-                        {
-                            dataModel.FirstIndex++;
-                            dataModel.State = 2;
+                    {
+                        dataModel.FirstIndex++;
+                        dataModel.State = 2;
                             
-                            break;
-                        }
+                        break;
+                    }
                     case 12:
                     {
-                     
                         isInterestingState = true;
                         dataModel.BorderSortedPart = dataModel.ArraySize - 1;
 
                         state = GetStateSelectionSortAutomaton(12);
                         dataModel.State = -1;
-                            break;
-                        }
+                        
+                        break;
+                    }
                     default:
-                        {
-                            dataModel.State = 12;
-                            break;
-                        }
+                    {
+                        dataModel.State = 12;
+                        
+                        break;
+                    }
                 }
             }
 

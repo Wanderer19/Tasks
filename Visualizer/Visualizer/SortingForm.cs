@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,52 +17,53 @@ namespace Visualizer
     public partial class SortingForm : Form
     {
         private readonly Application parentWindow;
-      
-        private readonly SortingFormSettings interfaceSettings;
 
-        public SortingForm(Application parentWindow, SortingFormSettings interfaceSettings)
+        private readonly System.Resources.ResourceManager sortingFormSettings;
+       
+        public SortingForm(Application parentWindow, string fileSettings)
         {
-            this.interfaceSettings = interfaceSettings;
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            sortingFormSettings = new ResourceManager(fileSettings, assembly);
             this.parentWindow = parentWindow;
 
             InitializeComponent();
-            this.aboutSorting.Items.AddRange(File.ReadAllLines(interfaceSettings.AboutSortingFile));
         }
 
         private void ShowSourceCodeCSharp(object sender, EventArgs e)
         {
-            var sourceCode = new Sourcecode(interfaceSettings.SourceCodeCSharp);
+            var sourceCode = new Sourcecode(sortingFormSettings.GetString("SourceCodeCSharp"));
             sourceCode.Show();
         }
 
         private void ShowSourceCodeJava(object sender, EventArgs e)
         {
-            var sourceCode = new Sourcecode(interfaceSettings.SourceCodeJava);
+            var sourceCode = new Sourcecode(sortingFormSettings.GetString("SourceCodeJava"));
             sourceCode.Show();
         }
 
         private void ShowSourceCodeCPlusPlus(object sender, EventArgs e)
         {
-            var sourceCode = new Sourcecode(interfaceSettings.SourceCodeCPlusPlus);
+            var sourceCode = new Sourcecode(sortingFormSettings.GetString("SourceCodeCPlusPlus"));
             sourceCode.Show();
         }
 
         private void ShowSourceCodePython(object sender, EventArgs e)
         {
-            var sourceCode = new Sourcecode(interfaceSettings.SourceCodePython);
+            var sourceCode = new Sourcecode(sortingFormSettings.GetString("SourceCodePython"));
             sourceCode.Show();
         }
 
         private void ShowHelp(object sender, EventArgs e)
         {
-            MessageBox.Show(System.IO.File.ReadAllText(SortingFormSettings.HelpFile));
+            MessageBox.Show(sortingFormSettings.GetString("HelpFile"));
         }
 
         private void RunVisualizer(object sender, EventArgs e)
         {
             HideMainWindow();
 
-            var dataReceiverForm = new DataReceiverForm(this, interfaceSettings.SortID);
+            var dataReceiverForm = new DataReceiverForm(this, (int) sortingFormSettings.GetObject("SortID"));
             dataReceiverForm.Show();
         }
 
@@ -78,6 +81,5 @@ namespace Visualizer
         {
             parentWindow.Visible = true;
         }
-
     }
 }

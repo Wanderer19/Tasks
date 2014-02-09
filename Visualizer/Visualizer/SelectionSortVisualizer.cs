@@ -37,22 +37,22 @@ namespace Visualizer
            
             switch (stateAutomaton.StateId)
             {
-
                 case StateCompare:
-                    {
-                        
-                        this.DrawCompare(stateAutomaton);
-                        break;
-                    }
+                {
+                    this.DrawCompare(stateAutomaton);
+                    
+                    break;
+                }
                 case StateSwap:
-                    {
-                        this.DrawSwap(stateAutomaton);
+                {
+                    this.DrawSwap(stateAutomaton);
 
-                        break;
-                    }
+                    break;
+                }
                 case StateMin:
                 {
                     this.DrawMin(stateAutomaton);
+                    
                     break;
                 }
             }
@@ -71,7 +71,8 @@ namespace Visualizer
 
         private void DrawComment(string message)
         {
-            graphics.DrawString(message, drawingTools.FontDigits, drawingTools.BrushDigit, BubbleSortVisualizerSettings.LocationBottomCommentField, drawingTools.FormatDrawing);
+            this.commentsBox.Text = message;
+            //graphics.DrawString(message, drawingTools.FontDigits, drawingTools.BrushDigit, BubbleSortVisualizerSettings.LocationBottomCommentField, drawingTools.FormatDrawing);
         }
 
         private void DrawCompare(StateAutomaton state)
@@ -89,7 +90,8 @@ namespace Visualizer
         private void ClearComments()
         {
             graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.UpperCommentField);
-            graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.BottomCommentField);
+            this.commentsBox.Text = "";
+            //graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.BottomCommentField);
         }
 
         private void DrawSortedPartArray(StateAutomaton state)
@@ -110,6 +112,5 @@ namespace Visualizer
             automatonSort.ToStart();
             DrawArray(inputArray);
         }
-
     }
 }

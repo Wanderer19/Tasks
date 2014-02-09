@@ -12,6 +12,21 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +47,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,15 +69,25 @@
   <ItemGroup>
     <Compile Include="ArrayReader.cs" />
     <Compile Include="Automaton.cs" />
+    <Compile Include="AutomatonHeapSort.cs" />
     <Compile Include="AutomatonSelectionSort.cs" />
-    <Compile Include="SelectionSortVisualizerSettings.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HeapSortVisualizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HeapSortVisualizer.Designer.cs">
+      <DependentUpon>HeapSortVisualizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="SortArray.cs" />
     <Compile Include="DrawingTools.cs" />
     <Compile Include="IAutomaton.cs" />
     <Compile Include="AutomatonBubbleSort.cs" />
     <Compile Include="BubbleSortVisualizerSettings.cs" />
-    <Compile Include="DataReceiverFormSettings.cs" />
-    <Compile Include="SelectionSortFormSettings.cs" />
     <Compile Include="SelectionSortVisualizer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,7 +100,6 @@
     <Compile Include="SortingForm.Designer.cs">
       <DependentUpon>SortingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BubbleSortFormSettings.cs" />
     <Compile Include="BubbleSortVisualizer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,17 +118,14 @@
     <Compile Include="Application.Designer.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Compile Include="GeneralSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SortingFormSettings.cs" />
     <Compile Include="Sourcecode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Sourcecode.Designer.cs">
       <DependentUpon>Sourcecode.cs</DependentUpon>
     </Compile>
-    <Compile Include="SourceCodeSettings.cs" />
     <Compile Include="StateAutomaton.cs" />
     <Compile Include="StateBubbleSortAutomaton.cs" />
     <Compile Include="StateSelectionSortAutomaton.cs" />
@@ -110,7 +135,14 @@
     <Compile Include="Visualizer.Designer.cs">
       <DependentUpon>Visualizer.cs</DependentUpon>
     </Compile>
-    <Compile Include="VisualizerSettings.cs" />
+    <EmbeddedResource Include="BubbleSortFormSettings.resx" />
+    <EmbeddedResource Include="DataReceiverFormSettings.resx" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HeapSortFormSettings.resx" />
+    <EmbeddedResource Include="GeneralSettings.resx" />
+    <EmbeddedResource Include="SelectionSortFormSettings.resx" />
     <EmbeddedResource Include="SortingForm.resx">
       <DependentUpon>SortingForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,22 +154,28 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Application.resx">
       <DependentUpon>Application.cs</DependentUpon>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Application1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Sourcecode.resx">
       <DependentUpon>Sourcecode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SourceCodeSettings.resx" />
     <EmbeddedResource Include="Visualizer.resx">
       <DependentUpon>Visualizer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VisualizerSettings.resx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -150,6 +188,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

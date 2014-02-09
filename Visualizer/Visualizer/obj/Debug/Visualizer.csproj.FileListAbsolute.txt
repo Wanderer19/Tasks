@@ -12,3 +12,11 @@ C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\De
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.csprojResolveAssemblyReference.cache
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SortingForm.resources
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverForm.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.GeneralSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.BubbleSortFormSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SelectionSortFormSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SourceCodeSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverFormSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.VisualizerSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.HeapSortFormSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Form1.resources
