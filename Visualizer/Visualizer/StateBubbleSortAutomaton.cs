@@ -9,9 +9,7 @@ namespace Visualizer
     {
         public StateBubbleSortAutomaton(int firstIndex, int secondIndex, string stateId, string comment, int [] array, int state)
         {
-            SelectedElements = new List<int>();
-            SelectedElements.Add(firstIndex);
-            SelectedElements.Add(secondIndex);
+            SelectedElements = new List<int> {firstIndex, secondIndex};
 
             this.Array = array;
             this.DescriptionState = comment;

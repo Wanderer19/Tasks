@@ -17,18 +17,23 @@ namespace Visualizer
         public const string StateCompare = "compare";
         public const string StateSwap = "swap";
         
+        private readonly System.Drawing.Font digitsFont = new System.Drawing.Font("Arial", 20);
+        private readonly System.Drawing.StringFormat formatDrawing = new System.Drawing.StringFormat();
+        private readonly System.Drawing.SolidBrush digitsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+        private readonly System.Drawing.SolidBrush elementsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
+        private readonly Pen elementsPen = new Pen(Color.Blue, 7);
+        private readonly System.Drawing.SolidBrush brushSortedPartArray = new SolidBrush(Color.DeepSkyBlue);
+        
         public BubbleSortVisualizer(SortingForm parentWindow, int[] array)
         {
             this.parentWindow = parentWindow;
             this.inputArray = array;
             this.sortId = 1;
             selfTimer.Interval = 650;
-            this.sortArray = new SortArray(array.Length);
+            this.visualizationArray = new VisualizationArray(array.Length);
             this.automatonSort = new AutomatonBubbleSort(array);
-
-            drawingTools = new DrawingTools(BubbleSortVisualizerSettings.FontDigits, BubbleSortVisualizerSettings.FormatDrawing,
-                                             BubbleSortVisualizerSettings.BrushDigit, BubbleSortVisualizerSettings.BrushElement, 
-                                             BubbleSortVisualizerSettings.PenElement);           
+            elementsPen.StartCap = LineCap.ArrowAnchor;
+            elementsPen.EndCap = LineCap.ArrowAnchor;
            
             this.Paint += new PaintEventHandler(DrawInitialState);
          }
@@ -58,20 +63,18 @@ namespace Visualizer
 
         public override void ClearOldComments()
         {
-            graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.UpperCommentField);
-            this.commentsBox.Text = "";
-            //graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.BottomCommentField);
+            base.ClearOldComments();
+            graphics.FillRectangle(elementsBrush, BubbleSortVisualizerSettings.UpperCommentField);
         }
 
         private void DrawComment(string message)
         {
             this.commentsBox.Text = message;
-            //graphics.DrawString(message, drawingTools.FontDigits, drawingTools.BrushDigit, BubbleSortVisualizerSettings.LocationBottomCommentField, drawingTools.FormatDrawing);
         }
 
         private void DrawCompare(StateAutomaton state)
         {
-            this.DrawArray(state.Array);
+            this.visualizationArray.DrawArray(state.Array, this.graphics);
             
             this.DrawCursor(state.SelectedElements[0]);
             this.DrawSymbolComparison(state.SelectedElements[0]);
@@ -86,12 +89,13 @@ namespace Visualizer
                 new Point(BubbleSortVisualizerSettings.FirstPointerCoordinates[2].X + index * BubbleSortVisualizerSettings.WidthElemet, BubbleSortVisualizerSettings.FirstPointerCoordinates[2].Y)
             };
 
-            graphics.DrawCurve(drawingTools.PenElement, points);
+           
+            graphics.DrawCurve(elementsPen, points);
         }
 
         private void DrawSymbolComparison(int index)
         {
-            graphics.DrawString(BubbleSortVisualizerSettings.SymbolComparison, drawingTools.FontDigits, drawingTools.BrushDigit, 80 + 100 * index, 100, drawingTools.FormatDrawing);
+            graphics.DrawString(BubbleSortVisualizerSettings.SymbolComparison, digitsFont, digitsBrush, 80 + 100 * index, 100, formatDrawing);
         }
     }
 }

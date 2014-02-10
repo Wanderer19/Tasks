@@ -14,10 +14,9 @@ namespace Visualizer
 {
     public partial class Visualizer : Form
     {
-        private readonly System.Resources.ResourceManager settings;
+        protected readonly System.Resources.ResourceManager settings;
         protected Graphics graphics;
-        protected SortArray sortArray;
-        protected DrawingTools drawingTools;
+        protected VisualizationArray visualizationArray;
         protected SortingForm parentWindow;
         protected Automaton automatonSort;
         protected bool automaticMode = false;
@@ -28,7 +27,7 @@ namespace Visualizer
         public Visualizer()
         {
             selfTimer = new System.Timers.Timer();
-            Assembly assembly = Assembly.GetExecutingAssembly();
+            var assembly = Assembly.GetExecutingAssembly();
 
             settings = new ResourceManager("Visualizer.VisualizerSettings", assembly);
             selfTimer.Elapsed += new System.Timers.ElapsedEventHandler(DoAutomaticStepForward);
@@ -44,16 +43,16 @@ namespace Visualizer
         public virtual void ToStart(object sender, EventArgs e)
         {
             this.ClearOldComments();
-            this.sortArray.DeselectAllElements();
+            this.visualizationArray.DeselectAllElements();
 
             var state = automatonSort.ToStart();
 
-            this.DrawArray(state.Array);
+            this.visualizationArray.DrawArray(state.Array, this.graphics);
         }
 
         public virtual void ClearOldComments()
         {
-            
+            this.commentsBox.Text = "";
         }
 
         public virtual void EnableAutomaticMode(object sender, EventArgs e)
@@ -94,11 +93,11 @@ namespace Visualizer
 
         public virtual void DrawSwap(StateAutomaton state)
         {
-            sortArray.SelectElements(state.SelectedElements.ToArray());
+            visualizationArray.SelectElements(state.SelectedElements.ToArray());
 
-            this.DrawArray(state.Array);
+            this.visualizationArray.DrawArray(state.Array, this.graphics);
 
-            sortArray.DeselectElements(state.SelectedElements.ToArray());
+            visualizationArray.DeselectElements(state.SelectedElements.ToArray());
 
         }
         public virtual void Proceed(object sender, EventArgs e)
@@ -150,19 +149,7 @@ namespace Visualizer
         {
             graphics = this.CreateGraphics();
 
-            this.DrawArray(this.inputArray);
-        }
-
-        public virtual void DrawArray(int [] array)
-        {
-            for (var i = 0; i < sortArray.Length; ++i)
-            {
-                var rectangle = new System.Drawing.Rectangle(sortArray.GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
-
-                graphics.FillRectangle(new SolidBrush(sortArray.GetColorElement(i)), rectangle);
-                graphics.DrawRectangle(drawingTools.PenElement, rectangle);
-                graphics.DrawString(array[i].ToString(), drawingTools.FontDigits, drawingTools.BrushDigit, sortArray.GetCoordinates(i), drawingTools.FormatDrawing);
-            }
+            this.visualizationArray.DrawArray(this.inputArray, graphics);
         }
 
     }

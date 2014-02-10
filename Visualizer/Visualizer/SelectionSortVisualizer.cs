@@ -14,26 +14,27 @@ namespace Visualizer
         public const string StateCompare = "compare";
         public const string StateSwap = "swap";
         public const string StateMin = "min";
-    
+        
+        private readonly System.Drawing.Font digitsFont = new System.Drawing.Font("Arial", 20);
+        private readonly System.Drawing.StringFormat formatDrawing = new System.Drawing.StringFormat();
+        private readonly System.Drawing.SolidBrush digitsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+        private readonly System.Drawing.SolidBrush elementsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
+
         public SelectionSortVisualizer(SortingForm parentWindow, int [] array)
         {
             this.parentWindow = parentWindow;
             this.inputArray = (int []) array.Clone();
-            this.sortArray = new SortArray(array.Length);
+            this.visualizationArray = new VisualizationArray(array.Length);
             selfTimer.Interval = 1000;
             this.automatonSort = new AutomatonSelectionSort(array);
             this.sortId = 2;
-
-            drawingTools = new DrawingTools(BubbleSortVisualizerSettings.FontDigits, BubbleSortVisualizerSettings.FormatDrawing,
-                                             BubbleSortVisualizerSettings.BrushDigit, BubbleSortVisualizerSettings.BrushElement,
-                                             BubbleSortVisualizerSettings.PenElement);
             InitializeComponent();
             this.Paint += new PaintEventHandler(DrawInitialState);
         }
 
         public override void DrawState(StateAutomaton stateAutomaton)
         {
-            this.ClearComments();
+            this.ClearOldComments();
            
             switch (stateAutomaton.StateId)
             {
@@ -59,58 +60,45 @@ namespace Visualizer
 
 
             this.DrawComment(stateAutomaton.DescriptionState);
-            this.DrawSortedPartArray(stateAutomaton);
+            this.visualizationArray.DrawSortedPartArray(stateAutomaton, graphics);
 
         }
 
         private void DrawMin(StateAutomaton state)
         {
-            this.DrawArray(state.Array);
-            graphics.DrawString(String.Format("Текущий минимум  = {0}", state.Min), drawingTools.FontDigits, drawingTools.BrushDigit, 80 + 100 * 4, 100, drawingTools.FormatDrawing);
+            this.visualizationArray.DrawArray(state.Array, this.graphics);
+            
+            graphics.DrawString(String.Format("Текущий минимум  = {0}", state.Min), digitsFont, digitsBrush, 80 + 100 * 4, 100, formatDrawing);
         }
 
         private void DrawComment(string message)
         {
             this.commentsBox.Text = message;
-            //graphics.DrawString(message, drawingTools.FontDigits, drawingTools.BrushDigit, BubbleSortVisualizerSettings.LocationBottomCommentField, drawingTools.FormatDrawing);
         }
 
         private void DrawCompare(StateAutomaton state)
         {
             this.DrawMin(state);
             
-            sortArray.SelectElements(state.SelectedElements.ToArray());
+            visualizationArray.SelectElements(state.SelectedElements.ToArray());
             
-            this.DrawArray(state.Array);
+            this.visualizationArray.DrawArray(state.Array, this.graphics);
             
-            sortArray.DeselectElements(state.SelectedElements.ToArray());
+            visualizationArray.DeselectElements(state.SelectedElements.ToArray());
       
         }
 
-        private void ClearComments()
+        public override void ClearOldComments()
         {
-            graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.UpperCommentField);
-            this.commentsBox.Text = "";
-            //graphics.FillRectangle(drawingTools.BrushElement, BubbleSortVisualizerSettings.BottomCommentField);
+            base.ClearOldComments();
+            graphics.FillRectangle(elementsBrush, BubbleSortVisualizerSettings.UpperCommentField);
         }
 
-        private void DrawSortedPartArray(StateAutomaton state)
-        {
-            for(var i = 0; i <= state.FirstIndex; ++i)
-            {
-                var rectangle = new System.Drawing.Rectangle(sortArray.GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
-
-                graphics.FillRectangle(new SolidBrush(Color.DeepSkyBlue), rectangle);
-                graphics.DrawRectangle(drawingTools.PenElement, rectangle);
-                graphics.DrawString(state.Array[i].ToString(), drawingTools.FontDigits, drawingTools.BrushDigit, sortArray.GetCoordinates(i), drawingTools.FormatDrawing);
-            }
-        }
-        
         public override void ToStart(object sender, EventArgs e)
         {
-            sortArray = new SortArray(inputArray.Length);
+            visualizationArray = new VisualizationArray(inputArray.Length);
             automatonSort.ToStart();
-            DrawArray(inputArray);
+            this.visualizationArray.DrawArray(inputArray, this.graphics);
         }
     }
 }
