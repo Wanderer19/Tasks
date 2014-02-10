@@ -178,16 +178,6 @@ namespace Visualizer
             return dataModel.State;
         
         }
-
-        public override StateAutomaton DoStepBackward()
-        {
-            return base.DoStepBackward();
-        }
-
-        public override StateAutomaton ToStart()
-        {
-            return base.ToStart();
-        }
     }
     
     class AutomatonHeapSort : Automaton
@@ -234,7 +224,7 @@ namespace Visualizer
         }
         
         private AutomatonShiftDown automatonShiftDown;
-        public int[] Array { get; private set; }
+        private int[] array;
         private DataModel dataModel;
         private int stepsCount;
 
@@ -243,7 +233,7 @@ namespace Visualizer
            var copy = (int[]) array.Clone();
            automatonShiftDown = new AutomatonShiftDown(copy);
            dataModel = new DataModel(copy);
-           this.Array = array;
+           this.array = array;
             stepsCount = 0;
         }
 
@@ -251,7 +241,6 @@ namespace Visualizer
         {
             var isInterestingState = false;
             stepsCount++;
-
             while (!isInterestingState)
             {
                 switch (dataModel.State)
@@ -352,12 +341,34 @@ namespace Visualizer
 
         public override StateAutomaton DoStepBackward()
         {
-            return base.DoStepBackward();
+            var copyArray = (int[]) array.Clone();
+            
+            dataModel = new DataModel(copyArray);
+            automatonShiftDown = new AutomatonShiftDown(copyArray);
+            
+            var newStepsCount = stepsCount - 1;
+            stepsCount = 0;
+            StateAutomaton state = new StateSelectionSortAutomaton();
+
+            if (newStepsCount + 1 == 0) return state;
+
+            while (stepsCount != newStepsCount)
+            {
+                state = DoStepForward();
+            }
+
+            return state;
         }
 
         public override StateAutomaton ToStart()
         {
-            return base.ToStart();
+            stepsCount = 0;
+            var copyArray = (int[])array.Clone();
+
+            dataModel = new DataModel(copyArray);
+            automatonShiftDown = new AutomatonShiftDown(copyArray);
+
+            return new StateSelectionSortAutomaton();
         }
     }
 }

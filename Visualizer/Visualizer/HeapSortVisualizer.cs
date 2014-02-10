@@ -12,7 +12,7 @@ namespace Visualizer
 {
     public partial class HeapSortVisualizer : Visualizer
     {
-        private readonly VisualizationHeap visualizationHeap;
+        private VisualizationHeap visualizationHeap;
 
         public HeapSortVisualizer(SortingForm parentWindow, int [] array)
         {
@@ -39,6 +39,17 @@ namespace Visualizer
         public override void DrawState(StateAutomaton stateAutomaton)
         {
             base.DrawState(stateAutomaton);
+        }
+
+        public override void ToStart(object sender, EventArgs e)
+        {
+            visualizationArray = new VisualizationArray(inputArray.Length);
+            visualizationHeap = new VisualizationHeap(inputArray.Length);
+
+            automatonSort.ToStart();
+            
+            this.visualizationArray.DrawArray(inputArray, this.graphics);
+            this.visualizationHeap.DrawHeap(inputArray, this.graphics);
         }
     }
 }
