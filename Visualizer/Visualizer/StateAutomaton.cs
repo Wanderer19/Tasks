@@ -14,5 +14,6 @@ namespace Visualizer
         public int[] Array { get; protected set; }
         public int Min { get; protected set; }
         public int FirstIndex { get; protected set; }
+        public int ShiftingElement { get; protected set; }
     }
 }

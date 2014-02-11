@@ -58,7 +58,7 @@ namespace Visualizer
                 }
             }
             
-           this.DrawComment(stateAutomaton.DescriptionState);
+           base.DrawComment(stateAutomaton.DescriptionState);
         }
 
         public override void ClearOldComments()
@@ -67,10 +67,6 @@ namespace Visualizer
             graphics.FillRectangle(elementsBrush, BubbleSortVisualizerSettings.UpperCommentField);
         }
 
-        private void DrawComment(string message)
-        {
-            this.commentsBox.Text = message;
-        }
 
         private void DrawCompare(StateAutomaton state)
         {

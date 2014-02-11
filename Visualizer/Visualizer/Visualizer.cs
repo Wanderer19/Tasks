@@ -35,6 +35,12 @@ namespace Visualizer
             InitializeComponent();
         }
 
+
+        public  virtual void DrawComment(string message)
+        {
+            this.commentsBox.Text = message;
+        }
+
         public void DoAutomaticStepForward(object source, System.Timers.ElapsedEventArgs e)
         {
             this.DrawState(automatonSort.DoStepForward());

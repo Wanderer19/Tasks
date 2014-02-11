@@ -107,7 +107,7 @@ namespace Visualizer
 
         public void SelectNodes(params int[] nodes)
         {
-            foreach (var node in nodes.Where(node => node < Length))
+            foreach (var node in nodes.Where(node => node < Length && node >= 0 ))
             {
                 selectedNodes[node] = true;
             }
@@ -115,7 +115,7 @@ namespace Visualizer
 
         public void DeselectNodes(params int[] nodes)
         {
-            foreach (var node in nodes.Where(node => node < Length))
+            foreach (var node in nodes.Where(node => node < Length && node >= 0))
             {
                 selectedNodes[node] = false;
             }
@@ -123,6 +123,8 @@ namespace Visualizer
 
         public void DrawRoot(int rootsValue, Graphics graphics)
         {
+            graphics.FillEllipse(new SolidBrush(GetColorElement(0)), GetCoordinatesNode(0));
+
             graphics.DrawEllipse(elementsPen, GetCoordinatesNode(0));
             graphics.DrawString(rootsValue.ToString(), nodesFontDigits, digitsBrush, GetCoordinatesValue(0), formatDrawing);
         }
@@ -164,5 +166,42 @@ namespace Visualizer
             }
         }
 
+        public int GetParent(int i)
+        {
+            if ((i - 1)%2 == 0)
+            {
+                return (i - 1)/2;
+            }
+            else
+            {
+                return (i - 2)/2;
+            }
+        }
+
+        public void DrawSortedPartHeap(StateAutomaton state, Graphics graphics)
+        {
+            if (state.FirstIndex == -1) return;
+            
+            for (var i = state.Array.Length - 1; i >= state.FirstIndex; --i)
+            {
+                if (i != 0)
+                {
+                    var coordinatesEdge = GetCoordinatesEdge(i);
+                
+                    graphics.DrawLine(new Pen(Color.LightCyan, 4), coordinatesEdge.Item1, coordinatesEdge.Item2);
+                }
+                graphics.FillEllipse(new SolidBrush(Color.LightSkyBlue), GetCoordinatesNode(i));
+                graphics.DrawEllipse(elementsPen, GetCoordinatesNode(i));
+
+                graphics.DrawString(state.Array[i].ToString(), nodesFontDigits, digitsBrush, GetCoordinatesValue(i),
+                    formatDrawing);
+
+                if (i != 0)
+                {
+                    var parent = GetParent(i);
+                    graphics.DrawEllipse(elementsPen, GetCoordinatesNode(parent));
+                }
+            }
+        }
     }
 }

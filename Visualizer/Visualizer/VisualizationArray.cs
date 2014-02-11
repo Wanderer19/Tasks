@@ -64,7 +64,7 @@ namespace Visualizer
        
         public void SelectElements(params int [] indexes)
         {
-            foreach (var index in indexes)
+            foreach (var index in indexes.Where(i => i >=0 && i < arrayLength))
             {
                 this.SelectElement(index);
             }
@@ -72,7 +72,7 @@ namespace Visualizer
 
         public void DeselectElements(params int [] indexes)
         {
-            foreach (var index in indexes)
+            foreach (var index in indexes.Where(i => i >= 0 && i < arrayLength))
             {
                 this.DeselectElement(index);
             }
@@ -108,6 +108,19 @@ namespace Visualizer
         public  void DrawSortedPartArray(StateAutomaton state, Graphics graphics)
         {
             for (var i = 0; i <= state.FirstIndex; ++i)
+            {
+                var rectangle = new System.Drawing.Rectangle(GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
+
+                graphics.FillRectangle(brushSortedPartArray, rectangle);
+                graphics.DrawRectangle(elementsPen, rectangle);
+                graphics.DrawString(state.Array[i].ToString(), digitsFont, digitsBrush, GetCoordinates(i), formatDrawing);
+            }
+        }
+
+        public void DrawSortedInvertedPartArray(StateAutomaton state, Graphics graphics)
+        {
+            if (state.FirstIndex == -1) return;
+            for (var i = state.FirstIndex; i < state.Array.Length; ++i)
             {
                 var rectangle = new System.Drawing.Rectangle(GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
 
