@@ -199,7 +199,7 @@
     <value>changeDataButton</value>
   </data>
   <data name="ChangeDataButtonSize" type="System.Drawing.Size, System.Drawing">
-    <value>802, 38</value>
+    <value>722, 38</value>
   </data>
   <data name="ChangeDataButtonText" xml:space="preserve">
     <value>Поменять данные</value>
@@ -211,7 +211,7 @@
     <value>startButton</value>
   </data>
   <data name="StartButtonSize" type="System.Drawing.Size, System.Drawing">
-    <value>249, 43</value>
+    <value>229, 43</value>
   </data>
   <data name="StartButtonTabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -220,13 +220,13 @@
     <value>В начало</value>
   </data>
   <data name="AutomaticModeButtonLocation" type="System.Drawing.Point, System.Drawing">
-    <value>237, 927</value>
+    <value>217, 927</value>
   </data>
   <data name="AutomaticModeButtonName" xml:space="preserve">
     <value>automaticModeButton</value>
   </data>
   <data name="AutomaticModeButtonSize" type="System.Drawing.Size, System.Drawing">
-    <value>565, 43</value>
+    <value>505, 43</value>
   </data>
   <data name="AutomaticModeButtonTabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -241,7 +241,7 @@
     <value>forwardButton</value>
   </data>
   <data name="ForwardButtonSize" type="System.Drawing.Size, System.Drawing">
-    <value>249, 33</value>
+    <value>229, 33</value>
   </data>
   <data name="ForwardButtonTabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -250,13 +250,13 @@
     <value>&gt;&gt;&gt;Вперед</value>
   </data>
   <data name="BackwardButtonLocation" type="System.Drawing.Point, System.Drawing">
-    <value>237, 899</value>
+    <value>217, 899</value>
   </data>
   <data name="BackwardButtonName" xml:space="preserve">
     <value>backwardButton</value>
   </data>
   <data name="BackwardButtonSize" type="System.Drawing.Size, System.Drawing">
-    <value>273, 33</value>
+    <value>253, 33</value>
   </data>
   <data name="BackwardButtonTabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -265,13 +265,13 @@
     <value>&lt;&lt;&lt;Назад</value>
   </data>
   <data name="PauseButtonLocation" type="System.Drawing.Point, System.Drawing">
-    <value>505, 899</value>
+    <value>465, 899</value>
   </data>
   <data name="PauseButtonName" xml:space="preserve">
     <value>pauseButton</value>
   </data>
   <data name="PauseButtonSize" type="System.Drawing.Size, System.Drawing">
-    <value>136, 33</value>
+    <value>116, 33</value>
   </data>
   <data name="PauseButtonTabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -280,13 +280,13 @@
     <value>Пауза</value>
   </data>
   <data name="ContinueButtonLocation" type="System.Drawing.Point, System.Drawing">
-    <value>638, 899</value>
+    <value>578, 899</value>
   </data>
   <data name="ContinueButtonName" xml:space="preserve">
     <value>continueButton</value>
   </data>
   <data name="ContinueButtonSize" type="System.Drawing.Size, System.Drawing">
-    <value>164, 33</value>
+    <value>144, 33</value>
   </data>
   <data name="ContinueButtonTabIndex" type="System.Int32, mscorlib">
     <value>8</value>

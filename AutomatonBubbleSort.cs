@@ -70,12 +70,11 @@ namespace Visualizer
         public AutomatonBubbleSort(int[] array)
         {
             dataModel = new DataModel(array);
-            this.array = (int[])array.Clone();
-            StepsCount = 0;
+            stack = new Stack<object>();
         }
 
         private DataModel dataModel;
-        private int[] array;
+        private Stack<object> stack;
 
         public override StateAutomaton DoStepForward()
         {
@@ -85,7 +84,6 @@ namespace Visualizer
             var firstIndex = -1;
             var secondIndex = -1;
 
-            StepsCount++;
             while (!isInterestingState)
             {
                 switch (dataModel.State)
@@ -134,12 +132,14 @@ namespace Visualizer
 
                         if (dataModel.Array[dataModel.SecondIndex] > dataModel.Array[dataModel.SecondIndex + 1])
                         {
-                            
+                            stack.Push(dataModel.Array[dataModel.SecondIndex]);
+                            stack.Push(dataModel.Array[dataModel.SecondIndex + 1]);
+
                             dataModel.State = 6;
                         }
                         else
                         {
-                            
+                            stack.Push(false);
 
                             dataModel.State = 7;
                         }
@@ -158,6 +158,7 @@ namespace Visualizer
 
                         dataModel.Swap();
 
+                        stack.Push(true);
 
                         dataModel.State = 7;
 
@@ -201,9 +202,126 @@ namespace Visualizer
 
         public override StateAutomaton DoStepBackward()
         {
+            var descriptionState = "";
+            var stateId = "";
+            var firstIndex = -1;
+            var secondIndex = -1;
+            var isInterestingState = false;
 
-            dataModel = new DataModel((int[])array.Clone());
-            return base.DoStepBackward();
+            while (!isInterestingState)
+            {
+                switch (dataModel.State)
+                {
+                    case 0:
+                    {
+                        isInterestingState = true;
+
+                        dataModel.State = 0;
+
+                        break;
+                    }
+                    case 1:
+                    {
+                        dataModel.State = 0;
+
+                        break;
+                    }
+                    case 2:
+                    {
+                        dataModel.State = dataModel.FirstIndex <= 1 ? 1 : 9;
+
+                        break;
+                    }
+                    case 3:
+                    {
+                        dataModel.State = 2;
+
+                        break;
+                    }
+                    case 4:
+                    {
+                        dataModel.State = dataModel.SecondIndex <= 0 ? 3 : 8;
+
+                        break;
+                    }
+                    case 5:
+                    {
+                        descriptionState = String.Format("Сравнение элемента с индексом {0} и с индексом {1}",
+                            dataModel.SecondIndex, dataModel.SecondIndex + 1);
+                        stateId = "compare";
+                        isInterestingState = true;
+
+                        firstIndex = dataModel.SecondIndex;
+                        secondIndex = dataModel.SecondIndex + 1;
+
+                        dataModel.State = 4;
+
+                        break;
+                    }
+                    case 6:
+                    {
+                        descriptionState = String.Format("Обмен эелементов и синдексами {0} и {1}",
+                            dataModel.SecondIndex, dataModel.SecondIndex + 1);
+                        stateId = "swap";
+                        isInterestingState = true;
+
+                        firstIndex = dataModel.SecondIndex;
+                        secondIndex = dataModel.SecondIndex + 1;
+
+                        dataModel.Array[dataModel.SecondIndex + 1] = (int) stack.Pop();
+                        dataModel.Array[dataModel.SecondIndex] = (int) stack.Pop();
+
+                        dataModel.State = 5;
+
+                        break;
+                    }
+                    case 7:
+                    {
+                        var isTrue = (bool) stack.Pop();
+
+                        dataModel.State = isTrue ? 6 : 5;
+
+                        break;
+                    }
+                    case 8:
+                    {
+                        dataModel.SecondIndex--;
+
+                        dataModel.State = 7;
+
+                        break;
+                    }
+                    case 9:
+                    {
+                        dataModel.FirstIndex--;
+                        dataModel.SecondIndex = dataModel.ArraySize - 1;
+
+                        dataModel.State = 4;
+
+                        break;
+                    }
+                    case 10:
+                    {
+                        descriptionState = "Конец сортировки";
+                        stateId = "end";
+                        isInterestingState = true;
+
+                        dataModel.State = 2;
+
+                        break;
+                    }
+                    default:
+                    {
+                        isInterestingState = true;
+
+                        dataModel.State = 10;
+
+                        break;
+                    }
+                }
+            }
+            
+            return new StateBubbleSortAutomaton(firstIndex, secondIndex, stateId, descriptionState, dataModel.Array, dataModel.State);
         }
     }
 }

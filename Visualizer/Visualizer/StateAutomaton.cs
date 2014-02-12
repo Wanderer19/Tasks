@@ -15,5 +15,12 @@ namespace Visualizer
         public int Min { get; protected set; }
         public int FirstIndex { get; protected set; }
         public int ShiftingElement { get; protected set; }
+
+        public StateAutomaton()
+        {
+            SelectedElements = new List<int>();
+            FirstIndex = -1;
+            ShiftingElement = -1;
+        }
     }
 }

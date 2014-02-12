@@ -20,10 +20,15 @@ namespace Visualizer
 
         public Application()
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-
-            generalSettings = new ResourceManager("Visualizer.GeneralSettings", assembly);
+            this.DownloadConfigurationFile("Visualizer.GeneralSettings");
             InitializeComponent();
+        }
+
+        public void DownloadConfigurationFile(string fileName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            generalSettings = new ResourceManager(fileName, assembly);
         }
 
         private void BubbleSortRun(object sender, EventArgs e)

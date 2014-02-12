@@ -20,22 +20,23 @@ namespace Visualizer
         private readonly System.Drawing.SolidBrush digitsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
         private readonly System.Drawing.SolidBrush elementsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
 
-        public SelectionSortVisualizer(SortingForm parentWindow, int [] array)
+        public SelectionSortVisualizer(SortingForm parentWindow, int [] array, int sortId)
         {
             this.parentWindow = parentWindow;
             this.inputArray = (int []) array.Clone();
             this.visualizationArray = new VisualizationArray(array.Length);
-            selfTimer.Interval = 1000;
+            
             this.automatonSort = new AutomatonSelectionSort(array);
-            this.sortId = 2;
-            InitializeComponent();
-            this.Paint += new PaintEventHandler(DrawInitialState);
+            this.sortId = sortId;
         }
 
         public override void DrawState(StateAutomaton stateAutomaton)
         {
             this.ClearOldComments();
-           
+            
+            if (stateAutomaton.FirstIndex >= 0)
+                this.visualizationArray.UpdateIndexesSortedPart(Enumerable.Range(0, stateAutomaton.FirstIndex + 1));
+            
             switch (stateAutomaton.StateId)
             {
                 case StateCompare:
@@ -60,7 +61,7 @@ namespace Visualizer
 
 
             this.DrawComment(stateAutomaton.DescriptionState);
-            this.visualizationArray.DrawSortedPartArray(stateAutomaton, graphics);
+           // this.visualizationArray.DrawSortedPartArray(stateAutomaton, graphics);
 
         }
 

@@ -65,7 +65,7 @@ namespace Visualizer
         {
             var isInterestingState = false;
            // MessageBox.Show(i.ToString());
-            StateAutomaton state = new StateAutomaton();
+            StateAutomaton state = new StateHeapSortAutomaton(-1, -1, -1, "", "", dataModel.Array, dataModel.SortedPart);
 
             while (!isInterestingState)
             {
@@ -166,7 +166,7 @@ namespace Visualizer
                     }
                     case 12:
                     {
-                        state = GetStateShiftDownAutomaton(12);
+                        state = GetStateShiftDownAutomaton(10);
                         isInterestingState = true;
                         dataModel.State = 0;
                         
@@ -233,7 +233,8 @@ namespace Visualizer
 
                 default:
                 {
-                    return new StateAutomaton();
+                    //stateId = "start";
+                    return new StateHeapSortAutomaton(-1, -1, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
                 }
 
             }
@@ -283,23 +284,21 @@ namespace Visualizer
         private AutomatonShiftDown automatonShiftDown;
         private int[] array;
         private DataModel dataModel;
-        private int stepsCount;
 
         public AutomatonHeapSort(int[] array)
         {
-           var copy = (int[]) array.Clone();
-           automatonShiftDown = new AutomatonShiftDown(copy);
-           dataModel = new DataModel(copy);
-           this.array = array;
-            stepsCount = 0;
+           //var copy = (int[]) array.Clone();
+           automatonShiftDown = new AutomatonShiftDown(array);
+           dataModel = new DataModel(array);
+           this.array = (int[]) array.Clone();
         }
 
         public override StateAutomaton DoStepForward()
         {
             var isInterestingState = false;
-            stepsCount++;
+            StepsCount++;
 
-            StateAutomaton state = new StateAutomaton();    
+            StateAutomaton state = new StateHeapSortAutomaton(-1, -1, -1, "","", dataModel.Array, -1);  
             while (!isInterestingState)
             {
                 switch (dataModel.State)
@@ -419,19 +418,13 @@ namespace Visualizer
             
             dataModel = new DataModel(copyArray);
             automatonShiftDown = new AutomatonShiftDown(copyArray);
-            
-            var newStepsCount = stepsCount - 1;
-            stepsCount = 0;
-            StateAutomaton state = new StateSelectionSortAutomaton();
 
-            if (newStepsCount + 1 == 0) return state;
-
-            while (stepsCount != newStepsCount)
+            if (StepsCount - 1 == 0)
             {
-                state = DoStepForward();
+                return new StateHeapSortAutomaton(-1, -1, -1, "start", "", copyArray, -1);
             }
 
-            return state;
+            return base.DoStepBackward();
         }
 
         public StateAutomaton GetStateHeapSortAutomaton(int state)
@@ -464,14 +457,15 @@ namespace Visualizer
                 }
                 case 10:
                 {
-                    stateId = "endSorting";
+                    stateId = "end";
                     comment = String.Format("Конец сортировки");
 
                     return new StateHeapSortAutomaton(-1, -1, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
                 }
                 default:
                 {
-                    return new StateAutomaton();
+                    stateId = "start";
+                    return new StateHeapSortAutomaton(-1, -1, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
                 }
             }
         }
@@ -480,7 +474,7 @@ namespace Visualizer
 
         public override StateAutomaton ToStart()
         {
-            stepsCount = 0;
+            StepsCount = 0;
             var copyArray = (int[])array.Clone();
 
             dataModel = new DataModel(copyArray);

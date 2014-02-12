@@ -11,6 +11,7 @@ namespace Visualizer
     public class VisualizationArray
     {
         private readonly bool[] selectedIndexes = new bool[]{};
+        private bool [] indexesSortedPart = new bool[]{};
         private readonly List<Point> coordinatesElements;
         private readonly int arrayLength;
         private readonly System.Drawing.Font digitsFont = new System.Drawing.Font("Arial", 20);
@@ -25,6 +26,7 @@ namespace Visualizer
             this.arrayLength = arrayLength;
             
             selectedIndexes = Enumerable.Range(0, arrayLength).Select(i => false).ToArray();
+            indexesSortedPart = Enumerable.Range(0, arrayLength).Select(i => false).ToArray();
             
             coordinatesElements = new List<Point>();
             
@@ -40,6 +42,10 @@ namespace Visualizer
             return selectedIndexes[index];
         }
 
+        public bool IndexInSortedPart(int index)
+        {
+            return indexesSortedPart[index];
+        }
         public Point GetCoordinates(int index)
         {
             return coordinatesElements[index];
@@ -47,6 +53,9 @@ namespace Visualizer
 
         public Color GetColorElement(int index)
         {
+            if (!IsSelected(index) && IndexInSortedPart(index))
+                return Color.DeepSkyBlue;
+
             return this.IsSelected(index)
                     ? BubbleSortVisualizerSettings.SelectedElementColor
                     : BubbleSortVisualizerSettings.ElementColor;
@@ -67,6 +76,16 @@ namespace Visualizer
             foreach (var index in indexes.Where(i => i >=0 && i < arrayLength))
             {
                 this.SelectElement(index);
+            }
+        }
+
+        public void UpdateIndexesSortedPart(IEnumerable<int> indexes)
+        {
+            indexesSortedPart = Enumerable.Range(0, arrayLength).Select(i => false).ToArray();
+
+            foreach (var index in indexes)
+            {
+                indexesSortedPart[index] = true;
             }
         }
 
@@ -120,6 +139,7 @@ namespace Visualizer
         public void DrawSortedInvertedPartArray(StateAutomaton state, Graphics graphics)
         {
             if (state.FirstIndex == -1) return;
+            
             for (var i = state.FirstIndex; i < state.Array.Length; ++i)
             {
                 var rectangle = new System.Drawing.Rectangle(GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);

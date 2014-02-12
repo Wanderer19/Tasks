@@ -24,18 +24,17 @@ namespace Visualizer
         private readonly Pen elementsPen = new Pen(Color.Blue, 7);
         private readonly System.Drawing.SolidBrush brushSortedPartArray = new SolidBrush(Color.DeepSkyBlue);
         
-        public BubbleSortVisualizer(SortingForm parentWindow, int[] array)
+        public BubbleSortVisualizer(SortingForm parentWindow, int[] array, int sortId)
         {
             this.parentWindow = parentWindow;
             this.inputArray = array;
-            this.sortId = 1;
-            selfTimer.Interval = 650;
+            this.sortId = sortId;
             this.visualizationArray = new VisualizationArray(array.Length);
             this.automatonSort = new AutomatonBubbleSort(array);
             elementsPen.StartCap = LineCap.ArrowAnchor;
             elementsPen.EndCap = LineCap.ArrowAnchor;
            
-            this.Paint += new PaintEventHandler(DrawInitialState);
+           
          }
 
         public override void DrawState(StateAutomaton stateAutomaton)

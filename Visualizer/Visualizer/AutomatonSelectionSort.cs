@@ -90,19 +90,17 @@ namespace Visualizer
 
         public AutomatonSelectionSort(int[] array)
         {
-            dataModel = new DataModel((int[])array.Clone());
+            dataModel = new DataModel(array);
             this.array = (int[]) array.Clone();
-            stepsCount = 0;
         }
 
         private DataModel dataModel;
         private readonly int[] array;
-        private int stepsCount;
 
         public override StateAutomaton DoStepForward()
         {
             var isInterestingState = false;
-            stepsCount++;
+            StepsCount++;
 
             var state = new StateSelectionSortAutomaton();
 
@@ -114,7 +112,7 @@ namespace Visualizer
                     case 0:
                     {
                         dataModel.BorderSortedPart = -1;
-                       dataModel.State = 1;
+                        dataModel.State = 1;
                        
                         break;
                     }
@@ -275,23 +273,12 @@ namespace Visualizer
         {
 
             dataModel = new DataModel((int[]) array.Clone());
-            var newStepsCount = stepsCount-1;
-            stepsCount = 0;
-            StateAutomaton state = new StateSelectionSortAutomaton();
-
-            if (newStepsCount + 1 == 0) return state;
-            
-            while (stepsCount != newStepsCount)
-            {
-                state = DoStepForward();
-            }
-
-            return state;
+            return base.DoStepBackward();
         }
 
         public override StateAutomaton ToStart()
         {
-            stepsCount = 0;
+            StepsCount = 0;
             dataModel = new DataModel((int[])array.Clone());
 
             return new StateSelectionSortAutomaton();

@@ -14,27 +14,34 @@ namespace Visualizer
 {
     public partial class Visualizer : Form
     {
-        protected readonly System.Resources.ResourceManager settings;
+        protected System.Resources.ResourceManager settings;
         protected Graphics graphics;
         protected VisualizationArray visualizationArray;
         protected SortingForm parentWindow;
         protected Automaton automatonSort;
         protected bool automaticMode = false;
-        protected System.Timers.Timer selfTimer;
+        protected System.Timers.Timer selfTimer = new System.Timers.Timer();
         protected int sortId;
         protected int[] inputArray;
+        protected int countUpdateScreen = 0;
 
         public Visualizer()
         {
-            selfTimer = new System.Timers.Timer();
-            var assembly = Assembly.GetExecutingAssembly();
-
-            settings = new ResourceManager("Visualizer.VisualizerSettings", assembly);
-            selfTimer.Elapsed += new System.Timers.ElapsedEventHandler(DoAutomaticStepForward);
+            DownloadConfigurationFile("Visualizer.VisualizerSettings");
             
+            selfTimer.Elapsed += new System.Timers.ElapsedEventHandler(DoAutomaticStepForward);
+            this.Paint += new PaintEventHandler(DrawInitialState);
+
+            selfTimer.Interval = 650;
             InitializeComponent();
         }
 
+        public void DownloadConfigurationFile(string fileName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            settings = new ResourceManager(fileName, assembly);
+        }
 
         public  virtual void DrawComment(string message)
         {
@@ -43,7 +50,12 @@ namespace Visualizer
 
         public void DoAutomaticStepForward(object source, System.Timers.ElapsedEventArgs e)
         {
-            this.DrawState(automatonSort.DoStepForward());
+            var state = automatonSort.DoStepForward();
+
+            if (state.StateId.Equals(Automaton.StateEnd))
+                DoPause(null, new EventArgs());
+
+            DrawState(state);
         }
 
         public virtual void ToStart(object sender, EventArgs e)
@@ -118,11 +130,6 @@ namespace Visualizer
             parentWindow.Visible = true;
         }
 
-        public virtual void ShowHelpMessage(object sender, EventArgs e)
-        {
-            MessageBox.Show(System.IO.File.ReadAllText(BubbleSortVisualizerSettings.HelpFile));
-        }
-
         public virtual void ChangeData(object sender, EventArgs e)
         {
             var dataReceiver = new DataReceiverForm(parentWindow, sortId);
@@ -153,9 +160,16 @@ namespace Visualizer
 
         public virtual void DrawInitialState(object sender, PaintEventArgs e)
         {
-            graphics = this.CreateGraphics();
+            if (countUpdateScreen == 0)
+            {
+                graphics = this.CreateGraphics();
 
-            this.visualizationArray.DrawArray(this.inputArray, graphics);
+                this.visualizationArray.DrawArray(this.inputArray, graphics);
+
+                countUpdateScreen++;
+            }
+            
+            
         }
 
     }

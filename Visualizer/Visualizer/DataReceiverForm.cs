@@ -19,24 +19,30 @@ namespace Visualizer
 
     public partial class DataReceiverForm : Form
     {
-        private readonly System.Resources.ResourceManager settings;
+        private System.Resources.ResourceManager settings;
         private bool choice = true;
         private readonly SortingForm parentWindow;
         private readonly int sortId;
         private int[] inputArray;
+        
         private const int BubbleSortId = 1;
         private const int SelectionSortId = 2;
         private const int HeapSortId = 3;
 
         public DataReceiverForm(SortingForm parentWindow, int sortId)
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-
-            settings = new ResourceManager("Visualizer.DataReceiverFormSettings", assembly);
             this.parentWindow = parentWindow;
             this.sortId = sortId;
             
+            DownloadConfigurationFile("Visualizer.DataReceiverFormSettings");
             InitializeComponent();
+        }
+
+        public void DownloadConfigurationFile(string fileName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            settings = new ResourceManager(fileName, assembly);
         }
 
         private void SelectDefaultData(object sender, EventArgs e)
@@ -53,7 +59,6 @@ namespace Visualizer
         {
             if (VisualizerCanBeRun())
             {
-
                 HideMainWindow();
 
                 var visualizer = GetVisualizer(this.inputArray);
@@ -61,6 +66,27 @@ namespace Visualizer
             }
             else
                 ProcessErrorReadingData();
+        }
+
+        private bool VisualizerCanBeRun()
+        {
+            var isValidData = true;
+            var array = new int[] { 16, 11, 9, 10, 5, 6, 8, 1, 2, 4, 2, 1, 2, 3, 4 };
+
+            if (!choice)
+            {
+                if (ArrayReader.IsValidInputString(inputField.Text))
+                {
+                    array = ArrayReader.ReadData(inputField.Text);
+                    isValidData = true;
+                }
+                else
+                    isValidData = false;
+            }
+
+            inputArray = array;
+
+            return isValidData && ArrayReader.IsValidValuesElementsInArray(array, (int)settings.GetObject("SizeLimitArray"), (int)settings.GetObject("LimitArrayElementValue"));
         }
 
         private void HideMainWindow()
@@ -74,15 +100,15 @@ namespace Visualizer
             {
                 case BubbleSortId:
                 {
-                       return new BubbleSortVisualizer(parentWindow, array);
+                       return new BubbleSortVisualizer(parentWindow, array, BubbleSortId);
                 }
                 case SelectionSortId:
                 {
-                      return new SelectionSortVisualizer(parentWindow, array);
+                      return new SelectionSortVisualizer(parentWindow, array, SelectionSortId);
                 }
                 case HeapSortId:
                 {
-                    return new HeapSortVisualizer(parentWindow, array);
+                    return new HeapSortVisualizer(parentWindow, array, HeapSortId);
                 }
                 default:
                 {

@@ -11,14 +11,14 @@ namespace Visualizer
         private readonly Dictionary<int, Rectangle> coordinatesNodesPyramid;
         private readonly Dictionary<int, Tuple<Point, Point>> coordinatesEdges;
         private readonly Dictionary<int, PointF> coordinatesValues; 
-        private const int OffsetBetweenNeighbors = 200;
-        private const int DistanceBetweenLevels = 100;
-        private const int NodesDiameter  = 60;
+        private const int OffsetBetweenNeighbors = 300;
+        private const int DistanceBetweenLevels = 150;
+        private const int NodesDiameter  = 75;
         public int Length { get; private set; }
         private bool [] selectedNodes; 
         
         
-        private readonly Font nodesFontDigits = new System.Drawing.Font("Arial Black", 16.2F,
+        private readonly Font nodesFontDigits = new System.Drawing.Font("Arial Black", 12.2F,
                 System.Drawing.FontStyle.Bold,
                 System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 
@@ -68,8 +68,8 @@ namespace Visualizer
 
         public void DefineCoordinates()
         {
-            coordinatesNodesPyramid.Add(0, new Rectangle(1300, 400, NodesDiameter, NodesDiameter));
-            coordinatesValues.Add(0, new PointF(1310, 410));
+            coordinatesNodesPyramid.Add(0, new Rectangle(1290, 400, NodesDiameter, NodesDiameter));
+            coordinatesValues.Add(0, new PointF(1295, 420));
             var depthsNodes = new Dictionary<int, int> { { 0, 0 } };
 
             for (var i = 0; i <= Length / 2 - 1; ++i)
@@ -85,7 +85,7 @@ namespace Visualizer
                         coordinatesNodesPyramid.Add(i * 2 + 1, new Rectangle(coordinatesNodesPyramid[i].X - OffsetBetweenNeighbors / (depthsNodes[i * 2 + 1]), coordinatesNodesPyramid[i].Y + DistanceBetweenLevels, NodesDiameter, NodesDiameter));
                         coordinatesEdges.Add(i*2+1, Tuple.Create(new Point(coordinatesNodesPyramid[i].X + NodesDiameter / 2, coordinatesNodesPyramid[i].Y + NodesDiameter),
                                         new Point(coordinatesNodesPyramid[i * 2 + 1].X + NodesDiameter / 2, coordinatesNodesPyramid[i*2+1].Y)));
-                        coordinatesValues.Add(i*2+1, new PointF(coordinatesNodesPyramid[i*2+1].X + 10, coordinatesNodesPyramid[i*2+1].Y + 10));
+                        coordinatesValues.Add(i*2+1, new PointF(coordinatesNodesPyramid[i*2+1].X + 5, coordinatesNodesPyramid[i*2+1].Y + 20));
                     }
                     
                     if (i * 2 + 2 < Length)
@@ -93,7 +93,7 @@ namespace Visualizer
                         coordinatesNodesPyramid.Add(i * 2 + 2, new Rectangle(coordinatesNodesPyramid[i].X + OffsetBetweenNeighbors / (depthsNodes[i * 2 + 2]), coordinatesNodesPyramid[i].Y + DistanceBetweenLevels, NodesDiameter, NodesDiameter));
                         coordinatesEdges.Add(i * 2 + 2, Tuple.Create(new Point(coordinatesNodesPyramid[i].X + NodesDiameter / 2, coordinatesNodesPyramid[i].Y + NodesDiameter),
                                         new Point(coordinatesNodesPyramid[i * 2 + 2].X + NodesDiameter / 2, coordinatesNodesPyramid[i * 2 + 2].Y)));
-                        coordinatesValues.Add(i * 2 + 2, new PointF(coordinatesNodesPyramid[i * 2 + 2].X + 10, coordinatesNodesPyramid[i * 2 + 2].Y + 10));
+                        coordinatesValues.Add(i * 2 + 2, new PointF(coordinatesNodesPyramid[i * 2 + 2].X + 5, coordinatesNodesPyramid[i * 2 + 2].Y + 20));
                     }
                 }
             }
@@ -119,6 +119,12 @@ namespace Visualizer
             {
                 selectedNodes[node] = false;
             }
+        }
+
+        public void DeselectAllNodes()
+        {
+            for (var i = 0; i < Length; ++i)
+                DeselectNodes(i);
         }
 
         public void DrawRoot(int rootsValue, Graphics graphics)

@@ -18,16 +18,21 @@ namespace Visualizer
     {
         private readonly Application parentWindow;
 
-        private readonly System.Resources.ResourceManager sortingFormSettings;
+        private System.Resources.ResourceManager sortingFormSettings;
        
         public SortingForm(Application parentWindow, string fileSettings)
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-
-            sortingFormSettings = new ResourceManager(fileSettings, assembly);
             this.parentWindow = parentWindow;
-
+            
+            this.DownloadConfigurationFile(fileSettings);
             InitializeComponent();
+        }
+
+        public void DownloadConfigurationFile(string fileName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            sortingFormSettings = new ResourceManager(fileName, assembly);
         }
 
         private void ShowSourceCodeCSharp(object sender, EventArgs e)
