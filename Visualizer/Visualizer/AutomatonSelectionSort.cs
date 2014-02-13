@@ -8,62 +8,32 @@ namespace Visualizer
 {
     public class AutomatonSelectionSort : Automaton
     {
+        public enum States
+        {
+            InitialState = 0,
+            StartOuterLoop = 1,
+            OuterLoop = 2,
+            InitializeIndexMinimum = 3,
+            StartInnerLoop = 4,
+            InnerLoop = 5,
+            Condition = 6,
+            UpdateMinimum = 7,
+            EndingConditions = 8,
+            IncrementInnerCounter = 9,
+            SwappingElements = 10,
+            IncrementOuterCounter = 11,
+            FinalState = 12
+        }
+
         private class DataModel
         {
-            private int firstIndex;
-            private int secondIndex;
-            private int minIndex;
-            public int State { get; set; }
+            public int OuterCounter { get; set; }
+            public int InnerCounter { get; set; }
+            public int IndexMinimum { get; set; }
+            public States State { get; set; }
             public int BorderSortedPart { get; set; }
 
-            public int FirstIndex
-            {
-                get { return firstIndex; }
-                set
-                {
-                    if (value <= ArraySize && value >= 0)
-                    {
-                        firstIndex = value;
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-            }
-
-            public int SecondIndex
-            {
-                get { return secondIndex; }
-                set
-                {
-                    if (value <= ArraySize && value >= 0)
-                    {
-                        secondIndex = value;
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-            }
-
-            public int Min
-            {
-                get { return minIndex; }
-                set
-                {
-                    if (value <= ArraySize && value >= 0)
-                    {
-                        minIndex = value;
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-            }
-
+            
             public int ArraySize { get; private set; }
             public int[] Array { get; private set; }
 
@@ -71,26 +41,27 @@ namespace Visualizer
             {
                 ArraySize = array.Length;
                 Array = array;
-                firstIndex = 0;
-                secondIndex = 0;
-                minIndex = 0;
-                State = 0;
+                OuterCounter = 0;
+                InnerCounter = 0;
+                IndexMinimum = 0;
+                State = States.InitialState;
                 BorderSortedPart = -1;
             }
 
-            public void Swap()
+            public void SwapElements()
             {
-                var copyItem = Array[FirstIndex];
-                Array[FirstIndex] = Array[Min];
-                Array[Min] = copyItem;
+                var copyItem = Array[OuterCounter];
+                Array[OuterCounter] = Array[IndexMinimum];
+                Array[IndexMinimum] = copyItem;
 
-                BorderSortedPart = FirstIndex;
+                BorderSortedPart = OuterCounter;
             }
         }
 
         public AutomatonSelectionSort(int[] array)
         {
             dataModel = new DataModel(array);
+            
             this.array = (int[]) array.Clone();
         }
 
@@ -106,112 +77,106 @@ namespace Visualizer
 
             while (!isInterestingState)
             {
-
                 switch (dataModel.State)
                 {
-                    case 0:
+                    case States.InitialState:
                     {
                         dataModel.BorderSortedPart = -1;
-                        dataModel.State = 1;
+                        dataModel.State = States.StartOuterLoop;
                        
                         break;
                     }
-                    case 1:
+                    case States.StartOuterLoop:
                         {
-                            dataModel.FirstIndex = 0;
-                            dataModel.State = 2;
+                            dataModel.OuterCounter = 0;
+                            dataModel.State = States.OuterLoop;
                             
                             break;
                         }
-                    case 2:
+                    case States.OuterLoop:
                     {
-                        dataModel.State = dataModel.FirstIndex < dataModel.ArraySize - 1 ? 3 : 12;
+                        dataModel.State = dataModel.OuterCounter < dataModel.ArraySize - 1 ? States.InitializeIndexMinimum : States.FinalState;
 
                         break;
                     }
-                    case 3:
+                    case States.InitializeIndexMinimum:
                     {
-                        dataModel.Min = dataModel.FirstIndex;
+                        dataModel.IndexMinimum = dataModel.OuterCounter;
                         isInterestingState = true;
                         state = GetStateSelectionSortAutomaton(3);
-                        dataModel.State = 4;
+                        dataModel.State = States.StartInnerLoop;
                             
                         break;
                     }
-                    case 4:
-                        {
-                            dataModel.SecondIndex = dataModel.FirstIndex + 1;
-                            dataModel.State = 5;
-                           
-                            break;
-
-                        }
-                    case 5:
+                    case States.StartInnerLoop:
                     {
-                        dataModel.State = dataModel.SecondIndex < dataModel.ArraySize ? 6 : 10;
+                        dataModel.InnerCounter = dataModel.OuterCounter + 1;
+                            
+                        dataModel.State = States.InnerLoop;
+                           
+                        break;
+                    }
+                    case States.InnerLoop:
+                    {
+                        dataModel.State = dataModel.InnerCounter < dataModel.ArraySize ? States.Condition : States.SwappingElements;
                         
                         break;
                     }
-                    case 6:
+                    case States.Condition:
                     {
                         isInterestingState = true;
                         state = GetStateSelectionSortAutomaton(6);
-                        dataModel.State = dataModel.Array[dataModel.SecondIndex] < dataModel.Array[dataModel.Min] ? 7 : 8;
+                        
+                        dataModel.State = dataModel.Array[dataModel.InnerCounter] < dataModel.Array[dataModel.IndexMinimum] ? 
+                            States.UpdateMinimum : States.EndingConditions;
 
                         break;
                     }
-                    case 7:
+                    case States.UpdateMinimum:
                     {
-                        dataModel.Min = dataModel.SecondIndex;
+                        dataModel.IndexMinimum = dataModel.InnerCounter;
                         isInterestingState = true;
                         state = GetStateSelectionSortAutomaton(7);
-                        dataModel.State = 8;
+                        dataModel.State = States.EndingConditions;
                          
                         break;
                     }
-                    case 8:
+                    case States.EndingConditions:
                     {
-                        dataModel.State = 9;
+                        dataModel.State = States.IncrementInnerCounter;
                             
                         break;
                     }
-                    case 9:
+                    case States.IncrementInnerCounter:
                     {
-                        dataModel.SecondIndex++;
-                        dataModel.State = 5;
+                        dataModel.InnerCounter++;
+                        dataModel.State = States.InnerLoop;
                         
                         break;
                     }
-                    case 10:
+                    case States.SwappingElements:
                     {
-                        dataModel.Swap();
+                        dataModel.SwapElements();
                         state = GetStateSelectionSortAutomaton(10);
                         isInterestingState = true;
                            
-                        dataModel.State = 11;
+                        dataModel.State = States.IncrementOuterCounter;
                             
                         break;
                     }
-                    case 11:
+                    case States.IncrementOuterCounter:
                     {
-                        dataModel.FirstIndex++;
-                        dataModel.State = 2;
+                        dataModel.OuterCounter++;
+                        dataModel.State = States.OuterLoop;
                             
                         break;
                     }
-                    case 12:
+                    case States.FinalState:
                     {
                         isInterestingState = true;
                         dataModel.BorderSortedPart = dataModel.ArraySize - 1;
 
                         state = GetStateSelectionSortAutomaton(12);
-                        dataModel.State = -1;
-                        
-                        break;
-                    }
-                    default:
-                    {
-                        dataModel.State = 12;
                         
                         break;
                     }
@@ -237,9 +202,9 @@ namespace Visualizer
                 case 6:
                 {
                     stateId = "compare";
-                    descriptionState = String.Format("Сравнение элемента с индексом {0} с текущим минимумом", dataModel.SecondIndex);
+                    descriptionState = String.Format("Сравнение элемента с индексом {0} с текущим минимумом", dataModel.InnerCounter);
                     
-                    selectedIndexes.Add(dataModel.SecondIndex);
+                    selectedIndexes.Add(dataModel.InnerCounter);
 
                     break;
                 }
@@ -251,10 +216,10 @@ namespace Visualizer
                 case 10:
                 {
                     stateId = "swap";
-                    descriptionState = String.Format("Обмен элемента с индексом {0} с текущим минимумом", dataModel.FirstIndex);
+                    descriptionState = String.Format("Обмен элемента с индексом {0} с текущим минимумом", dataModel.OuterCounter);
 
-                    selectedIndexes.Add(dataModel.FirstIndex);
-                    selectedIndexes.Add(dataModel.Min);
+                    selectedIndexes.Add(dataModel.OuterCounter);
+                    selectedIndexes.Add(dataModel.IndexMinimum);
                     
                    break;
                 }
@@ -266,7 +231,7 @@ namespace Visualizer
                 }
             }
 
-            return new StateSelectionSortAutomaton(selectedIndexes, dataModel.BorderSortedPart, dataModel.Array[dataModel.Min], stateId, descriptionState, dataModel.Array);
+            return new StateSelectionSortAutomaton(selectedIndexes, dataModel.BorderSortedPart, dataModel.Array[dataModel.IndexMinimum], stateId, descriptionState, dataModel.Array);
         }
 
         public override StateAutomaton DoStepBackward()

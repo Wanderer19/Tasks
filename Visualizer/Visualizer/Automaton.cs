@@ -19,7 +19,6 @@ namespace Visualizer
 
         public virtual StateAutomaton DoStepBackward()
         {
-            MessageBox.Show(StepsCount.ToString());
             var newStepsCount = StepsCount-1;
             StepsCount = 0;
             var state = new StateAutomaton();

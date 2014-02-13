@@ -19,4 +19,3 @@ C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\De
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverFormSettings.resources
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.VisualizerSettings.resources
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.HeapSortFormSettings.resources
-C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Form1.resources

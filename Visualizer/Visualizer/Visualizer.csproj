@@ -71,12 +71,6 @@
     <Compile Include="Automaton.cs" />
     <Compile Include="AutomatonHeapSort.cs" />
     <Compile Include="AutomatonSelectionSort.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="StateHeapSortAutomaton.cs" />
     <Compile Include="VisualizationHeap.cs" />
     <Compile Include="HeapSortVisualizer.cs">
@@ -138,9 +132,6 @@
     </Compile>
     <EmbeddedResource Include="BubbleSortFormSettings.resx" />
     <EmbeddedResource Include="DataReceiverFormSettings.resx" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="HeapSortFormSettings.resx" />
     <EmbeddedResource Include="GeneralSettings.resx" />
     <EmbeddedResource Include="SelectionSortFormSettings.resx" />
