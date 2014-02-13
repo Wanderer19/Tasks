@@ -126,7 +126,7 @@ namespace Visualizer
 
         public  void DrawSortedPartArray(StateAutomaton state, Graphics graphics)
         {
-            for (var i = 0; i <= state.FirstIndex; ++i)
+            for (var i = 0; i <= state.BorderSortedPart; ++i)
             {
                 var rectangle = new System.Drawing.Rectangle(GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
 
@@ -138,9 +138,9 @@ namespace Visualizer
 
         public void DrawSortedInvertedPartArray(StateAutomaton state, Graphics graphics)
         {
-            if (state.FirstIndex == -1) return;
+            if (state.BorderSortedPart == -1) return;
             
-            for (var i = state.FirstIndex; i < state.Array.Length; ++i)
+            for (var i = state.BorderSortedPart; i < state.Array.Length; ++i)
             {
                 var rectangle = new System.Drawing.Rectangle(GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
 

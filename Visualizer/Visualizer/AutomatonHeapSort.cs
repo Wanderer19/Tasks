@@ -101,7 +101,7 @@ namespace Visualizer
                     {
                         isInterestingState = true;
                         
-                        state = GetStateShiftDownAutomaton(3);
+                        state = GetStateShiftDownAutomaton(dataModel.State);
                         
                         dataModel.State = dataModel.Counter * 2 + 1 < j && !dataModel.IsDone ?
                             States.InitializingIndexMaximumChild : States.FinalState;
@@ -120,7 +120,7 @@ namespace Visualizer
                     {
                         isInterestingState = true;
                         
-                        state = GetStateShiftDownAutomaton(5);
+                        state = GetStateShiftDownAutomaton(dataModel.State);
                         
                         dataModel.State = dataModel.Counter * 2 + 2 < j &&
                                           dataModel.Array[dataModel.IndexMaximumChild] < dataModel.Array[dataModel.Counter*2 + 2]
@@ -141,7 +141,7 @@ namespace Visualizer
                     {
                         isInterestingState = true;
                         
-                        state = GetStateShiftDownAutomaton(7);
+                        state = GetStateShiftDownAutomaton(dataModel.State);
                         
                         dataModel.State = States.ConditionOnUpdateParent;
 
@@ -150,8 +150,8 @@ namespace Visualizer
                     case States.ConditionOnUpdateParent:
                     {
                         isInterestingState = true;
-                        
-                        state = GetStateShiftDownAutomaton(8);
+
+                        state = GetStateShiftDownAutomaton(dataModel.State);
                         
                         dataModel.State = dataModel.Array[dataModel.Counter] < dataModel.Array[dataModel.IndexMaximumChild] ?
                             States.SwappingParentWithMaximumChild : States.EndLoop;
@@ -161,8 +161,8 @@ namespace Visualizer
                     case States.SwappingParentWithMaximumChild:
                     {
                         isInterestingState = true;
-                        
-                        state = GetStateShiftDownAutomaton(9);
+
+                        state = GetStateShiftDownAutomaton(dataModel.State);
                         
                         dataModel.SwapParentWithMaximumChild();
                         
@@ -172,7 +172,7 @@ namespace Visualizer
                     }
                     case States.EndLoop:
                     {
-                       state = GetStateShiftDownAutomaton(10);
+                        state = GetStateShiftDownAutomaton(dataModel.State);
                         
                        isInterestingState = true;
                         
@@ -190,75 +190,70 @@ namespace Visualizer
                     }
                     case States.FinalState:
                     {
-                        state = GetStateShiftDownAutomaton(10);
+                        state = GetStateShiftDownAutomaton(States.EndLoop);
                         isInterestingState = true;
                         
                         break;
                     }
-                    
-
                 }
             }
 
             return state;
-
         }
 
-        public StateAutomaton GetStateShiftDownAutomaton(int state)
+        public StateAutomaton GetStateShiftDownAutomaton(States state)
         {
             var stateId = "";
             var comment = "";
 
             switch (state)
             {
-                case 3:
+                case States.Loop:
                 {
                     stateId = "shifting";
                     comment = String.Format("Просеивание элемента с индексом {0}", dataModel.Counter);
 
                     return new StateHeapSortAutomaton(-1, -1, dataModel.Counter, stateId, comment, dataModel.Array, dataModel.SortedPart);
                 }
-                case 5:
-                    {
-                        stateId = "compare";
-                        comment = String.Format("Определяем максимального ребёнка элемента с индексом {0}", dataModel.Counter);
+                case States.ConditionOnUpdateMaximumChild:
+                {
+                    stateId = "compare";
+                    comment = String.Format("Определяем максимального ребёнка элемента с индексом {0}", dataModel.Counter);
 
-                        return new StateHeapSortAutomaton(dataModel.IndexMaximumChild, dataModel.Counter * 2 + 2, dataModel.Counter, stateId, comment, dataModel.Array, dataModel.SortedPart);
-                    }
-                case 7:
+                    return new StateHeapSortAutomaton(dataModel.IndexMaximumChild, dataModel.Counter * 2 + 2, dataModel.Counter, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                 }
+                case States.EndingConditionOnUpdateMaximumChild:
                 {
                     stateId = "maxChild";
                     comment = String.Format("Максимальный ребёнок - элемент с индексом {0}", dataModel.IndexMaximumChild);
 
                     return new StateHeapSortAutomaton(-1, -1, dataModel.IndexMaximumChild, stateId, comment, dataModel.Array, dataModel.SortedPart);
                 }
-                case 8:
+                case States.ConditionOnUpdateParent:
                 {
                     stateId = "compare";
                     comment = String.Format("Сравнение значения в узле с его наибольшим ребенком");
 
                     return new StateHeapSortAutomaton(dataModel.Counter, dataModel.IndexMaximumChild, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
                 }
-                case 9:
+                case States.SwappingParentWithMaximumChild:
                 {
                     stateId = "swap";
                     comment = String.Format("Обмен узла с его наибольшим ребёнком");
 
                     return new StateHeapSortAutomaton(dataModel.Counter, dataModel.IndexMaximumChild, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
                 }
-                case 10:
+                case States.EndLoop:
                 {
                     stateId = "endShifting";
                     comment = String.Format("Конец просеиванию");
 
                     return new StateHeapSortAutomaton(-1, -1, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
                 }
-
                 default:
                 {
                     return new StateHeapSortAutomaton(-1, -1, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
                 }
-
             }
         }
     }
@@ -427,6 +422,7 @@ namespace Visualizer
                     case States.FinalState:
                     {
                         state = GetStateHeapSortAutomaton(10);
+                        dataModel.State = States.InitialState;
                         isInterestingState = true;
                        
                         break;
@@ -445,7 +441,7 @@ namespace Visualizer
             dataModel = new DataModel(copyArray);
             automatonSiftDown = new AutomatonSiftDown(copyArray);
 
-            if (StepsCount - 1 == 0)
+            if (StepsCount - 1 == 0 || StepsCount == 0)
             {
                 return new StateHeapSortAutomaton(-1, -1, -1, "start", "", copyArray, -1);
             }
@@ -463,7 +459,7 @@ namespace Visualizer
                 case 3:
                 {
                     stateId = automatonSiftDown.State != 12 ? "shifting" : "endShifting";
-                    comment = "";//String.Format("Просеивание элемента с инексом {0}", dataModel.Index);
+                    comment = "";
 
                     return new StateHeapSortAutomaton(-1, -1, dataModel.Index, stateId, comment, dataModel.Array, dataModel.SortedPart);
                 }

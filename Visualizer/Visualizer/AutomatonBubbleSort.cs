@@ -63,11 +63,9 @@ namespace Visualizer
 
         public override StateAutomaton DoStepForward()
         {
-            var descriptionState = "";
             var isInterestingState = false;
-            var stateId = "";
-            var firstIndex = -1;
-            var secondIndex = -1;
+            
+            StateAutomaton state = new StateBubbleSortAutomaton(-1, -1, "", "", dataModel.Array, (int) dataModel.State);
 
             StepsCount++;
             while (!isInterestingState)
@@ -111,12 +109,7 @@ namespace Visualizer
                     case States.Condition:
                     {
                         isInterestingState = true;
-                        descriptionState = String.Format("Сравнение элемента с индексом {0} и с индексом {1}",
-                            dataModel.InnerCounter, dataModel.InnerCounter + 1);
-                        stateId = "compare";
-
-                        firstIndex = dataModel.InnerCounter;
-                        secondIndex = dataModel.InnerCounter + 1;
+                        state = GetStateBubbleSortAutomaton(dataModel.State);
 
                         dataModel.State = dataModel.Array[dataModel.InnerCounter] > dataModel.Array[dataModel.InnerCounter + 1] ? 
                             States.SwappingAdjacentElements : States.EndingConditions;
@@ -126,16 +119,10 @@ namespace Visualizer
                     case States.SwappingAdjacentElements:
                     {
                         isInterestingState = true;
-                        descriptionState = String.Format("Обмен эелементов и синдексами {0} и {1}",
-                            dataModel.InnerCounter, dataModel.InnerCounter + 1);
-                        stateId = "swap";
-
-                        firstIndex = dataModel.InnerCounter;
-                        secondIndex = dataModel.InnerCounter + 1;
+                        state = GetStateBubbleSortAutomaton(dataModel.State);
 
                         dataModel.SwapAdjacentElements();
-
-
+                        
                         dataModel.State = States.EndingConditions;
 
                         break;
@@ -165,21 +152,58 @@ namespace Visualizer
                     case States.FinalState:
                     {
                         isInterestingState = true;
-                        descriptionState = "Конец";
-                        stateId = "end";
+
+                        state = GetStateBubbleSortAutomaton(dataModel.State);
 
                         break;
                     }
                 }
             }
 
-            return new StateBubbleSortAutomaton(firstIndex, secondIndex,stateId,  descriptionState, dataModel.Array, (int) dataModel.State);
+            return state;
+        }
+
+        public StateAutomaton GetStateBubbleSortAutomaton(States state)
+        {
+            var stateId = "";
+            var comment = "";
+
+            switch (state)
+            {
+                case States.Condition:
+                {
+                    stateId = "compare";
+                    comment = String.Format("Сравнение элемента с индексом {0} и с индексом {1}",
+                            dataModel.InnerCounter, dataModel.InnerCounter + 1);
+                  
+                    return new StateBubbleSortAutomaton(dataModel.InnerCounter, dataModel.InnerCounter + 1, stateId, comment, dataModel.Array, (int)dataModel.State);
+                }
+                case States.SwappingAdjacentElements:
+                {
+                    stateId = "swap";
+                    comment = String.Format("Обмен эелементов и синдексами {0} и {1}",
+                            dataModel.InnerCounter, dataModel.InnerCounter + 1);
+
+                    return new StateBubbleSortAutomaton(dataModel.InnerCounter, dataModel.InnerCounter + 1, stateId, comment, dataModel.Array, (int)dataModel.State);
+                }
+                case States.FinalState:
+                {
+                    stateId = "end";
+                    comment = "Конец";
+
+                    return new StateBubbleSortAutomaton(-1, -1, stateId, comment, dataModel.Array, (int)dataModel.State);
+                }
+                default:
+                {
+                    return new StateBubbleSortAutomaton(-1, -1, stateId, comment, dataModel.Array, (int)dataModel.State);
+                }
+            }
         }
 
         public override StateAutomaton DoStepBackward()
         {
-
             dataModel = new DataModel((int[])array.Clone());
+            
             return base.DoStepBackward();
         }
     }

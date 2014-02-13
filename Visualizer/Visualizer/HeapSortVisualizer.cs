@@ -47,7 +47,7 @@ namespace Visualizer
         public override void DrawState(StateAutomaton stateAutomaton)
         {
             base.ClearOldComments();
-           // graphics.Clear(Color.LightCyan);
+
             switch (stateAutomaton.StateId)
             {
                 case StateCompare:
@@ -68,7 +68,6 @@ namespace Visualizer
                 case StateSwapSorting:
                 {
                     DrawSwap(stateAutomaton);
-                    //удаление ребра
                     break;
                 }
                 case StateMaxChild:
@@ -106,13 +105,13 @@ namespace Visualizer
             
             visualizationArray.DrawSortedInvertedPartArray(stateAutomaton, graphics);
             visualizationHeap.DrawSortedPartHeap(stateAutomaton, graphics);
-            base.DrawComment(stateAutomaton.DescriptionState);
+            base.DrawComment(stateAutomaton.Comment);
         }
 
         public void DrawShifting(StateAutomaton stateAutomaton)
         {
-            visualizationArray.SelectElements(stateAutomaton.ShiftingElement);
-            visualizationHeap.SelectNodes(stateAutomaton.ShiftingElement);
+            visualizationArray.SelectElements(stateAutomaton.SiftingElement);
+            visualizationHeap.SelectNodes(stateAutomaton.SiftingElement);
 
             visualizationArray.DrawArray(stateAutomaton.Array, graphics);
             visualizationHeap.DrawHeap(stateAutomaton.Array, graphics);

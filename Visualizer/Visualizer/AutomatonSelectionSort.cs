@@ -101,9 +101,12 @@ namespace Visualizer
                     }
                     case States.InitializeIndexMinimum:
                     {
-                        dataModel.IndexMinimum = dataModel.OuterCounter;
                         isInterestingState = true;
-                        state = GetStateSelectionSortAutomaton(3);
+                        
+                        dataModel.IndexMinimum = dataModel.OuterCounter;
+                        
+                        state = GetStateSelectionSortAutomaton(dataModel.State);
+                        
                         dataModel.State = States.StartInnerLoop;
                             
                         break;
@@ -125,7 +128,8 @@ namespace Visualizer
                     case States.Condition:
                     {
                         isInterestingState = true;
-                        state = GetStateSelectionSortAutomaton(6);
+                        
+                        state = GetStateSelectionSortAutomaton(dataModel.State);
                         
                         dataModel.State = dataModel.Array[dataModel.InnerCounter] < dataModel.Array[dataModel.IndexMinimum] ? 
                             States.UpdateMinimum : States.EndingConditions;
@@ -134,9 +138,12 @@ namespace Visualizer
                     }
                     case States.UpdateMinimum:
                     {
-                        dataModel.IndexMinimum = dataModel.InnerCounter;
                         isInterestingState = true;
-                        state = GetStateSelectionSortAutomaton(7);
+                        
+                        dataModel.IndexMinimum = dataModel.InnerCounter;
+                       
+                        state = GetStateSelectionSortAutomaton(dataModel.State);
+                        
                         dataModel.State = States.EndingConditions;
                          
                         break;
@@ -157,7 +164,7 @@ namespace Visualizer
                     case States.SwappingElements:
                     {
                         dataModel.SwapElements();
-                        state = GetStateSelectionSortAutomaton(10);
+                        state = GetStateSelectionSortAutomaton(dataModel.State);
                         isInterestingState = true;
                            
                         dataModel.State = States.IncrementOuterCounter;
@@ -176,7 +183,7 @@ namespace Visualizer
                         isInterestingState = true;
                         dataModel.BorderSortedPart = dataModel.ArraySize - 1;
 
-                        state = GetStateSelectionSortAutomaton(12);
+                        state = GetStateSelectionSortAutomaton(dataModel.State);
                         
                         break;
                     }
@@ -186,7 +193,7 @@ namespace Visualizer
             return state;
         }
 
-        private StateSelectionSortAutomaton GetStateSelectionSortAutomaton(int state)
+        private StateSelectionSortAutomaton GetStateSelectionSortAutomaton(States state)
         {
             var stateId = "";
             var descriptionState = "";
@@ -194,12 +201,13 @@ namespace Visualizer
            
             switch (state)
             {
-                case 3:
+                case States.InitializeIndexMinimum:
                 {
                     stateId = "min";
+                    
                     break;
                 }
-                case 6:
+                case States.Condition:
                 {
                     stateId = "compare";
                     descriptionState = String.Format("Сравнение элемента с индексом {0} с текущим минимумом", dataModel.InnerCounter);
@@ -208,12 +216,13 @@ namespace Visualizer
 
                     break;
                 }
-                case 7:
+                case States.UpdateMinimum:
                 {
                     stateId = "min";
+                    
                     break;
                 }
-                case 10:
+                case States.SwappingElements:
                 {
                     stateId = "swap";
                     descriptionState = String.Format("Обмен элемента с индексом {0} с текущим минимумом", dataModel.OuterCounter);
@@ -223,7 +232,7 @@ namespace Visualizer
                     
                    break;
                 }
-                case 12:
+                case States.FinalState:
                 {
                     stateId = "end";
                     descriptionState = "Конец Сортировки";
@@ -236,8 +245,11 @@ namespace Visualizer
 
         public override StateAutomaton DoStepBackward()
         {
-
             dataModel = new DataModel((int[]) array.Clone());
+            
+            if (StepsCount -1 == 0 || StepsCount == 0)
+                return new StateSelectionSortAutomaton(new List<int>(), -1, -1, "", "", dataModel.Array);
+
             return base.DoStepBackward();
         }
 

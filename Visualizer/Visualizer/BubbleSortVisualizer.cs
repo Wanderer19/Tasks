@@ -57,7 +57,7 @@ namespace Visualizer
                 }
             }
             
-           base.DrawComment(stateAutomaton.DescriptionState);
+           base.DrawComment(stateAutomaton.Comment);
         }
 
         public override void ClearOldComments()

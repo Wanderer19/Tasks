@@ -14,6 +14,7 @@ namespace Visualizer
         public const string StateCompare = "compare";
         public const string StateSwap = "swap";
         public const string StateMin = "min";
+        public const string StateEnd = "end";
         
         private readonly System.Drawing.Font digitsFont = new System.Drawing.Font("Arial", 20);
         private readonly System.Drawing.StringFormat formatDrawing = new System.Drawing.StringFormat();
@@ -23,20 +24,21 @@ namespace Visualizer
         public SelectionSortVisualizer(SortingForm parentWindow, int [] array, int sortId)
         {
             this.parentWindow = parentWindow;
-            this.inputArray = (int []) array.Clone();
-            this.visualizationArray = new VisualizationArray(array.Length);
-            
-            this.automatonSort = new AutomatonSelectionSort(array);
             this.sortId = sortId;
+            this.inputArray = (int []) array.Clone();
+            
+            this.visualizationArray = new VisualizationArray(array.Length);
+            this.automatonSort = new AutomatonSelectionSort(array);
         }
 
         public override void DrawState(StateAutomaton stateAutomaton)
         {
             this.ClearOldComments();
-            
-            if (stateAutomaton.FirstIndex >= 0)
-                this.visualizationArray.UpdateIndexesSortedPart(Enumerable.Range(0, stateAutomaton.FirstIndex + 1));
-            
+
+            this.visualizationArray.UpdateIndexesSortedPart(stateAutomaton.BorderSortedPart >= 0
+                ? Enumerable.Range(0, stateAutomaton.BorderSortedPart + 1)
+                : new List<int>());
+
             switch (stateAutomaton.StateId)
             {
                 case StateCompare:
@@ -57,24 +59,28 @@ namespace Visualizer
                     
                     break;
                 }
+                case StateEnd:
+                {
+                    this.visualizationArray.DrawArray(stateAutomaton.Array, this.graphics);
+                    
+                    break;
+                }
+                default:
+                {
+                    this.visualizationArray.DrawArray(stateAutomaton.Array, this.graphics);
+
+                    break;
+                }
             }
 
-
-            this.DrawComment(stateAutomaton.DescriptionState);
-           // this.visualizationArray.DrawSortedPartArray(stateAutomaton, graphics);
-
+            this.DrawComment(stateAutomaton.Comment);
         }
 
         private void DrawMin(StateAutomaton state)
         {
             this.visualizationArray.DrawArray(state.Array, this.graphics);
             
-            graphics.DrawString(String.Format("Текущий минимум  = {0}", state.Min), digitsFont, digitsBrush, 80 + 100 * 4, 100, formatDrawing);
-        }
-
-        private void DrawComment(string message)
-        {
-            this.commentsBox.Text = message;
+            graphics.DrawString(String.Format("Текущий минимум  = {0}", state.IndexMinimum), digitsFont, digitsBrush, 80 + 100 * 4, 100, formatDrawing);
         }
 
         private void DrawCompare(StateAutomaton state)
@@ -92,13 +98,16 @@ namespace Visualizer
         public override void ClearOldComments()
         {
             base.ClearOldComments();
+           
             graphics.FillRectangle(elementsBrush, BubbleSortVisualizerSettings.UpperCommentField);
         }
 
         public override void ToStart(object sender, EventArgs e)
         {
             visualizationArray = new VisualizationArray(inputArray.Length);
+            
             automatonSort.ToStart();
+            
             this.visualizationArray.DrawArray(inputArray, this.graphics);
         }
     }

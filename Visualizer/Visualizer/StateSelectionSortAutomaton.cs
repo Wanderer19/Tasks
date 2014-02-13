@@ -8,16 +8,16 @@ namespace Visualizer
     class StateSelectionSortAutomaton : StateAutomaton
     {
         public StateSelectionSortAutomaton() { }
-        public StateSelectionSortAutomaton(List<int> selectedIndexes, int firstIndex, int min, string stateId, string comment, int[] array)
+        public StateSelectionSortAutomaton(List<int> selectedIndexes, int borderSortedPart, int indexMinimum, string stateId, string comment, int[] array)
         {
             SelectedElements=new List<int>();
             SelectedElements.AddRange(selectedIndexes);
 
-            this.Min = min;
+            this.IndexMinimum = indexMinimum;
             this.Array = array;
-            this.DescriptionState = comment;
+            this.Comment = comment;
             this.StateId = stateId;
-            this.FirstIndex = firstIndex;
+            this.BorderSortedPart = borderSortedPart;
         }
     }
 }

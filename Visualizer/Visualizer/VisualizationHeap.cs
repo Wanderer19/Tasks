@@ -186,9 +186,9 @@ namespace Visualizer
 
         public void DrawSortedPartHeap(StateAutomaton state, Graphics graphics)
         {
-            if (state.FirstIndex == -1) return;
+            if (state.BorderSortedPart == -1) return;
             
-            for (var i = state.Array.Length - 1; i >= state.FirstIndex; --i)
+            for (var i = state.Array.Length - 1; i >= state.BorderSortedPart; --i)
             {
                 if (i != 0)
                 {

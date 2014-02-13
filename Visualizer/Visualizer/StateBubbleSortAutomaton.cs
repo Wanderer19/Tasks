@@ -12,7 +12,7 @@ namespace Visualizer
             SelectedElements = new List<int> {firstIndex, secondIndex};
 
             this.Array = array;
-            this.DescriptionState = comment;
+            this.Comment = comment;
             this.StateId = stateId;
             this.StateNumber = state;
         }
