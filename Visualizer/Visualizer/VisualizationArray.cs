@@ -21,6 +21,22 @@ namespace Visualizer
         private readonly System.Drawing.SolidBrush elementsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
         private readonly Pen elementsPen = new Pen(Color.Blue, 7);
         private readonly System.Drawing.SolidBrush brushSortedPartArray = new SolidBrush(Color.DeepSkyBlue);
+        private readonly Color colorSortedPart = Color.DeepSkyBlue;
+
+        public static readonly Point PositionFirstElement = new Point(3, 200);
+        public static readonly int WidthElemet = 100;
+        public static readonly Color SelectedElementColor = Color.Fuchsia;
+        public static readonly Color ElementColor = Color.LightCyan;
+        public static readonly Size ElementSize = new Size(100, 100);
+
+        public VisualizationArray()
+        {
+        }
+
+        public VisualizationArray(int arrayLength)
+        {
+            this.arrayLength = arrayLength;
+        }
 
         private void IdentifyCoordinates()
         {
@@ -28,8 +44,7 @@ namespace Visualizer
 
             for (var i = 0; i < arrayLength; ++i)
             {
-                coordinatesElements.Add(new Point(BubbleSortVisualizerSettings.PositionFirstElement.X + i * BubbleSortVisualizerSettings.WidthElemet,
-                    BubbleSortVisualizerSettings.PositionFirstElement.Y));
+                coordinatesElements.Add(new Point(PositionFirstElement.X + i * WidthElemet, PositionFirstElement.Y));
             }
         }
 
@@ -44,11 +59,12 @@ namespace Visualizer
             return coordinatesElements[index];
         }
 
-        private Color GetColorElement(int index)
+        private Color GetColorElement(int index, Point sortedPart)
         {
-            return this.IsSelected(index)
-                    ? BubbleSortVisualizerSettings.SelectedElementColor
-                    : BubbleSortVisualizerSettings.ElementColor;
+            if (sortedPart.Y >= 0 && sortedPart.X >= 0 && index >= sortedPart.X && index <= sortedPart.Y)
+                return colorSortedPart;
+
+            return this.IsSelected(index) ? SelectedElementColor : ElementColor;
         }
 
         private void SelectElements(params int [] indexes)
@@ -69,44 +85,14 @@ namespace Visualizer
 
             for (var i = 0; i < arrayLength; ++i)
             {
-                    var rectangle = new Rectangle(GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
+                    var rectangle = new Rectangle(GetCoordinates(i), ElementSize);
 
-                    graphics.FillRectangle(new SolidBrush(GetColorElement(i)), rectangle);
+                    graphics.FillRectangle(new SolidBrush(GetColorElement(i, state.BoundariesSortedPart)), rectangle);
                     graphics.DrawRectangle(elementsPen, rectangle);
                     graphics.DrawString(state.Array[i].ToString(), digitsFont, digitsBrush,
                     GetCoordinates(i), formatDrawing);
             }
 
-        }
-
-
-        public  void DrawSortedPartArray(StateAutomaton state, Graphics graphics)
-        {
-            for (var i = 0; i <= state.BorderSortedPart; ++i)
-            {
-                var rectangle = new System.Drawing.Rectangle(GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
-
-                graphics.FillRectangle(brushSortedPartArray, rectangle);
-                graphics.DrawRectangle(elementsPen, rectangle);
-                graphics.DrawString(state.Array[i].ToString(), digitsFont, digitsBrush, GetCoordinates(i), formatDrawing);
-            }
-        }
-
-        public void DrawSortedInvertedPartArray(StateAutomaton state, Graphics graphics)
-        {
-            arrayLength = state.Array.Length;
-            IdentifyCoordinates();
-
-            if (state.BorderSortedPart == -1) return;
-            
-            for (var i = state.BorderSortedPart; i < arrayLength; ++i)
-            {
-                var rectangle = new System.Drawing.Rectangle(GetCoordinates(i), BubbleSortVisualizerSettings.ElementSize);
-
-                graphics.FillRectangle(brushSortedPartArray, rectangle);
-                graphics.DrawRectangle(elementsPen, rectangle);
-                graphics.DrawString(state.Array[i].ToString(), digitsFont, digitsBrush, GetCoordinates(i), formatDrawing);
-            }
         }
     }
 }

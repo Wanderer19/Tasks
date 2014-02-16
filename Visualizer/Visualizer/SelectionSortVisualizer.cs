@@ -70,7 +70,7 @@ namespace Visualizer
                     break;
                 }
             }
-            this.visualizationArray.DrawSortedPartArray(stateAutomaton, graphics);
+            //this.visualizationArray.DrawSortedPartArray(stateAutomaton, graphics);
             this.DrawComment(stateAutomaton.Comment);
         }
 
@@ -92,7 +92,7 @@ namespace Visualizer
         {
             base.ClearOldComments();
            
-            graphics.FillRectangle(elementsBrush, BubbleSortVisualizerSettings.UpperCommentField);
+            graphics.FillRectangle(elementsBrush, UpperCommentField);
         }
 
         public override void ToStart(object sender, EventArgs e)

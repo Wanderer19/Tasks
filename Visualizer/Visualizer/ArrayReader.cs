@@ -10,7 +10,7 @@ namespace Visualizer
     {
         public static bool IsValidInputString(string inputData)
         {
-            return inputData.Any(i => Char.IsWhiteSpace(i) || Char.IsNumber(i) || i == '-');
+            return inputData.All(c => Char.IsWhiteSpace(c) || c >= '0' && c <= '9' || c == '-');
         }
 
         public static bool IsValidValuesElementsInArray(ICollection<int> array, int sizeLimitArray, int limitArrayElementValue)

@@ -22,19 +22,19 @@ namespace Visualizer
                 System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 
         private readonly Pen edgesPen = new Pen(Color.Blue, 2);
-        
+        private readonly Rectangle rootsCoordinates = new Rectangle(1290, 400, NodesDiameter, NodesDiameter);
+        private readonly PointF coordinatesRootsValue = new PointF(1295, 420);
         private readonly System.Drawing.Font digitsFont = new System.Drawing.Font("Arial", 20);
         private readonly System.Drawing.StringFormat formatDrawing = new System.Drawing.StringFormat();
         private readonly System.Drawing.SolidBrush digitsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
         private readonly System.Drawing.SolidBrush elementsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
         private readonly Pen elementsPen = new Pen(Color.Blue, 7);
+        private readonly Color colorSortedPart = Color.DeepSkyBlue;
         private readonly System.Drawing.SolidBrush brushSortedPartArray = new SolidBrush(Color.DeepSkyBlue);
         private readonly Color selectedNodeColor = Color.MediumPurple;
         private readonly Color nodeColor = Color.LightCyan;
-
-        public VisualizationHeap()
-        {
-        }
+        private readonly PointF offsetTextNode = new PointF(5, 20);
+        private readonly Pen penInvisibleEdges = new Pen(Color.LightCyan, 4);
 
         private  Rectangle GetCoordinatesNode(int index)
         {
@@ -51,8 +51,11 @@ namespace Visualizer
             return coordinatesValues[index];
         }
 
-        private Color GetColorElement(int index)
+        private Color GetColorElement(int index, int borderSortedPart)
         {
+            if (borderSortedPart >= 0 && index >= borderSortedPart)
+                return colorSortedPart;
+            
             return this.IsSelected(index)
                     ? selectedNodeColor
                     : nodeColor;
@@ -64,9 +67,9 @@ namespace Visualizer
             coordinatesEdges = new Dictionary<int, Tuple<Point, Point>>();
             coordinatesValues = new Dictionary<int, PointF>();
 
+            coordinatesNodesPyramid.Add(0, rootsCoordinates);
+            coordinatesValues.Add(0, coordinatesRootsValue);
 
-            coordinatesNodesPyramid.Add(0, new Rectangle(1290, 400, NodesDiameter, NodesDiameter));
-            coordinatesValues.Add(0, new PointF(1295, 420));
             var depthsNodes = new Dictionary<int, int> { { 0, 0 } };
 
             for (var i = 0; i <= arrayLength / 2 - 1; ++i)
@@ -82,7 +85,7 @@ namespace Visualizer
                         coordinatesNodesPyramid.Add(i * 2 + 1, new Rectangle(coordinatesNodesPyramid[i].X - OffsetBetweenNeighbors / (depthsNodes[i * 2 + 1]), coordinatesNodesPyramid[i].Y + DistanceBetweenLevels, NodesDiameter, NodesDiameter));
                         coordinatesEdges.Add(i*2+1, Tuple.Create(new Point(coordinatesNodesPyramid[i].X + NodesDiameter / 2, coordinatesNodesPyramid[i].Y + NodesDiameter),
                                         new Point(coordinatesNodesPyramid[i * 2 + 1].X + NodesDiameter / 2, coordinatesNodesPyramid[i*2+1].Y)));
-                        coordinatesValues.Add(i*2+1, new PointF(coordinatesNodesPyramid[i*2+1].X + 5, coordinatesNodesPyramid[i*2+1].Y + 20));
+                        coordinatesValues.Add(i*2+1, new PointF(coordinatesNodesPyramid[i*2+1].X + offsetTextNode.X, coordinatesNodesPyramid[i*2+1].Y + offsetTextNode.Y));
                     }
                     
                     if (i * 2 + 2 < arrayLength)
@@ -90,7 +93,7 @@ namespace Visualizer
                         coordinatesNodesPyramid.Add(i * 2 + 2, new Rectangle(coordinatesNodesPyramid[i].X + OffsetBetweenNeighbors / (depthsNodes[i * 2 + 2]), coordinatesNodesPyramid[i].Y + DistanceBetweenLevels, NodesDiameter, NodesDiameter));
                         coordinatesEdges.Add(i * 2 + 2, Tuple.Create(new Point(coordinatesNodesPyramid[i].X + NodesDiameter / 2, coordinatesNodesPyramid[i].Y + NodesDiameter),
                                         new Point(coordinatesNodesPyramid[i * 2 + 2].X + NodesDiameter / 2, coordinatesNodesPyramid[i * 2 + 2].Y)));
-                        coordinatesValues.Add(i * 2 + 2, new PointF(coordinatesNodesPyramid[i * 2 + 2].X + 5, coordinatesNodesPyramid[i * 2 + 2].Y + 20));
+                        coordinatesValues.Add(i * 2 + 2, new PointF(coordinatesNodesPyramid[i * 2 + 2].X + offsetTextNode.X, coordinatesNodesPyramid[i * 2 + 2].Y + offsetTextNode.Y));
                     }
                 }
             }
@@ -119,92 +122,70 @@ namespace Visualizer
                 selectedNodes[index] = true;
         }
 
-        private void DrawRoot(int rootsValue, Graphics graphics)
-        {
-            graphics.FillEllipse(new SolidBrush(GetColorElement(0)), GetCoordinatesNode(0));
-
-            graphics.DrawEllipse(elementsPen, GetCoordinatesNode(0));
-            graphics.DrawString(rootsValue.ToString(), nodesFontDigits, digitsBrush, GetCoordinatesValue(0), formatDrawing);
-        }
-
         public void DrawHeap(StateAutomaton state, Graphics graphics)
         {
             arrayLength = state.Array.Length;
-            SelectNodes(state.SelectedElements.ToArray());
-            SelectNode(state.SiftingElement);
-
-         
             DefineCoordinates();
 
-            DrawRoot(state.Array[0], graphics);
-
+            SelectNodes(state.SelectedElements.ToArray());
+            SelectNode(state.SiftingElement);
+            DrawNode(0, state, graphics);
             for (var i = 0; i <= arrayLength / 2 - 1; ++i)
             {
+                
+                
                 if (i * 2 + 1 < arrayLength)
-                {
-                    DrawNode(i * 2 + 1, state.Array[i * 2 + 1], graphics);
-                }
+                    DrawNode(i * 2 + 1, state, graphics);
+                
                 if (i * 2 + 2 < arrayLength)
-                {
-                    DrawNode(i * 2 + 2, state.Array[i * 2 + 1], graphics);
-                }
+                    DrawNode(i * 2 + 2, state, graphics);
             }
         }
 
-        private void DrawNode(int index, int value, Graphics graphics)
+        private void DrawNode(int index, StateAutomaton state,  Graphics graphics)
         {
-                    
-                graphics.FillEllipse(new SolidBrush(GetColorElement(index)), GetCoordinatesNode(index));
-                graphics.DrawEllipse(elementsPen, GetCoordinatesNode(index));
-
-                var coordinatesEdge = GetCoordinatesEdge(index);
-                graphics.DrawLine(edgesPen, coordinatesEdge.Item1, coordinatesEdge.Item2);
-
-                graphics.DrawString(value.ToString(), nodesFontDigits, digitsBrush, GetCoordinatesValue(index),
-                    formatDrawing);
+            if (state.BorderSortedPart >= 0 && index >= state.BorderSortedPart)
+                DrawDetachedNode(index, state, graphics);
+            else
+                DrawEdge(index, true, graphics);
 
             
+            graphics.FillEllipse(new SolidBrush(GetColorElement(index, state.BorderSortedPart)), GetCoordinatesNode(index));
+            graphics.DrawEllipse(elementsPen, GetCoordinatesNode(index));
+
+            graphics.DrawString(state.Array[index].ToString(), nodesFontDigits, digitsBrush, GetCoordinatesValue(index),
+                    formatDrawing);
         }
 
-        private int GetParent(int i)
+        private void DrawEdge(int index, bool isVisible, Graphics graphics)
+        {
+            if (index != 0)
+            {
+                var coordinatesEdge = GetCoordinatesEdge(index);
+
+                var pen = isVisible ? edgesPen : penInvisibleEdges;
+                graphics.DrawLine(pen, coordinatesEdge.Item1, coordinatesEdge.Item2);
+            }
+        }
+
+        private void DrawDetachedNode(int index, StateAutomaton state, Graphics graphics)
+        {
+            DrawEdge(index, false, graphics);
+            var parent = GetParent(index);
+            
+            DrawNode(parent, state, graphics);
+        }
+
+        private static int GetParent(int i)
         {
             if ((i - 1)%2 == 0)
             {
                 return (i - 1)/2;
             }
-            else
-            {
-                return (i - 2)/2;
-            }
-        }
-
-        public void DrawSortedPartHeap(StateAutomaton state, Graphics graphics)
-        {
-            arrayLength = state.Array.Length;
-            DefineCoordinates();
-
-            if (state.BorderSortedPart == -1) return;
             
-            for (var i = state.Array.Length - 1; i >= state.BorderSortedPart; --i)
-            {
-                if (i != 0)
-                {
-                    var coordinatesEdge = GetCoordinatesEdge(i);
-                
-                    graphics.DrawLine(new Pen(Color.LightCyan, 4), coordinatesEdge.Item1, coordinatesEdge.Item2);
-                }
-                graphics.FillEllipse(new SolidBrush(Color.LightSkyBlue), GetCoordinatesNode(i));
-                graphics.DrawEllipse(elementsPen, GetCoordinatesNode(i));
-
-                graphics.DrawString(state.Array[i].ToString(), nodesFontDigits, digitsBrush, GetCoordinatesValue(i),
-                    formatDrawing);
-
-                if (i != 0)
-                {
-                    var parent = GetParent(i);
-                    graphics.DrawEllipse(elementsPen, GetCoordinatesNode(parent));
-                }
-            }
+             return (i - 2)/2;
+            
         }
+
     }
 }

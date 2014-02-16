@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -16,12 +17,14 @@ namespace Visualizer
         public int BorderSortedPart { get; protected set; }
         public int SiftingElement { get; protected set; }
         public string State { get; protected set; }
-       
+        public Point BoundariesSortedPart { get; protected set; }
+
         public StateAutomaton()
         {
             SelectedElements = new List<int>();
             BorderSortedPart = -1;
             SiftingElement = -1;
+            BoundariesSortedPart = new Point(-1, -1);
         }
 
         public StateAutomaton(int[] array)
@@ -31,6 +34,7 @@ namespace Visualizer
             SelectedElements = new List<int>();
             StateId = -1;
             SiftingElement = -1;
+            BoundariesSortedPart = new Point(-1, -1);
         }
     }
 }

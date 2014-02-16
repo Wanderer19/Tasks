@@ -24,6 +24,7 @@ namespace Visualizer
         protected Application.IdentifiersSorts sortId;
         protected int[] inputArray;
         protected int countUpdateScreen = 0;
+        protected readonly Rectangle UpperCommentField = new Rectangle(0, 0, 1500, 200);
 
         public Visualizer()
         {

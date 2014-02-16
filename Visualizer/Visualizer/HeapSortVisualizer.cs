@@ -12,7 +12,7 @@ namespace Visualizer
 {
     public partial class HeapSortVisualizer : Visualizer
     {
-        private VisualizationHeap visualizationHeap;
+        private readonly VisualizationHeap visualizationHeap;
 
         public HeapSortVisualizer(SortingForm parentWindow, int [] array)
         {
@@ -30,7 +30,8 @@ namespace Visualizer
             if (countUpdateScreen == 0)
             {
                 base.DrawInitialState(sender, e);
-                this.visualizationHeap.DrawHeap(new StateAutomaton(inputArray), graphics);
+                
+                visualizationHeap.DrawHeap(new StateAutomaton(inputArray), graphics);
             }
         }
 
@@ -72,15 +73,17 @@ namespace Visualizer
                 }
                 case (int)AutomatonSiftDown.States.EndLoop:
                 {
-                    this.visualizationArray.DrawArray(stateAutomaton, graphics);
-                    this.visualizationHeap.DrawHeap(stateAutomaton, graphics);
+                    visualizationArray.DrawArray(stateAutomaton, graphics);
+                    visualizationHeap.DrawHeap(stateAutomaton, graphics);
+                    
                     break;
                 }
                 case (int)AutomatonHeapSort.States.FinalState:
                 {
-                    this.visualizationArray.DrawArray(stateAutomaton, graphics);
-                    this.visualizationHeap.DrawHeap(stateAutomaton, graphics);
-                    this.selfTimer.Stop();
+                    visualizationArray.DrawArray(stateAutomaton, graphics);
+                    visualizationHeap.DrawHeap(stateAutomaton, graphics);
+                    selfTimer.Stop();
+                    
                     break;
                 }
                 case (int)AutomatonHeapSort.States.InitialState:
@@ -98,8 +101,8 @@ namespace Visualizer
                 
             }
             
-            visualizationArray.DrawSortedInvertedPartArray(stateAutomaton, graphics);
-            visualizationHeap.DrawSortedPartHeap(stateAutomaton, graphics);
+            //visualizationArray.DrawSortedInvertedPartArray(stateAutomaton, graphics);
+
             base.DrawComment(stateAutomaton.Comment);
         }
 
@@ -115,15 +118,11 @@ namespace Visualizer
         {
             base.DrawSwap(stateAutomaton);
 
-            //visualizationHeap.SelectNodes(stateAutomaton.SelectedElements.ToArray());
-
             visualizationHeap.DrawHeap(stateAutomaton, graphics);
         }
 
         public void DrawCompare(StateAutomaton stateAutomaton)
         {
-           // visualizationHeap.SelectNodes(stateAutomaton.SelectedElements.ToArray());
-
             visualizationArray.DrawArray(stateAutomaton, graphics);
             visualizationHeap.DrawHeap(stateAutomaton, graphics);
         }
@@ -132,7 +131,6 @@ namespace Visualizer
         {
             this.visualizationHeap.DrawHeap(new StateAutomaton(inputArray), this.graphics);
             base.ToStart(sender, e);
-          
         }
     }
 }

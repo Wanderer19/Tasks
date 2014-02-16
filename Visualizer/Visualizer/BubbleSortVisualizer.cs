@@ -20,7 +20,9 @@ namespace Visualizer
         private readonly System.Drawing.SolidBrush elementsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
         private readonly Pen elementsPen = new Pen(Color.Blue, 7);
         private readonly System.Drawing.SolidBrush brushSortedPartArray = new SolidBrush(Color.DeepSkyBlue);
-        
+        public readonly Point[] FirstPointerCoordinates = new Point[] { new Point(53, 180), new Point(100, 155), new Point(153, 180) };
+        public readonly string SymbolComparison = "VS";
+
         public BubbleSortVisualizer(SortingForm parentWindow, int[] array)
         {
             this.parentWindow = parentWindow;
@@ -66,7 +68,7 @@ namespace Visualizer
         public override void ClearOldComments()
         {
             base.ClearOldComments();
-            graphics.FillRectangle(elementsBrush, BubbleSortVisualizerSettings.UpperCommentField);
+            graphics.FillRectangle(elementsBrush, UpperCommentField);
         }
 
 
@@ -82,9 +84,9 @@ namespace Visualizer
         {
             var points = new Point[]
             {
-                new Point(BubbleSortVisualizerSettings.FirstPointerCoordinates[0].X + index * BubbleSortVisualizerSettings.WidthElemet, BubbleSortVisualizerSettings.FirstPointerCoordinates[0].Y), 
-                new Point(BubbleSortVisualizerSettings.FirstPointerCoordinates[1].X + index * BubbleSortVisualizerSettings.WidthElemet, BubbleSortVisualizerSettings.FirstPointerCoordinates[1].Y),
-                new Point(BubbleSortVisualizerSettings.FirstPointerCoordinates[2].X + index * BubbleSortVisualizerSettings.WidthElemet, BubbleSortVisualizerSettings.FirstPointerCoordinates[2].Y)
+                new Point(FirstPointerCoordinates[0].X + index * VisualizationArray.WidthElemet, FirstPointerCoordinates[0].Y), 
+                new Point(FirstPointerCoordinates[1].X + index * VisualizationArray.WidthElemet, FirstPointerCoordinates[1].Y),
+                new Point(FirstPointerCoordinates[2].X + index * VisualizationArray.WidthElemet, FirstPointerCoordinates[2].Y)
             };
 
            
@@ -93,7 +95,7 @@ namespace Visualizer
 
         private void DrawSymbolComparison(int index)
         {
-            graphics.DrawString(BubbleSortVisualizerSettings.SymbolComparison, digitsFont, digitsBrush, 80 + 100 * index, 100, formatDrawing);
+            graphics.DrawString(SymbolComparison, digitsFont, digitsBrush, 80 + 100 * index, 100, formatDrawing);
         }
     }
 }

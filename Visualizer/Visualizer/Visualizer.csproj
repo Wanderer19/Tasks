@@ -82,7 +82,6 @@
     <Compile Include="VisualizationArray.cs" />
     <Compile Include="IAutomaton.cs" />
     <Compile Include="AutomatonBubbleSort.cs" />
-    <Compile Include="BubbleSortVisualizerSettings.cs" />
     <Compile Include="SelectionSortVisualizer.cs">
       <SubType>Form</SubType>
     </Compile>

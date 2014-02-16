@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -17,6 +18,7 @@ namespace Visualizer
             this.Comment = comment;
             this.StateId = stateId;
             this.BorderSortedPart = borderSortedPart;
+            BoundariesSortedPart = new Point(0, borderSortedPart);
         }
     }
 }
