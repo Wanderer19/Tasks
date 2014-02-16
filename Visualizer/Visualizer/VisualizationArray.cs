@@ -21,7 +21,7 @@ namespace Visualizer
         private readonly System.Drawing.SolidBrush elementsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
         private readonly Pen elementsPen = new Pen(Color.Blue, 7);
         private readonly System.Drawing.SolidBrush brushSortedPartArray = new SolidBrush(Color.DeepSkyBlue);
-        private readonly Color colorSortedPart = Color.DeepSkyBlue;
+        public static readonly Color colorSortedPart = Color.DeepSkyBlue;
 
         public static readonly Point PositionFirstElement = new Point(3, 200);
         public static readonly int WidthElemet = 100;
@@ -38,7 +38,7 @@ namespace Visualizer
             this.arrayLength = arrayLength;
         }
 
-        private void IdentifyCoordinates()
+        public void IdentifyCoordinates()
         {
             coordinatesElements = new List<Point>();
 
@@ -48,18 +48,18 @@ namespace Visualizer
             }
         }
 
-        private bool IsSelected(int index)
+        public bool IsSelected(int index)
         {
             return selectedIndexes[index];
         }
 
        
-        private Point GetCoordinates(int index)
+        public Point GetCoordinates(int index)
         {
             return coordinatesElements[index];
         }
 
-        private Color GetColorElement(int index, Point sortedPart)
+        public Color GetColorElement(int index, Point sortedPart)
         {
             if (sortedPart.Y >= 0 && sortedPart.X >= 0 && index >= sortedPart.X && index <= sortedPart.Y)
                 return colorSortedPart;
@@ -67,7 +67,7 @@ namespace Visualizer
             return this.IsSelected(index) ? SelectedElementColor : ElementColor;
         }
 
-        private void SelectElements(params int [] indexes)
+        public void SelectElements(params int [] indexes)
         {
             selectedIndexes = Enumerable.Range(0, arrayLength).Select(i => false).ToArray();
 

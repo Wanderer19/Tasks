@@ -11,9 +11,9 @@ namespace Visualizer
         private Dictionary<int, Rectangle> coordinatesNodesPyramid;
         private Dictionary<int, Tuple<Point, Point>> coordinatesEdges;
         private Dictionary<int, PointF> coordinatesValues; 
-        private const int OffsetBetweenNeighbors = 300;
-        private const int DistanceBetweenLevels = 150;
-        private const int NodesDiameter  = 75;
+        public static readonly int OffsetBetweenNeighbors = 300;
+        public static readonly int DistanceBetweenLevels = 150;
+        public static readonly int NodesDiameter = 75;
         private int arrayLength;
         private bool [] selectedNodes = new bool[]{};
         
@@ -21,37 +21,44 @@ namespace Visualizer
                 System.Drawing.FontStyle.Bold,
                 System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 
-        private readonly Pen edgesPen = new Pen(Color.Blue, 2);
-        private readonly Rectangle rootsCoordinates = new Rectangle(1290, 400, NodesDiameter, NodesDiameter);
-        private readonly PointF coordinatesRootsValue = new PointF(1295, 420);
-        private readonly System.Drawing.Font digitsFont = new System.Drawing.Font("Arial", 20);
-        private readonly System.Drawing.StringFormat formatDrawing = new System.Drawing.StringFormat();
-        private readonly System.Drawing.SolidBrush digitsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
-        private readonly System.Drawing.SolidBrush elementsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
-        private readonly Pen elementsPen = new Pen(Color.Blue, 7);
-        private readonly Color colorSortedPart = Color.DeepSkyBlue;
-        private readonly System.Drawing.SolidBrush brushSortedPartArray = new SolidBrush(Color.DeepSkyBlue);
-        private readonly Color selectedNodeColor = Color.MediumPurple;
-        private readonly Color nodeColor = Color.LightCyan;
-        private readonly PointF offsetTextNode = new PointF(5, 20);
-        private readonly Pen penInvisibleEdges = new Pen(Color.LightCyan, 4);
+       public static readonly Pen edgesPen = new Pen(Color.Blue, 2);
+       public static readonly Rectangle rootsCoordinates = new Rectangle(1290, 400, NodesDiameter, NodesDiameter);
+       public static readonly PointF coordinatesRootsValue = new PointF(1295, 420);
+       public static readonly System.Drawing.Font digitsFont = new System.Drawing.Font("Arial", 20);
+       public static readonly System.Drawing.StringFormat formatDrawing = new System.Drawing.StringFormat();
+       public static readonly System.Drawing.SolidBrush digitsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+       public static readonly System.Drawing.SolidBrush elementsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
+       public static readonly Pen elementsPen = new Pen(Color.Blue, 7);
+       public static readonly Color colorSortedPart = Color.DeepSkyBlue;
+       public static readonly System.Drawing.SolidBrush brushSortedPartArray = new SolidBrush(Color.DeepSkyBlue);
+       public static readonly Color selectedNodeColor = Color.MediumPurple;
+       public static readonly Color nodeColor = Color.LightCyan;
+       public static readonly PointF offsetTextNode = new PointF(5, 20);
+       public static readonly Pen penInvisibleEdges = new Pen(Color.LightCyan, 4);
 
-        private  Rectangle GetCoordinatesNode(int index)
+        public VisualizationHeap() { }
+
+        public VisualizationHeap(int arrayLength)
+        {
+            this.arrayLength = arrayLength;
+        }
+
+        public  Rectangle GetCoordinatesNode(int index)
         {
             return coordinatesNodesPyramid[index];
         }
 
-        private Tuple<Point, Point> GetCoordinatesEdge(int index)
+        public Tuple<Point, Point> GetCoordinatesEdge(int index)
         {
             return coordinatesEdges[index];
         }
 
-        private PointF GetCoordinatesValue(int index)
+        public PointF GetCoordinatesValue(int index)
         {
             return coordinatesValues[index];
         }
 
-        private Color GetColorElement(int index, int borderSortedPart)
+        public Color GetColorElement(int index, int borderSortedPart)
         {
             if (borderSortedPart >= 0 && index >= borderSortedPart)
                 return colorSortedPart;
@@ -61,7 +68,7 @@ namespace Visualizer
                     : nodeColor;
         }
 
-        private void DefineCoordinates()
+        public void DefineCoordinates()
         {
             coordinatesNodesPyramid = new Dictionary<int, Rectangle>();
             coordinatesEdges = new Dictionary<int, Tuple<Point, Point>>();
@@ -100,12 +107,12 @@ namespace Visualizer
 
         }
 
-        private bool IsSelected(int index)
+        public bool IsSelected(int index)
         {
             return selectedNodes[index];
         }
 
-        private void SelectNodes(params int[] nodes)
+        public void SelectNodes(params int[] nodes)
         {
 
             selectedNodes = Enumerable.Range(0, arrayLength).Select(i => false).ToArray();
@@ -116,7 +123,7 @@ namespace Visualizer
             }
         }
 
-        private void SelectNode(int index)
+        public void SelectNode(int index)
         {
             if (index >=0 && index < arrayLength)
                 selectedNodes[index] = true;
@@ -176,8 +183,11 @@ namespace Visualizer
             DrawNode(parent, state, graphics);
         }
 
-        private static int GetParent(int i)
+        public static int GetParent(int i)
         {
+            if (i == 0)
+                return 0;
+
             if ((i - 1)%2 == 0)
             {
                 return (i - 1)/2;
