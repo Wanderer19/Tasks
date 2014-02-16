@@ -7,8 +7,7 @@ namespace Visualizer
 {
     class StateSelectionSortAutomaton : StateAutomaton
     {
-        public StateSelectionSortAutomaton() { }
-        public StateSelectionSortAutomaton(List<int> selectedIndexes, int borderSortedPart, int indexMinimum, string stateId, string comment, int[] array)
+        public StateSelectionSortAutomaton(List<int> selectedIndexes, int borderSortedPart, int indexMinimum, int stateId, string comment, int[] array)
         {
             SelectedElements=new List<int>();
             SelectedElements.AddRange(selectedIndexes);

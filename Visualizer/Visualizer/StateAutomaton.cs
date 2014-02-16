@@ -9,17 +9,27 @@ namespace Visualizer
     {
         public string Comment { get; protected set; }
         public List<int> SelectedElements { get; protected set; } 
-        public string StateId { get; protected set; }
+        public int StateId { get; protected set; }
         public int StateNumber { get; protected set; }
         public int[] Array { get; protected set; }
         public int IndexMinimum { get; protected set; }
         public int BorderSortedPart { get; protected set; }
         public int SiftingElement { get; protected set; }
-
+        public string State { get; protected set; }
+       
         public StateAutomaton()
         {
             SelectedElements = new List<int>();
             BorderSortedPart = -1;
+            SiftingElement = -1;
+        }
+
+        public StateAutomaton(int[] array)
+        {
+            Array = array;
+            BorderSortedPart = -1;
+            SelectedElements = new List<int>();
+            StateId = -1;
             SiftingElement = -1;
         }
     }

@@ -18,6 +18,14 @@ namespace Visualizer
     {
         private System.Resources.ResourceManager generalSettings;
 
+        public enum IdentifiersSorts
+        {
+            DefaultSorting = 0,
+            BubbleSort = 1,
+            SelectionSort = 2,
+            HeapSort = 3
+        }
+
         public Application()
         {
             this.DownloadConfigurationFile("Visualizer.GeneralSettings");
@@ -35,7 +43,7 @@ namespace Visualizer
         {
             HideMainWindow();
             
-            var bubbleSortForm = new SortingForm(this, "Visualizer.BubbleSortFormSettings");
+            var bubbleSortForm = new SortingForm(this, "Visualizer.BubbleSortFormSettings", IdentifiersSorts.BubbleSort);
             bubbleSortForm.Show();
         }
 
@@ -43,7 +51,7 @@ namespace Visualizer
         {
             HideMainWindow();
 
-            var selectionSortForm = new SortingForm(this, "Visualizer.SelectionSortFormSettings");
+            var selectionSortForm = new SortingForm(this, "Visualizer.SelectionSortFormSettings", IdentifiersSorts.SelectionSort);
 
             selectionSortForm.Show();
         }
@@ -52,7 +60,7 @@ namespace Visualizer
         {
             HideMainWindow();
 
-            var selectionSortForm = new SortingForm(this, "Visualizer.HeapSortFormSettings");
+            var selectionSortForm = new SortingForm(this, "Visualizer.HeapSortFormSettings", IdentifiersSorts.HeapSort);
 
             selectionSortForm.Show();
         }

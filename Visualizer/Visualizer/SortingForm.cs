@@ -17,13 +17,14 @@ namespace Visualizer
     public partial class SortingForm : Form
     {
         private readonly Application parentWindow;
+        private readonly Application.IdentifiersSorts sortId;
 
         private System.Resources.ResourceManager sortingFormSettings;
        
-        public SortingForm(Application parentWindow, string fileSettings)
+        public SortingForm(Application parentWindow, string fileSettings, Application.IdentifiersSorts sortId)
         {
             this.parentWindow = parentWindow;
-            
+            this.sortId = sortId;
             this.DownloadConfigurationFile(fileSettings);
             InitializeComponent();
         }
@@ -68,7 +69,7 @@ namespace Visualizer
         {
             HideMainWindow();
 
-            var dataReceiverForm = new DataReceiverForm(this, (int) sortingFormSettings.GetObject("SortID"));
+            var dataReceiverForm = new DataReceiverForm(this, this.sortId);
             dataReceiverForm.Show();
         }
 

@@ -7,11 +7,9 @@ namespace Visualizer
 {
     class StateHeapSortAutomaton : StateAutomaton
     {
-        public StateHeapSortAutomaton(int firstIndex, int secondIndex, int siftingElement, string stateId, string comment, int[] array, int sortedPart)
+        public StateHeapSortAutomaton(int firstIndex, int secondIndex, int siftingElement, int stateId, string comment, int[] array, int sortedPart)
         {
-            SelectedElements = new List<int>();
-            SelectedElements.Add(firstIndex);
-            SelectedElements.Add(secondIndex);
+            SelectedElements = new List<int> {firstIndex, secondIndex};
             this.BorderSortedPart = sortedPart;
 
             SiftingElement = siftingElement;

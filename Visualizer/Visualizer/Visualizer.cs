@@ -19,9 +19,9 @@ namespace Visualizer
         protected VisualizationArray visualizationArray;
         protected SortingForm parentWindow;
         protected Automaton automatonSort;
-        protected bool automaticMode = false;
+        protected bool isAutomaticMode = false;
         protected System.Timers.Timer selfTimer = new System.Timers.Timer();
-        protected int sortId;
+        protected Application.IdentifiersSorts sortId;
         protected int[] inputArray;
         protected int countUpdateScreen = 0;
 
@@ -60,12 +60,7 @@ namespace Visualizer
 
         public virtual void ToStart(object sender, EventArgs e)
         {
-            this.ClearOldComments();
-            this.visualizationArray.DeselectAllElements();
-
-            var state = automatonSort.ToStart();
-
-            this.visualizationArray.DrawArray(state.Array, this.graphics);
+            this.DrawState(automatonSort.ToStart());
         }
 
         public virtual void ClearOldComments()
@@ -75,13 +70,10 @@ namespace Visualizer
 
         public virtual void EnableAutomaticMode(object sender, EventArgs e)
         {
-            if (!this.automaticMode)
+            if (!this.isAutomaticMode)
             {
-                this.backwardButton.Enabled = false;
-                this.forwardButton.Enabled = false;
-                this.continueButton.Enabled = false;
-
-                this.automaticMode = true;
+                ToDisableButtons();
+                this.isAutomaticMode = true;
                
                 selfTimer.Start();
             }
@@ -99,30 +91,26 @@ namespace Visualizer
 
         public virtual void DrawState(StateAutomaton stateAutomaton)
         {
-
+           
         }
 
         public virtual void DoPause(object sender, EventArgs e)
         {
             ToEnableButtons();
             selfTimer.Stop();
-            this.automaticMode = false;
+            this.isAutomaticMode = false;
         }
 
         public virtual void DrawSwap(StateAutomaton state)
         {
-            visualizationArray.SelectElements(state.SelectedElements.ToArray());
-
-            this.visualizationArray.DrawArray(state.Array, this.graphics);
-
-            visualizationArray.DeselectElements(state.SelectedElements.ToArray());
-
+            this.visualizationArray.DrawArray(state, this.graphics);
         }
+
         public virtual void Proceed(object sender, EventArgs e)
         {
             selfTimer.Start();
             ToDisableButtons();
-            this.automaticMode = true;
+            this.isAutomaticMode = true;
         }  
 
         public virtual void CloseVisualizer(object sender, EventArgs e)
@@ -164,7 +152,7 @@ namespace Visualizer
             {
                 graphics = this.CreateGraphics();
 
-                this.visualizationArray.DrawArray(this.inputArray, graphics);
+                this.visualizationArray.DrawArray(new StateAutomaton(this.inputArray), graphics);
 
                 countUpdateScreen++;
             }

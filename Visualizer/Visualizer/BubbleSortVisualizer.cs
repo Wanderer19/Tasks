@@ -14,9 +14,6 @@ namespace Visualizer
 {
     public partial class BubbleSortVisualizer : Visualizer
     {
-        public const string StateCompare = "compare";
-        public const string StateSwap = "swap";
-        
         private readonly System.Drawing.Font digitsFont = new System.Drawing.Font("Arial", 20);
         private readonly System.Drawing.StringFormat formatDrawing = new System.Drawing.StringFormat();
         private readonly System.Drawing.SolidBrush digitsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
@@ -24,12 +21,12 @@ namespace Visualizer
         private readonly Pen elementsPen = new Pen(Color.Blue, 7);
         private readonly System.Drawing.SolidBrush brushSortedPartArray = new SolidBrush(Color.DeepSkyBlue);
         
-        public BubbleSortVisualizer(SortingForm parentWindow, int[] array, int sortId)
+        public BubbleSortVisualizer(SortingForm parentWindow, int[] array)
         {
             this.parentWindow = parentWindow;
             this.inputArray = array;
-            this.sortId = sortId;
-            this.visualizationArray = new VisualizationArray(array.Length);
+            this.sortId = Application.IdentifiersSorts.BubbleSort;
+            this.visualizationArray = new VisualizationArray();
             this.automatonSort = new AutomatonBubbleSort(array);
             elementsPen.StartCap = LineCap.ArrowAnchor;
             elementsPen.EndCap = LineCap.ArrowAnchor;
@@ -43,16 +40,22 @@ namespace Visualizer
 
             switch (stateAutomaton.StateId)
             {
-                case StateCompare:
+                case (int) AutomatonBubbleSort.States.Condition:
                 {
                     this.DrawCompare(stateAutomaton);
                     
                     break;
                 }
-                case StateSwap:
+                case (int) AutomatonBubbleSort.States.SwappingAdjacentElements:
                 {
                     this.DrawSwap(stateAutomaton);
                     
+                    break;
+                }
+                default:
+                {
+                    this.visualizationArray.DrawArray(stateAutomaton, graphics);
+
                     break;
                 }
             }
@@ -69,7 +72,7 @@ namespace Visualizer
 
         private void DrawCompare(StateAutomaton state)
         {
-            this.visualizationArray.DrawArray(state.Array, this.graphics);
+            this.visualizationArray.DrawArray(state, this.graphics);
             
             this.DrawCursor(state.SelectedElements[0]);
             this.DrawSymbolComparison(state.SelectedElements[0]);

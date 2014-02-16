@@ -66,14 +66,13 @@ namespace Visualizer
         }
 
         private DataModel dataModel;
-        private readonly int[] array;
 
         public override StateAutomaton DoStepForward()
         {
             var isInterestingState = false;
             StepsCount++;
 
-            var state = new StateSelectionSortAutomaton();
+            var state = new StateAutomaton(array);
 
             while (!isInterestingState)
             {
@@ -195,7 +194,6 @@ namespace Visualizer
 
         private StateSelectionSortAutomaton GetStateSelectionSortAutomaton(States state)
         {
-            var stateId = "";
             var descriptionState = "";
             var selectedIndexes = new List<int>();
            
@@ -203,13 +201,10 @@ namespace Visualizer
             {
                 case States.InitializeIndexMinimum:
                 {
-                    stateId = "min";
-                    
                     break;
                 }
                 case States.Condition:
                 {
-                    stateId = "compare";
                     descriptionState = String.Format("Сравнение элемента с индексом {0} с текущим минимумом", dataModel.InnerCounter);
                     
                     selectedIndexes.Add(dataModel.InnerCounter);
@@ -218,13 +213,10 @@ namespace Visualizer
                 }
                 case States.UpdateMinimum:
                 {
-                    stateId = "min";
-                    
                     break;
                 }
                 case States.SwappingElements:
                 {
-                    stateId = "swap";
                     descriptionState = String.Format("Обмен элемента с индексом {0} с текущим минимумом", dataModel.OuterCounter);
 
                     selectedIndexes.Add(dataModel.OuterCounter);
@@ -234,21 +226,17 @@ namespace Visualizer
                 }
                 case States.FinalState:
                 {
-                    stateId = "end";
                     descriptionState = "Конец Сортировки";
                     break;
                 }
             }
 
-            return new StateSelectionSortAutomaton(selectedIndexes, dataModel.BorderSortedPart, dataModel.Array[dataModel.IndexMinimum], stateId, descriptionState, dataModel.Array);
+            return new StateSelectionSortAutomaton(selectedIndexes, dataModel.BorderSortedPart, dataModel.Array[dataModel.IndexMinimum], (int) dataModel.State, descriptionState, dataModel.Array);
         }
 
         public override StateAutomaton DoStepBackward()
         {
             dataModel = new DataModel((int[]) array.Clone());
-            
-            if (StepsCount -1 == 0 || StepsCount == 0)
-                return new StateSelectionSortAutomaton(new List<int>(), -1, -1, "", "", dataModel.Array);
 
             return base.DoStepBackward();
         }
@@ -258,7 +246,7 @@ namespace Visualizer
             StepsCount = 0;
             dataModel = new DataModel((int[])array.Clone());
 
-            return new StateSelectionSortAutomaton();
+            return new StateSelectionSortAutomaton(new List<int>(), -1, -1, (int)dataModel.State, "", dataModel.Array);
         }
     }
 }

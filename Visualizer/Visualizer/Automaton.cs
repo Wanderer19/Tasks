@@ -11,6 +11,7 @@ namespace Visualizer
         public static string StateEnd = "end";
         public static string StateStart = "start";
         protected int StepsCount = 0;
+        protected int[] array;
 
         public virtual StateAutomaton DoStepForward()
         {
@@ -19,13 +20,15 @@ namespace Visualizer
 
         public virtual StateAutomaton DoStepBackward()
         {
+            if (StepsCount - 1 == 0 || StepsCount == 0)
+            {
+                return new StateAutomaton(array);
+            }
+
             var newStepsCount = StepsCount-1;
             StepsCount = 0;
-            var state = new StateAutomaton();
+            var state = new StateAutomaton(array);
 
-            if (newStepsCount + 1 == 0)
-                return state;
-            
             while (StepsCount != newStepsCount)
             {
                 state = DoStepForward();
@@ -37,14 +40,7 @@ namespace Visualizer
 
         public virtual StateAutomaton ToStart()
         {
-            var stateAutomaton = this.DoStepBackward();
-
-            while (stateAutomaton.StateNumber != 0)
-            {
-                stateAutomaton = this.DoStepBackward();
-            }
-
-            return stateAutomaton;
+            return new StateAutomaton(array);
         }
     }
 }

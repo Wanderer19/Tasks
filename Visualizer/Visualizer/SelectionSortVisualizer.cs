@@ -11,23 +11,18 @@ namespace Visualizer
 {
     public partial class SelectionSortVisualizer : Visualizer
     {
-        public const string StateCompare = "compare";
-        public const string StateSwap = "swap";
-        public const string StateMin = "min";
-        public const string StateEnd = "end";
-        
         private readonly System.Drawing.Font digitsFont = new System.Drawing.Font("Arial", 20);
         private readonly System.Drawing.StringFormat formatDrawing = new System.Drawing.StringFormat();
         private readonly System.Drawing.SolidBrush digitsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
         private readonly System.Drawing.SolidBrush elementsBrush = new System.Drawing.SolidBrush(System.Drawing.Color.LightCyan);
 
-        public SelectionSortVisualizer(SortingForm parentWindow, int [] array, int sortId)
+        public SelectionSortVisualizer(SortingForm parentWindow, int [] array)
         {
             this.parentWindow = parentWindow;
-            this.sortId = sortId;
+            this.sortId = Application.IdentifiersSorts.SelectionSort;
             this.inputArray = (int []) array.Clone();
             
-            this.visualizationArray = new VisualizationArray(array.Length);
+            this.visualizationArray = new VisualizationArray();
             this.automatonSort = new AutomatonSelectionSort(array);
         }
 
@@ -35,50 +30,53 @@ namespace Visualizer
         {
             this.ClearOldComments();
 
-            this.visualizationArray.UpdateIndexesSortedPart(stateAutomaton.BorderSortedPart >= 0
-                ? Enumerable.Range(0, stateAutomaton.BorderSortedPart + 1)
-                : new List<int>());
 
             switch (stateAutomaton.StateId)
             {
-                case StateCompare:
+                case (int) AutomatonSelectionSort.States.Condition:
                 {
                     this.DrawCompare(stateAutomaton);
                     
                     break;
                 }
-                case StateSwap:
+                case (int) AutomatonSelectionSort.States.SwappingElements:
                 {
                     this.DrawSwap(stateAutomaton);
 
                     break;
                 }
-                case StateMin:
+                case (int) AutomatonSelectionSort.States.InitializeIndexMinimum:
                 {
                     this.DrawMin(stateAutomaton);
                     
                     break;
                 }
-                case StateEnd:
+                case (int)AutomatonSelectionSort.States.UpdateMinimum:
                 {
-                    this.visualizationArray.DrawArray(stateAutomaton.Array, this.graphics);
+                    this.DrawMin(stateAutomaton);
+
+                    break;
+                }
+                case (int)AutomatonSelectionSort.States.FinalState:
+                {
+                    this.visualizationArray.DrawArray(stateAutomaton, this.graphics);
                     
                     break;
                 }
                 default:
                 {
-                    this.visualizationArray.DrawArray(stateAutomaton.Array, this.graphics);
+                    this.visualizationArray.DrawArray(stateAutomaton, this.graphics);
 
                     break;
                 }
             }
-
+            this.visualizationArray.DrawSortedPartArray(stateAutomaton, graphics);
             this.DrawComment(stateAutomaton.Comment);
         }
 
         private void DrawMin(StateAutomaton state)
         {
-            this.visualizationArray.DrawArray(state.Array, this.graphics);
+            this.visualizationArray.DrawArray(state, this.graphics);
             
             graphics.DrawString(String.Format("Текущий минимум  = {0}", state.IndexMinimum), digitsFont, digitsBrush, 80 + 100 * 4, 100, formatDrawing);
         }
@@ -87,12 +85,7 @@ namespace Visualizer
         {
             this.DrawMin(state);
             
-            visualizationArray.SelectElements(state.SelectedElements.ToArray());
-            
-            this.visualizationArray.DrawArray(state.Array, this.graphics);
-            
-            visualizationArray.DeselectElements(state.SelectedElements.ToArray());
-      
+            this.visualizationArray.DrawArray(state, this.graphics);
         }
 
         public override void ClearOldComments()
@@ -104,11 +97,11 @@ namespace Visualizer
 
         public override void ToStart(object sender, EventArgs e)
         {
-            visualizationArray = new VisualizationArray(inputArray.Length);
+            visualizationArray = new VisualizationArray();
             
             automatonSort.ToStart();
             
-            this.visualizationArray.DrawArray(inputArray, this.graphics);
+            this.visualizationArray.DrawArray(new StateAutomaton(inputArray), this.graphics);
         }
     }
 }

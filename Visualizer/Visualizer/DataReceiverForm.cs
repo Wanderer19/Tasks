@@ -22,14 +22,10 @@ namespace Visualizer
         private System.Resources.ResourceManager settings;
         private bool choice = true;
         private readonly SortingForm parentWindow;
-        private readonly int sortId;
+        private readonly Application.IdentifiersSorts sortId;
         private int[] inputArray;
-        
-        private const int BubbleSortId = 1;
-        private const int SelectionSortId = 2;
-        private const int HeapSortId = 3;
 
-        public DataReceiverForm(SortingForm parentWindow, int sortId)
+        public DataReceiverForm(SortingForm parentWindow, Application.IdentifiersSorts sortId)
         {
             this.parentWindow = parentWindow;
             this.sortId = sortId;
@@ -98,17 +94,17 @@ namespace Visualizer
         {
             switch (sortId)
             {
-                case BubbleSortId:
+                case Application.IdentifiersSorts.BubbleSort:
                 {
-                       return new BubbleSortVisualizer(parentWindow, array, BubbleSortId);
+                       return new BubbleSortVisualizer(parentWindow, array);
                 }
-                case SelectionSortId:
+                case Application.IdentifiersSorts.SelectionSort:
                 {
-                      return new SelectionSortVisualizer(parentWindow, array, SelectionSortId);
+                      return new SelectionSortVisualizer(parentWindow, array);
                 }
-                case HeapSortId:
+                case Application.IdentifiersSorts.HeapSort:
                 {
-                    return new HeapSortVisualizer(parentWindow, array, HeapSortId);
+                    return new HeapSortVisualizer(parentWindow, array);
                 }
                 default:
                 {

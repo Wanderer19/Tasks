@@ -10,19 +10,19 @@ namespace Visualizer
     {
         public enum States
         {
-            InitialState = 0,
-            InitializeVariables = 1,
-            StartLoop = 2,
-            Loop = 3,
-            InitializingIndexMaximumChild = 4,
-            ConditionOnUpdateMaximumChild = 5,
-            UpdateMaximalChild = 6,
-            EndingConditionOnUpdateMaximumChild = 7,
-            ConditionOnUpdateParent = 8,
-            SwappingParentWithMaximumChild = 9,
-            EndLoop = 10,
-            EndingConditionOnUpdateParent = 11,
-            FinalState = 12
+            InitialState = 11,
+            InitializeVariables = 12,
+            StartLoop = 13,
+            Loop = 14,
+            InitializingIndexMaximumChild = 15,
+            ConditionOnUpdateMaximumChild = 16,
+            UpdateMaximalChild = 17,
+            EndingConditionOnUpdateMaximumChild = 18,
+            ConditionOnUpdateParent = 19,
+            SwappingParentWithMaximumChild = 20,
+            EndLoop = 21,
+            EndingConditionOnUpdateParent = 22,
+            FinalState = 23
         }
 
         private class  DataModel 
@@ -56,8 +56,8 @@ namespace Visualizer
 
         }
 
-        private DataModel dataModel;
-        public int State { get { return (int)dataModel.State; } set { dataModel.State = (States)value; }}
+        private readonly DataModel dataModel;
+        public States State { get { return dataModel.State; } set { dataModel.State = value; }}
 
         public AutomatonSiftDown(int[] array)
         {
@@ -68,7 +68,7 @@ namespace Visualizer
         {
             var isInterestingState = false;
 
-            StateAutomaton state = new StateHeapSortAutomaton(-1, -1, -1, "", "", dataModel.Array, dataModel.SortedPart);
+            StateAutomaton state = new StateHeapSortAutomaton(-1, -1, -1, (int)dataModel.State, "", dataModel.Array, dataModel.SortedPart);
 
             while (!isInterestingState)
             {
@@ -213,46 +213,46 @@ namespace Visualizer
                     stateId = "shifting";
                     comment = String.Format("Просеивание элемента с индексом {0}", dataModel.Counter);
 
-                    return new StateHeapSortAutomaton(-1, -1, dataModel.Counter, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(-1, -1, dataModel.Counter, (int)state, comment, dataModel.Array, dataModel.SortedPart);
                 }
                 case States.ConditionOnUpdateMaximumChild:
                 {
                     stateId = "compare";
                     comment = String.Format("Определяем максимального ребёнка элемента с индексом {0}", dataModel.Counter);
 
-                    return new StateHeapSortAutomaton(dataModel.IndexMaximumChild, dataModel.Counter * 2 + 2, dataModel.Counter, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(dataModel.IndexMaximumChild, dataModel.Counter * 2 + 2, dataModel.Counter, (int)state, comment, dataModel.Array, dataModel.SortedPart);
                  }
                 case States.EndingConditionOnUpdateMaximumChild:
                 {
                     stateId = "maxChild";
                     comment = String.Format("Максимальный ребёнок - элемент с индексом {0}", dataModel.IndexMaximumChild);
 
-                    return new StateHeapSortAutomaton(-1, -1, dataModel.IndexMaximumChild, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(-1, -1, dataModel.IndexMaximumChild, (int)state, comment, dataModel.Array, dataModel.SortedPart);
                 }
                 case States.ConditionOnUpdateParent:
                 {
                     stateId = "compare";
                     comment = String.Format("Сравнение значения в узле с его наибольшим ребенком");
 
-                    return new StateHeapSortAutomaton(dataModel.Counter, dataModel.IndexMaximumChild, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(dataModel.Counter, dataModel.IndexMaximumChild, -1, (int)state, comment, dataModel.Array, dataModel.SortedPart);
                 }
                 case States.SwappingParentWithMaximumChild:
                 {
                     stateId = "swap";
                     comment = String.Format("Обмен узла с его наибольшим ребёнком");
 
-                    return new StateHeapSortAutomaton(dataModel.Counter, dataModel.IndexMaximumChild, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(dataModel.Counter, dataModel.IndexMaximumChild, -1, (int)state, comment, dataModel.Array, dataModel.SortedPart);
                 }
                 case States.EndLoop:
                 {
                     stateId = "endShifting";
                     comment = String.Format("Конец просеиванию");
 
-                    return new StateHeapSortAutomaton(-1, -1, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(-1, -1, -1, (int)state, comment, dataModel.Array, dataModel.SortedPart);
                 }
                 default:
                 {
-                    return new StateHeapSortAutomaton(-1, -1, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(-1, -1, -1, (int)state, comment, dataModel.Array, dataModel.SortedPart);
                 }
             }
         }
@@ -302,7 +302,6 @@ namespace Visualizer
         }
         
         private AutomatonSiftDown automatonSiftDown;
-        private int[] array;
         private DataModel dataModel;
 
         public AutomatonHeapSort(int[] array)
@@ -317,7 +316,7 @@ namespace Visualizer
             var isInterestingState = false;
             StepsCount++;
 
-            StateAutomaton state = new StateHeapSortAutomaton(-1, -1, -1, "","", dataModel.Array, -1);  
+            StateAutomaton state = new StateHeapSortAutomaton(-1, -1, -1, (int)dataModel.State, "", dataModel.Array, -1);  
             while (!isInterestingState)
             {
                 switch (dataModel.State)
@@ -343,7 +342,7 @@ namespace Visualizer
                     }
                     case States.SiftingElementInBuildingPyramid:
                     {
-                       if (automatonSiftDown.State != 12)
+                       if (automatonSiftDown.State != AutomatonSiftDown.States.FinalState)
                        {
                            isInterestingState = true;
                            state = automatonSiftDown.DoStepForward(dataModel.Index, dataModel.ArraySize, dataModel.SortedPart);
@@ -352,7 +351,7 @@ namespace Visualizer
                         }
                         else
                        {
-                           automatonSiftDown.State = 0;
+                           automatonSiftDown.State = AutomatonSiftDown.States.InitialState;
                            dataModel.State = States.DecrementCounterInBuildingPyramid;
                         }
 
@@ -381,7 +380,7 @@ namespace Visualizer
                     }
                     case States.SwappingElements:
                     {
-                        state = GetStateHeapSortAutomaton(7);
+                        state = GetStateHeapSortAutomaton(dataModel.State);
                         isInterestingState = true;
                         
                         dataModel.SwappingElements();
@@ -395,7 +394,7 @@ namespace Visualizer
                     case States.SiftingElementInSorting:
                     {
                         
-                        if (automatonSiftDown.State != 12)
+                        if (automatonSiftDown.State != AutomatonSiftDown.States.FinalState)
                         {
                             isInterestingState = true;
                             state = automatonSiftDown.DoStepForward(0, dataModel.Index - 1, dataModel.SortedPart);
@@ -404,7 +403,7 @@ namespace Visualizer
                         }
                         else
                         {
-                            automatonSiftDown.State = 0;
+                            automatonSiftDown.State = AutomatonSiftDown.States.InitialState;
                             
                             dataModel.State = States.DecrementCounterSorting;
                         }
@@ -421,7 +420,7 @@ namespace Visualizer
                     }
                     case States.FinalState:
                     {
-                        state = GetStateHeapSortAutomaton(10);
+                        state = GetStateHeapSortAutomaton(dataModel.State);
                         dataModel.State = States.InitialState;
                         isInterestingState = true;
                        
@@ -441,58 +440,44 @@ namespace Visualizer
             dataModel = new DataModel(copyArray);
             automatonSiftDown = new AutomatonSiftDown(copyArray);
 
-            if (StepsCount - 1 == 0 || StepsCount == 0)
-            {
-                return new StateHeapSortAutomaton(-1, -1, -1, "start", "", copyArray, -1);
-            }
-
             return base.DoStepBackward();
         }
 
-        public StateAutomaton GetStateHeapSortAutomaton(int state)
+        public StateAutomaton GetStateHeapSortAutomaton(States state)
         {
             var stateId = "";
             var comment = "";
 
             switch (state)
             {
-                case 3:
-                {
-                    stateId = automatonSiftDown.State != 12 ? "shifting" : "endShifting";
-                    comment = "";
-
-                    return new StateHeapSortAutomaton(-1, -1, dataModel.Index, stateId, comment, dataModel.Array, dataModel.SortedPart);
-                }
-                case 7:
+                case States.SwappingElements:
                 {
                     stateId = "swap - sorting";
                     comment = String.Format("Обмен элеентов с индексами {0} и {1}. Далее, если не конец, восстанавливаем пирамиду", 0, dataModel.Index - 1);
 
-                    return new StateHeapSortAutomaton(0, dataModel.Index - 1, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(0, dataModel.Index - 1, -1, (int) state, comment, dataModel.Array, dataModel.SortedPart);
                 }
-                case 8:
+                case States.SiftingElementInSorting:
                 {
                     stateId = "restore pyramid";
                     comment = String.Format("Восстановение пирамиды, просеиваем 0-й элемент");
 
-                    return new StateHeapSortAutomaton(-1, -1, 0, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(-1, -1, 0, (int)state, comment, dataModel.Array, dataModel.SortedPart);
                 }
-                case 10:
+                case States.FinalState:
                 {
                     stateId = "end";
                     comment = String.Format("Конец сортировки");
 
-                    return new StateHeapSortAutomaton(-1, -1, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(-1, -1, -1, (int)state, comment, dataModel.Array, dataModel.SortedPart);
                 }
                 default:
                 {
                     stateId = "start";
-                    return new StateHeapSortAutomaton(-1, -1, -1, stateId, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(-1, -1, -1, (int)state, comment, dataModel.Array, dataModel.SortedPart);
                 }
             }
         }
-
-   
 
         public override StateAutomaton ToStart()
         {
@@ -502,7 +487,7 @@ namespace Visualizer
             dataModel = new DataModel(copyArray);
             automatonSiftDown = new AutomatonSiftDown(copyArray);
 
-            return new StateSelectionSortAutomaton();
+            return new StateHeapSortAutomaton(-1, -1, -1, -1, "", copyArray, dataModel.SortedPart);
         }
     }
 }
