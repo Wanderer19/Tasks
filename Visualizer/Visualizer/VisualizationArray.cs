@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Visualizer
 {
-    public class VisualizationArray
+    public class VisualizationArray : IVisualizationArray   
     {
         private bool[] selectedIndexes = new bool[]{};
         private bool [] indexesSortedPart = new bool[]{};

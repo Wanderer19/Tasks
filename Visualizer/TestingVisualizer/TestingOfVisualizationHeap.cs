@@ -94,12 +94,27 @@ namespace TestingVisualizer
             var visualizationHeap = new VisualizationHeap(8);
             visualizationHeap.DefineCoordinates();
 
+            var root = new Rectangle((int)(VisualizationHeap.rootsCoordinates.X),
+               (int)VisualizationHeap.rootsCoordinates.Y,
+               VisualizationHeap.NodesDiameter, VisualizationHeap.NodesDiameter);
 
-            Assert.AreEqual(Tuple.Create(new Point(), new Point()), visualizationHeap.GetCoordinatesValue(0));
-            Assert.AreEqual(Tuple.Create(new Point(), new Point()), visualizationHeap.GetCoordinatesValue(1));
-            Assert.AreEqual(Tuple.Create(new Point(), new Point()), visualizationHeap.GetCoordinatesValue(2));
-            Assert.AreEqual(Tuple.Create(new Point(), new Point()), visualizationHeap.GetCoordinatesValue(3));
-            Assert.AreEqual(Tuple.Create(new Point(), new Point()), visualizationHeap.GetCoordinatesValue(7));
+            var nextNode1 = new Rectangle(root.X - VisualizationHeap.OffsetBetweenNeighbors, root.Y + VisualizationHeap.DistanceBetweenLevels, VisualizationHeap.NodesDiameter, VisualizationHeap.NodesDiameter);
+            var nextNode2 = new Rectangle(root.X + VisualizationHeap.OffsetBetweenNeighbors, root.Y + VisualizationHeap.DistanceBetweenLevels, VisualizationHeap.NodesDiameter, VisualizationHeap.NodesDiameter);
+            var nextNode3 = new Rectangle(nextNode1.X - VisualizationHeap.OffsetBetweenNeighbors / 2, nextNode1.Y + VisualizationHeap.DistanceBetweenLevels, VisualizationHeap.NodesDiameter, VisualizationHeap.NodesDiameter);
+            var nextNode7 = new Rectangle(nextNode3.X - VisualizationHeap.OffsetBetweenNeighbors/3,
+                nextNode3.Y + VisualizationHeap.DistanceBetweenLevels, VisualizationHeap.NodesDiameter,
+                VisualizationHeap.NodesDiameter);
+
+
+
+
+            Assert.AreEqual(new PointF(root.X + VisualizationHeap.offsetTextNode.X, root.Y + VisualizationHeap.offsetTextNode.Y), visualizationHeap.GetCoordinatesValue(0));
+            Assert.AreEqual(new PointF(nextNode1.X + VisualizationHeap.offsetTextNode.X, nextNode1.Y + VisualizationHeap.offsetTextNode.Y), visualizationHeap.GetCoordinatesValue(1));
+            Assert.AreEqual(new PointF(nextNode2.X + VisualizationHeap.offsetTextNode.X, nextNode2.Y + VisualizationHeap.offsetTextNode.Y), visualizationHeap.GetCoordinatesValue(2));
+            Assert.AreEqual(new PointF(nextNode3.X + VisualizationHeap.offsetTextNode.X, nextNode3.Y + VisualizationHeap.offsetTextNode.Y), visualizationHeap.GetCoordinatesValue(3));
+            Assert.AreEqual(new PointF(nextNode7.X + VisualizationHeap.offsetTextNode.X, nextNode7.Y + VisualizationHeap.offsetTextNode.Y), visualizationHeap.GetCoordinatesValue(7));
+
+   
         }
 
         [TestMethod]
@@ -108,12 +123,22 @@ namespace TestingVisualizer
             var visualizationHeap = new VisualizationHeap(8);
             visualizationHeap.DefineCoordinates();
 
+            var root = new Rectangle((int)(VisualizationHeap.rootsCoordinates.X),
+              (int)VisualizationHeap.rootsCoordinates.Y,
+              VisualizationHeap.NodesDiameter, VisualizationHeap.NodesDiameter);
 
-            Assert.AreEqual(new PointF(), visualizationHeap.GetCoordinatesEdge(0));
-            Assert.AreEqual(new PointF(), visualizationHeap.GetCoordinatesEdge(1));
-            Assert.AreEqual(new PointF(), visualizationHeap.GetCoordinatesEdge(2));
-            Assert.AreEqual(new PointF(), visualizationHeap.GetCoordinatesEdge(3));
-            Assert.AreEqual(new PointF(), visualizationHeap.GetCoordinatesEdge(7));
+            var nextNode1 = new Rectangle(root.X - VisualizationHeap.OffsetBetweenNeighbors, root.Y + VisualizationHeap.DistanceBetweenLevels, VisualizationHeap.NodesDiameter, VisualizationHeap.NodesDiameter);
+            var nextNode2 = new Rectangle(root.X + VisualizationHeap.OffsetBetweenNeighbors, root.Y + VisualizationHeap.DistanceBetweenLevels, VisualizationHeap.NodesDiameter, VisualizationHeap.NodesDiameter);
+            var nextNode3 = new Rectangle(nextNode1.X - VisualizationHeap.OffsetBetweenNeighbors / 2, nextNode1.Y + VisualizationHeap.DistanceBetweenLevels, VisualizationHeap.NodesDiameter, VisualizationHeap.NodesDiameter);
+            var nextNode7 = new Rectangle(nextNode3.X - VisualizationHeap.OffsetBetweenNeighbors / 3,
+                nextNode3.Y + VisualizationHeap.DistanceBetweenLevels, VisualizationHeap.NodesDiameter,
+                VisualizationHeap.NodesDiameter);
+
+            var d = VisualizationHeap.NodesDiameter;
+            Assert.AreEqual(Tuple.Create(new Point(root.X + d/2, root.Y + d), new Point(nextNode1.X + d/2, nextNode1.Y)), visualizationHeap.GetCoordinatesEdge(1));
+            Assert.AreEqual(Tuple.Create(new Point(root.X + d / 2, root.Y + d), new Point(nextNode2.X + d / 2, nextNode2.Y)), visualizationHeap.GetCoordinatesEdge(2));
+            Assert.AreEqual(Tuple.Create(new Point(nextNode1.X + d / 2, nextNode1.Y + d), new Point(nextNode3.X + d / 2, nextNode3.Y)), visualizationHeap.GetCoordinatesEdge(3));
+            Assert.AreEqual(Tuple.Create(new Point(nextNode3.X + d / 2, nextNode3.Y + d), new Point(nextNode7.X + d / 2, nextNode7.Y)), visualizationHeap.GetCoordinatesEdge(7));
         }
     }
 }

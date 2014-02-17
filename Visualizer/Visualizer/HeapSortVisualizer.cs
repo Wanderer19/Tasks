@@ -12,7 +12,7 @@ namespace Visualizer
 {
     public partial class HeapSortVisualizer : Visualizer
     {
-        private readonly VisualizationHeap visualizationHeap;
+        private readonly IVisualizationHeap visualizationHeap;
 
         public HeapSortVisualizer(SortingForm parentWindow, int [] array)
         {
@@ -100,8 +100,6 @@ namespace Visualizer
                 }
                 
             }
-            
-            //visualizationArray.DrawSortedInvertedPartArray(stateAutomaton, graphics);
 
             base.DrawComment(stateAutomaton.Comment);
         }

@@ -16,9 +16,9 @@ namespace Visualizer
     {
         protected System.Resources.ResourceManager settings;
         protected Graphics graphics;
-        protected VisualizationArray visualizationArray;
+        protected IVisualizationArray visualizationArray;
         protected SortingForm parentWindow;
-        protected Automaton automatonSort;
+        protected IAutomaton automatonSort;
         protected bool isAutomaticMode = false;
         protected System.Timers.Timer selfTimer = new System.Timers.Timer();
         protected Application.IdentifiersSorts sortId;

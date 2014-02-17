@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Visualizer
 {
-    interface IAutomaton
+    public interface IAutomaton
     {
         StateAutomaton DoStepForward();
         StateAutomaton DoStepBackward();

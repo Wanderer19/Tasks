@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Visualizer
 {
-    public class VisualizationHeap
+    public class VisualizationHeap : IVisualizationHeap
     {
         private Dictionary<int, Rectangle> coordinatesNodesPyramid;
         private Dictionary<int, Tuple<Point, Point>> coordinatesEdges;

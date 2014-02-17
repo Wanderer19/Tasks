@@ -32,8 +32,6 @@ namespace Visualizer
             this.automatonSort = new AutomatonBubbleSort(array);
             elementsPen.StartCap = LineCap.ArrowAnchor;
             elementsPen.EndCap = LineCap.ArrowAnchor;
-           
-           
          }
 
         public override void DrawState(StateAutomaton stateAutomaton)
