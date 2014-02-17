@@ -212,14 +212,12 @@ namespace Visualizer
 
         public StateAutomaton GetStateShiftDownAutomaton(States state)
         {
-            var stateId = "";
             var comment = "";
 
             switch (state)
             {
                 case States.Loop:
                 {
-                    stateId = "shifting";
                     comment = String.Format("Просеивание элемента с индексом {0}", dataModel.Counter);
 
                     return new StateHeapSortAutomaton(-1, -1, dataModel.Counter, (int) state, comment, dataModel.Array,
@@ -227,7 +225,6 @@ namespace Visualizer
                 }
                 case States.ConditionOnUpdateMaximumChild:
                 {
-                    stateId = "compare";
                     comment = String.Format("Определяем максимального ребёнка элемента с индексом {0}",
                         dataModel.Counter);
 
@@ -236,7 +233,6 @@ namespace Visualizer
                 }
                 case States.EndingConditionOnUpdateMaximumChild:
                 {
-                    stateId = "maxChild";
                     comment = String.Format("Максимальный ребёнок - элемент с индексом {0}", dataModel.IndexMaximumChild);
 
                     return new StateHeapSortAutomaton(-1, -1, dataModel.IndexMaximumChild, (int) state, comment,
@@ -244,7 +240,6 @@ namespace Visualizer
                 }
                 case States.ConditionOnUpdateParent:
                 {
-                    stateId = "compare";
                     comment = String.Format("Сравнение значения в узле с его наибольшим ребенком");
 
                     return new StateHeapSortAutomaton(dataModel.Counter, dataModel.IndexMaximumChild, -1, (int) state,
@@ -252,7 +247,6 @@ namespace Visualizer
                 }
                 case States.SwappingParentWithMaximumChild:
                 {
-                    stateId = "swap";
                     comment = String.Format("Обмен узла с его наибольшим ребёнком");
 
                     return new StateHeapSortAutomaton(dataModel.Counter, dataModel.IndexMaximumChild, -1, (int) state,
@@ -260,7 +254,6 @@ namespace Visualizer
                 }
                 case States.EndLoop:
                 {
-                    stateId = "endShifting";
                     comment = String.Format("Конец просеиванию");
 
                     return new StateHeapSortAutomaton(-1, -1, -1, (int) state, comment, dataModel.Array,

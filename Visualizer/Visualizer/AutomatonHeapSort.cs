@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Visualizer
 {
-    class AutomatonHeapSort : Automaton
+    public class AutomatonHeapSort : Automaton
     {
         public enum States
         {
@@ -121,7 +121,8 @@ namespace Visualizer
                     }
                     case States.LoopSorting:
                     {
-                        dataModel.State = dataModel.Index > 0 ? States.SwappingElements : States.FinalState;
+                       // MessageBox.Show(dataModel.Index.ToString());
+                        dataModel.State = dataModel.Index > 1 ? States.SwappingElements : States.FinalState;
 
                         break;
                     }
@@ -141,7 +142,7 @@ namespace Visualizer
                     case States.SiftingElementInSorting:
                     {
                         
-                        if (automatonSiftDown.State != AutomatonSiftDown.States.FinalState)
+                        if (automatonSiftDown.State != AutomatonSiftDown.States.FinalState && automatonSiftDown.State != AutomatonSiftDown.States.EndLoop)
                         {
                             isInterestingState = true;
                             state = automatonSiftDown.DoStepForward(0, dataModel.Index - 1, dataModel.SortedPart);
@@ -168,7 +169,7 @@ namespace Visualizer
                     case States.FinalState:
                     {
                         state = GetStateHeapSortAutomaton(dataModel.State);
-                        dataModel.State = States.InitialState;
+                        //dataModel.State = States.InitialState;
                         isInterestingState = true;
                        
                         break;
@@ -198,7 +199,7 @@ namespace Visualizer
             {
                 case States.SwappingElements:
                 {
-                    comment = String.Format("Обмен элеентов с индексами {0} и {1}. Далее, если не конец, восстанавливаем пирамиду", 0, dataModel.Index - 1);
+                    comment = String.Format("Обмен элемнтов с индексами {0} и {1}. Далее, если не конец, восстанавливаем пирамиду", 0, dataModel.Index - 1);
 
                     return new StateHeapSortAutomaton(0, dataModel.Index - 1, -1, (int) state, comment, dataModel.Array, dataModel.SortedPart);
                 }
@@ -212,7 +213,7 @@ namespace Visualizer
                 {
                     comment = String.Format("Конец сортировки");
 
-                    return new StateHeapSortAutomaton(-1, -1, -1, (int)state, comment, dataModel.Array, dataModel.SortedPart);
+                    return new StateHeapSortAutomaton(-1, -1, -1, (int)state, comment, dataModel.Array, 0);
                 }
                 default:
                 {

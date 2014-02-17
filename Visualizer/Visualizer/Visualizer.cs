@@ -8,19 +8,21 @@ using System.Reflection;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
+using Timer = System.Timers.Timer;
 
 namespace Visualizer
 {
     public partial class Visualizer : Form
     {
-        protected System.Resources.ResourceManager settings;
+        protected ResourceManager settings;
         protected Graphics graphics;
         protected IVisualizationArray visualizationArray;
         protected SortingForm parentWindow;
         protected IAutomaton automatonSort;
         protected bool isAutomaticMode = false;
-        protected System.Timers.Timer selfTimer = new System.Timers.Timer();
+        protected Timer selfTimer = new Timer();
         protected Application.IdentifiersSorts sortId;
         protected int[] inputArray;
         protected int countUpdateScreen = 0;
@@ -30,10 +32,10 @@ namespace Visualizer
         {
             DownloadConfigurationFile("Visualizer.VisualizerSettings");
             
-            selfTimer.Elapsed += new System.Timers.ElapsedEventHandler(DoAutomaticStepForward);
-            this.Paint += new PaintEventHandler(DrawInitialState);
+            selfTimer.Elapsed += new ElapsedEventHandler(DoAutomaticStepForward);
+            Paint += new PaintEventHandler(DrawInitialState);
 
-            selfTimer.Interval = 650;
+            selfTimer.Interval = 300;
             InitializeComponent();
         }
 
@@ -46,10 +48,10 @@ namespace Visualizer
 
         public  virtual void DrawComment(string message)
         {
-            this.commentsBox.Text = message;
+            commentsBox.Text = message;
         }
 
-        public void DoAutomaticStepForward(object source, System.Timers.ElapsedEventArgs e)
+        public void DoAutomaticStepForward(object source, ElapsedEventArgs e)
         {
             var state = automatonSort.DoStepForward();
 
@@ -61,20 +63,20 @@ namespace Visualizer
 
         public virtual void ToStart(object sender, EventArgs e)
         {
-            this.DrawState(automatonSort.ToStart());
+            DrawState(automatonSort.ToStart());
         }
 
         public virtual void ClearOldComments()
         {
-            this.commentsBox.Text = "";
+            commentsBox.Text = "";
         }
 
         public virtual void EnableAutomaticMode(object sender, EventArgs e)
         {
-            if (!this.isAutomaticMode)
+            if (!isAutomaticMode)
             {
                 ToDisableButtons();
-                this.isAutomaticMode = true;
+                isAutomaticMode = true;
                
                 selfTimer.Start();
             }
@@ -82,12 +84,12 @@ namespace Visualizer
 
         public virtual void DoStepForward(object sender, EventArgs e)
         {
-            this.DrawState(automatonSort.DoStepForward());
+            DrawState(automatonSort.DoStepForward());
         }
 
         public virtual void DoStepBackward(object sender, EventArgs e)
         {
-            this.DrawState(automatonSort.DoStepBackward());
+            DrawState(automatonSort.DoStepBackward());
         }
 
         public virtual void DrawState(StateAutomaton stateAutomaton)
@@ -99,19 +101,19 @@ namespace Visualizer
         {
             ToEnableButtons();
             selfTimer.Stop();
-            this.isAutomaticMode = false;
+            isAutomaticMode = false;
         }
 
         public virtual void DrawSwap(StateAutomaton state)
         {
-            this.visualizationArray.DrawArray(state, this.graphics);
+            visualizationArray.DrawArray(state, graphics);
         }
 
         public virtual void Proceed(object sender, EventArgs e)
         {
             selfTimer.Start();
             ToDisableButtons();
-            this.isAutomaticMode = true;
+            isAutomaticMode = true;
         }  
 
         public virtual void CloseVisualizer(object sender, EventArgs e)
@@ -129,31 +131,31 @@ namespace Visualizer
 
         public void ToDisableButtons()
         {
-            this.backwardButton.Enabled = false;
-            this.forwardButton.Enabled = false;
-            this.continueButton.Enabled = false;
+            backwardButton.Enabled = false;
+            forwardButton.Enabled = false;
+            continueButton.Enabled = false;
         }
 
         public void ToEnableButtons()
         {
-            this.backwardButton.Enabled = true;
-            this.forwardButton.Enabled = true;
-            this.continueButton.Enabled = true;
+            backwardButton.Enabled = true;
+            forwardButton.Enabled = true;
+            continueButton.Enabled = true;
         }
 
         public void HideMainWindow()
         {
-            this.Visible = false;
-            this.Dispose();
+            Visible = false;
+            Dispose();
         }
 
         public virtual void DrawInitialState(object sender, PaintEventArgs e)
         {
             if (countUpdateScreen == 0)
             {
-                graphics = this.CreateGraphics();
+                graphics = CreateGraphics();
 
-                this.visualizationArray.DrawArray(new StateAutomaton(this.inputArray), graphics);
+                visualizationArray.DrawArray(new StateAutomaton(inputArray), graphics);
 
                 countUpdateScreen++;
             }

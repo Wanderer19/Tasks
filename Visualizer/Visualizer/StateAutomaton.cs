@@ -13,7 +13,7 @@ namespace Visualizer
         public int StateId { get; protected set; }
         public int StateNumber { get; protected set; }
         public int[] Array { get; protected set; }
-        public int IndexMinimum { get; protected set; }
+        public int Minimum { get; protected set; }
         public int BorderSortedPart { get; protected set; }
         public int SiftingElement { get; protected set; }
         public string State { get; protected set; }

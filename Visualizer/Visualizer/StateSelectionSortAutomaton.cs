@@ -8,12 +8,12 @@ namespace Visualizer
 {
     class StateSelectionSortAutomaton : StateAutomaton
     {
-        public StateSelectionSortAutomaton(List<int> selectedIndexes, int borderSortedPart, int indexMinimum, int stateId, string comment, int[] array)
+        public StateSelectionSortAutomaton(List<int> selectedIndexes, int borderSortedPart, int minimum, int stateId, string comment, int[] array)
         {
             SelectedElements=new List<int>();
             SelectedElements.AddRange(selectedIndexes);
 
-            this.IndexMinimum = indexMinimum;
+            this.Minimum = minimum;
             this.Array = array;
             this.Comment = comment;
             this.StateId = stateId;

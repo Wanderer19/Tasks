@@ -29,7 +29,11 @@ namespace Visualizer
         {
             if (countUpdateScreen == 0)
             {
-                base.DrawInitialState(sender, e);
+                graphics = CreateGraphics();
+
+                visualizationArray.DrawArray(new StateAutomaton(inputArray), graphics);
+
+                countUpdateScreen++;
                 
                 visualizationHeap.DrawHeap(new StateAutomaton(inputArray), graphics);
             }
@@ -37,8 +41,6 @@ namespace Visualizer
 
         public override void DrawState(StateAutomaton stateAutomaton)
         {
-            base.ClearOldComments();
-
             switch (stateAutomaton.StateId)
             {
                 case (int)AutomatonSiftDown.States.ConditionOnUpdateMaximumChild:
@@ -92,6 +94,7 @@ namespace Visualizer
                     this.visualizationHeap.DrawHeap(stateAutomaton, graphics);
                     break;
                 }
+                
                 default:
                 {
                     this.visualizationArray.DrawArray(stateAutomaton, graphics);

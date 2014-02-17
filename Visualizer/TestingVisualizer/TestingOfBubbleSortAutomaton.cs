@@ -61,23 +61,32 @@ namespace TestingVisualizer
             var state = automaton.DoStepForward();
 
             Assert.AreEqual((int)AutomatonBubbleSort.States.Condition, state.StateId);
+            Assert.IsTrue(ArrayEquals(new[] { -1, 2, 0 }, state.Array));
+            Assert.IsTrue(ArrayEquals(new [ ] {0, 1 }, state.SelectedElements.ToArray()));
 
             state = automaton.DoStepForward();
 
             Assert.AreEqual((int) AutomatonBubbleSort.States.Condition, state.StateId);
+            Assert.IsTrue(ArrayEquals(new[] { -1, 2, 0 }, state.Array));
+            Assert.IsTrue(ArrayEquals(new[] { 1, 2 }, state.SelectedElements.ToArray()));
 
             state = automaton.DoStepForward();
 
             Assert.AreEqual((int)AutomatonBubbleSort.States.SwappingAdjacentElements, state.StateId);
+            Assert.IsTrue(ArrayEquals(new[] { -1, 0, 2 }, state.Array));
+            Assert.IsTrue(ArrayEquals(new[] { 1, 2 }, state.SelectedElements.ToArray()));
 
             state = automaton.DoStepForward();
 
             Assert.AreEqual((int)AutomatonBubbleSort.States.Condition, state.StateId);
-
+            Assert.IsTrue(ArrayEquals(new[] { -1, 0, 2 }, state.Array));
+            Assert.IsTrue(ArrayEquals(new[] { 0, 1 }, state.SelectedElements.ToArray()));
             state = automaton.DoStepForward();
 
             Assert.AreEqual((int)AutomatonBubbleSort.States.Condition, state.StateId);
-
+            Assert.IsTrue(ArrayEquals(new[] { -1, 0, 2 }, state.Array));
+            Assert.IsTrue(ArrayEquals(new[] { 1, 2 }, state.SelectedElements.ToArray()));
+            
             state = automaton.DoStepForward();
 
             while (state.StateId != (int) AutomatonBubbleSort.States.FinalState)
@@ -86,7 +95,13 @@ namespace TestingVisualizer
                 state = automaton.DoStepForward();
             }
 
+            automaton.DoStepForward();
+            Assert.AreEqual((int)AutomatonBubbleSort.States.FinalState, state.StateId);
 
+            automaton.DoStepForward();
+            Assert.AreEqual((int)AutomatonBubbleSort.States.FinalState, state.StateId);
+            Assert.IsTrue(ArrayEquals(new[] { -1, 0, 2 }, state.Array));
+            Assert.IsTrue(ArrayEquals(new int[] {}, state.SelectedElements.ToArray()));
         }
 
         [TestMethod]
@@ -103,9 +118,13 @@ namespace TestingVisualizer
 
             state = automaton.DoStepBackward();
             Assert.AreEqual((int)AutomatonBubbleSort.States.Condition, state.StateId);
-
+            Assert.IsTrue(ArrayEquals(new[] { -1, 2, 0 }, state.Array));
+            Assert.IsTrue(ArrayEquals(new[] { 1, 2 }, state.SelectedElements.ToArray()));
+            
             state = automaton.DoStepBackward();
             Assert.AreEqual((int)AutomatonBubbleSort.States.Condition, state.StateId);
+            Assert.IsTrue(ArrayEquals(new[] { -1, 2, 0 }, state.Array));
+            Assert.IsTrue(ArrayEquals(new[] { 0, 1 }, state.SelectedElements.ToArray()));
 
             state = automaton.DoStepForward();
             state = automaton.DoStepForward();
@@ -113,12 +132,16 @@ namespace TestingVisualizer
 
             state = automaton.DoStepBackward();
             Assert.AreEqual((int)AutomatonBubbleSort.States.SwappingAdjacentElements, state.StateId);
+            Assert.IsTrue(ArrayEquals(new[] { -1, 0, 2 }, state.Array));
+            Assert.IsTrue(ArrayEquals(new[] { 1, 2 }, state.SelectedElements.ToArray()));
 
             state = automaton.DoStepBackward();
             state = automaton.DoStepBackward();
             Assert.AreEqual((int)AutomatonBubbleSort.States.Condition, state.StateId);
-
+            Assert.IsTrue(ArrayEquals(new[] { -1, 2, 0 }, state.Array));
+            Assert.IsTrue(ArrayEquals(new[] { 0, 1 }, state.SelectedElements.ToArray()));
         }
+       
         public bool ArrayEquals(int[] expectedArray, int[] actualArray)
         {
             if (expectedArray.Length != actualArray.Length)

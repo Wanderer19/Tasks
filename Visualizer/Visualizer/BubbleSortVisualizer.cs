@@ -52,6 +52,11 @@ namespace Visualizer
                     
                     break;
                 }
+                case (int)AutomatonBubbleSort.States.FinalState:
+                {
+                    selfTimer.Stop();
+                    break;
+                }
                 default:
                 {
                     this.visualizationArray.DrawArray(stateAutomaton, graphics);

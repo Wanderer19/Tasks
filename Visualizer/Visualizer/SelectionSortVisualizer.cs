@@ -60,7 +60,7 @@ namespace Visualizer
                 case (int)AutomatonSelectionSort.States.FinalState:
                 {
                     this.visualizationArray.DrawArray(stateAutomaton, this.graphics);
-                    
+                    selfTimer.Stop();
                     break;
                 }
                 default:
@@ -70,7 +70,7 @@ namespace Visualizer
                     break;
                 }
             }
-            //this.visualizationArray.DrawSortedPartArray(stateAutomaton, graphics);
+            
             this.DrawComment(stateAutomaton.Comment);
         }
 
@@ -78,7 +78,7 @@ namespace Visualizer
         {
             this.visualizationArray.DrawArray(state, this.graphics);
             
-            graphics.DrawString(String.Format("Текущий минимум  = {0}", state.IndexMinimum), digitsFont, digitsBrush, 80 + 100 * 4, 100, formatDrawing);
+            graphics.DrawString(String.Format("Текущий минимум  = {0}", state.Minimum), digitsFont, digitsBrush, 80 + 100 * 4, 100, formatDrawing);
         }
 
         private void DrawCompare(StateAutomaton state)

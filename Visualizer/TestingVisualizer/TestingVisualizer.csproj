@@ -56,6 +56,8 @@
     <Compile Include="TestingOfVisualizationArray.cs" />
     <Compile Include="TestingOfVisualizationHeap.cs" />
     <Compile Include="TestingOfBubbleSortAutomaton.cs" />
+    <Compile Include="TestingOfSelectionSortAutomaton.cs" />
+    <Compile Include="TestingOfAutomatonHeapSort.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Visualizer\Visualizer.csproj">

@@ -129,6 +129,14 @@ namespace Visualizer
                 selectedNodes[index] = true;
         }
 
+        public void DrawRoot(StateAutomaton state, Graphics graphics)
+        {
+            graphics.FillEllipse(new SolidBrush(GetColorElement(0, state.BorderSortedPart)), GetCoordinatesNode(0));
+            graphics.DrawEllipse(elementsPen, GetCoordinatesNode(0));
+            graphics.DrawString(state.Array[0].ToString(), nodesFontDigits, digitsBrush, GetCoordinatesValue(0),
+                   formatDrawing);
+
+        }
         public void DrawHeap(StateAutomaton state, Graphics graphics)
         {
             arrayLength = state.Array.Length;
@@ -136,7 +144,7 @@ namespace Visualizer
 
             SelectNodes(state.SelectedElements.ToArray());
             SelectNode(state.SiftingElement);
-            DrawNode(0, state, graphics);
+            DrawRoot(state, graphics);
             for (var i = 0; i <= arrayLength / 2 - 1; ++i)
             {
                 
@@ -177,10 +185,17 @@ namespace Visualizer
 
         private void DrawDetachedNode(int index, StateAutomaton state, Graphics graphics)
         {
-            DrawEdge(index, false, graphics);
-            var parent = GetParent(index);
-            
-            DrawNode(parent, state, graphics);
+            if (index != 0)
+            {
+                DrawEdge(index, false, graphics);
+                var parent = GetParent(index);
+                DrawNode(parent, state, graphics);
+            }
+
+            else
+            {
+                DrawRoot(state, graphics);
+            }
         }
 
         public static int GetParent(int i)
