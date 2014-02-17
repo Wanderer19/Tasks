@@ -101,7 +101,6 @@ namespace TestingVisualizer
             automaton.DoStepForward();
             Assert.AreEqual((int)AutomatonBubbleSort.States.FinalState, state.StateId);
             Assert.IsTrue(ArrayEquals(new[] { -1, 0, 2 }, state.Array));
-            Assert.IsTrue(ArrayEquals(new int[] {}, state.SelectedElements.ToArray()));
         }
 
         [TestMethod]

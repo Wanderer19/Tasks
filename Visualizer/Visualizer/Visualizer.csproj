@@ -74,6 +74,7 @@
     <Compile Include="AutomatonSiftDown.cs" />
     <Compile Include="IVisualizationArray.cs" />
     <Compile Include="IVisualizationHeap.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="StateHeapSortAutomaton.cs" />
     <Compile Include="VisualizationHeap.cs" />
     <Compile Include="HeapSortVisualizer.cs">

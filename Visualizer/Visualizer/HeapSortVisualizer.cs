@@ -111,8 +111,6 @@ namespace Visualizer
         {
             visualizationArray.DrawArray(stateAutomaton, graphics);
             visualizationHeap.DrawHeap(stateAutomaton, graphics);
-
-
         }
 
         public override void DrawSwap(StateAutomaton stateAutomaton)

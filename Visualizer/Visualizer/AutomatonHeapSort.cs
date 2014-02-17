@@ -169,7 +169,7 @@ namespace Visualizer
                     case States.FinalState:
                     {
                         state = GetStateHeapSortAutomaton(dataModel.State);
-                        //dataModel.State = States.InitialState;
+                        
                         isInterestingState = true;
                        
                         break;
