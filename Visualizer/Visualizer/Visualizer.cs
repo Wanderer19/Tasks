@@ -35,7 +35,7 @@ namespace Visualizer
             selfTimer.Elapsed += new ElapsedEventHandler(DoAutomaticStepForward);
             Paint += new PaintEventHandler(DrawInitialState);
 
-            selfTimer.Interval = 300;
+            selfTimer.Interval = 650;
             InitializeComponent();
         }
 
