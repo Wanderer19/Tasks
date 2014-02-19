@@ -16,13 +16,13 @@ namespace Visualizer
 {
     public partial class Application : Form
     {
-        private System.Resources.ResourceManager generalSettings;
+        private static Assembly assembly = Assembly.GetExecutingAssembly();
+        private System.Resources.ResourceManager generalSettings = new ResourceManager("Visualizer.GeneralSettings", assembly);
 
         public Application()
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
+          
 
-            generalSettings = new ResourceManager("Visualizer.GeneralSettings", assembly);
             InitializeComponent();
         }
 
