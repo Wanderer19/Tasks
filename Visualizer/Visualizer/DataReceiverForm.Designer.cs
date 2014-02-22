@@ -137,25 +137,5 @@ namespace Visualizer
         private System.Windows.Forms.RichTextBox inputField;
         private System.Windows.Forms.Button OkButton;
 
-        private bool VisualizerCanBeRun()
-        {
-            var isValidData = true;
-            var array = new int[] {16, 11, 9, 10, 5, 6, 8, 1, 2, 4, 2, 1, 2, 3, 4};
-                
-            if (!choice)
-            {
-                if (ArrayReader.IsValidInputString(inputField.Text))
-                {
-                    array = ArrayReader.ReadData(inputField.Text);
-                    isValidData = true;
-                }
-                else
-                    isValidData = false;
-            }
-
-            inputArray = array;
-
-            return isValidData && ArrayReader.IsValidValuesElementsInArray(array, (int)settings.GetObject("SizeLimitArray"), (int)settings.GetObject("LimitArrayElementValue"));
-        }
     }
 }

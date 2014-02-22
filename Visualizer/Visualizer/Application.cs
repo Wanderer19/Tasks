@@ -19,18 +19,37 @@ namespace Visualizer
         private static Assembly assembly = Assembly.GetExecutingAssembly();
         private System.Resources.ResourceManager generalSettings = new ResourceManager("Visualizer.GeneralSettings", assembly);
 
-        public Application()
+        public enum IdentifiersSorts
         {
+<<<<<<< HEAD
           
 
+=======
+            DefaultSorting = 0,
+            BubbleSort = 1,
+            SelectionSort = 2,
+            HeapSort = 3
+        }
+
+        public Application()
+        {
+            this.DownloadConfigurationFile("Visualizer.GeneralSettings");
+>>>>>>> 2bb74d776b6c761e0cc701d47ffed726513cad2c
             InitializeComponent();
+        }
+
+        public void DownloadConfigurationFile(string fileName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            generalSettings = new ResourceManager(fileName, assembly);
         }
 
         private void BubbleSortRun(object sender, EventArgs e)
         {
             HideMainWindow();
             
-            var bubbleSortForm = new SortingForm(this, "Visualizer.BubbleSortFormSettings");
+            var bubbleSortForm = new SortingForm(this, "Visualizer.BubbleSortFormSettings", IdentifiersSorts.BubbleSort);
             bubbleSortForm.Show();
         }
 
@@ -38,7 +57,7 @@ namespace Visualizer
         {
             HideMainWindow();
 
-            var selectionSortForm = new SortingForm(this, "Visualizer.SelectionSortFormSettings");
+            var selectionSortForm = new SortingForm(this, "Visualizer.SelectionSortFormSettings", IdentifiersSorts.SelectionSort);
 
             selectionSortForm.Show();
         }
@@ -47,7 +66,7 @@ namespace Visualizer
         {
             HideMainWindow();
 
-            var selectionSortForm = new SortingForm(this, "Visualizer.HeapSortFormSettings");
+            var selectionSortForm = new SortingForm(this, "Visualizer.HeapSortFormSettings", IdentifiersSorts.HeapSort);
 
             selectionSortForm.Show();
         }

@@ -9,43 +9,27 @@ namespace Visualizer
 {
     public class AutomatonBubbleSort : Automaton
     {
+        public enum States
+        {
+            InitialState = 0,
+            StartOuterLoop = 1,
+            OuterLoop = 2,
+            StartInnerLoop = 3,
+            InnerLoop = 4,
+            Condition = 5,
+            SwappingAdjacentElements = 6,
+            EndingConditions = 7,
+            IncrementInnerCounter = 8,
+            IncrementOuterCounter = 9,
+            FinalState = 10
+        }
+
         private class DataModel
         {
-            private int firstIndex;
-            private int secondIndex;
-            public int State { get; set; }
+            public int OuterCounter { get; set; }
+            public int InnerCounter { get; set; }
+            public States State { get; set; }
            
-            public int FirstIndex
-            {
-                get { return firstIndex; }
-                set
-                {
-                    if (value <= ArraySize && value >= 0)
-                    {
-                        firstIndex = value;
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-            }
-
-            public int SecondIndex
-            {
-                get { return secondIndex; }
-                set
-                {
-                    if (value <= ArraySize && value >= 0)
-                    {
-                        secondIndex = value;
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-            }
 
             public int ArraySize { get; private set; }
             public int[] Array { get; private set; }
@@ -54,274 +38,175 @@ namespace Visualizer
             {
                 ArraySize = array.Length;
                 Array = array;
-                firstIndex = 0;
-                secondIndex = 0;
-                State = 0;
+                OuterCounter = 0;
+                InnerCounter = 0;
+                State = States.InitialState;
             }
 
-            public void Swap()
+            public void SwapAdjacentElements()
             {
-                var copyItem = Array[secondIndex];
-                Array[secondIndex] = Array[secondIndex + 1];
-                Array[secondIndex + 1] = copyItem;
+                var copyItem = Array[InnerCounter];
+                Array[InnerCounter] = Array[InnerCounter + 1];
+                Array[InnerCounter + 1] = copyItem;
             }
         }
 
         public AutomatonBubbleSort(int[] array)
         {
             dataModel = new DataModel(array);
-            stack = new Stack<object>();
+            
+            this.array = (int[])array.Clone();
         }
 
         private DataModel dataModel;
-        private Stack<object> stack;
 
         public override StateAutomaton DoStepForward()
         {
-            var descriptionState = "";
             var isInterestingState = false;
-            var stateId = "";
-            var firstIndex = -1;
-            var secondIndex = -1;
 
+            StateAutomaton state = new StateBubbleSortAutomaton(-1, -1, (int)dataModel.State, "", dataModel.Array);
+
+            StepsCount++;
             while (!isInterestingState)
             {
                 switch (dataModel.State)
                 {
-                    case 0:
+                    case States.InitialState:
                     {
-                        dataModel.State = 1;
+                        dataModel.State = States.StartOuterLoop;
 
                         break;
                     }
-                    case 1:
+                    case States.StartOuterLoop:
                     {
-                        dataModel.FirstIndex = 1;
-                        dataModel.State = 2;
+                        dataModel.OuterCounter = 1;
+
+                        dataModel.State = States.OuterLoop;
 
                         break;
                     }
-                    case 2:
+                    case States.OuterLoop:
                     {
-                        dataModel.State = dataModel.FirstIndex < dataModel.ArraySize ? 3 : -1;
+                        dataModel.State = dataModel.OuterCounter < dataModel.ArraySize ? States.StartInnerLoop : States.FinalState;
 
                         break;
                     }
-                    case 3:
+                    case States.StartInnerLoop:
                     {
-                        dataModel.SecondIndex = 0;
-                        dataModel.State = 4;
+                        dataModel.InnerCounter = 0;
+                        
+                        dataModel.State = States.InnerLoop;
 
                         break;
                     }
-                    case 4:
+                    case States.InnerLoop:
                     {
-                        dataModel.State = dataModel.SecondIndex < dataModel.ArraySize - 1 ? 5 : 9;
+                        dataModel.State = dataModel.InnerCounter < dataModel.ArraySize - 1 ? States.Condition : States.IncrementOuterCounter;
 
                         break;
                     }
-                    case 5:
+                    case States.Condition:
                     {
                         isInterestingState = true;
-                        descriptionState = String.Format("Сравнение элемента с индексом {0} и с индексом {1}",
-                            dataModel.SecondIndex, dataModel.SecondIndex + 1);
-                        stateId = "compare";
+                        state = GetStateBubbleSortAutomaton(dataModel.State);
 
-                        firstIndex = dataModel.SecondIndex;
-                        secondIndex = dataModel.SecondIndex + 1;
-
-                        if (dataModel.Array[dataModel.SecondIndex] > dataModel.Array[dataModel.SecondIndex + 1])
-                        {
-                            stack.Push(dataModel.Array[dataModel.SecondIndex]);
-                            stack.Push(dataModel.Array[dataModel.SecondIndex + 1]);
-
-                            dataModel.State = 6;
-                        }
-                        else
-                        {
-                            stack.Push(false);
-
-                            dataModel.State = 7;
-                        }
+                        dataModel.State = dataModel.Array[dataModel.InnerCounter] > dataModel.Array[dataModel.InnerCounter + 1] ? 
+                            States.SwappingAdjacentElements : States.EndingConditions;
 
                         break;
                     }
-                    case 6:
+                    case States.SwappingAdjacentElements:
                     {
                         isInterestingState = true;
-                        descriptionState = String.Format("Обмен эелементов и синдексами {0} и {1}",
-                            dataModel.SecondIndex, dataModel.SecondIndex + 1);
-                        stateId = "swap";
+                        state = GetStateBubbleSortAutomaton(dataModel.State);
 
-                        firstIndex = dataModel.SecondIndex;
-                        secondIndex = dataModel.SecondIndex + 1;
-
-                        dataModel.Swap();
-
-                        stack.Push(true);
-
-                        dataModel.State = 7;
+                        dataModel.SwapAdjacentElements();
+                        
+                        dataModel.State = States.EndingConditions;
 
                         break;
                     }
-                    case 7:
+                    case States.EndingConditions:
                     {
-                        dataModel.State = 8;
+                        dataModel.State = States.IncrementInnerCounter;
 
                         break;
                     }
-                    case 8:
+                    case States.IncrementInnerCounter:
                     {
-                        dataModel.SecondIndex++;
+                        dataModel.InnerCounter++;
 
-                        dataModel.State = 4;
+                        dataModel.State = States.InnerLoop;
 
                         break;
                     }
-                    case 9:
+                    case States.IncrementOuterCounter:
                     {
-                        dataModel.FirstIndex++;
+                        dataModel.OuterCounter++;
 
-                        dataModel.State = 2;
+                        dataModel.State = States.OuterLoop;
 
                         break;
                     }
-                    default:
+                    case States.FinalState:
                     {
                         isInterestingState = true;
-                        descriptionState = "Конец";
-                        stateId = "end";
+
+                        state = GetStateBubbleSortAutomaton(dataModel.State);
 
                         break;
                     }
                 }
             }
 
-            return new StateBubbleSortAutomaton(firstIndex, secondIndex,stateId,  descriptionState, dataModel.Array, dataModel.State);
+            return state;
+        }
+
+        public StateAutomaton GetStateBubbleSortAutomaton(States state)
+        {
+            var stateId = "";
+            var comment = "";
+
+            switch (state)
+            {
+                case States.Condition:
+                {
+                    comment = String.Format("Сравнение элемента с индексом {0} и с индексом {1}",
+                            dataModel.InnerCounter, dataModel.InnerCounter + 1);
+
+                    return new StateBubbleSortAutomaton(dataModel.InnerCounter, dataModel.InnerCounter + 1, (int)dataModel.State, comment, dataModel.Array);
+                }
+                case States.SwappingAdjacentElements:
+                {
+                    comment = String.Format("Обмен эелементов и синдексами {0} и {1}",
+                            dataModel.InnerCounter, dataModel.InnerCounter + 1);
+
+                    return new StateBubbleSortAutomaton(dataModel.InnerCounter, dataModel.InnerCounter + 1, (int)dataModel.State, comment, dataModel.Array);
+                }
+                case States.FinalState:
+                {
+                    return new StateBubbleSortAutomaton(-1, -1, (int)dataModel.State, comment, dataModel.Array);
+                }
+                default:
+                {
+                    return new StateBubbleSortAutomaton(-1, -1, (int) dataModel.State, comment, dataModel.Array);
+                }
+            }
         }
 
         public override StateAutomaton DoStepBackward()
         {
-            var descriptionState = "";
-            var stateId = "";
-            var firstIndex = -1;
-            var secondIndex = -1;
-            var isInterestingState = false;
-
-            while (!isInterestingState)
-            {
-                switch (dataModel.State)
-                {
-                    case 0:
-                    {
-                        isInterestingState = true;
-
-                        dataModel.State = 0;
-
-                        break;
-                    }
-                    case 1:
-                    {
-                        dataModel.State = 0;
-
-                        break;
-                    }
-                    case 2:
-                    {
-                        dataModel.State = dataModel.FirstIndex <= 1 ? 1 : 9;
-
-                        break;
-                    }
-                    case 3:
-                    {
-                        dataModel.State = 2;
-
-                        break;
-                    }
-                    case 4:
-                    {
-                        dataModel.State = dataModel.SecondIndex <= 0 ? 3 : 8;
-
-                        break;
-                    }
-                    case 5:
-                    {
-                        descriptionState = String.Format("Сравнение элемента с индексом {0} и с индексом {1}",
-                            dataModel.SecondIndex, dataModel.SecondIndex + 1);
-                        stateId = "compare";
-                        isInterestingState = true;
-
-                        firstIndex = dataModel.SecondIndex;
-                        secondIndex = dataModel.SecondIndex + 1;
-
-                        dataModel.State = 4;
-
-                        break;
-                    }
-                    case 6:
-                    {
-                        descriptionState = String.Format("Обмен эелементов и синдексами {0} и {1}",
-                            dataModel.SecondIndex, dataModel.SecondIndex + 1);
-                        stateId = "swap";
-                        isInterestingState = true;
-
-                        firstIndex = dataModel.SecondIndex;
-                        secondIndex = dataModel.SecondIndex + 1;
-
-                        dataModel.Array[dataModel.SecondIndex + 1] = (int) stack.Pop();
-                        dataModel.Array[dataModel.SecondIndex] = (int) stack.Pop();
-
-                        dataModel.State = 5;
-
-                        break;
-                    }
-                    case 7:
-                    {
-                        var isTrue = (bool) stack.Pop();
-
-                        dataModel.State = isTrue ? 6 : 5;
-
-                        break;
-                    }
-                    case 8:
-                    {
-                        dataModel.SecondIndex--;
-
-                        dataModel.State = 7;
-
-                        break;
-                    }
-                    case 9:
-                    {
-                        dataModel.FirstIndex--;
-                        dataModel.SecondIndex = dataModel.ArraySize - 1;
-
-                        dataModel.State = 4;
-
-                        break;
-                    }
-                    case 10:
-                    {
-                        descriptionState = "Конец сортировки";
-                        stateId = "end";
-                        isInterestingState = true;
-
-                        dataModel.State = 2;
-
-                        break;
-                    }
-                    default:
-                    {
-                        isInterestingState = true;
-
-                        dataModel.State = 10;
-
-                        break;
-                    }
-                }
-            }
+            dataModel = new DataModel((int[])array.Clone());
             
-            return new StateBubbleSortAutomaton(firstIndex, secondIndex, stateId, descriptionState, dataModel.Array, dataModel.State);
+            return base.DoStepBackward();
+        }
+
+        public override StateAutomaton ToStart()
+        {
+            StepsCount = 0;
+            dataModel = new DataModel((int[])array.Clone());
+
+            return new StateBubbleSortAutomaton(-1, -1, (int)dataModel.State, "", dataModel.Array);
         }
     }
 }

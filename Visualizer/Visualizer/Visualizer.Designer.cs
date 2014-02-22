@@ -46,7 +46,7 @@ namespace Visualizer
 
             this.commentsBox.Location = new System.Drawing.Point(13, 400);
             this.commentsBox.Name = "commentsBox";
-            this.commentsBox.Size = new System.Drawing.Size(800, 400);
+            this.commentsBox.Size = new System.Drawing.Size(720, 400);
             this.commentsBox.TabIndex = 1;
             this.commentsBox.Text = "";
             this.commentsBox.BackColor = (Color)settings.GetObject("BackColor");

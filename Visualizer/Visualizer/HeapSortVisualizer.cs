@@ -12,129 +12,124 @@ namespace Visualizer
 {
     public partial class HeapSortVisualizer : Visualizer
     {
-        private VisualizationHeap visualizationHeap;
-        private const string StateSwap = "swap";
-        private const string StateCompare = "compare";
-        private const string StateShifting = "shifting";
-
-        private const string StateEndShifting = "endShifting";
-        private const string StateSwapSorting = "swap - sorting";
-        private const string StateEndSorting = "endSorting";
-        private const string StateMaxChild = "maxChild";
-
+        private readonly IVisualizationHeap visualizationHeap;
 
         public HeapSortVisualizer(SortingForm parentWindow, int [] array)
         {
-            InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             this.parentWindow = parentWindow;
             this.inputArray = array;
-            this.sortId = 1;
-            selfTimer.Interval = 650;
-            this.visualizationArray = new VisualizationArray(array.Length);
-            this.visualizationHeap = new VisualizationHeap(array.Length);
+            this.sortId = Application.IdentifiersSorts.HeapSort;
+            this.visualizationArray = new VisualizationArray();
+            this.visualizationHeap = new VisualizationHeap();
             this.automatonSort = new AutomatonHeapSort(array);
-
-            this.Paint += new PaintEventHandler(DrawInitialState);
-            
         }
        
         public override void DrawInitialState(object sender, PaintEventArgs e)
         {
-            base.DrawInitialState(sender, e);
-            this.visualizationHeap.DrawHeap(inputArray, graphics);
+            if (countUpdateScreen == 0)
+            {
+                graphics = CreateGraphics();
+
+                visualizationArray.DrawArray(new StateAutomaton(inputArray), graphics);
+
+                countUpdateScreen++;
+                
+                visualizationHeap.DrawHeap(new StateAutomaton(inputArray), graphics);
+            }
         }
 
         public override void DrawState(StateAutomaton stateAutomaton)
         {
-            base.ClearOldComments();
-
             switch (stateAutomaton.StateId)
             {
-                case StateCompare:
+                case (int)AutomatonSiftDown.States.ConditionOnUpdateMaximumChild:
                 {
                     DrawCompare(stateAutomaton);
                     break;
                 }
-                case StateSwap:
+                case (int)AutomatonSiftDown.States.ConditionOnUpdateParent:
+                {
+                    DrawCompare(stateAutomaton);
+                    break;
+                }
+                case (int)AutomatonSiftDown.States.SwappingParentWithMaximumChild:
                 {
                     DrawSwap(stateAutomaton);
                     break;
                 }
-                case StateShifting:
+                case (int)AutomatonSiftDown.States.Loop:
                 {
                     DrawShifting(stateAutomaton);
                     break;
                 }
-                case StateSwapSorting:
+                case (int)AutomatonHeapSort.States.SwappingElements:
                 {
                     DrawSwap(stateAutomaton);
-                    //удаление ребра
                     break;
                 }
-                case StateMaxChild:
+                case (int)AutomatonSiftDown.States.EndingConditionOnUpdateMaximumChild:
                 {
                     DrawShifting(stateAutomaton);
                     break;
                 }
-                case StateEndSorting:
+                case (int)AutomatonSiftDown.States.EndLoop:
                 {
+                    visualizationArray.DrawArray(stateAutomaton, graphics);
+                    visualizationHeap.DrawHeap(stateAutomaton, graphics);
                     
+                    break;
+                }
+                case (int)AutomatonHeapSort.States.FinalState:
+                {
+                    visualizationArray.DrawArray(stateAutomaton, graphics);
+                    visualizationHeap.DrawHeap(stateAutomaton, graphics);
+                    selfTimer.Stop();
+                    
+                    break;
+                }
+                case (int)AutomatonHeapSort.States.InitialState:
+                {
+                    this.visualizationArray.DrawArray(stateAutomaton, graphics);
+                    this.visualizationHeap.DrawHeap(stateAutomaton, graphics);
+                    break;
+                }
+                
+                default:
+                {
+                    this.visualizationArray.DrawArray(stateAutomaton, graphics);
+                    this.visualizationHeap.DrawHeap(stateAutomaton, graphics);
                     break;
                 }
                 
             }
-            visualizationArray.DrawSortedInvertedPartArray(stateAutomaton, graphics);
-            visualizationHeap.DrawSortedPartHeap(stateAutomaton, graphics);
-            base.DrawComment(stateAutomaton.DescriptionState);
+
+            base.DrawComment(stateAutomaton.Comment);
         }
 
         public void DrawShifting(StateAutomaton stateAutomaton)
         {
-            visualizationArray.SelectElements(stateAutomaton.ShiftingElement);
-            visualizationHeap.SelectNodes(stateAutomaton.ShiftingElement);
-
-            visualizationArray.DrawArray(stateAutomaton.Array, graphics);
-            visualizationHeap.DrawHeap(stateAutomaton.Array, graphics);
-
-            visualizationArray.DeselectElements(stateAutomaton.ShiftingElement);
-            visualizationHeap.DeselectNodes(stateAutomaton.ShiftingElement);
-
+            visualizationArray.DrawArray(stateAutomaton, graphics);
+            visualizationHeap.DrawHeap(stateAutomaton, graphics);
         }
 
         public override void DrawSwap(StateAutomaton stateAutomaton)
         {
             base.DrawSwap(stateAutomaton);
 
-            visualizationHeap.SelectNodes(stateAutomaton.SelectedElements.ToArray());
-
-            visualizationHeap.DrawHeap(stateAutomaton.Array, graphics);
-
-            visualizationHeap.DeselectNodes(stateAutomaton.SelectedElements.ToArray());
+            visualizationHeap.DrawHeap(stateAutomaton, graphics);
         }
 
         public void DrawCompare(StateAutomaton stateAutomaton)
         {
-
-            visualizationHeap.SelectNodes(stateAutomaton.SelectedElements.ToArray());
-            visualizationArray.SelectElements(stateAutomaton.SelectedElements.ToArray());
-
-            visualizationArray.DrawArray(stateAutomaton.Array, graphics);
-            visualizationHeap.DrawHeap(stateAutomaton.Array, graphics);
-
-            visualizationHeap.DeselectNodes(stateAutomaton.SelectedElements.ToArray());
-            visualizationArray.DeselectElements(stateAutomaton.SelectedElements.ToArray());
+            visualizationArray.DrawArray(stateAutomaton, graphics);
+            visualizationHeap.DrawHeap(stateAutomaton, graphics);
         }
 
         public override void ToStart(object sender, EventArgs e)
         {
-            visualizationArray = new VisualizationArray(inputArray.Length);
-            visualizationHeap = new VisualizationHeap(inputArray.Length);
-
-            automatonSort.ToStart();
-            
-            this.visualizationArray.DrawArray(inputArray, this.graphics);
-            this.visualizationHeap.DrawHeap(inputArray, this.graphics);
+            this.visualizationHeap.DrawHeap(new StateAutomaton(inputArray), this.graphics);
+            base.ToStart(sender, e);
         }
     }
 }

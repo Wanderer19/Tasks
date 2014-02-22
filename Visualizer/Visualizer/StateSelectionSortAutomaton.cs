@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -7,17 +8,17 @@ namespace Visualizer
 {
     class StateSelectionSortAutomaton : StateAutomaton
     {
-        public StateSelectionSortAutomaton() { }
-        public StateSelectionSortAutomaton(List<int> selectedIndexes, int firstIndex, int min, string stateId, string comment, int[] array)
+        public StateSelectionSortAutomaton(List<int> selectedIndexes, int borderSortedPart, int minimum, int stateId, string comment, int[] array)
         {
             SelectedElements=new List<int>();
             SelectedElements.AddRange(selectedIndexes);
 
-            this.Min = min;
+            this.Minimum = minimum;
             this.Array = array;
-            this.DescriptionState = comment;
+            this.Comment = comment;
             this.StateId = stateId;
-            this.FirstIndex = firstIndex;
+            this.BorderSortedPart = borderSortedPart;
+            BoundariesSortedPart = new Point(0, borderSortedPart);
         }
     }
 }

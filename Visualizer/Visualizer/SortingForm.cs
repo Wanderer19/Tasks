@@ -17,17 +17,23 @@ namespace Visualizer
     public partial class SortingForm : Form
     {
         private readonly Application parentWindow;
+        private readonly Application.IdentifiersSorts sortId;
 
-        private readonly System.Resources.ResourceManager sortingFormSettings;
+        private System.Resources.ResourceManager sortingFormSettings;
        
-        public SortingForm(Application parentWindow, string fileSettings)
+        public SortingForm(Application parentWindow, string fileSettings, Application.IdentifiersSorts sortId)
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-
-            sortingFormSettings = new ResourceManager(fileSettings, assembly);
             this.parentWindow = parentWindow;
-
+            this.sortId = sortId;
+            this.DownloadConfigurationFile(fileSettings);
             InitializeComponent();
+        }
+
+        public void DownloadConfigurationFile(string fileName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            sortingFormSettings = new ResourceManager(fileName, assembly);
         }
 
         private void ShowSourceCodeCSharp(object sender, EventArgs e)
@@ -63,7 +69,7 @@ namespace Visualizer
         {
             HideMainWindow();
 
-            var dataReceiverForm = new DataReceiverForm(this, (int) sortingFormSettings.GetObject("SortID"));
+            var dataReceiverForm = new DataReceiverForm(this, this.sortId);
             dataReceiverForm.Show();
         }
 

@@ -19,6 +19,7 @@ C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\De
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverFormSettings.resources
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.VisualizerSettings.resources
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.HeapSortFormSettings.resources
+<<<<<<< HEAD
 C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Form1.resources
 C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\bin\Debug\Visualizer.exe.config
 C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.exe
@@ -43,3 +44,5 @@ C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visu
 C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.Visualizer.resources
 C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.VisualizerSettings.resources
 C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.csproj.GenerateResource.Cache
+=======
+>>>>>>> 2bb74d776b6c761e0cc701d47ffed726513cad2c
