@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="MainTitleAutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="MainTitleFont" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe Script, 28.2pt, style=Bold</value>
+  </data>
+  <data name="MainTitleForeColor" type="System.Drawing.Color, System.Drawing">
+    <value>MidnightBlue</value>
+  </data>
+  <data name="MainTitleLocation" type="System.Drawing.Point, System.Drawing">
+    <value>12, 48</value>
+  </data>
+  <data name="MainTitleName" xml:space="preserve">
+    <value>mainTitle</value>
+  </data>
+  <data name="MainTitleSize" type="System.Drawing.Size, System.Drawing">
+    <value>723, 80</value>
+  </data>
+  <data name="MainTitleTabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="AboutSortingBackColor" type="System.Drawing.Color, System.Drawing">
+    <value>PaleTurquoise</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AboutSortingBorderStyle" type="System.Windows.Forms.BorderStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="AboutSortingFont" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 13.8pt</value>
+  </data>
+  <data name="AboutSortingFormattingEnabled" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="AboutSortingItemHeight" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="AboutSortingLocation" type="System.Drawing.Point, System.Drawing">
+    <value>12, 140</value>
+  </data>
+  <data name="AboutSortingName" xml:space="preserve">
+    <value>aboutSorting</value>
+  </data>
+  <data name="AboutSortingScrollAlwaysVisible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="AboutSortingSize" type="System.Drawing.Size, System.Drawing">
+    <value>861, 609</value>
+  </data>
+  <data name="AboutSortingTabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="MainMenuBackColor" type="System.Drawing.Color, System.Drawing">
+    <value>PaleTurquoise</value>
+  </data>
+  <data name="MainMenuLocation" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="MainMenuName" xml:space="preserve">
+    <value>mainMenu</value>
+  </data>
+  <data name="MainMenuSize" type="System.Drawing.Size, System.Drawing">
+    <value>850, 36</value>
+  </data>
+  <data name="MainMenuTabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="MainMenuText" xml:space="preserve">
+    <value>mainMenu</value>
+  </data>
+  <data name="ProgramMenuFont" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Symbol, 12pt, style=Bold</value>
+  </data>
+  <data name="ProgramMenuForeColor" type="System.Drawing.Color, System.Drawing">
+    <value>Navy</value>
+  </data>
+  <data name="ProgramMenuName" xml:space="preserve">
+    <value>programMenu</value>
+  </data>
+  <data name="ProgramMenuSize" type="System.Drawing.Size, System.Drawing">
+    <value>146, 32</value>
+  </data>
+  <data name="ProgramMenuText" xml:space="preserve">
+    <value>Программа</value>
+  </data>
+  <data name="VisualizerMenuItemName" xml:space="preserve">
+    <value>visualizerMenuItem</value>
+  </data>
+  <data name="VisualizerMenuItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>237, 32</value>
+  </data>
+  <data name="VisualizerMenuItemText" xml:space="preserve">
+    <value>Визуализатор</value>
+  </data>
+  <data name="SourceCodeMenuItemName" xml:space="preserve">
+    <value>sourceCodeMenuItem</value>
+  </data>
+  <data name="SourceCodeMenuItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>237, 32</value>
+  </data>
+  <data name="SourceCodeMenuItemText" xml:space="preserve">
+    <value>Исходный код</value>
+  </data>
+  <data name="SourceCodeCSharpName" xml:space="preserve">
+    <value>sourceCodeCSharp</value>
+  </data>
+  <data name="SourceCodeCSharpSize" type="System.Drawing.Size, System.Drawing">
+    <value>152, 32</value>
+  </data>
+  <data name="SourceCodeCSharpText" xml:space="preserve">
+    <value>C#</value>
+  </data>
+  <data name="SourceCodeCPlusPlusName" xml:space="preserve">
+    <value>sourceCodeCPlusPlus</value>
+  </data>
+  <data name="SourceCodeCPlusPlusSize" type="System.Drawing.Size, System.Drawing">
+    <value>152, 32</value>
+  </data>
+  <data name="SourceCodeCPlusPlusText" xml:space="preserve">
+    <value>C++</value>
+  </data>
+  <data name="SourceCodeJavaName" xml:space="preserve">
+    <value>sourceCodeJava</value>
+  </data>
+  <data name="SourceCodeJavaSize" type="System.Drawing.Size, System.Drawing">
+    <value>152, 32</value>
+  </data>
+  <data name="SourceCodeJavaText" xml:space="preserve">
+    <value>Java</value>
+  </data>
+  <data name="SourceCodePythonName" xml:space="preserve">
+    <value>sourceCodePython</value>
+  </data>
+  <data name="SourceCodePythonSize" type="System.Drawing.Size, System.Drawing">
+    <value>152, 32</value>
+  </data>
+  <data name="SourceCodePythonText" xml:space="preserve">
+    <value>Python</value>
+  </data>
+  <data name="HelpMenuFont" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Symbol, 12pt, style=Bold</value>
+  </data>
+  <data name="HelpMenuForeColor" type="System.Drawing.Color, System.Drawing">
+    <value>Navy</value>
+  </data>
+  <data name="HelpMenuName" xml:space="preserve">
+    <value>helpMenu</value>
+  </data>
+  <data name="HelpMenuSize" type="System.Drawing.Size, System.Drawing">
+    <value>116, 32</value>
+  </data>
+  <data name="HelpMenuText" xml:space="preserve">
+    <value>Справка</value>
+  </data>
+  <data name="HelpMenuItemName" xml:space="preserve">
+    <value>helpMenuItem</value>
+  </data>
+  <data name="HelpMenuItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>172, 32</value>
+  </data>
+  <data name="HelpMenuItemText" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 16</value>
+  </data>
+  <data name="AutoScaleMode" type="System.Windows.Forms.AutoScaleMode, System.Windows.Forms">
+    <value>Font</value>
+  </data>
+  <data name="BackColor" type="System.Drawing.Color, System.Drawing">
+    <value>PaleTurquoise</value>
+  </data>
+  <data name="ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>650, 600</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>SortingForm</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>SelectionSortForm</value>
+  </data>
+  <data name="HelpFile" xml:space="preserve">
+    <value>Визуализатор
+
+В меню есть вкладка "Исходный код", нажава которую, можно выбрать
+интересующий вас язык программирования и посмотреть код данного алгоритма.
+
+Далее есть вкладка "Визуализатор", который откроет вам программу, наглядно показывающий 
+выполнение данного алгоритма.</value>
+  </data>
+  <data name="MainTitleText" xml:space="preserve">
+    <value>Сортировка выбором</value>
+  </data>
+  <data name="AboutSortingFile" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAARAQAAADsAAAAGAgAAAGDQodC+0YDRgtC40YDQvtCy0LrQsCDQstGL0LHQ
+        vtGA0L7QvCAoU2VsZWN0aW9uIHNvcnQpIOKAlCDQsNC70LPQvtGA0LjRgtC8INGB0L7RgNGC0LjRgNC+
+        0LLQutC4LiAGAwAAAFTQnNC+0LbQtdGCINCx0YvRgtGMINC60LDQuiDRg9GB0YLQvtC50YfQuNCy0YvQ
+        uSwg0YLQsNC6INC4INC90LXRg9GB0YLQvtC50YfQuNCy0YvQuS4GBAAAAAAGBQAAAFnQndCwINC80LDR
+        gdGB0LjQstC1INC40LcgbiDRjdC70LXQvNC10L3RgtC+0LIg0LjQvNC10LXRgiDQstGA0LXQvNGPINCy
+        0YvQv9C+0LvQvdC10L3QuNGPIAYGAAAAXNCyINGF0YPQtNGI0LXQvCwg0YHRgNC10LTQvdC10Lwg0Lgg
+        0LvRg9GH0YjQtdC8INGB0LvRg9GH0LDQtSDOmChuMiksINC/0YDQtdC00L/QvtC70LDQs9Cw0Y8gBgcA
+        AABQ0YfRgtC+INGB0YDQsNCy0L3QtdC90LjRjyDQtNC10LvQsNGO0YLRgdGPINC30LAg0L/QvtGB0YLQ
+        vtGP0L3QvdC+0LUg0LLRgNC10LzRjy4JBAAAAAYJAAAAHNCo0LDQs9C4INCw0LvQs9C+0YDQuNGC0LzQ
+        sDoJBAAAAAYLAAAAYtC90LDRhdC+0LTQuNC8INC90L7QvNC10YAg0LzQuNC90LjQvNCw0LvRjNC90L7Q
+        s9C+INC30L3QsNGH0LXQvdC40Y8g0LIg0YLQtdC60YPRidC10Lwg0YHQv9C40YHQutC1BgwAAABh0L/R
+        gNC+0LjQt9Cy0L7QtNC40Lwg0L7QsdC80LXQvSDRjdGC0L7Qs9C+INC30L3QsNGH0LXQvdC40Y8g0YHQ
+        viDQt9C90LDRh9C10L3QuNC10Lwg0L/QtdGA0LLQvtC5IAYNAAAAb9C90LXQvtGC0YHQvtGA0YLQuNGA
+        0L7QstCw0L3QvdC+0Lkg0L/QvtC30LjRhtC40LggKNC+0LHQvNC10L0g0L3QtSDQvdGD0LbQtdC9LCDQ
+        tdGB0LvQuCDQvNC40L3QuNC80LDQu9GM0L3Ri9C5IAYOAAAAStGN0LvQtdC80LXQvdGCINGD0LbQtSDQ
+        vdCw0YXQvtC00LjRgtGB0Y8g0L3QsCDQtNCw0L3QvdC+0Lkg0L/QvtC30LjRhtC40LgpBg8AAABv0YLQ
+        tdC/0LXRgNGMINGB0L7RgNGC0LjRgNGD0LXQvCDRhdCy0L7RgdGCINGB0L/QuNGB0LrQsCwg0LjRgdC6
+        0LvRjtGH0LjQsiDQuNC3INGA0LDRgdGB0LzQvtGC0YDQtdC90LjRjyDRg9C20LUgBhAAAAAv0L7RgtGB
+        0L7RgNGC0LjRgNC+0LLQsNC90L3Ri9C1INGN0LvQtdC80LXQvdGC0YsGEQAAAG3QlNC70Y8g0YDQtdCw
+        0LvQuNC30LDRhtC40Lgg0YPRgdGC0L7QudGH0LjQstC+0YHRgtC4INCw0LvQs9C+0YDQuNGC0LzQsCDQ
+        vdC10L7QsdGF0L7QtNC40LzQviDQsiDQv9GD0L3QutGC0LUgBhIAAABqMiDQvNC40L3QuNC80LDQu9GM
+        0L3Ri9C5INGN0LvQtdC80LXQvdGCINC90LXQv9C+0YHRgNC10LTRgdGC0LLQtdC90L3QviDQstGB0YLQ
+        sNCy0LvRj9GC0Ywg0LIg0L/QtdGA0LLRg9GOIAYTAAAAeNC90LXQvtGC0YHQvtGA0YLQuNGA0L7QstCw
+        0L3QvdGD0Y4g0L/QvtC30LjRhtC40Y4sINC90LUg0LzQtdC90Y/RjyDQv9C+0YDRj9C00L7QuiDQvtGB
+        0YLQsNC70YzQvdGL0YUg0Y3Qu9C10LzQtdC90YLQvtCyLgkEAAAABhUAAABp0J/QvtC60LDQttC10Lws
+        INC/0L7Rh9C10LzRgyDQtNCw0L3QvdCw0Y8g0YDQtdCw0LvQuNC30LDRhtC40Y8g0Y/QstC70Y/QtdGC
+        0YHRjyDQvdC10YPRgdGC0L7QudGH0LjQstC+0LkuBhYAAABg0KDQsNGB0YHQvNC+0YLRgNC40Lwg0YHQ
+        u9C10LTRg9GO0YnQuNC5INC80LDRgdGB0LjQsiDQuNC3INGN0LvQtdC80LXQvdGC0L7Qsiwg0LrQsNC2
+        0LTRi9C5INC40LcgBhcAAABm0LrQvtGC0L7RgNGL0YUg0LjQvNC10LXRgiDQtNCy0LAg0L/QvtC70Y8u
+        INCh0L7RgNGC0LjRgNC+0LLQutCwINC40LTQtdGCINC/0L4g0L/QtdGA0LLQvtC80YMg0L/QvtC70Y4u
+        BhgAAAAn0JzQsNGB0YHQuNCyINC00L4g0YHQvtGA0YLQuNGA0L7QstC60Lg6BhkAAAAaeyAoMiwgYSks
+        ICgyLCBiKSwgKDEsIGEpIH0GGgAAAGLQo9C20LUg0L/QvtGB0LvQtSDQv9C10YDQstC+0Lkg0LjRgtC1
+        0YDQsNGG0LjQuCDQstC90LXRiNC90LXQs9C+INGG0LjQutC70LAg0LHRg9C00LXQvCDQuNC80LXRgtGM
+        IAYbAAAARNC+0YLRgdC+0YDRgtC40YDQvtCy0LDQvdC90YPRjiDQv9C+0YHQu9C10LTQvtCy0LDRgtC1
+        0LvRjNC90L7RgdGC0Yw6BhwAAAAaeyAoMSwgYSksICgyLCBiKSwgKDIsIGEpIH0GHQAAAHHQotC10L/Q
+        tdGA0Ywg0LfQsNC80LXRgtC40LwsINGH0YLQviDQstC30LDQuNC80L3QvtC1INGA0LDRgdC/0L7Qu9C+
+        0LbQtdC90LjQtSDRjdC70LXQvNC10L3RgtC+0LIgKDIsIGEpINC4ICgyLCBiKQYeAAAAdtC40LfQvNC1
+        0L3QuNC70L7RgdGMLiDQotCw0LrQuNC8INC+0LHRgNCw0LfQvtC8LCDRgNCw0YHRgdC80LDRgtGA0LjQ
+        stCw0LXQvNCw0Y8g0YDQtdCw0LvQuNC30LDRhtC40Y8g0Y/QstC70Y/QtdGC0YHRjyAGHwAAABnQvdC1
+        0YPRgdGC0L7QudGH0LjQstC+0LkuCQQAAAAGIQAAAG/QotCw0Log0LrQsNC6INC/0L7RgdC70LUg0LrQ
+        sNC20LTQvtCz0L4g0L/RgNC+0YXQvtC00LAg0L/QviDQstC90YPRgtGA0LXQvdC90LXQvNGDINGG0LjQ
+        utC70YMg0LTQtdC70LDQtdGC0YHRjyAGIgAAAGLRgtC+0LvRjNC60L4g0L7QtNC40L0g0L7QsdC80LXQ
+        vSwg0YLQviDQvtCx0YnQtdC1INGH0LjRgdC70L4g0L7QsdC80LXQvdC+0LIg0YDQsNCy0L3QviBOLTEs
+        INGH0YLQvgYjAAAATyDQsiBOLzIg0YDQsNC3INC80LXQvdGM0YjQtSwg0YfQtdC8INCyINGB0L7RgNGC
+        0LjRgNC+0LLQutC1INC/0YPQt9GL0YDRjNC60L7QvC4GJAAAAFvQp9C40YHQu9C+INC/0YDQvtGF0L7Q
+        tNC+0LIg0L/QviDQstC90YPRgtGA0LXQvdC90LXQvNGDINGG0LjQutC70YMg0YDQsNCy0L3QviBOLTEg
+        0LTQsNC20LUgBiUAAABx0LIg0YHQu9GD0YfQsNC1INGB0L7RgNGC0LjRgNC+0LLQutC4INGH0LDRgdGC
+        0LjRh9C90L4g0LjQu9C4INC/0L7Qu9C90L7RgdGC0YzRjiDQvtGC0YHQvtGA0YLQuNGA0L7QstCw0L3Q
+        vdC+0LPQviAGJgAAAA/QvNCw0YHRgdC40LLQsC4JBAAAAAYoAAAAINCd0LDQuNGF0YPQtNGI0LjQuSDR
+        gdC70YPRh9Cw0Lk6BikAAABK0KfQuNGB0LvQviDRgdGA0LDQstC90LXQvdC40Lkg0LIg0YLQtdC70LUg
+        0YbQuNC60LvQsCDRgNCw0LLQvdC+IChOLTEpKk4vMi4GKgAAAE3Qp9C40YHQu9C+INGB0YDQsNCy0L3Q
+        tdC90LjQuSDQsiDQt9Cw0LPQvtC70L7QstC60LDRhSDRhtC40LrQu9C+0LIgKE4tMSkqTi8yLgYrAAAA
+        TdCn0LjRgdC70L4g0YHRgNCw0LLQvdC10L3QuNC5INC/0LXRgNC10LQg0L7Qv9C10YDQsNGG0LjQtdC5
+        INC+0LHQvNC10L3QsCBOLTEuBiwAAAA40KHRg9C80LzQsNGA0L3QvtC1INGH0LjRgdC70L4g0YHRgNCw
+        0LLQvdC10L3QuNC5IE4y4oiSMS4GLQAAAB7Qp9C40YHQu9C+INC+0LHQvNC10L3QvtCyIE4tMS4JBAAA
+        AAYvAAAAINCd0LDQuNC70YPRh9GI0LjQuSDRgdC70YPRh9Cw0Lk6BjAAAABd0JLRgNC10LzRjyDRgdC+
+        0YDRgtC40YDQvtCy0LrQuCAxMDAwMCDQutC+0YDQvtGC0LrQuNGFINGG0LXQu9GL0YUg0YfQuNGB0LXQ
+        uyDQvdCwINC+0LTQvdC+0LwgBjEAAABj0Lgg0YLQvtC8INC20LUg0L/RgNC+0LPRgNCw0LzQvNC90L4t
+        0LDQv9C/0LDRgNCw0YLQvdC+0Lwg0LrQvtC80L/Qu9C10LrRgdC1INGB0L7RgNGC0LjRgNC+0LLQutC+
+        0LkgBjIAAABa0LLRi9Cx0L7RgNC+0Lwg0YHQvtGB0YLQsNCy0LjQu9C+IOKJiDQw0YHQtdC6Liwg0LAg
+        0LXRidGRINCx0L7Qu9C10LUg0YPQu9GD0YfRiNC10L3QvdC+0LkgBjMAAAA20YHQvtGA0YLQuNGA0L7Q
+        stC60L7QuSDQv9GD0LfRi9GA0YzQutC+0Lwg4omIMzDRgdC10LouCQQAAAAGNQAAAF3Qn9C40YDQsNC8
+        0LjQtNCw0LvRjNC90LDRjyDRgdC+0YDRgtC40YDQvtCy0LrQsCDRgdC40LvRjNC90L4g0YPQu9GD0YfR
+        iNCw0LXRgiDQsdCw0LfQvtCy0YvQuSAGNgAAAFnQsNC70LPQvtGA0LjRgtC8LCDQuNGB0L/QvtC70YzQ
+        t9GD0Y8g0YHRgtGA0YPQutGC0YPRgNGDINC00LDQvdC90YvRhSDCq9C60YPRh9Cwwrsg0LTQu9GPIAY3
+        AAAAZtGD0YHQutC+0YDQtdC90LjRjyDQvdCw0YXQvtC20LTQtdC90LjRjyDQuCDRg9C00LDQu9C10L3Q
+        uNGPINC80LjQvdC40LzQsNC70YzQvdC+0LPQviDRjdC70LXQvNC10L3RgtCwLgkEAAAABjkAAABj0KHR
+        g9GJ0LXRgdGC0LLRg9C10YIg0YLQsNC60LbQtSDQtNCy0YPQvdCw0L/RgNCw0LLQu9C10L3QvdGL0Lkg
+        0LLQsNGA0LjQsNC90YIg0YHQvtGA0YLQuNGA0L7QstC60LggBjoAAABo0LzQtdGC0L7QtNC+0Lwg0LLR
+        i9Cx0L7RgNCwLCDQsiDQutC+0YLQvtGA0L7QvCDQvdCwINC60LDQttC00L7QvCDQv9GA0L7RhdC+0LTQ
+        tSDQvtGC0YvRgdC60LjQstCw0Y7RgtGB0Y8GOwAAAFnQuCDRg9GB0YLQsNC90LDQstC70LjQstCw0Y7R
+        gtGB0Y8g0L3QsCDRgdCy0L7QuCDQvNC10YHRgtCwINC4INC80LjQvdC40LzQsNC70YzQvdC+0LUsINC4
+        IAY8AAAAKtC80LDQutGB0LjQvNCw0LvRjNC90L7QtSDQt9C90LDRh9C10L3QuNGPLgs=
+</value>
+  </data>
+  <data name="SourceCodeCSharp" xml:space="preserve">
+    <value>var list = new int[] {1, -9, 2, 3, 10};
+
+for (var i = 0; i &lt; list.Length-1; i++)
+{
+    var min = i;
+    for (var j = i + 1; j &lt; list.Length; j++)
+    {
+        if (list[j] &lt; list[min])
+			min = j;
+                    
+    }
+    
+	var dummy = list[i];
+    list[i] = list[min];
+    list[min] = dummy;
+}
+          </value>
+  </data>
+  <data name="SourceCodeCPlusPlus" xml:space="preserve">
+    <value>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+vector&lt;int&gt; SelectionSort(vector&lt;int&gt; list)
+{
+    for (unsigned int i = 0; i &lt; list.size()-1; i++)
+    {
+        int min = i;
+        for (unsigned int j = i + 1; j &lt; list.size(); j++)
+        {
+            if (list[j] &lt; list[min])
+                min = j;
+
+        }
+
+        swap(list[i], list[min]);
+    }
+
+    return list;
+}
+
+int main()
+{
+    int size;
+    cin&gt;&gt;size;
+    vector&lt;int&gt; array(size);
+
+    for (int i = 0; i &lt; size; ++i)
+        scanf("%d", &amp;array[i]);
+
+    array = SelectionSort(array);
+
+    for (int i = 0; i &lt; size; ++i)
+        printf("%d ", array[i]);
+
+    return 0;
+}
+</value>
+  </data>
+  <data name="SourceCodeJava" xml:space="preserve">
+    <value>package SelectionSort;
+
+public class SelectionSort {
+
+	public static int [] Sort (int [] list){
+		
+		for (int i = 0; i &lt; list.length-1; i++)
+        {
+            int min = i;
+            for (int j = i + 1; j &lt; list.length; j++)
+            {
+                if (list[j] &lt; list[min])
+                {
+                    min = j;
+                }
+            }
+            int dummy = list[i];
+            list[i] = list[min];
+            list[min] = dummy;
+        }
+       
+		return list;
+			
+	}
+	
+	public static void main (String [] args){
+		int [] array = new int[]{0, -9, 1, 10, 3, 18};
+		
+		array = Sort(array);
+		
+		for (int i = 0; i &lt; array.length; ++i){
+			System.out.println(array[i]);
+		}
+	}
+	
+}
+</value>
+  </data>
+  <data name="SourceCodePython" xml:space="preserve">
+    <value>list = [0, -9, 1, 8, -100, 200];
+
+i = 0;
+min = list[0];
+
+while i &lt; len(list) - 1:
+	min = i;
+	j = i + 1;
+	while j &lt; len(list):
+		if (list[j] &lt; list[min]):
+			min = j;
+			
+		j += 1;
+		
+	dummy = list[i];
+	list[i] = list[min];
+	list[min] = dummy;          
+	i += 1;
+	
+for i in list:
+	print (i);</value>
+  </data>
+  <data name="SortID" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+</root>
