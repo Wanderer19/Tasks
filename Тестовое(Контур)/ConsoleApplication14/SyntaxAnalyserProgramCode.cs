@@ -49,18 +49,18 @@ namespace ConsoleApplication14
             var statementSyntax = GetStatementSyntaxs(methodDeclaration);
          
             var nestings = statementSyntax.Where(statement => !(statement is BlockSyntax) && IsEnlargersNesting(statement))
-                                            .Select(GetNestingLevelStatement)
+                                            .Select(i => GetNestingLevelStatement(i, methodDeclaration))
                                             .ToList();
            
             return nestings.Count == 0 ? 0 : nestings.OrderByDescending(nesting => nesting).First();
         }
 
-        private int GetNestingLevelStatement(StatementSyntax statement)
+        private int GetNestingLevelStatement(StatementSyntax statement, MethodDeclarationSyntax methodDeclaration)
         {
             var nestingLevelStatement = 1;
             var parentStatement = statement.Parent;
 
-            while (parentStatement != null && parentStatement != rootSyntaxTreeCode)
+            while (parentStatement != null && parentStatement != methodDeclaration)
             {
                 if (IsEnlargersNesting(parentStatement))
                     nestingLevelStatement++;
