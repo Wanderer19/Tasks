@@ -1,0 +1,8 @@
+c:\users\1\documents\visual studio 2012\Projects\WCF\WCF\bin\Debug\WCF.exe.config
+C:\Users\1\Documents\Visual Studio 2012\Projects\WCF\WCF\bin\Debug\WCF.exe
+C:\Users\1\Documents\Visual Studio 2012\Projects\WCF\WCF\bin\Debug\WCF.pdb
+C:\Users\1\Documents\Visual Studio 2012\Projects\WCF\WCF\bin\Debug\MgicBall.dll
+C:\Users\1\Documents\Visual Studio 2012\Projects\WCF\WCF\bin\Debug\MgicBall.pdb
+C:\Users\1\Documents\Visual Studio 2012\Projects\WCF\WCF\obj\Debug\WCF.csprojResolveAssemblyReference.cache
+C:\Users\1\Documents\Visual Studio 2012\Projects\WCF\WCF\obj\Debug\WCF.exe
+C:\Users\1\Documents\Visual Studio 2012\Projects\WCF\WCF\obj\Debug\WCF.pdb

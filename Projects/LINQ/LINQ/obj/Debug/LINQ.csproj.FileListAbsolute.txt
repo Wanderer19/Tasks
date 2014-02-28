@@ -1,0 +1,5 @@
+c:\users\1\documents\visual studio 2012\Projects\LINQ\LINQ\bin\Debug\LINQ.exe.config
+c:\users\1\documents\visual studio 2012\Projects\LINQ\LINQ\bin\Debug\LINQ.exe
+c:\users\1\documents\visual studio 2012\Projects\LINQ\LINQ\bin\Debug\LINQ.pdb
+c:\users\1\documents\visual studio 2012\Projects\LINQ\LINQ\obj\Debug\LINQ.exe
+c:\users\1\documents\visual studio 2012\Projects\LINQ\LINQ\obj\Debug\LINQ.pdb

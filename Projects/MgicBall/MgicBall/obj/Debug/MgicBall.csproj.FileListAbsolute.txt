@@ -1,0 +1,5 @@
+c:\users\1\documents\visual studio 2012\Projects\MgicBall\MgicBall\bin\Debug\MgicBall.dll
+c:\users\1\documents\visual studio 2012\Projects\MgicBall\MgicBall\bin\Debug\MgicBall.pdb
+c:\users\1\documents\visual studio 2012\Projects\MgicBall\MgicBall\obj\Debug\MgicBall.csprojResolveAssemblyReference.cache
+c:\users\1\documents\visual studio 2012\Projects\MgicBall\MgicBall\obj\Debug\MgicBall.dll
+c:\users\1\documents\visual studio 2012\Projects\MgicBall\MgicBall\obj\Debug\MgicBall.pdb

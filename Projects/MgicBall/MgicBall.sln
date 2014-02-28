@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MgicBall", "MgicBall\MgicBall.csproj", "{68B8D22D-0A34-40DF-BE28-68C75FE2928A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCF", "..\WCF\WCF\WCF.csproj", "{EC3877B4-EF2F-4084-824D-83A1BEED98BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68B8D22D-0A34-40DF-BE28-68C75FE2928A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68B8D22D-0A34-40DF-BE28-68C75FE2928A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68B8D22D-0A34-40DF-BE28-68C75FE2928A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68B8D22D-0A34-40DF-BE28-68C75FE2928A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC3877B4-EF2F-4084-824D-83A1BEED98BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC3877B4-EF2F-4084-824D-83A1BEED98BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC3877B4-EF2F-4084-824D-83A1BEED98BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC3877B4-EF2F-4084-824D-83A1BEED98BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
