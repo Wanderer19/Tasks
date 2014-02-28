@@ -1,0 +1,6 @@
+c:\users\1\documents\visual studio 2012\Projects\Life\Life\bin\Debug\Life.exe.config
+c:\users\1\documents\visual studio 2012\Projects\Life\Life\bin\Debug\Life.exe
+c:\users\1\documents\visual studio 2012\Projects\Life\Life\bin\Debug\Life.pdb
+c:\users\1\documents\visual studio 2012\Projects\Life\Life\obj\Debug\Life.exe
+c:\users\1\documents\visual studio 2012\Projects\Life\Life\obj\Debug\Life.pdb
+c:\users\1\documents\visual studio 2012\Projects\Life\Life\obj\Debug\Life.csprojResolveAssemblyReference.cache

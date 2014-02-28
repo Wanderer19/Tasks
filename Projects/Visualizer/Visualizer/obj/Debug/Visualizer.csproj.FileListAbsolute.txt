@@ -1,0 +1,15 @@
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.exe.config
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.exe
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.pdb
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.csprojResolveAssemblyReference.cache
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Properties.Resources.resources
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.csproj.GenerateResource.Cache
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.exe
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.pdb
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.GeneralSettings.resources
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.BubbleSortFormSettings.resources
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverFormSettings.resources
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.HeapSortFormSettings.resources
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SelectionSortFormSettings.resources
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SourceCodeSettings.resources
+c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.VisualizerSettings.resources

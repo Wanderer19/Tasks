@@ -1,0 +1,48 @@
+c:\users\asus\documents\visual studio 2013\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.exe
+c:\users\asus\documents\visual studio 2013\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.pdb
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.exe.config
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.BubbleSortVisualizer.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Application.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Properties.Resources.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Sourcecode.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Visualizer.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.csproj.GenerateResource.Cache
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.exe
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.pdb
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.csprojResolveAssemblyReference.cache
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SortingForm.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverForm.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.GeneralSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.BubbleSortFormSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SelectionSortFormSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SourceCodeSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverFormSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.VisualizerSettings.resources
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.HeapSortFormSettings.resources
+<<<<<<< HEAD
+C:\Users\asus\Documents\Visual Studio 2013\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Form1.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\bin\Debug\Visualizer.exe.config
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.exe
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.pdb
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\bin\Debug\Visualizer.exe
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\bin\Debug\Visualizer.pdb
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.csprojResolveAssemblyReference.cache
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.BubbleSortFormSettings.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverFormSettings.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.Form1.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.Form2.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.HeapSortFormSettings.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.GeneralSettings.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.SelectionSortFormSettings.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.SortingForm.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.BubbleSortVisualizer.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverForm.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.Application.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.Properties.Resources.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.Sourcecode.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.SourceCodeSettings.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.Visualizer.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.VisualizerSettings.resources
+C:\Users\1\Desktop\Задачи\Tasks\Tasks\Visualizer\Visualizer\obj\Debug\Visualizer.csproj.GenerateResource.Cache
+=======
+>>>>>>> 2bb74d776b6c761e0cc701d47ffed726513cad2c

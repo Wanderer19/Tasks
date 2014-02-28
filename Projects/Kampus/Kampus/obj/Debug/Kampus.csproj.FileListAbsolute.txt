@@ -1,0 +1,6 @@
+c:\users\1\documents\visual studio 2012\Projects\Kampus\Kampus\bin\Debug\Kampus.exe.config
+c:\users\1\documents\visual studio 2012\Projects\Kampus\Kampus\bin\Debug\Kampus.exe
+c:\users\1\documents\visual studio 2012\Projects\Kampus\Kampus\bin\Debug\Kampus.pdb
+c:\users\1\documents\visual studio 2012\Projects\Kampus\Kampus\obj\Debug\Kampus.csprojResolveAssemblyReference.cache
+c:\users\1\documents\visual studio 2012\Projects\Kampus\Kampus\obj\Debug\Kampus.exe
+c:\users\1\documents\visual studio 2012\Projects\Kampus\Kampus\obj\Debug\Kampus.pdb

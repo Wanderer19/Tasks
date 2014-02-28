@@ -1,0 +1,21 @@
+list = [0, -9, 1, 8, -100, 200];
+
+i = 0;
+min = list[0];
+
+while i < len(list) - 1:
+	min = i;
+	j = i + 1;
+	while j < len(list):
+		if (list[j] < list[min]):
+			min = j;
+			
+		j += 1;
+		
+	dummy = list[i];
+	list[i] = list[min];
+	list[min] = dummy;          
+	i += 1;
+	
+for i in list:
+	print (i);

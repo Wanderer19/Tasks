@@ -1,0 +1,6 @@
+c:\users\1\documents\visual studio 2012\Projects\Делегаты\Делегаты\bin\Debug\Делегаты.exe.config
+c:\users\1\documents\visual studio 2012\Projects\Делегаты\Делегаты\bin\Debug\Делегаты.exe
+c:\users\1\documents\visual studio 2012\Projects\Делегаты\Делегаты\bin\Debug\Делегаты.pdb
+c:\users\1\documents\visual studio 2012\Projects\Делегаты\Делегаты\obj\Debug\Делегаты.csprojResolveAssemblyReference.cache
+c:\users\1\documents\visual studio 2012\Projects\Делегаты\Делегаты\obj\Debug\Делегаты.exe
+c:\users\1\documents\visual studio 2012\Projects\Делегаты\Делегаты\obj\Debug\Делегаты.pdb
