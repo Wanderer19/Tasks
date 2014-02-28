@@ -39,7 +39,7 @@ namespace Visualizer
             this.aboutProgramMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
-
+            this.AutoScroll = true;
             // 
             // mainTitle
             // 

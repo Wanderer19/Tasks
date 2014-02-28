@@ -1,0 +1,12 @@
+c:\users\1\documents\visual studio 2012\Projects\ConsoleApplication14\ConsoleApplication14\bin\Debug\ConsoleApplication14.exe
+c:\users\1\documents\visual studio 2012\Projects\ConsoleApplication14\ConsoleApplication14\bin\Debug\ConsoleApplication14.pdb
+c:\users\1\documents\visual studio 2012\Projects\ConsoleApplication14\ConsoleApplication14\obj\x86\Debug\ConsoleApplication14.csprojResolveAssemblyReference.cache
+c:\users\1\documents\visual studio 2012\Projects\ConsoleApplication14\ConsoleApplication14\obj\x86\Debug\ConsoleApplication14.exe
+c:\users\1\documents\visual studio 2012\Projects\ConsoleApplication14\ConsoleApplication14\obj\x86\Debug\ConsoleApplication14.pdb
+C:\Users\1\Documents\Visual Studio 2012\Projects\Тестовое(Контур)\ConsoleApplication14\obj\x86\Debug\ConsoleApplication14.exe
+C:\Users\1\Documents\Visual Studio 2012\Projects\Тестовое(Контур)\ConsoleApplication14\obj\x86\Debug\ConsoleApplication14.pdb
+C:\Users\1\Documents\Visual Studio 2012\Projects\Тестовое(Контур)\ConsoleApplication14\bin\Debug\ConsoleApplication14.exe
+C:\Users\1\Documents\Visual Studio 2012\Projects\Тестовое(Контур)\ConsoleApplication14\bin\Debug\ConsoleApplication14.pdb
+C:\Users\1\Documents\Visual Studio 2012\Projects\Тестовое(Контур)\ConsoleApplication14\obj\x86\Debug\ConsoleApplication14.csprojResolveAssemblyReference.cache
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Тестовое(Контур)\ConsoleApplication14\obj\x86\Debug\ConsoleApplication14.exe
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Тестовое(Контур)\ConsoleApplication14\obj\x86\Debug\ConsoleApplication14.pdb

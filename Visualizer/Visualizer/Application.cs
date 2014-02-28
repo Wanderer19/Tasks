@@ -16,10 +16,15 @@ namespace Visualizer
 {
     public partial class Application : Form
     {
-        private System.Resources.ResourceManager generalSettings;
+        private static Assembly assembly = Assembly.GetExecutingAssembly();
+        private System.Resources.ResourceManager generalSettings = new ResourceManager("Visualizer.GeneralSettings", assembly);
 
         public enum IdentifiersSorts
         {
+<<<<<<< HEAD
+          
+
+=======
             DefaultSorting = 0,
             BubbleSort = 1,
             SelectionSort = 2,
@@ -29,6 +34,7 @@ namespace Visualizer
         public Application()
         {
             this.DownloadConfigurationFile("Visualizer.GeneralSettings");
+>>>>>>> 2bb74d776b6c761e0cc701d47ffed726513cad2c
             InitializeComponent();
         }
 
