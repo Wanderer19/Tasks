@@ -13,3 +13,18 @@ c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug
 c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SelectionSortFormSettings.resources
 c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SourceCodeSettings.resources
 c:\users\1\documents\visual studio 2012\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.VisualizerSettings.resources
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.exe.config
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.exe
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.pdb
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.exe
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\bin\Debug\Visualizer.pdb
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.csprojResolveAssemblyReference.cache
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.BubbleSortFormSettings.resources
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.DataReceiverFormSettings.resources
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.GeneralSettings.resources
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.HeapSortFormSettings.resources
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.Properties.Resources.resources
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SelectionSortFormSettings.resources
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.SourceCodeSettings.resources
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.VisualizerSettings.resources
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\Visualizer\obj\Debug\Visualizer.csproj.GenerateResource.Cache

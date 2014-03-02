@@ -1,0 +1,7 @@
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\UnitTestProject1\obj\Debug\UnitTestProject1.csprojResolveAssemblyReference.cache
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\UnitTestProject1\bin\Debug\UnitTestProject1.dll
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\UnitTestProject1\bin\Debug\UnitTestProject1.pdb
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\UnitTestProject1\bin\Debug\Visualizer.exe
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\UnitTestProject1\bin\Debug\Visualizer.pdb
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\UnitTestProject1\obj\Debug\UnitTestProject1.dll
+C:\Users\asus\Desktop\Git_Tasks\Tasks\Projects\Visualizer\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
